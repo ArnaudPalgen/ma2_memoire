@@ -1,1 +1,5 @@
 # Mémoire
+
+- Protocole
+- OS
+- Plateforme
