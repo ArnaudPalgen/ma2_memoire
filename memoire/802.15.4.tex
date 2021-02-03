@@ -66,7 +66,7 @@
 
 \subsubsection*{Accès au canal durant la contention acces period (CAP)}
   Durant cette période, l'accès au canal se fait par l'algotihme slotted CSMA-CA
-  (Carrier Sense Multiple Access with Collision Avoidance). La figure~\ref{fig:etat_art-csmaca}
+  (Carrier Sense Multiple Access with Collision Avoidance). La figure~\ref{fig:etat_art-slotted_csmaca}
   illustre son fonctionnement.
 
   Les time slots de la CAP sont divisés en plus petits time slots appelés \textbf{backoff periods}.
@@ -91,7 +91,8 @@
 
 
 \begin{figure}[H]
-\begin{tikzpicture}[node distance=1.7cm]
+  \centering
+\begin{tikzpicture}[node distance=1.7cm, scale=0.85, every node/.style={scale=0.85}]
 
   \node (start) [process] {\begin{tabular}{c} $NB = 0$; $CW = 2$ \\ BE = macMinBE \end{tabular}};
   \node (in1) [process, below of=start] {\begin{tabular}{c} wait until next backoff\\ period boundary\end{tabular}};
@@ -120,16 +121,56 @@
   \draw [arrow] (dec3) -- node[anchor=east] {Yes} (success);
   \end{tikzpicture}
   \caption{Schéma de l'algorithme slotted CSMA-CA.}
-  \label{fig:etat_art-csmaca}
+  \label{fig:etat_art-slotted_csmaca}
 \end{figure}
 
 
-
-\subsubsection{Accès au canal durant la contention free period} (CFP)
-TODO
+\subsubsection{Accès au canal durant la contention free period (CFP)}
+Le mécanisme utilisé durant cette phase d'accès est TDMA (Time Division Multiple Access).
+Comme illustré sur la figure~\ref{fig:etat_art-802.15.4.superframe}, cette période est divisée
+en 7 slots qui sont attribués par le coordinateur aux noeuds ayant émis une GTS (Guaranteed
+time slots) durant la période de CAP.
+Cette requête spécifie le nombre de slots consécutifs désirés ainsi que le type de slot demandé:
+slot de transmission ou de réception.
+Après réception de cette requête, le coordinateur va répondre en deux temps. D'abord, un ack pour
+confirmer la réception de la requête et ensuite un beacon appelé GTS descriptor lorsque les ressources
+demandées sont disponibles.
 
 \subsection{Non-Beacon Enabled mode}\label{subsec:etat_art-802.15.4.nbe}
+Ce mode d'accès n'utilise pas de beacons. Il n' a donc aucune synchronisation.
+L'accès au canal se fait alors par l'algorithme Unslotted CSMA-CA illustré par la
+figure~\ref{fig:etat_art-unslotted_csmaca}. On remarque que cet algorithme est similaire
+à soltted CSMA-CA à l'expection que le CCA est réalisé qu'une seule fois et que l'algortihme
+n'attend plus un time slot du CAP avant d'attendre un nombre de backoff aléatoire.
+
+\begin{figure}[H]
+  \centering
+\begin{tikzpicture}[node distance=1.7cm, scale=0.8, every node/.style={scale=0.8}]
+
+  \node (start) [process] {\begin{tabular}{c} $CW = 2$ \\ BE = macMinBE \end{tabular}};
+  \node (pro1) [process, below of=in1] {\begin{tabular}{c} Skip $r \in [0, 2^{BE}-1]$ \\ backoff periods \end{tabular}};
+  \node (pro2) [process, below of=pro1] {Perform CCA};
+  \node (dec1) [decision, below of=pro2, yshift=-0.8cm] {Channel idle?};
+
+  \node (pro2a) [process, below of=dec1, yshift=-1cm] {\begin{tabular}{c} $NB = NB+1$ \\ $BE = min(BE+1, macMaxBE)$ \end{tabular}};
+  \node (dec2) [decision, below of=pro2a, yshift=-1cm] {NB > MCB ?};
+  \node (fail) [endfail, below of=dec2, yshift=-1cm] {Failure};
+  \node (success) [endsuccess, right of=fail, xshift= 4cm] {Success};
+  
+  \draw [arrow] (start) -- (pro1);
+  \draw [arrow] (pro1) -- (pro2);
+  \draw [arrow] (pro2) -- (dec1);
+  \draw [arrow] (dec1) -- node[anchor=east] {No} (pro2a);
+  \draw [arrow] (pro2a) -- (dec2);
+  \draw [arrow] (dec2) -- node[anchor=east] {Yes} (fail);
+  \draw [arrow] (dec2) -- node[anchor=south] {No} ++(-4,0) |- (pro1);
+  \draw [arrow] (dec1) -| node[anchor=south] {Yes} (success);
+  \end{tikzpicture}
+  \caption{Schéma de l'algorithme unslotted CSMA-CA.}
+  \label{fig:etat_art-unslotted_csmaca}
+\end{figure}
 
 \subsection{Adressage}\label{subsec:etat_art-802.15.4.adress}
 
-\subsection{Mécanisme d'Ack optionnel}\label{subsec:etat_art-802.15.4.ack}
+%\subsection{Mécanisme d'Ack optionnel}\label{subsec:etat_art-802.15.4.ack}
+\subsection{80.15.4e}\label{subsec:etat_art-802.15.4.e}
