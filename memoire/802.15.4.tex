@@ -170,7 +170,36 @@ n'attend plus un time slot du CAP avant d'attendre un nombre de backoff aléatoi
   \label{fig:etat_art-unslotted_csmaca}
 \end{figure}
 
-\subsection{Adressage}\label{subsec:etat_art-802.15.4.adress}
-
+%\subsection{Adressage}\label{subsec:etat_art-802.15.4.adress}
 %\subsection{Mécanisme d'Ack optionnel}\label{subsec:etat_art-802.15.4.ack}
-\subsection{80.15.4e}\label{subsec:etat_art-802.15.4.e}
+
+\subsection{80.15.4e}\label{subsec:etat_art-802.15.4.limitations}
+802.15.4 a un certains nombres de limitations:
+\begin{itemize}
+  \item Aucune garantie sur le délai maximal pour qu'un paquet puisse atteindre sa destination
+    ne peut être fourni avec l'alorithme CSMA-CA.
+  \item La fiabilité des communications est limitée par l'utilisation de l'algorithme slotted CSMA-CA
+    qui offre un taux de transmission faible.
+  \item Aucune protection contre les interférences due à l'utilisation d'un seul canal et à l'absence
+    de mécanismes de sauts de fréquence (frequency hopping)
+\end{itemize}
+Ces limitations ont menées à la création de 802.14.4.e qui redifinis les protocoles MAC du standard.
+
+Ainsi, 5 modes de fonctionnement de la couche MAC sont définis:
+\begin{enumerate}
+  \item \textbf{Time Slotted Channel Hopping (TSCH)}\\
+    Cible les applications tel que l'automatisation de processus. Permet des communications multi-sauts
+    et multi-canaux.
+  \item \textbf{Deterministic and Synchronous Multi-channel Extension (DSME)}\\
+    Réalisé pour des applications industirelles et commercialesayant des contraintes de délai et
+    fiabilité. Permet des communications multi-sauts ainsi que la création de réseaux MESH.
+  \item \textbf{Low Latency Deterministic Network (LLDN)}\\
+    Conçu pour les applications nécessitant une latence faible et les réseaux n'utilisant qu'un seul
+    canl pour des chemins d'un saut maximum.
+  \item \textbf{Asynchronous multi-channel adaptation (AMCA)}\\
+    Cible les applications où de grands déploiments sont nécessaire comme le monitoring d'infrastructures.
+  \item \textbf{Radio Frequency Identification Blink (BLINK)}\\
+    Conçu pour i'identification de personnes ou d'objets. Il permet aux noeuds de communiquer leur
+    ID aux autres noeuds sans avoir été préalablement associés.
+\end{enumerate}
+\subsection{TSCH}\label{subsec:etat_art-802.15.4.tsch}
