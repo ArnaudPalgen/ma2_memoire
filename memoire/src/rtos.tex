@@ -1,0 +1,32 @@
+\section{RTOS}
+
+Etant donné que ce projet utilise le protocole 802.15.4 ainsi que TSCH, le RTOS choisis, doit supporter la couche physique 802.15.4, le mode TSCH pour la couche MAC de 802.15.4.
+
+Le RTOS choisis doit également posséder une implémentation d'un ou plusieurs algorithme d'ordonnancement de TSCH. Il est également préférable, que le RTOS choisis, supprote déja la plateforme utilisée. Une implémentation de la LoRa n'est pas nécessaire car lisaison via UART ou SPI.
+
+Le tableau ci-dessous illustre la comparaison de différents RTOS. Les critères de comparaison
+sont les suivants: L'implémentation du protocole 802.15.4, 
+
+Contiki oS est un RTOS mature, qui dispose de tout ce qui peut etre utile pour ce mémoire.
+
+
+
+
+%https://github.com/Lora-net/LoRaMac-node/blob/ba17382bd5109513937afad07f068a781a503ef6/src/radio/radio.h
+\begin{table}[H]
+    \begin{adjustbox}{width=\textwidth}
+        \begin{tabular}{c||c|c|c|c|c|c|c}
+            RTOS                & 802.15.4 & ord. TSCH         & LoRa          & IPv6    & routage IP & comp.   \\ \hline
+
+            \textbf{Contiki OS} & $\surd$  & 6Tisch, Orchestra & Projet KRATOS & $\surd$ & RPL        & $\surd$ \\ \hline
+
+            FreeRTOS            & $\times$ & $\times$          & $\surd$       & $\surd$ & $\times$   &    $\times$     \\ \hline
+
+            RIOT OS             & $\surd$  & $\times$          & $\surd$       & $\surd$ & RPL        &    $\surd$     \\ \hline
+
+            Zephyr              & $\surd$  & $\times$          & $\surd$       & $\surd$ & Thread     &    $\times$     \\
+        \end{tabular}
+    \end{adjustbox}
+    \caption{cap}
+    \label{label}
+\end{table}
