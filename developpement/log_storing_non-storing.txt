@@ -1,0 +1,35 @@
+611b(root)
+ |
+b607
+ |
+b1f8
+
+=========== STORING ===========
+
+routes sur 611b:
+Routing entries (2 in total):
+-- fd00::212:4b00:60d:b1f8 via fe80::212:4b00:60d:b607 (lifetime: 1797 seconds)
+-- fd00::212:4b00:60d:b607 via fe80::212:4b00:60d:b607 (lifetime: 1787 seconds)
+---
+b607
+Routing entries (1 in total):
+-- fd00::212:4b00:60d:b1f8 via fe80::212:4b00:60d:b1f8 (lifetime: 1769 seconds)
+---
+routes sur b1f8:
+Default route:
+-- fe80::212:4b00:60d:b607 (lifetime: infinite)
+
+=========== NON STORING ===========
+611b:
+Routing links (3 in total):
+-- fd00::212:4b00:60d:611b  (DODAG root) (lifetime: infinite)
+-- fd00::212:4b00:60d:b607  to fd00::212:4b00:60d:611b (lifetime: 1320 seconds)
+-- fd00::212:4b00:60d:b1f8  to fd00::212:4b00:60d:b607 (lifetime: 1680 seconds)
+
+b607:
+Default route:
+-- fe80::212:4b00:60d:611b (lifetime: infinite)
+
+b1f8:
+Default route:
+-- fe80::212:4b00:60d:b607 (lifetime: infinite)

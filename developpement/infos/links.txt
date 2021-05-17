@@ -1,0 +1,6 @@
+RN2483: https://www.microchip.com/wwwproducts/en/RN2483
+RE-MOTE: https://zolertia.io/product/re-mote/
+Zolertia ressources: https://github.com/Zolertia/Resources/wiki
+Contiki OS: https://github.com/contiki-ng/contiki-ng
+contiki RE-MOTE doc: https://contiki-ng.readthedocs.io/en/latest/_api/group__remote-revb.html
+.

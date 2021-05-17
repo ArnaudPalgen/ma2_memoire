@@ -276,5 +276,5 @@ TSWLatexianTemp*
 *.lpz
 
 # build dir
-#*/build
+*/build/*
 build/*
