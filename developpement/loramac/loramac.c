@@ -7,23 +7,43 @@
 #include "loramac.h"
 #include "net/linkaddr.h"
 #include "sys/log.h"
+#include "mybuffer.h"
+
 
 #define LOG_MODULE "LoRa MAC"
 #define LOG_LEVEL LOG_LEVEL_DBG
 
-//node adress
+#define QUERY_TIMEOUT (CLOCK_SECOND * 5)
+#define RETRANSMIT_TIMEOUT CLOCK_SECOND
+
+#define MAX_RETRANSMIT 3
+#define BUF_SIZE 10
+
 static lora_addr_t node_addr;
 
-//current state
 static state_t state;
-//static lora_frame_t last_send_frame;
-//static uint8_t expected_ack_num = 0;
+
+static struct ctimer retransmit_timer;
+static struct ctimer query_timer;
+
+static lora_frame_t buffer[BUF_SIZE];
+static myqueue queue;
+static mac_command_t resp_buffer[BUF_SIZE];
+static myqueue resp_queue;
+
+static lora_frame_t last_send_frame;
+static uint8_t expected_ack_num = 0;
+static mac_command_t expected_response = JOIN_RESPONSE;
+static uint8_t retransmit_attempt=0
 
 lora_addr_t root_addr={ROOT_PREFIX, ROOT_ID};
 
-PROCESS(loramac_process, "lora-mac-process");
-AUTOSTART_PROCESSES(&loramac_process);
+static lora_frame_t query_frame={node_addr, root_addr, false, QUERY, ""};
 
+//PROCESS(loramac_process, "lora-mac-process");
+//AUTOSTART_PROCESSES(&loramac_process);
+
+/*---------------------------------------------------------------------------*/
 void printLoraAddr(lora_addr_t *addr){
     printf("%d:%d", addr->prefix, addr->id);
 }
@@ -48,9 +68,14 @@ bool isForRoot(lora_addr_t *dest_addr){
 bool isForChild(lora_addr_t *dest_addr){
     return dest_addr->prefix == node_addr.prefix && dest_addr->id != node_addr.id;
 }
+/*---------------------------------------------------------------------------*/
 
 void process_frame(lora_frame_t *frame){
     mac_command_t command = frame->command;
+
+    if(command != expected_response && expected_response>-1){
+        command = -1;//match noting in the swith 
+    }
 
     switch (command)
     {
@@ -58,14 +83,21 @@ void process_frame(lora_frame_t *frame){
         if(state == ALONE && isForRoot(&(frame->dest_addr)) && strlen(frame->payload) == 2){
             node_addr.prefix = (uint8_t) strtol(frame->payload, NULL, 16);
             state = JOINED;
+            ctimer_stop(&retransmit_timer);
+            LOG_INFO("Lora Root joined. \n");
+            LOG_INFO("Node addr: ");
+            printLoraAddr(&node_addr);
+            LOG_INFO("\n");
         }
         break;
     
     case DATA:
         if(state != ALONE && isForRoot(&(frame->dest_addr))){
             //todo send payload to upper layer
+            LOG_DBG("Data for root");
         }else if(state == READY && isForChild(&(frame->dest_addr))){
             //todo send to RPL
+            LOG_DBG("Data for child");
         }
         break;
 
@@ -82,12 +114,21 @@ void process_frame(lora_frame_t *frame){
         //todo
         break;
     case ACK:
-        //todo
+        uint8_t ack_num = (uint8_t) strtol(frame->payload, NULL, 16);
+        LOG_DBG("received ack_num: %d\n", ack_num);
+        if(ack_num == expected_ack_num){
+            ctimer_stop(&retransmit_timer);
+            state = READY;
+        }
         break;
 
     default:
         LOG_WARN("Unknown command %d\n", command);
     }
+}
+
+void rpl_on(){
+    state = READY;
 }
 
 int lora_rx(lora_frame_t frame){
@@ -100,6 +141,54 @@ int lora_rx(lora_frame_t frame){
     }
     
     return 0;
+}
+
+void retransmit_timeout(void *ptr){
+    if(retransmit_attempt>=MAX_RETRANSMIT){
+        LOG_WARN("Unable to send frame");
+        retransmit_attempt = 0;
+    }else{
+        retransmit_attempt ++;
+        phy_tx(last_send_frame);
+        ctimer_reset(&retransmit_timer);
+    }
+}
+
+int process(lora_frame_t *frame, mac_command_t f_expected_response){
+    if(queue.current_item<BUF_SIZE && frame !=NULL && f_expected_response>0){//append frame to buffer
+        queue_append(&queue, frame);
+        queue_append(&resp_queue, &f_expected_response);
+    }
+    if(queue.current_item>0 && state = READY){//send next
+        queue_pop(&queue, &last_send_frame);
+        queue_pop(&resp_queue, &expected_response);
+
+        state = WAIT_RESPONSE;
+        phy_timeout(0);//disable watchdog timer
+        phy_tx(last_send_frame);
+        if(expected_response>=0){
+            phy_timeout(10000);
+            phy_rx();
+            ctimer_set(&retransmit_timer, RETRANSMIT_TIMEOUT, retransmit_timeout, NULL);
+        }
+    }
+}
+
+void send_next(){
+    process(NULL, -1);
+}
+
+void mac_tx(lora_frame_t frame){
+    if(frame.k){
+        process(&frame, ACK);
+    }else{
+        process(&frame, -1);
+    }
+    
+}
+
+void query_timeout(void *ptr){
+    process(query_frame, DATA);
 }
 
 void mac_init(){
@@ -127,8 +216,20 @@ void mac_init(){
     phy_init();
     phy_register_listener(&lora_rx);
 
+    /*init query timer*/
+    ctimer_set(&query_timer, QUERY_TIMEOUT, query_timeout, NULL);
+    //ctimer_set(&timer_ctimer, CLOCK_SECOND, ctimer_callback, NULL);
+
+    /*init queue*/
+    queue_init(&queue, sizeof(lora_frame_t), BUF_SIZE, buffer);
+    queue_init(&resp_queue, sizeof(mac_command_t), BUF_SIZE, resp_buffer);
+
+
+    /*send join request to LoRa root*/
+    lora_frame_t join_frame={node_addr, root_addr, false, JOIN, NULL};
+    process(&join_frame, JOIN_RESPONSE);
     
-    //lora_frame_t join_frame={node_addr, root_addr, false, JOIN, NULL};
+    
     //uart_tx(join_frame);
     //phy_timeout()
     //phy_rx()
@@ -140,7 +241,7 @@ void mac_init(){
     //start process(max retransmit=3, timeout=1)
 }
 
-
+/**
 PROCESS_THREAD(loramac_process, ev, data){
     PROCESS_BEGIN();
     mac_init();
@@ -165,3 +266,4 @@ PROCESS_THREAD(loramac_process, ev, data){
 
     PROCESS_END();
 }
+*/

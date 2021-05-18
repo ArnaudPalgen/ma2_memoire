@@ -1,6 +1,7 @@
 CONTIKI_PROJECT = loramac
 MODULES = os/services/at-master arch/cpu/cc2538/dev
 PROJECT_SOURCEFILES += loraphy.c
+PROJECT_SOURCEFILES += mybuffer.c
 all: $(CONTIKI_PROJECT)
 
 CONTIKI = $(HOME)/contiki-ng

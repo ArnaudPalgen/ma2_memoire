@@ -9,7 +9,8 @@
 typedef enum state{
     ALONE, //initial state
     JOINED, // when node has received the prefix
-    READY // when node has start RPL
+    READY, // when node has start RPL
+    WAIT_RESPONSE
 }state_t;
 
 //int send_to_root(lora_addr_t *frame);
