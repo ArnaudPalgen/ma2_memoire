@@ -3,10 +3,47 @@ import time
 import queue
 import threading
 import logging
+from enum import Enum, auto, unique
+from dataclasses import dataclass
 
-log = logging.getLogger(__name__)
+log = logging.getLogger("LoRa PHY")
 log.setLevel(logging.DEBUG)
 
+@dataclass
+class LoraAddr:
+    prefix: int
+    node_id: int
+
+@dataclass
+class LoraFrame:
+    src_addr: LoraAddr
+    des_addr: LoraAddr
+    k: bool
+    command: MacCommand
+    
+
+@unique
+class MacCommand(Enum):
+    JOIN=auto(),
+    JOIN_RESPONSE=auto(),
+    DATA=auto(),
+    ACK=auto(),
+    PING=auto(),
+    PONG=auto(),
+    QUERY=auto(),
+    CHILD=auto(),
+    CHILD_RESPONSE=auto() 
+
+@unique
+class UartResponse(Enum):
+    OK = "ok",
+    INVALID_PARAM = "invalid_param",
+    RADIO_ERR = "radio_err",
+    RADIO_RX = "radio_rx",
+    BUSY = "busy",
+    RADIO_TX_OK = "radio_tx_ok",
+    U_INT = "4294967245",
+    NONE = "none"
 
 class LoraPhy:
     def __init__(self, port="/dev/ttyUSB0", baudrate=57600):
@@ -15,18 +52,36 @@ class LoraPhy:
         self.baudrate=baudrate
         self.buffer = queue.Queue(10)
         self.listener = None
+        self.can_send = True
+        self.can_send_cond = threading.Condition()
 
-    def init(self):
-        log.info("Init PHY")
+    def phy_init(self):
+        #set serial connection, call send_phy for mac pause et radio set freq
+        logging.debug('Init PHY')
         self.con = serial.Serial(port=self.port, baudrate=self.baudrate)
-        thread = threading.Thread(target=self.uart_rx)
-        self.send_phy("sys get ver")
+        tx_thread = threading.Thread(target=self.uart_tx)
+        rx_thread = threading.Thread(target=self.uart_rx)
         self.send_phy("mac pause")
         self.send_phy("radio set freq 868100000")
-        self.send_phy("radio tx 48656c6C6F")
-        thread.start()
+        rx_thread.start()
+        tx_thread.start()
+        
+        with self.can_send_cond:
+            self.can_send_cond.notify_all()
 
-    def send_phy(self, data):
+    def phy_register_listener(self, listener):
+        self.listener = listener
+
+    def phy_tx(self):#todo loraframe
+        pass#todo
+
+    def phy_timeout(self, timeout:int):
+        pass#todo
+
+    def phy_rx(self):
+        pass #todo
+#--------------------------------------------------------------------------------
+    def send_phy(self, data):#append data to buffer
         if type(data) == bytes:
             data = data + "\r\n".encode()
         elif type(data) == str:
@@ -34,7 +89,7 @@ class LoraPhy:
         else:
             raise TypeError("Data must be bytes or str")
         
-        if len(data > 255):
+        if len(data) > 255:
             raise ValueError("Data too big")
         
         try:
@@ -43,9 +98,6 @@ class LoraPhy:
             return False
 
         return True
-
-    def phy_register_listener(self, listener):
-        self.listener = listener
 
     def process_response(self, data):
         decode_data = data.decode()
@@ -59,22 +111,28 @@ class LoraPhy:
         elif "radio_rx" in decode_data:
             self.listener(decode_data)
             return False
-
+        
         return True
 
     def uart_rx(self):
-        can_send = True
-        while self.con is not None:
-            if can_send and not self.buffer.empty():
-                data = self.buffer.get(block=False)
-                log.info("Send UART data:"+ data)
-                self.con.write(data)
-                can_send = False
-            if self.con.in_waiting > 0:
-                data = self.con.readline()
-                can_send = self.process_response(data)
+        while True:
+            data = self.con.readline()
+            if self.process_response(data):
+                with self.can_send_cond:
+                    self.can_send = True
+                    self.can_send_cond.notify_all()
+    
+    def uart_tx(self):
+        while True:
+            while self.con is None or not self.can_send:
+                with self.can_send_cond:
+                    self.can_send_cond.wait()
+            data = self.buffer.get(block=True)
+            log.info("Send UART data:"+ str(data))
+            self.con.write(data)
+            self.can_send = False
 
 
 if __name__ == '__main__':
     phy = LoraPhy()
-    phy.init()
+    phy.phy_init()
