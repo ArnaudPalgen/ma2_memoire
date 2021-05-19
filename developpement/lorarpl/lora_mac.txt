@@ -1,0 +1,37 @@
+callBackPhy(loraFrame):
+    Si loraFrame == expected_response:
+        * stop retransmit timer
+        * supprimer première trame du buffer(FIFO)
+        * state = IDLE
+        * Si loraFrame.type == data
+            * restart request_timer
+            * Si il y a des data:
+                Si c'est pour le noeud:
+                    app_data_callback(data)
+                Sinon:
+                    app_data_for_child(loraFrame)
+        *sendNext()
+DONE
+sendNext():
+    Si buffer non vide et que state=IDLE:
+        * state = WAIT_RESPONSE
+        * phySend(next frame)
+        * start retransmit timer
+DONE
+retransmitTimeout():
+    Si attempt >= maxAttempt:
+        *supprimer première trame du buffer
+        *state=IDLE
+        *attempt=0
+        *sendNext()
+    Sinon:
+        *retransmit
+        *restart transmit timer
+DONE
+mac_tx(data):
+    * append data to buffer
+    * sendNext()
+
+DONE
+;requestTimeout():
+    mac_tx(request_frame)
