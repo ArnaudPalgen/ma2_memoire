@@ -28,6 +28,17 @@ const char* uart_response[8]={"ok", "invalid_param", "radio_err", "radio_rx", "b
 /*---------------------------------------------------------------------------*/
 /*private functions*/
 
+void print_uart_frame(uart_frame_t *frame){
+    printf("{ cmd:%s ", uart_command[frame->cmd]);
+    printf("resp: [");
+    uart_response_t *f_expected_response = frame->expected_response;
+    for(int i=0;i<UART_EXP_RESP_SIZE-1;i++){
+        printf("%s, ",uart_response[f_expected_response[i]]);
+    }
+    printf("%s] }",uart_response[f_expected_response[UART_EXP_RESP_SIZE-1]]);
+    
+}
+
 int parse(lora_frame_t *dest, char *data){
 
     if(strlen(data) < HEADER_SIZE){
@@ -133,7 +144,7 @@ void process_command(unsigned char *command){
     response_frame.type=RESPONSE;
 
     for(int i=0;i<UART_EXP_RESP_SIZE;i++){
-        LOG_DBG("compare with expected:%s\n",uart_response[expected_response[i]]);
+        LOG_DBG("   compare with expected:%s\n",uart_response[expected_response[i]]);
         if(strstr((const char*)command, uart_response[expected_response[i]]) != NULL){
             if(expected_response[i] == RADIO_RX && parse(&frame, (char*)(command+10))==0){
                 handler(frame);
@@ -261,7 +272,10 @@ int phy_rx(){
 /*LoRa PHY process*/
 void process(uart_frame_t uart_frame){
     if(uart_frame.type != RESPONSE){
-        LOG_DBG("append frame to buffer\n");
+        LOG_DBG("append frame ");
+        print_uart_frame(&uart_frame);
+        LOG_DBG(" to buffer\n");
+        
         buffer[w_i] = uart_frame;
 		if (w_i == BUF_SIZE-1){
     		w_i = 0;

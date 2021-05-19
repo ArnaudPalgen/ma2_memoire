@@ -13,8 +13,9 @@
 #define LOG_MODULE "LoRa MAC"
 #define LOG_LEVEL LOG_LEVEL_DBG
 
-#define QUERY_TIMEOUT (CLOCK_SECOND * 5)
-#define RETRANSMIT_TIMEOUT CLOCK_SECOND
+#define QUERY_TIMEOUT (CLOCK_SECOND * 10) //10 sec
+#define RETRANSMIT_TIMEOUT (CLOCK_SECOND * 3) //3 sec
+#define RX_TIME 2000 // 2 sec
 
 #define MAX_RETRANSMIT 3
 #define BUF_SIZE 10
@@ -95,10 +96,10 @@ void process_frame(lora_frame_t *frame){
     case DATA:
         if(state != ALONE && isForRoot(&(frame->dest_addr))){
             //todo send payload to upper layer
-            LOG_DBG("Data for root");
+            LOG_DBG("Data for root\n");
         }else if(state == READY && isForChild(&(frame->dest_addr))){
             //todo send to RPL
-            LOG_DBG("Data for child");
+            LOG_DBG("Data for child\n");
         }
         break;
 
@@ -162,27 +163,32 @@ int mac_process(lora_frame_t *frame, mac_command_t f_expected_response){
     LOG_DBG("mac_process: frame:");
     printLoraFrame(frame);
     LOG_DBG(" expected response: %d\n", expected_response);
+    
     if(queue.current_item<BUF_SIZE && frame !=NULL && f_expected_response>0){//append frame to buffer
-        LOG_DBG("append to buffer");
+        LOG_DBG("append to buffer\n");
+        
         queue_append(&queue, frame);
         queue_append(&resp_queue, &f_expected_response);
     }
     if(queue.current_item>0 && state != WAIT_RESPONSE){//send next
         queue_pop(&queue, &last_send_frame);
         queue_pop(&resp_queue, &expected_response);
+        
         LOG_DBG("send ");
         printLoraFrame(&last_send_frame);
         LOG_DBG("with expected response: %d\n", expected_response);
-
         LOG_DBG("disable watchdog timer and send\n");
+        
         phy_timeout(0);//disable watchdog timer
         phy_tx(last_send_frame);
         if(expected_response>=0){
             LOG_DBG("waiting for an answer: %d\n", expected_response);
             state = WAIT_RESPONSE;
+            
             LOG_DBG("state is: %d\n", state);
             LOG_DBG("set watchdog timer and start rx\n");
-            phy_timeout(10000);
+            
+            phy_timeout(RX_TIME);
             phy_rx();
             LOG_DBG("start retransmit timer\n");
             ctimer_set(&retransmit_timer, RETRANSMIT_TIMEOUT, retransmit_timeout, NULL);
@@ -217,7 +223,7 @@ void query_timeout(void *ptr){
 }
 
 void mac_init(){
-    LOG_INFO("Init LoRa MAC");
+    LOG_INFO("Init LoRa MAC\n");
 
     /* set custom link_addr */
     unsigned char new_linkaddr[8] = {'_','u','m','o','n','s',linkaddr_node_addr.u8[LINKADDR_SIZE - 2],linkaddr_node_addr.u8[LINKADDR_SIZE - 1]};
@@ -242,11 +248,6 @@ void mac_init(){
     phy_init();
     phy_register_listener(&lora_rx);
 
-    /*init query timer*/
-    ctimer_set(&query_timer, QUERY_TIMEOUT, query_timeout, NULL);
-    LOG_DBG("query timer started\n");
-    //ctimer_set(&timer_ctimer, CLOCK_SECOND, ctimer_callback, NULL);
-
     /*init queue*/
     queue_init(&queue, sizeof(lora_frame_t), BUF_SIZE, buffer);
     queue_init(&resp_queue, sizeof(mac_command_t), BUF_SIZE, resp_buffer);
@@ -257,6 +258,11 @@ void mac_init(){
     lora_frame_t join_frame={node_addr, root_addr, false, JOIN, NULL};
     mac_process(&join_frame, JOIN_RESPONSE);
     LOG_DBG("JOIN_REQUEST sended\n");
+
+    /*init query timer*/
+    ctimer_set(&query_timer, QUERY_TIMEOUT, query_timeout, NULL);
+    LOG_DBG("query timer started\n");
+    //ctimer_set(&timer_ctimer, CLOCK_SECOND, ctimer_callback, NULL);
     
     
     //uart_tx(join_frame);
