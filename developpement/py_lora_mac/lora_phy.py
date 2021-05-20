@@ -9,10 +9,27 @@ from dataclasses import dataclass
 log = logging.getLogger("LoRa PHY")
 log.setLevel(logging.DEBUG)
 
+HEADER_SIZE = 14
+
 @dataclass
 class LoraAddr:
     prefix: int
     node_id: int
+
+    def toHex(self):
+        return "%02X"%self.prefix + "%04X"%self.node_id
+
+@unique
+class MacCommand(Enum):
+    JOIN=0
+    JOIN_RESPONSE=1
+    DATA=2
+    ACK=3
+    PING=4
+    PONG=5
+    QUERY=6
+    CHILD=7
+    CHILD_RESPONSE= 8
 
 @dataclass
 class LoraFrame:
@@ -20,19 +37,42 @@ class LoraFrame:
     des_addr: LoraAddr
     k: bool
     command: MacCommand
-    
+    payload:str #must be to hex
 
-@unique
-class MacCommand(Enum):
-    JOIN=auto(),
-    JOIN_RESPONSE=auto(),
-    DATA=auto(),
-    ACK=auto(),
-    PING=auto(),
-    PONG=auto(),
-    QUERY=auto(),
-    CHILD=auto(),
-    CHILD_RESPONSE=auto() 
+    def toHex(self):
+        ack=0
+        if self.k:
+            ack=0x80
+        f_cmd = "%02X" % (self.command.value | ack)
+        return self.src_addr.toHex()+self.des_addr.toHex()+f_cmd+(self.payload if self.payload else "")
+        
+
+    @staticmethod
+    def build(data:str):
+        if(len(data) < HEADER_SIZE):
+            return None
+        
+        """ extract src addr"""
+        prefix_src=int(data[0:2], 16)
+        node_id_src=int(data[2:6], 16)
+
+        """ extract dest addr"""
+        prefix_dest=int(data[6:8], 16)
+        node_id_dest=int(data[8:12], 16)
+
+        """ extract flags an command"""
+        f_c = int(data[12:14], 16)
+        ack = bool(f_c>>7)
+        filter = 0x0F
+        cmd = MacCommand(f_c & filter)
+
+        """ extract payload """
+        payload = data[14:]
+
+        return LoraFrame(LoraAddr(prefix_src, node_id_src),
+            LoraAddr(prefix_dest, node_id_dest),
+            ack,cmd, payload)
+
 
 @unique
 class UartResponse(Enum):
@@ -134,5 +174,8 @@ class LoraPhy:
 
 
 if __name__ == '__main__':
-    phy = LoraPhy()
-    phy.phy_init()
+    #phy = LoraPhy()
+    #phy.phy_init()
+    #a=LoraFrame.build("B2B2E5B2B2E50548656c6C6F")
+    a=LoraFrame(LoraAddr(178, 45797), LoraAddr(179, 49878), True, MacCommand.PING, None)
+    print(a.toHex())
