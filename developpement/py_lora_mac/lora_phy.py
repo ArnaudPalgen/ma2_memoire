@@ -11,13 +11,6 @@ log.setLevel(logging.DEBUG)
 
 HEADER_SIZE = 14
 
-@dataclass
-class LoraAddr:
-    prefix: int
-    node_id: int
-
-    def toHex(self):
-        return "%02X"%self.prefix + "%04X"%self.node_id
 
 @unique
 class MacCommand(Enum):
@@ -30,6 +23,37 @@ class MacCommand(Enum):
     QUERY=6
     CHILD=7
     CHILD_RESPONSE= 8
+
+
+@unique
+class UartCommand(Enum):
+    MAC_PAUSE = "mac pause" # pause mac layer
+    SET_MOD = "radio set mod " #set radio mode (fsk or lora)
+    SET_FREQ = "radio set freq " #set radio freq from 433050000 to 434790000 or from 863000000 to 870000000, in Hz.
+    SET_WDT = "radio set wdt " #set watchdog timer
+    RX = "radio rx " #receive mode
+    TX = "radio tx " #transmit data
+    SLEEP = "sys sleep " #system sleep
+
+
+@unique
+class UartResponse(Enum):
+    OK = "ok",
+    INVALID_PARAM = "invalid_param",
+    RADIO_ERR = "radio_err",
+    RADIO_RX = "radio_rx",
+    BUSY = "busy",
+    RADIO_TX_OK = "radio_tx_ok",
+    U_INT = "4294967245",
+    NONE = "none"
+
+@dataclass
+class LoraAddr:
+    prefix: int
+    node_id: int
+
+    def toHex(self):
+        return "%02X"%self.prefix + "%04X"%self.node_id
 
 @dataclass
 class LoraFrame:
@@ -72,18 +96,15 @@ class LoraFrame:
         return LoraFrame(LoraAddr(prefix_src, node_id_src),
             LoraAddr(prefix_dest, node_id_dest),
             ack,cmd, payload)
-
-
-@unique
-class UartResponse(Enum):
-    OK = "ok",
-    INVALID_PARAM = "invalid_param",
-    RADIO_ERR = "radio_err",
-    RADIO_RX = "radio_rx",
-    BUSY = "busy",
-    RADIO_TX_OK = "radio_tx_ok",
-    U_INT = "4294967245",
-    NONE = "none"
+#@dataclass
+#Class uartFrame:
+#    expected_response:UartResponse
+#    
+@dataclass
+class UartFrame:
+    expected_response: list
+    data:str
+    cmd: UartCommand
 
 class LoraPhy:
     def __init__(self, port="/dev/ttyUSB0", baudrate=57600):
@@ -94,6 +115,7 @@ class LoraPhy:
         self.listener = None
         self.can_send = True
         self.can_send_cond = threading.Condition()
+        self.last_sended = None
 
     def phy_init(self):
         #set serial connection, call send_phy for mac pause et radio set freq
@@ -101,8 +123,8 @@ class LoraPhy:
         self.con = serial.Serial(port=self.port, baudrate=self.baudrate)
         tx_thread = threading.Thread(target=self.uart_tx)
         rx_thread = threading.Thread(target=self.uart_rx)
-        self.send_phy("mac pause")
-        self.send_phy("radio set freq 868100000")
+        self._send_phy("mac pause")
+        self._send_phy("radio set freq 868100000")
         rx_thread.start()
         tx_thread.start()
         
@@ -112,16 +134,19 @@ class LoraPhy:
     def phy_register_listener(self, listener):
         self.listener = listener
 
-    def phy_tx(self):#todo loraframe
-        pass#todo
+    def phy_tx(self, loraFrame:LoraFrame):
+        f=UartFrame([UartResponse.RADIO_TX_OK, UartResponse], loraFrame.toHex, UartCommand.TX)
+        self._send_phy(f)
 
     def phy_timeout(self, timeout:int):
-        pass#todo
+        f=UartFrame([UartResponse.OK], str(timeout), UartCommand.SET_WDT)
+        self._send_phy(f)
 
     def phy_rx(self):
-        pass #todo
+        f = UartFrame([UartResponse.RADIO_ERR, UartResponse.RADIO_RX], "0", UartCommand.RX)
+        self._send_phy(f)
 #--------------------------------------------------------------------------------
-    def send_phy(self, data):#append data to buffer
+    def _send_phy(self, data):#append data to buffer
         if type(data) == bytes:
             data = data + "\r\n".encode()
         elif type(data) == str:
@@ -139,20 +164,22 @@ class LoraPhy:
 
         return True
 
-    def process_response(self, data):
+    def process_response(self, data:str):
         decode_data = data.decode()
         log.info("UART DATA: "+decode_data)
-        if "radio_rx" in decode_data:
-            log.debug("LoRa frame:"+decode_data)
-            return False
-        elif "radio_err" in decode_data:
-            log.debug("radio error")
-            return False
-        elif "radio_rx" in decode_data:
-            self.listener(decode_data)
-            return False
-        
-        return True
+        for resp in self.last_sended.expected_response:
+            if data in resp.value
+        #if "radio_rx" in decode_data:
+        #    log.debug("LoRa frame:"+decode_data)
+        #    return False
+        #elif "radio_err" in decode_data:
+        #    log.debug("radio error")
+        #    return False
+        #elif "radio_rx" in decode_data:
+        #    self.listener(decode_data)
+        #    return False
+        #
+        #return True
 
     def uart_rx(self):
         while True:
@@ -167,9 +194,9 @@ class LoraPhy:
             while self.con is None or not self.can_send:
                 with self.can_send_cond:
                     self.can_send_cond.wait()
-            data = self.buffer.get(block=True)
+            self.last_sended = self.buffer.get(block=True)
             log.info("Send UART data:"+ str(data))
-            self.con.write(data)
+            self.con.write(data.cmd.value+data.data)
             self.can_send = False
 
 
