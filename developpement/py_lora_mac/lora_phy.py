@@ -38,13 +38,13 @@ class UartCommand(Enum):
 
 @unique
 class UartResponse(Enum):
-    OK = "ok",
-    INVALID_PARAM = "invalid_param",
-    RADIO_ERR = "radio_err",
-    RADIO_RX = "radio_rx",
-    BUSY = "busy",
-    RADIO_TX_OK = "radio_tx_ok",
-    U_INT = "4294967245",
+    OK = "ok"
+    INVALID_PARAM = "invalid_param"
+    RADIO_ERR = "radio_err"
+    RADIO_RX = "radio_rx"
+    BUSY = "busy"
+    RADIO_TX_OK = "radio_tx_ok"
+    U_INT = "4294967245"
     NONE = "none"
 
 @dataclass
@@ -58,7 +58,7 @@ class LoraAddr:
 @dataclass
 class LoraFrame:
     src_addr: LoraAddr
-    des_addr: LoraAddr
+    dest_addr: LoraAddr
     k: bool
     command: MacCommand
     payload:str #must be to hex
@@ -68,7 +68,7 @@ class LoraFrame:
         if self.k:
             ack=0x80
         f_cmd = "%02X" % (self.command.value | ack)
-        return self.src_addr.toHex()+self.des_addr.toHex()+f_cmd+(self.payload if self.payload else "")
+        return self.src_addr.toHex()+self.dest_addr.toHex()+f_cmd+(self.payload if self.payload else "")
         
 
     @staticmethod
@@ -123,8 +123,8 @@ class LoraPhy:
         self.con = serial.Serial(port=self.port, baudrate=self.baudrate)
         tx_thread = threading.Thread(target=self.uart_tx)
         rx_thread = threading.Thread(target=self.uart_rx)
-        self._send_phy("mac pause")
-        self._send_phy("radio set freq 868100000")
+        self._send_phy(UartFrame([UartResponse.U_INT], "", UartCommand.MAC_PAUSE))
+        self._send_phy(UartFrame([UartResponse.OK], "868100000", UartCommand.SET_FREQ))
         rx_thread.start()
         tx_thread.start()
         
@@ -147,15 +147,8 @@ class LoraPhy:
         self._send_phy(f)
 #--------------------------------------------------------------------------------
     def _send_phy(self, data):#append data to buffer
-        if type(data) == bytes:
-            data = data + "\r\n".encode()
-        elif type(data) == str:
-            data = (data + "\r\n").encode()
-        else:
-            raise TypeError("Data must be bytes or str")
-        
-        if len(data) > 255:
-            raise ValueError("Data too big")
+        if type(data) != UartFrame:
+            raise TypeError("Data must be UartFrame. actual type: ", type(data))
         
         try:
             self.buffer.put(data, block=False)
@@ -168,18 +161,11 @@ class LoraPhy:
         decode_data = data.decode()
         log.info("UART DATA: "+decode_data)
         for resp in self.last_sended.expected_response:
-            if data in resp.value
-        #if "radio_rx" in decode_data:
-        #    log.debug("LoRa frame:"+decode_data)
-        #    return False
-        #elif "radio_err" in decode_data:
-        #    log.debug("radio error")
-        #    return False
-        #elif "radio_rx" in decode_data:
-        #    self.listener(decode_data)
-        #    return False
-        #
-        #return True
+            if UartResponse.RADIO_RX.value in decode_data:
+                log.info("RX DATA:"+decode_data)#todo call handler with uartframe
+            if resp.value in decode_data:
+                return True
+        return False
 
     def uart_rx(self):
         while True:
@@ -195,8 +181,8 @@ class LoraPhy:
                 with self.can_send_cond:
                     self.can_send_cond.wait()
             self.last_sended = self.buffer.get(block=True)
-            log.info("Send UART data:"+ str(data))
-            self.con.write(data.cmd.value+data.data)
+            log.info("Send UART data:"+ str(self.last_sended))
+            self.con.write( (self.last_sended.cmd.value+self.last_sended.data+ "\r\n").encode() )
             self.can_send = False
 
 

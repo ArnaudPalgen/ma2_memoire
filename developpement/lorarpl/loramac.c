@@ -74,7 +74,7 @@ void process_frame(lora_frame_t *frame){
     mac_command_t command = frame->command;
     uint8_t ack_num;
 
-    if(command != expected_response && expected_response>-1){
+    if(command != expected_response && expected_response>-1){//todo corriger
         command = -1;//match noting in the swith
         LOG_DBG("unexpected mac command %d\n", command);
     }
