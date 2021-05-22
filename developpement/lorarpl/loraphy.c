@@ -176,7 +176,7 @@ int uart_rx(unsigned char c){
         memset(buf, 0, FRAME_SIZE*sizeof(char));
       }
     }
-    if((int)c != 254 && (int)c != 248 && c!='\n' && (int)c != 192 && (int)c != 240){
+    if((int)c != 254 && (int)c != 248 && c!='\n' && (int)c != 192 && (int)c != 240 && c!='\r'){
         buf[index++] = c;
     }
     return 0;

@@ -46,18 +46,26 @@ class LoraMac():
                 self.can_send_cond.notify_all()
 
     def _on_join(self, frame:LoraFrame):
+        print("enter on_join")
         if len(self.childs) == 0:
             new_child = MIN_PREFIX
-        elif len(self.childs) > 0 and self.childs[-1] < MAX_PREFIX:
-            new_child = self.childs[-1]+1
+            print("len(child)=0")
+        elif len(self.childs) > 0 and self.childs[-1].prefix < MAX_PREFIX:
+            print("len(child)>0")
+            new_child = self.childs[-1].prefix+1
         
-        self.childs.append(LoraAddr(new_child, frame.src_addr.node_id))
+        new_child_addr = LoraAddr(new_child, frame.src_addr.node_id)
+        print("new child:", new_child_addr)
+        self.childs.append(new_child_addr)
         
+        print("send join response")
         self.mac_tx(LoraFrame(self.addr, frame.src_addr, True, MacCommand.JOIN_RESPONSE, "%02X"%new_child))
 
     def mac_tx(self, frame: LoraFrame)->bool:
-        if not self.tx_buf.full:
+        print("in mac tx. FULL:", self.tx_buf.full())
+        if not self.tx_buf.full():
             self.tx_buf.put(frame, block=False)
+            print("putted:", self.tx_buf)
             return True
         return False
 
@@ -65,17 +73,18 @@ class LoraMac():
     def _tx_process(self):
         while True:
             while not self.can_send:
-                while self.can_send_cond:
+                with self.can_send_cond:
                     self.can_send_cond.wait()
-        self.last_send_frame = self.tx_buf.get(block=True)
-        self.phy_layer.phy_tx(self.last_send_frame)
-        if self.last_send_frame.k:
-            self.retransmit_timer.start()
-            self.expected_ack = not self.expected_ack
-            self.can_send = False
+            self.last_send_frame = self.tx_buf.get(block=True)
+            self.phy_layer.phy_tx(self.last_send_frame)
+            print(self.last_send_frame, "sended to phy")
+            if self.last_send_frame.k:
+                self.retransmit_timer.start()
+                self.expected_ack = not self.expected_ack
+                self.can_send = False
 
     def _mac_rx(self, frame:LoraFrame):
-        print("MAC ! ", frame)
+        print("MAC RX:", frame)
         if frame.dest_addr == self.addr:
             fun = self.action_matcher.get(frame.command, None)
             if fun is not None:
@@ -87,3 +96,4 @@ class LoraMac():
 if __name__ == '__main__':
     mac = LoraMac()
     mac.mac_init()
+    #mac._mac_rx(LoraFrame.build("radio_rx  00611B01000000\r\n"))

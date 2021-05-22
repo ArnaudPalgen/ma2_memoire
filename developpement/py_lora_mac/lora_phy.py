@@ -73,6 +73,7 @@ class LoraFrame:
 
     @staticmethod
     def build(data:str):
+        print("build receive:"+data)
         if(len(data) < HEADER_SIZE):
             return None
         
@@ -135,7 +136,7 @@ class LoraPhy:
         self.listener = listener
 
     def phy_tx(self, loraFrame:LoraFrame):
-        f=UartFrame([UartResponse.RADIO_TX_OK, UartResponse], loraFrame.toHex, UartCommand.TX)
+        f=UartFrame([UartResponse.RADIO_TX_OK, UartResponse.RADIO_ERR], loraFrame.toHex(), UartCommand.TX)
         self._send_phy(f)
 
     def phy_timeout(self, timeout:int):
@@ -151,6 +152,7 @@ class LoraPhy:
             raise TypeError("Data must be UartFrame. actual type: ", type(data))
         
         try:
+            print("put data in phy buffer:", data)
             self.buffer.put(data, block=False)
         except queue.Full:
             return False
@@ -161,8 +163,10 @@ class LoraPhy:
         decode_data = data.decode()
         log.info("UART DATA: "+decode_data)
         for resp in self.last_sended.expected_response:
+            if resp is None:
+                continue
             if UartResponse.RADIO_RX.value in decode_data:
-                log.info("RX DATA:"+decode_data)#todo call handler with uartframe
+                self.listener(LoraFrame.build(decode_data[10:].strip()))
             if resp.value in decode_data:
                 return True
         return False
