@@ -129,7 +129,7 @@ int to_frame(lora_frame_t *frame, char *dest){
         strcat(result, frame->payload);
     }
     
-    LOG_DBG("created frame: %s\n", result);
+    LOG_DBG("[%lu]created frame: %s\n", clock_seconds(),result);
     memcpy(dest, &result, size+1);
     return 0;
 }
@@ -149,7 +149,7 @@ void process_command(unsigned char *command){
             if(expected_response[i] == RADIO_RX && parse(&frame, (char*)(command+10))==0){
                 handler(frame);
             }
-            LOG_DBG("send uart frame type RESPONSE to process\n");
+            LOG_DBG("[%lu]send uart frame type RESPONSE to process\n", clock_seconds());
             process(response_frame);
             //expected_response=NULL;
             break;
@@ -186,7 +186,7 @@ int uart_rx(unsigned char c){
  * Write s to UART
  */
 void write_uart(char *s){
-    LOG_INFO("Write UART:%s\n", s);
+    LOG_INFO("[%lu]Write UART:%s\n",clock_seconds(), s);
     while(*s != 0){
         uart_write_byte(UART, *s++);
     }
@@ -199,7 +199,7 @@ void write_uart(char *s){
 
 void phy_init(){
 
-    LOG_INFO("Init LoRa PHY\n");
+    LOG_INFO("[%lu]Init LoRa PHY\n", clock_seconds());
 
     /* UART configuration*/
     uart_init(UART);
@@ -272,7 +272,7 @@ int phy_rx(){
 /*LoRa PHY process*/
 void process(uart_frame_t uart_frame){
     if(uart_frame.type != RESPONSE){
-        LOG_DBG("append frame ");
+        LOG_DBG("[%lu]append frame ", clock_seconds());
         print_uart_frame(&uart_frame);
         LOG_DBG(" to buffer\n");
         
@@ -285,9 +285,9 @@ void process(uart_frame_t uart_frame){
     	current_size ++;
     }else{
         can_send = true;
-        LOG_DBG("can send -> true\n");
+        LOG_DBG("[%lu]can send -> true\n", clock_seconds());
     }
-    LOG_DBG("values: can_send=%d , current_size=%d\n", can_send, current_size);
+    LOG_DBG("[%lu]values: can_send=%d , current_size=%d\n", clock_seconds(), can_send, current_size);
     if(can_send && current_size>0){
         uart_frame_t uart_frame = buffer[r_i];
         char result[FRAME_SIZE]="";
@@ -308,10 +308,17 @@ void process(uart_frame_t uart_frame){
 		}
     	current_size --;
         can_send = false;
-        LOG_DBG("can send -> false\n");
+        LOG_DBG("[%lu]can send -> false\n", clock_seconds());
         for(int i=0;i<UART_EXP_RESP_SIZE;i++){
             expected_response[i] = uart_frame.expected_response[i];
         }
         write_uart(result);
     }
 }
+/*
+PROCESS_THREAD(ph_rx, ev, data){
+    PROCESS_BEGIN();
+        mac_init();
+    PROCESS_END();
+}
+*/
