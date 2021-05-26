@@ -2,38 +2,43 @@ import serial
 import time
 import queue
 import threading
-import logging
+import logging as log
 from enum import Enum, auto, unique
 from dataclasses import dataclass
 
-log = logging.getLogger("LoRa PHY")
-log.setLevel(logging.DEBUG)
+log.basicConfig(format='%(module)s-%(levelname)s-%(asctime)s-%(message)s', 
+datefmt='%H:%M:%S', filename='loramac.log', level=log.INFO)
 
 HEADER_SIZE = 14
+
+K_FLAG_SHIFT = 7
+SEQ_FLAG_SHIFT = 6
+NEXT_FLAG_SHIFT = 5
 
 
 @unique
 class MacCommand(Enum):
-    JOIN=0
-    JOIN_RESPONSE=1
-    DATA=2
-    ACK=3
-    PING=4
-    PONG=5
-    QUERY=6
-    CHILD=7
-    CHILD_RESPONSE= 8
+    JOIN = 0
+    JOIN_RESPONSE = 1
+    DATA = 2
+    ACK = 3
+    PING = 4
+    PONG = 5
+    QUERY = 6
+    CHILD = 7
+    CHILD_RESPONSE = 8
 
 
 @unique
 class UartCommand(Enum):
-    MAC_PAUSE = "mac pause" # pause mac layer
-    SET_MOD = "radio set mod " #set radio mode (fsk or lora)
-    SET_FREQ = "radio set freq " #set radio freq from 433050000 to 434790000 or from 863000000 to 870000000, in Hz.
-    SET_WDT = "radio set wdt " #set watchdog timer
-    RX = "radio rx " #receive mode
-    TX = "radio tx " #transmit data
-    SLEEP = "sys sleep " #system sleep
+    MAC_PAUSE = "mac pause"  # pause mac layer
+    SET_MOD = "radio set mod "  # set radio mode (fsk or lora)
+    # set radio freq from 433050000 to 434790000 or from 863000000 to 870000000, in Hz.
+    SET_FREQ = "radio set freq "
+    SET_WDT = "radio set wdt "  # set watchdog timer
+    RX = "radio rx "  # receive mode
+    TX = "radio tx "  # transmit data
+    SLEEP = "sys sleep "  # system sleep
 
 
 @unique
@@ -47,71 +52,93 @@ class UartResponse(Enum):
     U_INT = "4294967245"
     NONE = "none"
 
-@dataclass
+
+@dataclass(frozen=True)
 class LoraAddr:
     prefix: int
     node_id: int
 
     def toHex(self):
-        return "%02X"%self.prefix + "%04X"%self.node_id
+        return "%02X" % self.prefix + "%04X" % self.node_id
+
 
 @dataclass
 class LoraFrame:
     src_addr: LoraAddr
     dest_addr: LoraAddr
-    k: bool
     command: MacCommand
-    payload:str #must be to hex
+    payload: str  # must be to hex
+    seq: bool    #sequence number
+    k: bool = False #need ack ?
+    has_next: bool = False
 
     def toHex(self):
-        ack=0
-        if self.k:
-            ack=0x80
-        f_cmd = "%02X" % (self.command.value | ack)
-        return self.src_addr.toHex()+self.dest_addr.toHex()+f_cmd+(self.payload if self.payload else "")
-        
+        """ create flags and MAC command"""
+        f_c = 0
+        f_c |= self.k << K_FLAG_SHIFT
+        f_c |= self.seq << SEQ_FLAG_SHIFT
+        f_c |= self.has_next << NEXT_FLAG_SHIFT
+        f_c |= self.command.value
+
+        return (
+            self.src_addr.toHex()
+            + self.dest_addr.toHex()
+            + ("%02X" % f_c)
+            + (self.payload if self.payload else "")
+        )
 
     @staticmethod
-    def build(data:str):
-        print("build receive:"+data)
-        if(len(data) < HEADER_SIZE):
+    def build(data: str):
+        if len(data) < HEADER_SIZE:
             return None
-        
-        """ extract src addr"""
-        prefix_src=int(data[0:2], 16)
-        node_id_src=int(data[2:6], 16)
 
-        """ extract dest addr"""
-        prefix_dest=int(data[6:8], 16)
-        node_id_dest=int(data[8:12], 16)
+        """ extract src addr """
+        prefix_src = int(data[0:2], 16)
+        node_id_src = int(data[2:6], 16)
 
-        """ extract flags an command"""
+        """ extract dest addr """
+        prefix_dest = int(data[6:8], 16)
+        node_id_dest = int(data[8:12], 16)
+
+        """ extract flags an MAC command """
         f_c = int(data[12:14], 16)
-        ack = bool(f_c>>7)
-        filter = 0x0F
-        cmd = MacCommand(f_c & filter)
+
+        flag_filter = 0x01
+        cmd_filter = 0x0F
+
+        k = bool((f_c >> K_FLAG_SHIFT) & flag_filter)
+        seq = bool((f_c >> SEQ_FLAG_SHIFT) & flag_filter)
+        has_next = bool((f_c >> NEXT_FLAG_SHIFT) & flag_filter)
+
+        cmd = MacCommand(f_c & cmd_filter)
 
         """ extract payload """
         payload = data[14:]
 
-        return LoraFrame(LoraAddr(prefix_src, node_id_src),
+        """ create LoraFrame with computed values"""
+        return LoraFrame(
+            LoraAddr(prefix_src, node_id_src),
             LoraAddr(prefix_dest, node_id_dest),
-            ack,cmd, payload)
-#@dataclass
-#Class uartFrame:
-#    expected_response:UartResponse
-#    
+            cmd,
+            payload,
+            seq,
+            k,
+            has_next,
+        )
+
+
 @dataclass
 class UartFrame:
     expected_response: list
-    data:str
+    data: str
     cmd: UartCommand
+
 
 class LoraPhy:
     def __init__(self, port="/dev/ttyUSB0", baudrate=57600):
         self.con = None
-        self.port=port
-        self.baudrate=baudrate
+        self.port = port
+        self.baudrate = baudrate
         self.buffer = queue.Queue(10)
         self.listener = None
         self.can_send = True
@@ -119,8 +146,8 @@ class LoraPhy:
         self.last_sended = None
 
     def phy_init(self):
-        #set serial connection, call send_phy for mac pause et radio set freq
-        logging.debug('Init PHY')
+        # set serial connection, call send_phy for mac pause et radio set freq
+        log.info('Init PHY')
         self.con = serial.Serial(port=self.port, baudrate=self.baudrate)
         tx_thread = threading.Thread(target=self.uart_tx)
         rx_thread = threading.Thread(target=self.uart_rx)
@@ -128,40 +155,42 @@ class LoraPhy:
         self._send_phy(UartFrame([UartResponse.OK], "868100000", UartCommand.SET_FREQ))
         rx_thread.start()
         tx_thread.start()
-        
+
         with self.can_send_cond:
             self.can_send_cond.notify_all()
 
     def phy_register_listener(self, listener):
         self.listener = listener
 
-    def phy_tx(self, loraFrame:LoraFrame):
-        f=UartFrame([UartResponse.RADIO_TX_OK, UartResponse.RADIO_ERR], loraFrame.toHex(), UartCommand.TX)
+    def phy_tx(self, loraFrame: LoraFrame):
+        f = UartFrame([UartResponse.RADIO_TX_OK, UartResponse.RADIO_ERR], loraFrame.toHex(), UartCommand.TX)
         self._send_phy(f)
 
-    def phy_timeout(self, timeout:int):
-        f=UartFrame([UartResponse.OK], str(timeout), UartCommand.SET_WDT)
+    def phy_timeout(self, timeout: int):
+        f = UartFrame([UartResponse.OK], str(timeout), UartCommand.SET_WDT)
         self._send_phy(f)
 
     def phy_rx(self):
         f = UartFrame([UartResponse.RADIO_ERR, UartResponse.RADIO_RX], "0", UartCommand.RX)
         self._send_phy(f)
-#--------------------------------------------------------------------------------
-    def _send_phy(self, data):#append data to buffer
+
+    # --------------------------------------------------------------------------------
+    def _send_phy(self, data):  # append data to buffer
         if type(data) != UartFrame:
             raise TypeError("Data must be UartFrame. actual type: ", type(data))
-        
+
         try:
-            print("put data in phy buffer:", data)
+            log.debug("append %s to tx_buf", str(data))
             self.buffer.put(data, block=False)
         except queue.Full:
+            log.warning("  buffer full")
             return False
 
         return True
 
-    def process_response(self, data:str):
+    def process_response(self, data: str):
         decode_data = data.decode()
-        log.info("UART DATA: "+decode_data)
+        log.info("process uart response: " + decode_data)
         for resp in self.last_sended.expected_response:
             if resp is None:
                 continue
@@ -169,30 +198,35 @@ class LoraPhy:
                 self.listener(LoraFrame.build(decode_data[10:].strip()))
             if resp.value in decode_data:
                 return True
+        log.debug("unexpected response")
         return False
 
     def uart_rx(self):
         while True:
             data = self.con.readline()
-            if self.process_response(data):
+            if self.process_response(data.strip()):
                 with self.can_send_cond:
                     self.can_send = True
                     self.can_send_cond.notify_all()
-    
+
     def uart_tx(self):
         while True:
             while self.con is None or not self.can_send:
                 with self.can_send_cond:
                     self.can_send_cond.wait()
             self.last_sended = self.buffer.get(block=True)
-            log.info("Send UART data:"+ str(self.last_sended))
-            self.con.write( (self.last_sended.cmd.value+self.last_sended.data+ "\r\n").encode() )
+            log.info("Send UART data:" + str(self.last_sended))
+            self.con.write((self.last_sended.cmd.value + self.last_sended.data + "\r\n").encode())
             self.can_send = False
 
 
 if __name__ == '__main__':
-    #phy = LoraPhy()
-    #phy.phy_init()
-    #a=LoraFrame.build("B2B2E5B2B2E50548656c6C6F")
-    a=LoraFrame(LoraAddr(178, 45797), LoraAddr(179, 49878), True, MacCommand.PING, None)
-    print(a.toHex())
+    print("=== test frame parsing/building ===\n")
+    a = LoraFrame(LoraAddr(178, 45797), LoraAddr(179, 49878), MacCommand.PING, '', True, k=True)
+    print(" inital frame     :", a)
+    to_hex = a.toHex()
+    print(" to hex           : "+to_hex)
+    b = LoraFrame.build(to_hex)
+    print(" rebuild from hex :", b)
+    print(" frames are equals:", a==b)
+    print("\n===================================")

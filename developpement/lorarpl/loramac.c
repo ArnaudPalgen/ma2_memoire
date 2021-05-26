@@ -50,7 +50,7 @@ void printLoraFrame(lora_frame_t *frame){
     printLoraAddr(&(frame->src_addr));
     printf(" dest:");
     printLoraAddr(&(frame->dest_addr));
-    printf(" k:%d cmd:%d data: %s}", frame->k, frame->command, frame->payload);
+    printf(" k:%d seq:%d next:%d cmd:%d data:%s", frame->k, frame->seq, frame->next, frame->command, frame->payload);
 }
 
 bool checkDest(lora_addr_t *dest_addr){
@@ -167,7 +167,7 @@ void retransmit_timeout(void *ptr){
 int mac_process(lora_frame_t *frame, mac_command_t f_expected_response){
     LOG_DBG("%lu-mac_process: frame:", clock_seconds());
     printLoraFrame(frame);
-    LOG_DBG(" expected response: %d\n", expected_response);
+    LOG_DBG("%lu-expected response: %d\n", clock_seconds(), expected_response);
     
     if(queue.current_item<BUF_SIZE && frame !=NULL && f_expected_response>0){//append frame to buffer
         LOG_DBG("%lu-append to buffer\n", clock_seconds());
@@ -245,7 +245,7 @@ void mac_init(){
 
     
     /* set initial LoRa address */
-    node_addr.prefix = NULL_PREFIX;
+    node_addr.prefix = node_id;
     node_addr.id = node_id;
 
     /* set initial state*/
@@ -263,7 +263,7 @@ void mac_init(){
 
 
     /*send join request to LoRa root*/
-    lora_frame_t join_frame={node_addr, root_addr, false, JOIN, NULL};
+    lora_frame_t join_frame={node_addr, root_addr, false, JOIN, NULL};//TODO ajouter seq et next
     mac_process(&join_frame, JOIN_RESPONSE);
     LOG_DBG("%lu-JOIN_REQUEST sended\n", clock_seconds());
 

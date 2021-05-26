@@ -10,6 +10,10 @@
 
 #define UART_EXP_RESP_SIZE 2
 
+#define K_FLAG 0x80
+#define SEQ_FLAG 0x40
+#define NEXT_FLAG 0x20
+
 /*---------------------------------------------------------------------------*/
 /*enum definition*/
 typedef enum uart_response{
@@ -64,6 +68,8 @@ typedef struct lora_frame{
     lora_addr_t src_addr;
     lora_addr_t dest_addr;
     bool k;
+    bool seq;
+    bool next;
     mac_command_t command;
     char* payload;
 

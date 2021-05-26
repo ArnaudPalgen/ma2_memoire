@@ -143,20 +143,26 @@ get
 
 taille en bit max: 2040
 ```
-|<---24---->|<----24--->|<-1->|<--3--->|<--4--->|<(2040-56=1984)>|
-| dest addr |  src addr |  k  |reserved|command | payload |
+|<---24---->|<----24--->|<-1->|<-1->|<-1-->|<---1--->|<--4--->|<(2040-56=1984)>|
+| dest addr |  src addr |  k  | seq | next | reserved|command |     payload    |
 ```
-
-commandes disponibles:
-1. JOIN
-2. JOIN_RESPONSE
-3. DATA
-4. ACK
-5. PING
-6. PONG
-7. QUERY
-8. CHILD
-9. CHILD_RESPONSE
+- dest addr: adresse custom de destination
+- src addr: adresse custom source
+- k: flag qui indique si un ack doit être envoyé en retour
+- seq: num de sequence (1 ou 0)
+- next: indique si une trame DATA suit suit. (pour données descendantes)
+- reserved: réservé pour usage futur
+- command: commande MAC
+  1. JOIN
+  2. JOIN_RESPONSE
+  3. DATA
+  4. ACK
+  5. PING
+  6. PONG
+  7. QUERY
+  8. CHILD
+  9. CHILD_RESPONSE
+- payload: données transportées
  
 
 commandes sur 4 bits.

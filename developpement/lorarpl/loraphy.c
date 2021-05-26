@@ -38,7 +38,7 @@ void print_uart_frame(uart_frame_t *frame){
     printf("%s] }",uart_response[f_expected_response[UART_EXP_RESP_SIZE-1]]);
     
 }
-
+/*build lora_frame_t from char**/
 int parse(lora_frame_t *dest, char *data){
 
     if(strlen(data) < HEADER_SIZE){
@@ -81,16 +81,25 @@ int parse(lora_frame_t *dest, char *data){
     dest_addr.id = id;
     result.dest_addr = dest_addr;
 
-    /*extact ack flag anc command*/
+    /*extact flags and command*/
     char cmd[2];
     memcpy(cmd, data, 2);
     data = data+2;
+    uint8_t i_cmd = (uint8_t)strtol(cmd, NULL, 16);
 
-    bool ack = (bool)(((int)strtol(cmd, NULL, 16)) >> 7);
-    uint8_t filter = 0x0F;
-    mac_command_t command = (uint8_t)( ((uint8_t)strtol(cmd, NULL, 16)) & filter );
-    result.k = ack;
+    uint8_t flag_filter = 0x01;
+    uint8_t command_filter = 0x0F;
+
+    bool k    = (bool)((i_cmd >> 7) & flag_filter);
+    bool seq  = (bool)((i_cmd >> 6) & flag_filter);
+    bool next = (bool)((i_cmd >> 5) & flag_filter);
+    
+    mac_command_t command = (uint8_t)( i_cmd & command_filter );
+    
+    result.k = k;
     result.command = command;
+    result.seq = seq;
+    result.next = next;
 
     /*extract payload*/
     result.payload = data;
@@ -99,38 +108,53 @@ int parse(lora_frame_t *dest, char *data){
     return 0;
 }
 
+/*convert lora_frame_t to hex*/
 int to_frame(lora_frame_t *frame, char *dest){
-    int payload_size=0;
-    if(frame->payload != NULL){
-        payload_size = strlen(frame->payload);
-    }
-    int size = HEADER_SIZE+payload_size+9;
-    char result[HEADER_SIZE+PAYLOAD_MAX_SIZE]="";
     
+    char result[HEADER_SIZE+PAYLOAD_MAX_SIZE]="";
+
+    /*create src and dest addr*/
     char src_addr[6];
     char dest_addr[6];
-    char flags_command[2];
     
     sprintf(src_addr, "%02X%04X", frame->src_addr.prefix, frame->src_addr.id);
     sprintf(dest_addr, "%02X%04X", frame->dest_addr.prefix, frame->dest_addr.id);
-    uint8_t k;
-    if(frame->k){
-        k = 0x80;
-    }else{
-        k = 0x00;
-    }
-    uint8_t f_c = ((uint8_t) frame->command) | k;
-    sprintf(flags_command, "%02X", f_c);
+    
+    /*create flags and MAC command*/
+    char flags_command[2];
 
+    uint8_t f_c = 0;
+    if(frame->k){
+        f_c = f_c | K_FLAG;
+    }
+    if(frame->seq){
+        f_c = f_c | SEQ_FLAG;
+    }
+    if(frame->next){
+        f_c = f_c | NEXT_FLAG;
+    }
+    f_c = f_c | ((uint8_t) frame->command);
+
+    sprintf(flags_command, "%02X", f_c);   
+    
+    /* concat all computed values to result */
     strcat(result, src_addr);
     strcat(result, dest_addr);
     strcat(result, flags_command);
-    if(payload_size>0){
+    
+    /* create payload */
+    int data_size = HEADER_SIZE;
+    if(frame->payload != NULL){
+        data_size = data_size + strlen(frame->payload);
+    } 
+    //int size = HEADER_SIZE+payload_size+9;//todo + 9 why ?
+    if(data_size>HEADER_SIZE){
         strcat(result, frame->payload);
     }
     
-    LOG_DBG("[%lu]created frame: %s\n", clock_seconds(),result);
-    memcpy(dest, &result, size+1);
+    /*copy result to dest */
+    LOG_DBG("%lu-created frame: %s\n", clock_seconds(),result);
+    memcpy(dest, &result, data_size+1);
     return 0;
 }
 
@@ -149,7 +173,7 @@ void process_command(unsigned char *command){
             if(expected_response[i] == RADIO_RX && parse(&frame, (char*)(command+10))==0){
                 handler(frame);
             }
-            LOG_DBG("[%lu]send uart frame type RESPONSE to process\n", clock_seconds());
+            LOG_DBG("%lu-send uart frame type RESPONSE to process\n", clock_seconds());
             process(response_frame);
             //expected_response=NULL;
             break;
@@ -186,7 +210,7 @@ int uart_rx(unsigned char c){
  * Write s to UART
  */
 void write_uart(char *s){
-    LOG_INFO("[%lu]Write UART:%s\n",clock_seconds(), s);
+    LOG_INFO("%lu-Write UART:%s\n",clock_seconds(), s);
     while(*s != 0){
         uart_write_byte(UART, *s++);
     }
@@ -199,7 +223,7 @@ void write_uart(char *s){
 
 void phy_init(){
 
-    LOG_INFO("[%lu]Init LoRa PHY\n", clock_seconds());
+    LOG_INFO("%lu-Init LoRa PHY\n", clock_seconds());
 
     /* UART configuration*/
     uart_init(UART);
@@ -272,7 +296,7 @@ int phy_rx(){
 /*LoRa PHY process*/
 void process(uart_frame_t uart_frame){
     if(uart_frame.type != RESPONSE){
-        LOG_DBG("[%lu]append frame ", clock_seconds());
+        LOG_DBG("%lu-append frame ", clock_seconds());
         print_uart_frame(&uart_frame);
         LOG_DBG(" to buffer\n");
         
@@ -285,9 +309,9 @@ void process(uart_frame_t uart_frame){
     	current_size ++;
     }else{
         can_send = true;
-        LOG_DBG("[%lu]can send -> true\n", clock_seconds());
+        LOG_DBG("%lu-can send -> true\n", clock_seconds());
     }
-    LOG_DBG("[%lu]values: can_send=%d , current_size=%d\n", clock_seconds(), can_send, current_size);
+    LOG_DBG("%lu-values: can_send=%d , current_size=%d\n", clock_seconds(), can_send, current_size);
     if(can_send && current_size>0){
         uart_frame_t uart_frame = buffer[r_i];
         char result[FRAME_SIZE]="";
@@ -308,7 +332,7 @@ void process(uart_frame_t uart_frame){
 		}
     	current_size --;
         can_send = false;
-        LOG_DBG("[%lu]can send -> false\n", clock_seconds());
+        LOG_DBG("%lu-can send -> false\n", clock_seconds());
         for(int i=0;i<UART_EXP_RESP_SIZE;i++){
             expected_response[i] = uart_frame.expected_response[i];
         }
