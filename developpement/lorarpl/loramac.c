@@ -68,7 +68,7 @@ bool isForChild(lora_addr_t *dest_addr){
 /*---------------------------------------------------------------------------*/
 
 void process_frame(lora_frame_t *frame){
-    LOG_DBG("[%lu]process frame", clock_seconds());
+    LOG_DBG("%lu-process frame", clock_seconds());
     printLoraFrame(frame);
     LOG_DBG("\n");
     mac_command_t command = frame->command;
@@ -76,7 +76,7 @@ void process_frame(lora_frame_t *frame){
 
     if(command != expected_response && expected_response>-1){//todo corriger
         command = -1;//match noting in the swith
-        LOG_DBG("[%lu]unexpected mac command %d\n", clock_seconds(), command);
+        LOG_DBG("%lu-unexpected mac command %d\n", clock_seconds(), command);
     }
 
     switch (command)
@@ -91,8 +91,8 @@ void process_frame(lora_frame_t *frame){
             node_addr.prefix = (uint8_t) strtol(frame->payload, NULL, 16);
             state = JOINED;
             ctimer_stop(&retransmit_timer);
-            LOG_INFO("[%lu]Lora Root joined. \n", clock_seconds());
-            LOG_INFO("[%lu]Node addr: ", clock_seconds());
+            LOG_INFO("%lu-Lora Root joined. \n", clock_seconds());
+            LOG_INFO("%lu-Node addr: ", clock_seconds());
             printLoraAddr(&node_addr);
             LOG_INFO("\n");
         }
@@ -101,10 +101,10 @@ void process_frame(lora_frame_t *frame){
     case DATA:
         if(state != ALONE && isForRoot(&(frame->dest_addr))){
             //todo send payload to upper layer
-            LOG_DBG("[%lu]Data for root\n", clock_seconds());
+            LOG_DBG("%lu-Data for root\n", clock_seconds());
         }else if(state == READY && isForChild(&(frame->dest_addr))){
             //todo send to RPL
-            LOG_DBG("[%lu]Data for child\n", clock_seconds());
+            LOG_DBG("%lu-Data for child\n", clock_seconds());
         }
         break;
 
@@ -123,7 +123,7 @@ void process_frame(lora_frame_t *frame){
     case ACK:
         
         ack_num = (uint8_t) strtol(frame->payload, NULL, 16);
-        LOG_DBG("[%lu]received ack_num: %d\n", clock_seconds(), ack_num);
+        LOG_DBG("%lu-received ack_num: %d\n", clock_seconds(), ack_num);
         if(ack_num == expected_ack_num){
             ctimer_stop(&retransmit_timer);
             state = READY;
@@ -131,7 +131,7 @@ void process_frame(lora_frame_t *frame){
         break;
 
     default:
-        LOG_WARN("[%lu]Unknown command %d\n", clock_seconds(), command);
+        LOG_WARN("%lu-Unknown command %d\n", clock_seconds(), command);
     }
 }
 
@@ -140,7 +140,7 @@ void rpl_on(){
 }
 
 int lora_rx(lora_frame_t frame){
-    LOG_DBG("[%lu]Lora frame: ", clock_seconds());
+    LOG_DBG("%lu-Lora frame: ", clock_seconds());
     printLoraFrame(&frame);
     LOG_DBG("\n");
 
@@ -152,9 +152,9 @@ int lora_rx(lora_frame_t frame){
 }
 
 void retransmit_timeout(void *ptr){
-    LOG_DBG("[%lu]retransmit TIMEOUT\n", clock_seconds());
+    LOG_DBG("%lu-retransmit TIMEOUT\n", clock_seconds());
     if(retransmit_attempt>=MAX_RETRANSMIT){
-        LOG_WARN("[%lu]Unable to send frame\n", clock_seconds());
+        LOG_WARN("%lu-Unable to send frame\n", clock_seconds());
         retransmit_attempt = 0;
         send_next();
     }else{
@@ -165,12 +165,12 @@ void retransmit_timeout(void *ptr){
 }
 
 int mac_process(lora_frame_t *frame, mac_command_t f_expected_response){
-    LOG_DBG("[%lu]mac_process: frame:", clock_seconds());
+    LOG_DBG("%lu-mac_process: frame:", clock_seconds());
     printLoraFrame(frame);
     LOG_DBG(" expected response: %d\n", expected_response);
     
     if(queue.current_item<BUF_SIZE && frame !=NULL && f_expected_response>0){//append frame to buffer
-        LOG_DBG("[%lu]append to buffer\n", clock_seconds());
+        LOG_DBG("%lu-append to buffer\n", clock_seconds());
         
         queue_append(&queue, frame);
         queue_append(&resp_queue, &f_expected_response);
@@ -179,25 +179,25 @@ int mac_process(lora_frame_t *frame, mac_command_t f_expected_response){
         queue_pop(&queue, &last_send_frame);
         queue_pop(&resp_queue, &expected_response);
         
-        LOG_DBG("[%lu]send ", clock_seconds());
+        LOG_DBG("%lu-send ", clock_seconds());
         printLoraFrame(&last_send_frame);
-        LOG_DBG("[%lu]with expected response: %d\n", clock_seconds(), expected_response);
-        LOG_DBG("[%lu]disable watchdog timer and send\n", clock_seconds());
+        LOG_DBG("%lu-with expected response: %d\n", clock_seconds(), expected_response);
+        LOG_DBG("%lu-disable watchdog timer and send\n", clock_seconds());
         
         phy_timeout(0);//disable watchdog timer
         phy_tx(last_send_frame);
         if(expected_response>=0){
-            LOG_DBG("[%lu]waiting for an answer: %d\n", clock_seconds(), expected_response);
+            LOG_DBG("%lu-waiting for an answer: %d\n", clock_seconds(), expected_response);
             if(state != ALONE){
                 state = WAIT_RESPONSE;
             }
             
-            LOG_DBG("[%lu]state is: %d\n", clock_seconds(), state);
-            LOG_DBG("[%lu]set watchdog timer and start rx\n", clock_seconds());
+            LOG_DBG("%lu-state is: %d\n", clock_seconds(), state);
+            LOG_DBG("%lu-set watchdog timer and start rx\n", clock_seconds());
             
             phy_timeout(RX_TIME);
             phy_rx();
-            LOG_DBG("[%lu]start retransmit timer\n", clock_seconds());
+            LOG_DBG("%lu-start retransmit timer\n", clock_seconds());
             ctimer_set(&retransmit_timer, RETRANSMIT_TIMEOUT, retransmit_timeout, NULL);
         }
     }
@@ -205,32 +205,32 @@ int mac_process(lora_frame_t *frame, mac_command_t f_expected_response){
 }
 
 void send_next(){
-    LOG_DBG("[%lu]send next\n", clock_seconds());
+    LOG_DBG("%lu-send next\n", clock_seconds());
     mac_process(NULL, -1);
 }
 
 void mac_tx(lora_frame_t frame){
-    LOG_DBG("[%lu]mac tx: ", clock_seconds());
+    LOG_DBG("%lu-mac tx: ", clock_seconds());
     printLoraFrame(&frame);
     LOG_DBG(" ");
     if(frame.k){
-        LOG_DBG("[%lu]need ACK\n", clock_seconds());
+        LOG_DBG("%lu-need ACK\n", clock_seconds());
         mac_process(&frame, ACK);
     }else{
-        LOG_DBG("[%lu]don't need ACK\n", clock_seconds());
+        LOG_DBG("%lu-don't need ACK\n", clock_seconds());
         mac_process(&frame, -1);
     }
     
 }
 
 void query_timeout(void *ptr){
-    LOG_DBG("[%lu]Query timeout\n", clock_seconds());
+    LOG_DBG("%lu-Query timeout\n", clock_seconds());
     lora_frame_t query_frame={node_addr, root_addr, false, QUERY, ""};
     mac_process(&query_frame, DATA);
 }
 
 void mac_init(){
-    LOG_INFO("[%lu]Init LoRa MAC\n", clock_seconds());
+    LOG_INFO("%lu-Init LoRa MAC\n", clock_seconds());
 
     /* set custom link_addr */
     unsigned char new_linkaddr[8] = {'_','u','m','o','n','s',linkaddr_node_addr.u8[LINKADDR_SIZE - 2],linkaddr_node_addr.u8[LINKADDR_SIZE - 1]};
@@ -248,7 +248,8 @@ void mac_init(){
     node_addr.prefix = NULL_PREFIX;
     node_addr.id = node_id;
 
-    state = ALONE;//initial state
+    /* set initial state*/
+    state = ALONE;
     LOG_DBG("initial state: %d\n", state);
 
     /* start phy layer */
@@ -258,26 +259,16 @@ void mac_init(){
     /*init queue*/
     queue_init(&queue, sizeof(lora_frame_t), BUF_SIZE, buffer);
     queue_init(&resp_queue, sizeof(mac_command_t), BUF_SIZE, resp_buffer);
-    LOG_DBG("[%lu]buffer init\n", clock_seconds());
+    LOG_DBG("%lu-buffer init\n", clock_seconds());
 
 
     /*send join request to LoRa root*/
     lora_frame_t join_frame={node_addr, root_addr, false, JOIN, NULL};
     mac_process(&join_frame, JOIN_RESPONSE);
-    LOG_DBG("[%lu]JOIN_REQUEST sended\n", clock_seconds());
+    LOG_DBG("%lu-JOIN_REQUEST sended\n", clock_seconds());
 
     /*init query timer*/
     ctimer_set(&query_timer, QUERY_TIMEOUT, query_timeout, NULL);
-    LOG_DBG("[%lu]query timer started\n", clock_seconds());
-    //ctimer_set(&timer_ctimer, CLOCK_SECOND, ctimer_callback, NULL);
+    LOG_DBG("%lu-query timer started\n", clock_seconds());
     
-    
-    //uart_tx(join_frame);
-    //phy_timeout()
-    //phy_rx()
-
-    //join_request = toto
-    //PHY_send(join_reQUEST)
-    //last_send = join_request
-    //expected frame = ack0
 }
