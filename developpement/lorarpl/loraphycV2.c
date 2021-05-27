@@ -13,7 +13,7 @@
 
 static int (* handler)( lora_frame_t frame) = NULL;
 
-static bool can_send = true;
+//static bool can_send = true;
 static uart_response_t expected_response[UART_EXP_RESP_SIZE];
 
 const char* uart_command[7]={"mac pause", "radio set mod ", "radio set freq ", "radio set wdt ", "radio rx ", "radio tx ", "sys sleep "};
@@ -205,7 +205,9 @@ int uart_rx(unsigned char c){
 int uart_tx(uart_frame_t uart_frame){
     while(!mutex_try_lock(&tx_buf_mutex)){}
     if(tx_buf_size < TX_BUF_SIZE){
-        
+        tx_buffer[w_i] = uart_frame;
+        tx_buf_size ++;
+        w_i = (w_i+1)%TX_BUF_SIZE;
     }
     mutex_unlock(&tx_buf_mutex);
 }
