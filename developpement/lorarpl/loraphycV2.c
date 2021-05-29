@@ -2,6 +2,7 @@
 
 #include "dev/uart.h"
 #include "sys/log.h"
+#include "sys/mutex.h"
 
 #include <stdbool.h>
 #include <stdlib.h>
@@ -9,7 +10,7 @@
 #include "loraphy.h"
 /*---------------------------------------------------------------------------*/
 #define LOG_MODULE "LoRa PHY"
-#define LOG_LEVEL LOG_LEVEL_DBG
+#define LOG_LEVEL LOG_LEVEL_INFO
 
 static int (* handler)( lora_frame_t frame) = NULL;
 
@@ -18,6 +19,11 @@ static uart_response_t expected_response[UART_EXP_RESP_SIZE];
 
 const char* uart_command[7]={"mac pause", "radio set mod ", "radio set freq ", "radio set wdt ", "radio rx ", "radio tx ", "sys sleep "};
 const char* uart_response[8]={"ok", "invalid_param", "radio_err", "radio_rx", "busy", "radio_tx_ok", "4294967245", "none"};
+
+PROCESS(ph_rx, "LoRa-PHY rx process");
+PROCESS(ph_tx, "LoRa-PHY tx process");
+//LOG_DBG("[%lu]\n", clock_seconds());
+
 
 /*---------------------------------------------------------------------------*/
 /*correct functions*/
@@ -89,6 +95,7 @@ int parse(lora_frame_t *dest, char *data){
     /*extract payload*/
     result.payload = data;
     memcpy(dest, &result, sizeof(lora_frame_t));
+    LOG_DBG("[%lu]created frame a LoRa frame\n", clock_seconds());
     
     return 0;
 }
@@ -123,7 +130,7 @@ int to_frame(lora_frame_t *frame, char *dest){
         strcat(result, frame->payload);
     }
     
-    LOG_DBG("[%lu]created frame: %s\n", clock_seconds(),result);
+    LOG_DBG("[%lu]TO HEX frame: %s\n", clock_seconds(),result);
     memcpy(dest, &result, size+1);
     return 0;
 }
@@ -155,7 +162,7 @@ static uint8_t w_i = 0;// index to write in the buffer
 static uint8_t r_i = 0;// index to read in the buffer 
 static uint8_t tx_buf_size = 0;// current size of the buffer
 
-void process_command(char *command){
+void process_command(unsigned char *command){
     LOG_INFO("UART response:%s\n", command);
 
     lora_frame_t frame;
@@ -170,6 +177,7 @@ void process_command(char *command){
                 handler(frame);
             }
             /* signal to the tx process that the next frame can be sent*/
+            LOG_DBG("[%lu] expected !\n", clock_seconds());
             process_post(&ph_tx, can_send_event, NULL);
             break;
         }
@@ -196,20 +204,26 @@ int uart_rx(unsigned char c){
         memset(buf, 0, FRAME_SIZE*sizeof(char));
       }
     }
-    if((int)c != 254 && (int)c != 248 && c!='\n' && (int)c != 192 && (int)c != 240){
+    if((int)c != 254 && (int)c != 248 && c!='\n' && (int)c != 192 && (int)c != 240 && c!='\r'){
         buf[index++] = c;
     }
     return 0;
 }
 
 int uart_tx(uart_frame_t uart_frame){
+    LOG_DBG("[%lu]enter UART_TX\n", clock_seconds());
     while(!mutex_try_lock(&tx_buf_mutex)){}
     if(tx_buf_size < TX_BUF_SIZE){
         tx_buffer[w_i] = uart_frame;
         tx_buf_size ++;
         w_i = (w_i+1)%TX_BUF_SIZE;
+        LOG_DBG("[%lu] append ", clock_seconds());
+        print_uart_frame(&uart_frame);
+        LOG_DBG("to UART TX buffer\n");
     }
     mutex_unlock(&tx_buf_mutex);
+    process_post(&ph_tx, new_tx_frame_event, NULL);
+    return 0;//TODO
 }
 
 void phy_init(){
@@ -222,8 +236,8 @@ void phy_init(){
     can_send_event = process_alloc_event();
     
     /* start process*/
-    process_start(&ph_rx);
-    process_start(&ph_tx);
+    process_start(&ph_rx, NULL);
+    process_start(&ph_tx, NULL);
 
     /*send initialisation UART commands*/
     uart_frame_t mac_pause = {MAC_PAUSE, STR, {.s=""}, {U_INT, NONE}};
@@ -231,8 +245,6 @@ void phy_init(){
 
     uart_tx(mac_pause);
     uart_tx(set_freq);
-
-    process_post(&ph_tx, new_tx_frame_event, NULL);
 
 }
 
@@ -301,36 +313,52 @@ PROCESS_THREAD(ph_rx, ev, data){
     PROCESS_END();
 }
 
+bool buf_empty(){
+    bool result;
+    while(!mutex_try_lock(&tx_buf_mutex)){}
+    result = tx_buf_size == 0;
+    mutex_unlock(&tx_buf_mutex);
+    return result;
+}
+
 PROCESS_THREAD(ph_tx, ev, data){
     
     uart_frame_t uart_frame;
+    bool buf_empty_var;
     
     PROCESS_BEGIN();
 
     /*main process*/
-
-    PROCESS_WAIT_EVENT_UNTIL(ev==new_tx_frame_event);
-    if can_send{
-        while(!mutex_try_lock(&tx_buf_mutex)){}
-        if(tx_buf_size >0){
-            /* get next uart frame to send*/
-            uart_frame = tx_buffer[r_i];
-            tx_buf_size --;
-            r_i = (r_i+1)%TX_BUF_SIZE;
-            mutex_unlock(&tx_buf_mutex);
-
-            /* update expected response */
-            while(!mutex_try_lock(&response_mutex)){}
-            for(int i=0;i<UART_EXP_RESP_SIZE;i++){
-                expected_response[i] = uart_frame.expected_response[i];
-            }
-            mutex_unlock(&response_mutex);
-
-        }else{
-            mutex_unlock(&tx_buf_mutex);
+    while (true){
+        buf_empty_var = buf_empty();
+        if(buf_empty_var){
+            PROCESS_WAIT_EVENT_UNTIL(ev==new_tx_frame_event);
         }
-        can_send = false;
+        
+        if(!can_send){//to be sure. but should never happen.
+            continue;
+        }
+        
+        //acquire mutex for buffer
+        while(!mutex_try_lock(&tx_buf_mutex)){}
+        
+        // get next uart frame to send
+        uart_frame = tx_buffer[r_i];
+        tx_buf_size --;
+        r_i = (r_i+1)%TX_BUF_SIZE;
+        mutex_unlock(&tx_buf_mutex);
+        
+        //acquire mutex for expected_response
+        while(!mutex_try_lock(&response_mutex)){}
+        
+        // update expected response
+        for(int i=0;i<UART_EXP_RESP_SIZE;i++){
+            expected_response[i] = uart_frame.expected_response[i];
+        }
+        mutex_unlock(&response_mutex);
 
+        can_send = false;
+        
         char result[FRAME_SIZE]="";
         if(uart_frame.type == STR){
             sprintf(result, "%s%s", uart_command[uart_frame.cmd], uart_frame.data.s);
@@ -342,11 +370,16 @@ PROCESS_THREAD(ph_tx, ev, data){
         }
 
         write_uart(result);
-    }
-
-    PROCESS_WAIT_EVENT_UNTIL(ev==can_send_event);
-    can_send = true;
+        while(!can_send){
+            PROCESS_WAIT_EVENT();
+            if(ev == can_send_event){
+                can_send = true;
+                
+            }
+        }
+    }  
     //process_post(&ph_tx, new_tx_frame_event, NULL);
+    //LOG_DBG("[%lu] CAN SEND !\n", clock_seconds());
 
     PROCESS_END();
 }

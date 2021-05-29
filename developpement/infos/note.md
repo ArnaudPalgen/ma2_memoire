@@ -7,6 +7,12 @@
 #define UART1_TX_PIN             3
 ```
 
+- Dans `sys/log-conf.h` modification de
+```c
+#define LOG_OUTPUT_PREFIX(level, levelstr, module) LOG_OUTPUT("[%lu: %-4s: %-10s] ", clock_seconds( , levelstr, module)
+```
+Pour afficher le temps(en sec) du log.
+
 
 ### NODE_ID
 
