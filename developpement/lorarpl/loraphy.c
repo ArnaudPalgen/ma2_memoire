@@ -2,31 +2,50 @@
 
 #include "dev/uart.h"
 #include "sys/log.h"
+#include "sys/mutex.h"
 
 #include <stdbool.h>
 #include <stdlib.h>
 
 #include "loraphy.h"
-
-
+/*---------------------------------------------------------------------------*/
+//log configuration
 #define LOG_MODULE "LoRa PHY"
-#define LOG_LEVEL LOG_LEVEL_DBG
-#define BUF_SIZE 10
+#define LOG_LEVEL LOG_LEVEL_INFO
 
-
-static int (* handler)( lora_frame_t frame) = NULL;
-static uart_frame_t buffer [BUF_SIZE];
+//TX buffer initialization
+#define TX_BUF_SIZE 10
+static uart_frame_t tx_buffer [TX_BUF_SIZE];
 static uint8_t w_i = 0;// index to write in the buffer
 static uint8_t r_i = 0;// index to read in the buffer 
-static uint8_t current_size = 0;// current size of the buffer
-static bool can_send = true;
-static uart_response_t expected_response[UART_EXP_RESP_SIZE];
+static uint8_t tx_buf_size = 0;// current size of the buffer
 
-const char* uart_command[7]={"mac pause", "radio set mod ", "radio set freq ", "radio set wdt ", "radio rx ", "radio tx ", "sys sleep "};
+//Function to send data to. Data from ratio_rx
+static int (* handler)( lora_frame_t frame) = NULL;
+
+//Array that contains the expected responses for a sent UART command
+//The expected responses, when received, allow the next UART command to be sent
+static uart_response_t expected_response[UART_EXP_RESP_SIZE];
 const char* uart_response[8]={"ok", "invalid_param", "radio_err", "radio_rx", "busy", "radio_tx_ok", "4294967245", "none"};
 
+//commands that can be sent
+//see uart_command_t
+const char* uart_command[7]={"mac pause", "radio set mod ", "radio set freq ", "radio set wdt ", "radio rx ", "radio tx ", "sys sleep "};
+
+
+mutex_t response_mutex;//mutex for expected_response
+mutex_t tx_buf_mutex;// mutex for tx_buffer
+
+static process_event_t new_tx_frame_event;//event that signals to the TX process that a new frame is available to be sent 
+static process_event_t can_send_event;//event that signals to the TX process that the correct UART response was received
+
+static bool can_send = true;
+
+PROCESS(ph_rx, "LoRa-PHY rx process");
+PROCESS(ph_tx, "LoRa-PHY tx process");
+
+
 /*---------------------------------------------------------------------------*/
-/*private functions*/
 
 void print_uart_frame(uart_frame_t *frame){
     printf("{ cmd:%s ", uart_command[frame->cmd]);
@@ -104,6 +123,7 @@ int parse(lora_frame_t *dest, char *data){
     /*extract payload*/
     result.payload = data;
     memcpy(dest, &result, sizeof(lora_frame_t));
+    LOG_DBG("created frame a LoRa frame\n");
     
     return 0;
 }
@@ -143,42 +163,59 @@ int to_frame(lora_frame_t *frame, char *dest){
     strcat(result, flags_command);
     
     /* create payload */
-    int data_size = HEADER_SIZE;
+    int real_frame_size = HEADER_SIZE;
     if(frame->payload != NULL){
-        data_size = data_size + strlen(frame->payload);
+        real_frame_size = real_frame_size + strlen(frame->payload);
     } 
     //int size = HEADER_SIZE+payload_size+9;//todo + 9 why ?
-    if(data_size>HEADER_SIZE){
+    if(real_frame_size>HEADER_SIZE){
         strcat(result, frame->payload);
     }
     
     /*copy result to dest */
-    LOG_DBG("%lu-created frame: %s\n", clock_seconds(),result);
-    memcpy(dest, &result, data_size+1);
+    memcpy(dest, &result, real_frame_size+1);
+    LOG_DBG("TO HEX frame: %s\n",result);
     return 0;
 }
 
-/**
- * Process a received UART command
- */
+void write_uart(char *s){
+    LOG_INFO("Write UART:%s\n", s);
+    while(*s != 0){
+        uart_write_byte(UART, *s++);
+    }
+    uart_write_byte(UART, '\r');
+    uart_write_byte(UART, '\n');
+}
+
+void phy_register_listener(int (* listener)(lora_frame_t frame)){
+    handler = listener;
+}
+
+
+/*---------------------------------------------------------------------------*/
+
 void process_command(unsigned char *command){
     LOG_INFO("UART response:%s\n", command);
-    lora_frame_t frame;
-    uart_frame_t response_frame;
-    response_frame.type=RESPONSE;
 
+    lora_frame_t frame;
+
+    while(!mutex_try_lock(&response_mutex)){}
     for(int i=0;i<UART_EXP_RESP_SIZE;i++){
-        LOG_DBG("   compare with expected:%s\n",uart_response[expected_response[i]]);
+        LOG_DBG("compare response with:%s\n",uart_response[expected_response[i]]);
         if(strstr((const char*)command, uart_response[expected_response[i]]) != NULL){
+            /*the UART response is the exoetced response*/
             if(expected_response[i] == RADIO_RX && parse(&frame, (char*)(command+10))==0){
+                /*receive data -> transmit to MAC layer*/
                 handler(frame);
             }
-            LOG_DBG("%lu-send uart frame type RESPONSE to process\n", clock_seconds());
-            process(response_frame);
-            //expected_response=NULL;
+            /* signal to the tx process that the next frame can be sent*/
+            LOG_DBG(" expected !\n");
+            process_post(&ph_tx, can_send_event, NULL);
             break;
         }
     }
+    mutex_unlock(&response_mutex);
+
 }
 
 /**
@@ -187,7 +224,6 @@ void process_command(unsigned char *command){
 int uart_rx(unsigned char c){
     static unsigned char buf [FRAME_SIZE];
     static unsigned short index = 0;
-    //static unsigned char *p=buf;
     static bool cr = false;
 
     if(c == '\r'){
@@ -206,37 +242,42 @@ int uart_rx(unsigned char c){
     return 0;
 }
 
-/**
- * Write s to UART
- */
-void write_uart(char *s){
-    LOG_INFO("%lu-Write UART:%s\n",clock_seconds(), s);
-    while(*s != 0){
-        uart_write_byte(UART, *s++);
+int uart_tx(uart_frame_t uart_frame){
+    LOG_DBG("enter UART_TX\n");
+    while(!mutex_try_lock(&tx_buf_mutex)){}
+    if(tx_buf_size < TX_BUF_SIZE){
+        tx_buffer[w_i] = uart_frame;
+        tx_buf_size ++;
+        w_i = (w_i+1)%TX_BUF_SIZE;
+        LOG_DBG("append ");
+        LOG_DBG_UFRAME(&uart_frame);
+        LOG_DBG(" to UART TX buffer\n");
     }
-    uart_write_byte(UART, '\r');
-    uart_write_byte(UART, '\n');
+    mutex_unlock(&tx_buf_mutex);
+    process_post(&ph_tx, new_tx_frame_event, NULL);
+    return 0;//TODO
 }
-
-/*---------------------------------------------------------------------------*/
-/*public functions*/
 
 void phy_init(){
+    //add config command to tx_buf
+    //send event to process
+    LOG_INFO("Init LoRa PHY\n");
 
-    LOG_INFO("%lu-Init LoRa PHY\n", clock_seconds());
+    //create events
+    new_tx_frame_event = process_alloc_event();
+    can_send_event = process_alloc_event();
+    
+    //start process
+    process_start(&ph_rx, NULL);
+    process_start(&ph_tx, NULL);
 
-    /* UART configuration*/
-    uart_init(UART);
-    uart_set_input(UART, &uart_rx);
-
+    //send initialisation UART commands
     uart_frame_t mac_pause = {MAC_PAUSE, STR, {.s=""}, {U_INT, NONE}};
     uart_frame_t set_freq = {SET_FREQ, STR, {.s="868100000"}, {OK, NONE}};
-    process(mac_pause);
-    process(set_freq);    
-}
 
-void phy_register_listener(int (* listener)(lora_frame_t frame)){
-    handler = listener;
+    uart_tx(mac_pause);
+    uart_tx(set_freq);
+
 }
 
 int phy_tx(lora_frame_t frame){
@@ -246,7 +287,7 @@ int phy_tx(lora_frame_t frame){
         {.lora_frame = frame},
         {RADIO_TX_OK,RADIO_ERR}
     };
-    process(uart_frame);
+    uart_tx(uart_frame);
     return 0;
 
 }
@@ -262,11 +303,11 @@ int phy_timeout(int timeout){
         {.d = timeout},
         {OK, NONE}
     };
-    process(uart_frame);
+    uart_tx(uart_frame);
     return 0;
 }
 
-int phy_sleep(int duration){//todo bug rn2483 ne repond plus
+int phy_sleep(int duration){
     if(duration < 100 || duration > 4294967296 ){
         return 1;
     }
@@ -277,7 +318,7 @@ int phy_sleep(int duration){//todo bug rn2483 ne repond plus
         {.d = duration},
         {OK, NONE}
     };
-    process(uart_frame);
+    uart_tx(uart_frame);
     return 0;
 }
 
@@ -288,34 +329,69 @@ int phy_rx(){
         {.s = "0"},
         {RADIO_ERR, RADIO_RX}
     };
-    process(uart_frame);
+    uart_tx(uart_frame);
     return 0;
 }
 
 /*---------------------------------------------------------------------------*/
-/*LoRa PHY process*/
-void process(uart_frame_t uart_frame){
-    if(uart_frame.type != RESPONSE){
-        LOG_DBG("%lu-append frame ", clock_seconds());
-        print_uart_frame(&uart_frame);
-        LOG_DBG(" to buffer\n");
+// process
+PROCESS_THREAD(ph_rx, ev, data){
+    PROCESS_BEGIN();
+    
+    //UART configuration
+    uart_init(UART);
+    uart_set_input(UART, &uart_rx);
+    
+    PROCESS_END();
+}
+
+bool buf_empty(){
+    bool result;
+    while(!mutex_try_lock(&tx_buf_mutex)){}
+    result = tx_buf_size == 0;
+    mutex_unlock(&tx_buf_mutex);
+    return result;
+}
+
+PROCESS_THREAD(ph_tx, ev, data){
+    
+    uart_frame_t uart_frame;
+    bool buf_empty_var;
+    
+    PROCESS_BEGIN();
+
+    //main process
+    while (true){
+        buf_empty_var = buf_empty();
+        if(buf_empty_var){
+            PROCESS_WAIT_EVENT_UNTIL(ev==new_tx_frame_event);
+        }
         
-        buffer[w_i] = uart_frame;
-		if (w_i == BUF_SIZE-1){
-    		w_i = 0;
-		}else{
-    		w_i ++;
-		}
-    	current_size ++;
-    }else{
-        can_send = true;
-        LOG_DBG("%lu-can send -> true\n", clock_seconds());
-    }
-    LOG_DBG("%lu-values: can_send=%d , current_size=%d\n", clock_seconds(), can_send, current_size);
-    if(can_send && current_size>0){
-        uart_frame_t uart_frame = buffer[r_i];
+        if(!can_send){//to be sure. but should never happen.
+            continue;
+        }
+        
+        //acquire mutex for buffer
+        while(!mutex_try_lock(&tx_buf_mutex)){}
+        
+        //get next uart frame to send
+        uart_frame = tx_buffer[r_i];
+        tx_buf_size --;
+        r_i = (r_i+1)%TX_BUF_SIZE;
+        mutex_unlock(&tx_buf_mutex);
+        
+        //acquire mutex for expected_response
+        while(!mutex_try_lock(&response_mutex)){}
+        
+        //update expected response
+        for(int i=0;i<UART_EXP_RESP_SIZE;i++){
+            expected_response[i] = uart_frame.expected_response[i];
+        }
+        mutex_unlock(&response_mutex);
+
+        can_send = false;
+        
         char result[FRAME_SIZE]="";
-        
         if(uart_frame.type == STR){
             sprintf(result, "%s%s", uart_command[uart_frame.cmd], uart_frame.data.s);
         }else if(uart_frame.type == LORA){
@@ -324,25 +400,16 @@ void process(uart_frame_t uart_frame){
         }else if(uart_frame.type == INT){
             sprintf(result, "%s%d", uart_command[uart_frame.cmd], uart_frame.data.d);
         }
-        
-		if(r_i == BUF_SIZE-1){
-    		r_i = 0;
-		}else{
-    		r_i ++;
-		}
-    	current_size --;
-        can_send = false;
-        LOG_DBG("%lu-can send -> false\n", clock_seconds());
-        for(int i=0;i<UART_EXP_RESP_SIZE;i++){
-            expected_response[i] = uart_frame.expected_response[i];
-        }
+
         write_uart(result);
+        while(!can_send){
+            PROCESS_WAIT_EVENT();
+            if(ev == can_send_event){
+                can_send = true;
+                
+            }
+        }
     }
-}
-/*
-PROCESS_THREAD(ph_rx, ev, data){
-    PROCESS_BEGIN();
-        mac_init();
+
     PROCESS_END();
 }
-*/

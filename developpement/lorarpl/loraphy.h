@@ -14,6 +14,15 @@
 #define SEQ_FLAG 0x40
 #define NEXT_FLAG 0x20
 
+#define LOG_INFO_UFRAME(...)    LOG_UFRAME(LOG_LEVEL_INFO, __VA_ARGS__)
+#define LOG_DBG_UFRAME(...)    LOG_UFRAME(LOG_LEVEL_DBG, __VA_ARGS__)
+
+#define LOG_UFRAME(level, uart_frame) do {  \
+                           if(level <= (LOG_LEVEL)) { \
+                                print_uart_frame(uart_frame); \
+                           } \
+                         } while (0)
+
 /*---------------------------------------------------------------------------*/
 /*enum definition*/
 typedef enum uart_response{
@@ -92,13 +101,6 @@ void phy_init();
 
 void phy_register_listener(int (* listener)(lora_frame_t frame));
 
-/**
- * duration: the number of milliseconds the system is
- *           put to sleep, from 100 to 4294967296 
- *
- */ 
-//int phy_sleep(int duration);
-
 int phy_tx(lora_frame_t frame);
 
 int phy_timeout(int timeout);
@@ -108,3 +110,5 @@ int phy_rx();
 int uart_tx(uart_frame_t frame);
 
 void process(uart_frame_t uart_frame);
+
+void print_uart_frame(uart_frame_t *frame);

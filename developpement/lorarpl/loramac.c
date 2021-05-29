@@ -139,8 +139,8 @@ void rpl_on(){
     state = READY;
 }
 
-int lora_rx(lora_frame_t frame){
-    LOG_DBG("%lu-Lora frame: ", clock_seconds());
+int lora_rx(lora_frame_t frame){//todo only add to a buffer
+    LOG_DBG("Lora frame: ");
     printLoraFrame(&frame);
     LOG_DBG("\n");
 
