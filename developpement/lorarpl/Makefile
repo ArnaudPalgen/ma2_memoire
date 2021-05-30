@@ -1,7 +1,7 @@
 CONTIKI_PROJECT = lorarpl
 MODULES = os/services/at-master arch/cpu/cc2538/dev
 PROJECT_SOURCEFILES += loraphy.c
-PROJECT_SOURCEFILES += loramac.c
+PROJECT_SOURCEFILES += loramacV2.c
 PROJECT_SOURCEFILES += mybuffer.c
 all: $(CONTIKI_PROJECT)
 

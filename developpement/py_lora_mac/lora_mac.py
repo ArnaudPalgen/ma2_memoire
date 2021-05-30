@@ -57,6 +57,7 @@ class LoraMac:
     def _retransmit_timeout(self, child):
         log.info("retransmit timeout from child %s", str(child))
         if child.transmit_count >= MAX_RETRANSMIT:
+            # TODO si cela concerne une JOIN_RESPONSE, supprimer le child de self.childs
             log.warning("unable to send frame %s", str(child.last_send_frame))
             child.lost_packet += 1
             log.info("lost frames:%d", child.lost_packet)
@@ -76,12 +77,14 @@ class LoraMac:
         """ get the childs from self.childs
             try already joined child first, after try not already joined child
             raise key error if child is not found
+            &255 because initial prefix is unint8(node_id)
         """
         log.info("receive ack %s", str(frame))
         
-        child = self.childs.get(frame.src_addr.prefix, self.childs.get(frame.src_addr.node_id, None))
+        child = self.childs.get(frame.src_addr.prefix, self.childs.get(frame.src_addr.node_id & 255, None))
+        
         if child is None:
-            raise KeyError("child "+str(frame.src_addr)+"don 't exist")
+            log.error("child %s don't exist", str(frame.src_addr))
         
         if frame.seq == child.ack:
             log.debug("correct ack number")
@@ -92,8 +95,8 @@ class LoraMac:
                 """
                 new_prefix = int(child.last_send_frame.payload, 16)
                 child.addr = LoraAddr(new_prefix, frame.dest_addr.node_id)
-                self.childs[child.addr] = child
-                del self.childs[frame.src_addr.node_id]
+                self.childs[child.addr.prefix] = child
+                del self.childs[frame.src_addr.node_id& 255]
                 self.last_prefix = new_prefix
             
             child.ack = not child.ack
@@ -123,6 +126,9 @@ class LoraMac:
             LoraFrame(self.addr, frame.src_addr, MacCommand.JOIN_RESPONSE, "%02X" % new_prefix, new_child.ack, True)
         )
 
+    def _on_data(self, frame):
+        pass#TODO
+
     def mac_tx(self, frame: LoraFrame) -> bool:
         child = self.childs[frame.dest_addr.prefix]
         log.debug("in mac tx. FULL:%s", str(child.tx_buf.full()))
@@ -151,6 +157,7 @@ class LoraMac:
                     child.timer.start()
                     log.info("start retransmit timer")
                     self.can_send = False
+                self.phy_layer.phy_rx()
 
     def _mac_rx(self, frame: LoraFrame):
         log.debug("MAC RX: %s", str(frame))

@@ -194,9 +194,9 @@ class LoraPhy:
         for resp in self.last_sended.expected_response:
             if resp is None:
                 continue
-            if UartResponse.RADIO_RX.value in decode_data:
-                self.listener(LoraFrame.build(decode_data[10:].strip()))
             if resp.value in decode_data:
+                if resp==UartResponse.RADIO_RX:
+                    self.listener(LoraFrame.build(decode_data[10:].strip()))
                 return True
         log.debug("unexpected response")
         return False
