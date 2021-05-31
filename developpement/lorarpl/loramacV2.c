@@ -28,7 +28,7 @@ static struct ctimer retransmit_timer;
 
 //buffers
 static lora_frame_t buffer[BUF_SIZE];
-//static uint8_t w_i = 0;// index to write in the buffer
+static uint8_t w_i = 0;// index to write in the buffer
 static uint8_t r_i = 0;// index to read in the buffer 
 static uint8_t buf_size = 0;// current size of the buffer
 mutex_t tx_buf_mutex;// mutex for tx_buffer
@@ -93,7 +93,8 @@ int lora_rx(lora_frame_t frame){
     LOG_INFO_LR_FRAME(&frame);
     LOG_INFO("\n");
     
-    if(!forDag(&(frame.dest_addr))){//dest addr is not the node -> drop frame
+    if(!forDag(&(frame.dest_addr)) || frame.seq != seq){//dest addr is not the node -> drop frame
+       LOG_DBG("drop frame\n");
         return 0;
     }
 
@@ -129,10 +130,28 @@ int lora_rx(lora_frame_t frame){
 
         case DATA:
             LOG_INFO("DATA!\n");
+            if(state != ALONE && forRoot(&(frame.dest_addr))){
+                //todo send payload to upper layer
+                LOG_DBG("Data for root\n");
+            }else if(state == READY && isForChild(&(frame->dest_addr))){
+                //todo send to RPL
+                LOG_DBG("Data for child\n");
+            }
+            if(frame.k){
+                lora_frame_t ack_frame = {node_addr, frame.dest_addr, false, seq, false, ACK, ""};
+                phy_send(ack_frame);
+            }
+            seq = !seq;
+            if(frame.next){
+                phy_timeout(RX_TIME);
+                phy_rx();
+            }
             break;
 
         case ACK:
-        LOG_INFO("ACK!\n");
+            LOG_INFO("ACK!\n");
+            ctimer_stop(&retransmit_timer);
+            seq=!seq;
             break;
 
         default:
@@ -142,7 +161,26 @@ int lora_rx(lora_frame_t frame){
 
 }
 
-int send(lora_addr_t to, bool need_ack,void* data);
+int mac_send(lora_frame_t frame){
+    //acquire mutex for buffer
+    while(!mutex_try_lock(&tx_buf_mutex)){}
+
+    if(buf_size <= BUF_SIZE){
+        buffer[w_i] = frame;
+        buf_size++;
+        w_i = (w_i+1)%BUF_SIZE;
+        mutex_unlock(&tx_buf_mutex);
+        return 0;
+    }
+    return 1;
+    
+
+}
+
+int send(lora_addr_t to, bool need_ack,void* data){
+    lora_frame_t frame = {node_addr, to, need_ack, false, false, DATA, data};
+    mac_send(frame);
+}
 
 void mac_init(){
     LOG_INFO("Init LoRa MAC\n");
@@ -198,11 +236,12 @@ PROCESS_THREAD(mac_tx, ev, data){
             buf_not_empty = (buf_size>0);
             mutex_unlock(&tx_buf_mutex);
 
-            //TODO last_send_frame.seq =
+            last_send_frame.seq = seq;
             phy_timeout(0);//disable watchdog timer
             phy_tx(last_send_frame);
             if(last_send_frame.k){
                 state = WAIT_RESPONSE;
+                ctimer_start(&retransmit_timer);
                 phy_timeout(RX_TIME);
                 phy_rx();
                 
@@ -210,6 +249,8 @@ PROCESS_THREAD(mac_tx, ev, data){
                     PROCESS_WAIT_EVENT_UNTIL(ev == state_change_event);
                 }
 
+            }else{
+                seq = !seq;
             }
 
             

@@ -7,9 +7,9 @@
 #define UART1_TX_PIN             3
 ```
 
-- Dans `sys/log-conf.h` modification de
+- Dans `os/sys/log-conf.h` modification de
 ```c
-#define LOG_OUTPUT_PREFIX(level, levelstr, module) LOG_OUTPUT("[%lu: %-4s: %-10s] ", clock_seconds( , levelstr, module)
+#define LOG_OUTPUT_PREFIX(level, levelstr, module) LOG_OUTPUT("[%lu: %-4s: %-10s] ", clock_seconds(), levelstr, module)
 ```
 Pour afficher le temps(en sec) du log.
 
@@ -152,6 +152,14 @@ taille en bit max: 2040
 |<---24---->|<----24--->|<-1->|<-1->|<-1-->|<---1--->|<--4--->|<(2040-56=1984)>|
 | dest addr |  src addr |  k  | seq | next | reserved|command |     payload    |
 ```
+||<br>
+V
+
+```
+|<---24---->|<----24--->|<-1->|<-1-->|<---2--->|<--8--->|<--4--->|<(2040-56=1984)>|
+| dest addr |  src addr |  k  | next | reserved|  seq   |command |     payload    |
+```
+
 - dest addr: adresse custom de destination
 - src addr: adresse custom source
 - k: flag qui indique si un ack doit être envoyé en retour
@@ -194,3 +202,58 @@ Plus généralement, je dois regarder si les noeuds intermédiaires peuvent rece
 Pour les acquitements, si un ACK n'est pas reçu après un temps déterminé, le paquet est retransmis.
 Après 3 retransmissions, l'envoi est annulé.
 ![proto v0](PROTOv0.jpg)
+
+### Intégration dans Contiki
+Objectif: intéger le protocole dans contiki au lieu de créer un projet complet.
+
+
+#### Première piste: Utiliser border-router. au lieu d'une communication via SLIP, communication avec le protocole MAC créé.
+
+`os/services/rpl-border-router/embeded/border-router-embeded.c`<br>
+Process: mac off -> attend le préfixe (`request_prefix()`)-> mac on
+
+`os/services/rpl-border-router/rpl-border-router.c`<br>
+`rpl_border_router_init` start le process précédent<br>
+`set_prefix_64` set le prefixe de la racine et root_start()
+
+`os/services/rpl-border-router/embedded/slip-bridge.c`<br>
+- implémente `request_prefix`
+- uip_buf ?
+- `uipbuf_clear()` ?
+- `slip_write()` ?
+- init() : slip_arch_init, process_start(&slip_process, NULL); slip_set_input_callback
+- output() qui appelle slip_send()
+- 
+```c
+const struct uip_fallback_interface rpl_interface = {
+  init, output
+};
+```
+
+`os/dev/slip.c`<br>
+- implémente slip_set_input_callback
+- implémente slip_send. juste `slip_write(uip_buf, uip_len);` qui utilise `slip_arch_writeb`
+- process qui quand des données sont dispo appelle la callback enregistrée et tcpip_input
+--------------------------------
+##### Infos sur le buffer uip
+
+##### Infos sur const struct uip_fallback_interface rpl_interface
+uip_fallback_interface est aussi définie dans os/net/ipv6/uip.h<br>
+et dans os/net/ipv6/tcpip.c:
+```c
+#ifdef UIP_FALLBACK_INTERFACE
+extern struct uip_fallback_interface UIP_FALLBACK_INTERFACE;
+#endif
+```
+os/services/rpl-border-router/module-macros.h défini
+```c
+#define BUILD_WITH_RPL_BORDER_ROUTER               1 //utilisé dans contiki-main pour appeler rpl_border_router_init()
+#define UIP_FALLBACK_INTERFACE         rpl_interface 
+```
+UIP_FALLBACK_INTERFACE est utilisé dans os/net/ipv6/tcpip.c et appelle UIP_FALLBACK_INTERFACE.output quand un paquet doit sortir.
+
+##### Infos sur slip_arch_writeb
+
+`arch/cpu/cc2538/slip-arch.c`<br>
+- slip_arch_writeb utilise uart_write_byte
+- slip_arch_init utilise uart_set_input(slip_input_byte)

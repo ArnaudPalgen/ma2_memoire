@@ -13,6 +13,7 @@ ROOT_ID = 0
 
 RETRANSMIT_TIMEOUT = 5  # sec
 MAX_RETRANSMIT = 3
+RX_TIME = 3000 # 3 sec
 
 CHILD_TX_BUF_SIZE = 5
 CHILD_QUEUE_SIZE = 10
@@ -40,7 +41,7 @@ class LoraMac:
         self.phy_layer = LoraPhy()
         self.childs = {}# prefix:child
         self.addr = LoraAddr(ROOT_PREFIX, ROOT_ID)
-        self.action_matcher = {MacCommand.JOIN: self._on_join, MacCommand.ACK: self._on_ack}
+        self.action_matcher = {MacCommand.JOIN: self._on_join, MacCommand.ACK: self._on_ack, MacCommand.QUERY: self._on_query}
         self.last_prefix = -1
         self.childs_buf = queue.Queue(CHILD_QUEUE_SIZE)
 
@@ -57,7 +58,11 @@ class LoraMac:
     def _retransmit_timeout(self, child):
         log.info("retransmit timeout from child %s", str(child))
         if child.transmit_count >= MAX_RETRANSMIT:
-            # TODO si cela concerne une JOIN_RESPONSE, supprimer le child de self.childs
+            if child.last_send_frame.command == MacCommand.JOIN_RESPONSE:
+                r=self.childs.pop(child.addr.node_id & 255, None)
+                if r is None:
+                    log.warning("child not in list")
+                return
             log.warning("unable to send frame %s", str(child.last_send_frame))
             child.lost_packet += 1
             log.info("lost frames:%d", child.lost_packet)
@@ -65,13 +70,21 @@ class LoraMac:
             child.last_send_frame = None
             child.transmit_count = 1
             child.can_send = True
-            self.childs_buf.put(child)
+            if child.last_send_frame.has_next:
+                self.childs_buf.put(child)
 
         else:
             log.info("retransmit frame: %s", str(child.last_send_frame))
             child.transmit_count += 1
             self.phy_layer.phy_tx(child.last_send_frame)
             child.restart_timer()
+
+    def _on_query(self, frame: LoraFrame):
+        child = self.childs.get(frame.src_addr.prefix, None)
+        if child is None:
+            log.warning("child not in list")
+            self.childs_buf.put(child)
+
 
     def _on_ack(self, frame: LoraFrame):
         """ get the childs from self.childs
@@ -102,7 +115,8 @@ class LoraMac:
             child.ack = not child.ack
             child.timer.cancel()
             child.can_send = True
-            self.childs_buf.put(child)
+            if child.last_send_frame.has_next:
+                self.childs_buf.put(child)
 
     def _on_join(self, frame: LoraFrame):
         ch = self.childs.get(frame.src_addr.prefix)
@@ -126,17 +140,12 @@ class LoraMac:
             LoraFrame(self.addr, frame.src_addr, MacCommand.JOIN_RESPONSE, "%02X" % new_prefix, new_child.ack, True)
         )
 
-    def _on_data(self, frame):
-        pass#TODO
-
     def mac_tx(self, frame: LoraFrame) -> bool:
         child = self.childs[frame.dest_addr.prefix]
         log.debug("in mac tx. FULL:%s", str(child.tx_buf.full()))
         if not child.tx_buf.full():
             child.tx_buf.put(frame, block=False)
             log.debug("put for frame to buf of %s", str(child))
-            if child.can_send:
-                self.childs_buf.put(child)
             return True
         return False
 
@@ -151,17 +160,24 @@ class LoraMac:
                 child.last_send_frame = frame
                 if child.tx_buf.qsize() > 0:
                     frame.has_next=True
+                frame.seq = child.ack
                 self.phy_layer.phy_tx(frame)
                 log.info("send %s", str(frame))
                 if frame.k:
                     child.timer.start()
                     log.info("start retransmit timer")
-                    self.can_send = False
-                self.phy_layer.phy_rx()
+                    child.can_send = False
+                    if frame.has_next:
+                        self.childs_buf.put(child)
+                    self.phy_layer.phy_timeout(RX_TIME)
+                    self.phy_layer.phy_rx()
+                else:
+                    child.ack = not child.ack
 
     def _mac_rx(self, frame: LoraFrame):
         log.debug("MAC RX: %s", str(frame))
-        if frame.dest_addr == self.addr:
+        child = self.childs.get(frame.src_addr.prefix, None)
+        if frame.dest_addr == self.addr and (child is not None and frame.seq == child.ack):
             fun = self.action_matcher.get(frame.command, None)
             if fun is not None:
                 fun(frame)
