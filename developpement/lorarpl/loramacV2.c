@@ -24,7 +24,7 @@ static state_t state;
 
 //timers
 static struct ctimer retransmit_timer;
-//static struct ctimer query_timer;
+static struct ctimer query_timer;
 
 //buffers
 static lora_frame_t buffer[BUF_SIZE];
@@ -35,7 +35,7 @@ mutex_t tx_buf_mutex;// mutex for tx_buffer
 
 static lora_frame_t last_send_frame;
 static bool seq = false;
-//static uint8_t retransmit_attempt=0;
+static uint8_t retransmit_attempt=0;
 
 static process_event_t new_tx_frame_event;//event that signals to the TX process that a new frame is available to be sent 
 static process_event_t state_change_event;//event that signals to the TX process that ..TODO
@@ -71,94 +71,14 @@ bool forChild(lora_addr_t *dest_addr){
     return dest_addr->prefix == node_addr.prefix && dest_addr->id != node_addr.id;
 }
 
-/*---------------------------------------------------------------------------*/
-//timeout callback functions
-void retransmit_timeout(void *ptr){
-    LOG_INFO("retransmit timeout !\n");
+void setState(state_t new_state){
+    state = new_state;
+    process_post(&mac_tx, state_change_event, NULL);
 }
-
-void query_timeout(void *ptr){
-    LOG_INFO("query timeout !\n");
-}
-/*---------------------------------------------------------------------------*/
 
 void phy_send(lora_frame_t frame){
     phy_timeout(0);//disable watchdog timer
     phy_tx(frame);
-}
-
-int lora_rx(lora_frame_t frame){
-    
-    LOG_INFO("RX LoRa frame: ");
-    LOG_INFO_LR_FRAME(&frame);
-    LOG_INFO("\n");
-    
-    if(!forDag(&(frame.dest_addr)) || frame.seq != seq){//dest addr is not the node -> drop frame
-       LOG_DBG("drop frame\n");
-        return 0;
-    }
-
-    mac_command_t command = frame.command;
-
-    switch (command)
-    {
-        case JOIN_RESPONSE:
-            LOG_DBG("HEEEEEEEEEEEEEEEEEEEEEEEEEEEEEERE\n");
-            if(state == ALONE && forRoot(&(frame.dest_addr)) && strlen(frame.payload) == 2){
-                node_addr.prefix = (uint8_t) strtol(frame.payload, NULL, 16);
-                state = JOINED;
-                ctimer_stop(&retransmit_timer);
-                
-                LOG_INFO("Lora Root joined\n");
-                LOG_INFO("Node addr: ");
-                LOG_INFO_LR_ADDR(&node_addr);
-                LOG_INFO("\n");
-
-                lora_frame_t ack_frame = {node_addr, root_addr, false, seq, false, ACK, ""};
-                phy_send(ack_frame);
-                seq = !seq;
-                
-                process_start(&mac_tx, NULL);
-                //init query timer
-
-            }
-            else if(state != ALONE && forRoot(&(frame.dest_addr)) && strlen(frame.payload) == 2){
-                lora_frame_t ack_frame = {node_addr, root_addr, false, false, false, ACK, ""};
-                phy_send(ack_frame);
-            }
-            break;
-
-        case DATA:
-            LOG_INFO("DATA!\n");
-            if(state != ALONE && forRoot(&(frame.dest_addr))){
-                //todo send payload to upper layer
-                LOG_DBG("Data for root\n");
-            }else if(state == READY && isForChild(&(frame->dest_addr))){
-                //todo send to RPL
-                LOG_DBG("Data for child\n");
-            }
-            if(frame.k){
-                lora_frame_t ack_frame = {node_addr, frame.dest_addr, false, seq, false, ACK, ""};
-                phy_send(ack_frame);
-            }
-            seq = !seq;
-            if(frame.next){
-                phy_timeout(RX_TIME);
-                phy_rx();
-            }
-            break;
-
-        case ACK:
-            LOG_INFO("ACK!\n");
-            ctimer_stop(&retransmit_timer);
-            seq=!seq;
-            break;
-
-        default:
-            LOG_WARN("Unknown MAC command %d\n", command);
-    }
-    return 0;
-
 }
 
 int mac_send(lora_frame_t frame){
@@ -170,16 +90,150 @@ int mac_send(lora_frame_t frame){
         buf_size++;
         w_i = (w_i+1)%BUF_SIZE;
         mutex_unlock(&tx_buf_mutex);
+        process_post(&mac_tx, new_tx_frame_event, NULL);        
         return 0;
     }
+    mutex_unlock(&tx_buf_mutex);
     return 1;
     
 
 }
 
+void send_ack(lora_addr_t ack_dest_addr, bool ack_seq){
+    static lora_frame_t ack_frame;
+    
+    ack_frame.src_addr = node_addr;
+    ack_frame.seq = ack_seq;
+    ack_frame.command=ACK;
+    ack_frame.next=false;
+    ack_frame.k=false;
+    ack_frame.dest_addr = ack_dest_addr;
+
+    last_send_frame = ack_frame;
+    phy_send(ack_frame);
+}
+
+/*---------------------------------------------------------------------------*/
+
+//timeout callback functions
+void retransmit_timeout(void *ptr){
+    LOG_INFO("retransmit timeout !\n");
+    if(retransmit_attempt < MAX_RETRANSMIT){
+        LOG_DBG("retransmit frame: ");
+        LOG_DBG_LR_FRAME(&last_send_frame);
+        LOG_DBG("\n");
+        phy_send(last_send_frame);
+        retransmit_attempt ++;
+        ctimer_reset(&retransmit_timer);
+    }else{
+        retransmit_attempt = 0;
+        seq = !seq;
+        setState(READY);
+    }
+}
+
+void query_timeout(void *ptr){
+    LOG_INFO("query timeout !\n");
+    lora_frame_t query_frame = {node_addr, root_addr, false, seq, false, QUERY, ""};
+    mac_send(query_frame);
+}
+/*---------------------------------------------------------------------------*/
+
+
+void on_join_response(lora_frame_t* frame){
+    LOG_DBG("JOIN RESPONSE\n");
+    if(state == ALONE && forRoot(&(frame->dest_addr)) && strlen(frame->payload) == 2){
+        node_addr.prefix = (uint8_t) strtol(frame->payload, NULL, 16);
+        state = JOINED;
+        ctimer_stop(&retransmit_timer);
+        
+        LOG_INFO("Lora Root joined\n");
+        LOG_INFO("Node addr: ");
+        LOG_INFO_LR_ADDR(&node_addr);
+        LOG_INFO("\n");
+
+        send_ack(root_addr, seq);
+        seq = !seq;
+        
+        process_start(&mac_tx, NULL);
+        ctimer_set(&query_timer, QUERY_TIMEOUT, query_timeout, NULL);
+
+    }
+    else if(state != ALONE && forRoot(&(frame->dest_addr)) && strlen(frame->payload) == 2){
+        send_ack(root_addr, false);
+    }
+}
+
+void on_data(lora_frame_t* frame){
+    LOG_INFO("DATA!\n");
+
+    ctimer_stop(&retransmit_timer);
+    ctimer_stop(&query_timer);
+
+    if(forRoot(&(frame->dest_addr))){
+        LOG_DBG("Data for root\n");//todo send payload to upper layer
+
+    }else if(state == READY && forChild(&(frame->dest_addr))){
+        LOG_DBG("Data for child\n");//todo send to RPL
+    }
+
+    if(frame->k){
+        send_ack(frame->dest_addr, seq);
+    }
+    seq = !seq;
+    if(frame->next){
+        phy_timeout(RX_TIME);
+        phy_rx();
+    }else{
+        ctimer_reset(&query_timer);
+        setState(READY);
+    }
+}
+
+void on_ack(lora_frame_t* frame){
+    LOG_INFO("ACK!\n");
+    ctimer_stop(&retransmit_timer);
+    seq=!seq;
+    setState(READY);
+}
+
+int lora_rx(lora_frame_t frame){
+    
+    LOG_INFO("RX LoRa frame: ");
+    LOG_INFO_LR_FRAME(&frame);
+    LOG_INFO("\n");
+    
+    if(!forDag(&(frame.dest_addr)) || frame.seq != seq){//dest addr is not the node -> drop frame
+        if(frame.seq != seq){
+            phy_send(last_send_frame);
+        }
+        LOG_DBG("drop frame\n");
+        return 0;
+    }
+
+    mac_command_t command = frame.command;
+
+    switch (command){
+        case JOIN_RESPONSE:
+            on_join_response(&frame);
+            break;
+        case DATA:
+            if(state != ALONE){
+                on_data(&frame);
+            }
+            break;
+        case ACK:
+            on_ack(&frame);
+            break;
+        default:
+            LOG_WARN("Unknown MAC command %d\n", command);
+    }
+    return 0;
+}
+
 int send(lora_addr_t to, bool need_ack,void* data){
     lora_frame_t frame = {node_addr, to, need_ack, false, false, DATA, data};
-    mac_send(frame);
+    return mac_send(frame);
 }
 
 void mac_init(){
@@ -208,9 +262,11 @@ void mac_init(){
     phy_register_listener(&lora_rx);
 
     lora_frame_t join_frame = {node_addr, root_addr, false, false, false, JOIN, ""};
+    last_send_frame = join_frame;
     phy_send(join_frame);
     phy_timeout(RX_TIME);
     phy_rx();
+    ctimer_set(&retransmit_timer, RETRANSMIT_TIMEOUT, retransmit_timeout, NULL);
 }
 
 /*---------------------------------------------------------------------------*/
@@ -239,9 +295,9 @@ PROCESS_THREAD(mac_tx, ev, data){
             last_send_frame.seq = seq;
             phy_timeout(0);//disable watchdog timer
             phy_tx(last_send_frame);
-            if(last_send_frame.k){
+            if(last_send_frame.k || last_send_frame.command == QUERY){
                 state = WAIT_RESPONSE;
-                ctimer_start(&retransmit_timer);
+                ctimer_reset(&retransmit_timer);
                 phy_timeout(RX_TIME);
                 phy_rx();
                 
@@ -256,9 +312,7 @@ PROCESS_THREAD(mac_tx, ev, data){
             
         } while (buf_not_empty);
         
-        
     }
-    
     
     PROCESS_END();
 }

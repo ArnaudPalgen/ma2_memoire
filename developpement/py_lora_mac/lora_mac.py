@@ -30,6 +30,7 @@ class LoraChild:
         self.can_send = True
         self.tx_buf = queue.Queue(CHILD_TX_BUF_SIZE)
         self.lost_packet = 0
+        #self.tx_buf.put(LoraFrame(LoraAddr(ROOT_PREFIX, ROOT_ID), LoraAddr(2, 24859), MacCommand.DATA, "48656c6C6F", False, True, False))
 
     def restart_timer(self):
         self.timer = Timer(RETRANSMIT_TIMEOUT, self.retransmit_fun, [self])
@@ -80,9 +81,16 @@ class LoraMac:
             child.restart_timer()
 
     def _on_query(self, frame: LoraFrame):
-        child = self.childs.get(frame.src_addr.prefix, None)
+        log.debug("In _on_query")
+        child:LoraChild = self.childs.get(frame.src_addr.prefix, None)
         if child is None:
             log.warning("child not in list")
+            return
+        if child.tx_buf.empty():
+            log.debug("child buffer empty -> send ack")
+            self.phy_layer.phy_tx(LoraFrame(self.addr, frame.src_addr, MacCommand.ACK, "", child.ack, False, False))
+            child.ack = not child.ack
+        else:
             self.childs_buf.put(child)
 
 
@@ -139,6 +147,7 @@ class LoraMac:
         self.mac_tx(
             LoraFrame(self.addr, frame.src_addr, MacCommand.JOIN_RESPONSE, "%02X" % new_prefix, new_child.ack, True)
         )
+        self.childs_buf.put(new_child)
 
     def mac_tx(self, frame: LoraFrame) -> bool:
         child = self.childs[frame.dest_addr.prefix]
@@ -155,6 +164,7 @@ class LoraMac:
             while child.can_send and child.tx_buf.qsize() > 0:
                 try:
                     frame = child.tx_buf.get(block=False)
+                    log.warning("TX send frame: %s", str(frame))
                 except queue.Empty:
                     break
                 child.last_send_frame = frame
@@ -177,7 +187,7 @@ class LoraMac:
     def _mac_rx(self, frame: LoraFrame):
         log.debug("MAC RX: %s", str(frame))
         child = self.childs.get(frame.src_addr.prefix, None)
-        if frame.dest_addr == self.addr and (child is not None and frame.seq == child.ack):
+        if frame.dest_addr == self.addr and ((child is not None and frame.seq == child.ack) or child is None):
             fun = self.action_matcher.get(frame.command, None)
             if fun is not None:
                 fun(frame)
@@ -188,4 +198,5 @@ class LoraMac:
 if __name__ == '__main__':
     mac = LoraMac()
     mac.mac_init()
+    #mac.mac_tx(LoraFrame(LoraAddr(ROOT_PREFIX, ROOT_ID), LoraAddr(2, 24859), MacCommand.DATA, "48656c6C6F", False, True, False))
     # mac._mac_rx(LoraFrame.build("radio_rx  00611B01000000\r\n"))

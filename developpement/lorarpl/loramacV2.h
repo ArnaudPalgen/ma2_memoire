@@ -5,8 +5,10 @@
 
 //timeout and rx_time
 #define QUERY_TIMEOUT (CLOCK_SECOND * 30) //10 sec
-#define RETRANSMIT_TIMEOUT (CLOCK_SECOND * 5) //3 sec
-#define RX_TIME 3000 // 2 sec
+#define RETRANSMIT_TIMEOUT (CLOCK_SECOND * 35) //3 sec
+#define RX_TIME 30000 // 2 sec
+
+#define MAX_RETRANSMIT 3
 
 #define BUF_SIZE 10
 

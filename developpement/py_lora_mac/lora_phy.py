@@ -7,7 +7,7 @@ from enum import Enum, auto, unique
 from dataclasses import dataclass
 
 log.basicConfig(format='%(module)s-%(levelname)s-%(asctime)s-%(message)s', 
-datefmt='%H:%M:%S', filename='loramac.log', level=log.INFO)
+datefmt='%H:%M:%S', filename='loramacB.log', level=log.DEBUG)
 
 HEADER_SIZE = 14
 
