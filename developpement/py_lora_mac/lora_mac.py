@@ -124,6 +124,10 @@ class LoraMac:
             child.ack = not child.ack
             child.timer.cancel()
             child.can_send = True
+
+            self.phy_layer.phy_timeout(0)
+            self.phy_layer.phy_rx()
+
             if child.last_send_frame.has_next:
                 self.childs_buf.put(child)
 
@@ -161,7 +165,17 @@ class LoraMac:
 
     def _tx_process(self):
         while True:
-            child = self.childs_buf.get()
+            
+            try:
+                # get  next child for wich frame are available to send
+                child = self.childs_buf.get(block=False)
+            except queue.Empty:
+                # if there is no child, we have send all frame
+                # so we listen
+                self.phy_layer.phy_timeout(0)
+                self.phy_layer.phy_rx()
+                child = self.childs_buf.get(block=True)
+
             while child.can_send and child.tx_buf.qsize() > 0:
                 try:
                     frame = child.tx_buf.get(block=False)

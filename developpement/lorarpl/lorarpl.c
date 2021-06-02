@@ -16,9 +16,9 @@ AUTOSTART_PROCESSES(&lorarpl_process);
 PROCESS_THREAD(lorarpl_process, ev, data){
     PROCESS_BEGIN();
 
-        LOG_INFO("Welcome !");
+        LOG_INFO("Welcome !\n");
         PROCESS_WAIT_EVENT_UNTIL(ev == button_hal_press_event);
-        LOG_INFO("Button pushed");
+        LOG_INFO("Button pushed\n");
         mac_init();
     PROCESS_END();
 }

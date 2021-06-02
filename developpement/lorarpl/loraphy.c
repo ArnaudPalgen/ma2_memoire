@@ -12,6 +12,7 @@
 //log configuration
 #define LOG_MODULE "LoRa PHY"
 #define LOG_LEVEL LOG_LEVEL_INFO
+#define LOG_CONF_WITH_COLOR 3
 
 //TX buffer initialization
 #define TX_BUF_SIZE 10
