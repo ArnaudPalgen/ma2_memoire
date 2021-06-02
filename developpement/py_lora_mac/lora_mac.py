@@ -116,6 +116,7 @@ class LoraMac:
                 """
                 new_prefix = int(child.last_send_frame.payload, 16)
                 child.addr = LoraAddr(new_prefix, frame.dest_addr.node_id)
+                log.debug("update child with prefix %d", child.addr.prefix)
                 self.childs[child.addr.prefix] = child
                 del self.childs[frame.src_addr.node_id& 255]
                 self.last_prefix = new_prefix
@@ -168,12 +169,12 @@ class LoraMac:
                 except queue.Empty:
                     break
                 child.last_send_frame = frame
-                if child.tx_buf.qsize() > 0:
+                if child.tx_buf.qsize() > 0 and frame.command != MacCommand.JOIN_RESPONSE:
                     frame.has_next=True
                 frame.seq = child.ack
                 self.phy_layer.phy_tx(frame)
                 log.info("send %s", str(frame))
-                if frame.k:
+                if frame.k or frame.command==MacCommand.JOIN_RESPONSE:
                     child.timer.start()
                     log.info("start retransmit timer")
                     child.can_send = False
@@ -187,12 +188,21 @@ class LoraMac:
     def _mac_rx(self, frame: LoraFrame):
         log.debug("MAC RX: %s", str(frame))
         child = self.childs.get(frame.src_addr.prefix, None)
-        if frame.dest_addr == self.addr and ((child is not None and frame.seq == child.ack) or child is None):
-            fun = self.action_matcher.get(frame.command, None)
-            if fun is not None:
-                fun(frame)
+        log.debug("look child with prefix: %d", frame.src_addr.prefix)
+        print(self.childs)
+        
+        if frame.dest_addr == self.addr:
+            if child is not None and frame.seq != child.ack:
+                self.phy_layer.phy_tx(child.last_send_frame)
+            
+            elif child is None and (frame.command != MacCommand.JOIN and frame.command !=MacCommand.ACK):
+                log.warning("node %s wants to exchange without JOIN", str(frame.src_addr))
             else:
-                log.warning("unknown MAC command")
+                fun = self.action_matcher.get(frame.command, None)
+                if fun is not None:
+                    fun(frame)
+                else:
+                    log.warning("unknown MAC command")
 
 
 if __name__ == '__main__':

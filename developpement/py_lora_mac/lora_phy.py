@@ -163,6 +163,8 @@ class LoraPhy:
         self.listener = listener
 
     def phy_tx(self, loraFrame: LoraFrame):
+        if loraFrame is None:
+            return
         f = UartFrame([UartResponse.RADIO_TX_OK, UartResponse.RADIO_ERR], loraFrame.toHex(), UartCommand.TX)
         self._send_phy(f)
 

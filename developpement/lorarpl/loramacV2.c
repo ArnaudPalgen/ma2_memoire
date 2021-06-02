@@ -30,7 +30,7 @@ static struct ctimer query_timer;
 static lora_frame_t buffer[BUF_SIZE];
 static uint8_t w_i = 0;// index to write in the buffer
 static uint8_t r_i = 0;// index to read in the buffer 
-static uint8_t buf_size = 0;// current size of the buffer
+static uint8_t buf_len = 0;// current size of the buffer
 mutex_t tx_buf_mutex;// mutex for tx_buffer
 
 static lora_frame_t last_send_frame;
@@ -82,21 +82,30 @@ void phy_send(lora_frame_t frame){
 }
 
 int mac_send(lora_frame_t frame){
+    LOG_WARN("MAC_SEND A\n");
     //acquire mutex for buffer
     while(!mutex_try_lock(&tx_buf_mutex)){}
+    LOG_WARN("MAC_SEND B\n");
 
-    if(buf_size <= BUF_SIZE){
+    if(buf_len <= BUF_SIZE){
+        LOG_WARN("MAC_SEND C\n");
         buffer[w_i] = frame;
-        buf_size++;
+        LOG_WARN("MAC_SEND D\n");
+        buf_len++;
+        LOG_WARN("MAC_SEND E\n");
         w_i = (w_i+1)%BUF_SIZE;
+        LOG_WARN("MAC_SEND F\n");
         mutex_unlock(&tx_buf_mutex);
+        LOG_WARN("MAC_SEND G\n");
         process_post(&mac_tx, new_tx_frame_event, NULL);        
+        LOG_WARN("MAC_SEND H\n");
         return 0;
+    }else{
+        LOG_WARN("MAC_SEND I\n");
+        mutex_unlock(&tx_buf_mutex);
+        LOG_WARN("MAC_SEND J\n");
+        return 1;
     }
-    mutex_unlock(&tx_buf_mutex);
-    return 1;
-    
-
 }
 
 void send_ack(lora_addr_t ack_dest_addr, bool ack_seq){
@@ -118,13 +127,16 @@ void send_ack(lora_addr_t ack_dest_addr, bool ack_seq){
 //timeout callback functions
 void retransmit_timeout(void *ptr){
     LOG_INFO("retransmit timeout !\n");
+    LOG_ERR("STOP retransmit timer thanks to retransmit_timeout\n");
+    ctimer_stop(&retransmit_timer);
     if(retransmit_attempt < MAX_RETRANSMIT){
         LOG_DBG("retransmit frame: ");
         LOG_DBG_LR_FRAME(&last_send_frame);
         LOG_DBG("\n");
         phy_send(last_send_frame);
         retransmit_attempt ++;
-        ctimer_reset(&retransmit_timer);
+        LOG_ERR("RESTART retransmit timer because retransmit frame");
+        ctimer_restart(&retransmit_timer);
     }else{
         retransmit_attempt = 0;
         seq = !seq;
@@ -134,7 +146,18 @@ void retransmit_timeout(void *ptr){
 
 void query_timeout(void *ptr){
     LOG_INFO("query timeout !\n");
-    lora_frame_t query_frame = {node_addr, root_addr, false, seq, false, QUERY, ""};
+    LOG_ERR("STOP query timer thaks to query_timeout\n");
+    ctimer_stop(&query_timer);
+    lora_frame_t query_frame;
+    query_frame.src_addr = node_addr;
+    query_frame.dest_addr=root_addr;
+    query_frame.k=false;
+    query_frame.seq=seq;
+    query_frame.next=false;
+    query_frame.command=QUERY;
+    query_frame.payload="";
+    // = {node_addr, root_addr, false, seq, false, QUERY, ""};
+    LOG_DBG("query frame built\n");
     mac_send(query_frame);
 }
 /*---------------------------------------------------------------------------*/
@@ -144,7 +167,9 @@ void on_join_response(lora_frame_t* frame){
     LOG_DBG("JOIN RESPONSE\n");
     if(state == ALONE && forRoot(&(frame->dest_addr)) && strlen(frame->payload) == 2){
         node_addr.prefix = (uint8_t) strtol(frame->payload, NULL, 16);
-        state = JOINED;
+        //state = JOINED;
+        setState(READY);
+        LOG_ERR("STOP retransmit timer\n");
         ctimer_stop(&retransmit_timer);
         
         LOG_INFO("Lora Root joined\n");
@@ -156,6 +181,7 @@ void on_join_response(lora_frame_t* frame){
         seq = !seq;
         
         process_start(&mac_tx, NULL);
+        LOG_ERR("SET query timer\n");
         ctimer_set(&query_timer, QUERY_TIMEOUT, query_timeout, NULL);
 
     }
@@ -167,8 +193,8 @@ void on_join_response(lora_frame_t* frame){
 void on_data(lora_frame_t* frame){
     LOG_INFO("DATA!\n");
 
-    ctimer_stop(&retransmit_timer);
-    ctimer_stop(&query_timer);
+    //ctimer_stop(&retransmit_timer);
+    //ctimer_stop(&query_timer);
 
     if(forRoot(&(frame->dest_addr))){
         LOG_DBG("Data for root\n");//todo send payload to upper layer
@@ -185,13 +211,14 @@ void on_data(lora_frame_t* frame){
         phy_timeout(RX_TIME);
         phy_rx();
     }else{
-        ctimer_reset(&query_timer);
+        //ctimer_restart(&query_timer);
         setState(READY);
     }
 }
 
 void on_ack(lora_frame_t* frame){
     LOG_INFO("ACK!\n");
+    LOG_ERR("STOP retransmit timer thanks to ACK");
     ctimer_stop(&retransmit_timer);
     seq=!seq;
     setState(READY);
@@ -257,6 +284,9 @@ void mac_init(){
     state = ALONE;
     LOG_DBG("initial state: %d\n", state);
 
+    new_tx_frame_event = process_alloc_event();
+    state_change_event = process_alloc_event();
+
     /* start phy layer */
     phy_init();
     phy_register_listener(&lora_rx);
@@ -266,6 +296,7 @@ void mac_init(){
     phy_send(join_frame);
     phy_timeout(RX_TIME);
     phy_rx();
+    LOG_ERR("set retransmit timer\n");
     ctimer_set(&retransmit_timer, RETRANSMIT_TIMEOUT, retransmit_timeout, NULL);
 }
 
@@ -278,26 +309,48 @@ PROCESS_THREAD(mac_tx, ev, data){
     PROCESS_BEGIN();
     
     while(true){
+        LOG_WARN("YO 2\n");
+        LOG_DBG("TEST1 is new tx frame: %d\n",ev==new_tx_frame_event);
+        LOG_DBG("TEST2 is state change: %d\n",ev==state_change_event);
+        LOG_WARN("YO 2 B !\n");
         PROCESS_WAIT_EVENT_UNTIL(ev==new_tx_frame_event);
+        LOG_WARN("YO 3\n");
+        LOG_DBG("false: %d\n", false);
+        LOG_DBG("event is new tx frame: %d\n",ev==new_tx_frame_event);
+        LOG_DBG("event is state change: %d\n",ev==state_change_event);
         do
-        {
-            if(state != READY){continue;}
+        {   LOG_WARN("PROCESS A\n");
             
             //acquire mutex for buffer
             while(!mutex_try_lock(&tx_buf_mutex)){}
-            
+            LOG_WARN("PROCESS B\n");
+            if(buf_len==0){
+                LOG_WARN("YO!\n");
+                break;
+            }
             last_send_frame = buffer[r_i];
-            buf_size --;
+            LOG_DBG("--- buf size: %d\n", buf_len);
+            LOG_WARN("PROCESS C\n");
+            buf_len = buf_len-1;
+            LOG_DBG("--- buf size: %d\n", buf_len);
+            LOG_WARN("PROCESS D\n");
             r_i = (r_i+1)%BUF_SIZE;
-            buf_not_empty = (buf_size>0);
+            LOG_WARN("PROCESS E\n");
+            buf_not_empty = (buf_len>0);
+            LOG_DBG("--- buf size: %d\n", buf_len);
+            LOG_WARN("PROCESS F\n");
             mutex_unlock(&tx_buf_mutex);
-
+            LOG_WARN("PROCESS G\n");
             last_send_frame.seq = seq;
+            LOG_WARN("PROCESS H\n");
             phy_timeout(0);//disable watchdog timer
+            LOG_WARN("PROCESS I\n");
             phy_tx(last_send_frame);
+            LOG_WARN("PROCESS J\n");
             if(last_send_frame.k || last_send_frame.command == QUERY){
                 state = WAIT_RESPONSE;
-                ctimer_reset(&retransmit_timer);
+                LOG_ERR("RESTART retransmit timer in mac_tx process\n");
+                ctimer_restart(&retransmit_timer);
                 phy_timeout(RX_TIME);
                 phy_rx();
                 
