@@ -203,10 +203,10 @@ class LoraMac:
         log.debug("MAC RX: %s", str(frame))
         child = self.childs.get(frame.src_addr.prefix, None)
         log.debug("look child with prefix: %d", frame.src_addr.prefix)
-        print(self.childs)
         
         if frame.dest_addr == self.addr:
             if child is not None and frame.seq != child.ack:
+                log.warning("incorrect SN -> retransmit last frame")
                 self.phy_layer.phy_tx(child.last_send_frame)
             
             elif child is None and (frame.command != MacCommand.JOIN and frame.command !=MacCommand.ACK):

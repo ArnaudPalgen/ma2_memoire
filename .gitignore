@@ -1,7 +1,7 @@
 ## Core latex/pdflatex auxiliary files:
 *.aux
 *.lof
-*.log
+memoire/*.log
 *.lot
 *.fls
 *.out
@@ -279,3 +279,4 @@ TSWLatexianTemp*
 developpement/lorarpl/build/
 */build/*
 build/*
+__pycache__/

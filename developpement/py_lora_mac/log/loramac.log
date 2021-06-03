@@ -1,0 +1,38 @@
+lora_mac-INFO-16:43:46-Init MAC
+lora_phy-INFO-16:43:46-Init PHY
+lora_phy-DEBUG-16:43:46-append UartFrame(expected_response=[<UartResponse.U_INT: '4294967245'>], data='', cmd=<UartCommand.MAC_PAUSE: 'mac pause'>) to tx_buf
+lora_phy-DEBUG-16:43:46-append UartFrame(expected_response=[<UartResponse.OK: 'ok'>], data='868100000', cmd=<UartCommand.SET_FREQ: 'radio set freq '>) to tx_buf
+lora_phy-INFO-16:43:46-Send UART data:UartFrame(expected_response=[<UartResponse.U_INT: '4294967245'>], data='', cmd=<UartCommand.MAC_PAUSE: 'mac pause'>)
+lora_phy-DEBUG-16:43:46-append UartFrame(expected_response=[<UartResponse.OK: 'ok'>], data='0', cmd=<UartCommand.SET_WDT: 'radio set wdt '>) to tx_buf
+lora_phy-DEBUG-16:43:46-append UartFrame(expected_response=[<UartResponse.RADIO_ERR: 'radio_err'>, <UartResponse.RADIO_RX: 'radio_rx'>], data='0', cmd=<UartCommand.RX: 'radio rx '>) to tx_buf
+lora_phy-INFO-16:43:46-process uart response: 4294967245
+lora_phy-INFO-16:43:46-Send UART data:UartFrame(expected_response=[<UartResponse.OK: 'ok'>], data='868100000', cmd=<UartCommand.SET_FREQ: 'radio set freq '>)
+lora_phy-INFO-16:43:46-process uart response: ok
+lora_phy-INFO-16:43:46-Send UART data:UartFrame(expected_response=[<UartResponse.OK: 'ok'>], data='0', cmd=<UartCommand.SET_WDT: 'radio set wdt '>)
+lora_phy-INFO-16:43:46-process uart response: ok
+lora_phy-INFO-16:43:46-Send UART data:UartFrame(expected_response=[<UartResponse.RADIO_ERR: 'radio_err'>, <UartResponse.RADIO_RX: 'radio_rx'>], data='0', cmd=<UartCommand.RX: 'radio rx '>)
+lora_phy-INFO-16:43:46-process uart response: ok
+lora_phy-DEBUG-16:43:46-unexpected response
+lora_phy-INFO-16:43:53-process uart response: radio_rx  1B611B01000000
+lora_mac-DEBUG-16:43:53-MAC RX: LoraFrame(src_addr=LoraAddr(prefix=27, node_id=24859), dest_addr=LoraAddr(prefix=1, node_id=0), command=<MacCommand.JOIN: 0>, payload='', seq=False, k=False, has_next=False)
+lora_mac-INFO-16:43:53-reveive join frame LoraFrame(src_addr=LoraAddr(prefix=27, node_id=24859), dest_addr=LoraAddr(prefix=1, node_id=0), command=<MacCommand.JOIN: 0>, payload='', seq=False, k=False, has_next=False)
+lora_mac-DEBUG-16:43:53-new child:LoraAddr(prefix=27, node_id=24859)
+lora_mac-DEBUG-16:43:53-send join response
+lora_mac-DEBUG-16:43:53-in mac tx. FULL:False
+lora_mac-DEBUG-16:43:53-put for frame to buf of <__main__.LoraChild object at 0x7f21fed09460>
+lora_phy-DEBUG-16:43:53-append UartFrame(expected_response=[<UartResponse.RADIO_TX_OK: 'radio_tx_ok'>, <UartResponse.RADIO_ERR: 'radio_err'>], data='0100001B611B8102', cmd=<UartCommand.TX: 'radio tx '>) to tx_buf
+lora_mac-INFO-16:43:53-send LoraFrame(src_addr=LoraAddr(prefix=1, node_id=0), dest_addr=LoraAddr(prefix=27, node_id=24859), command=<MacCommand.JOIN_RESPONSE: 1>, payload='02', seq=False, k=True, has_next=False)
+lora_phy-INFO-16:43:53-Send UART data:UartFrame(expected_response=[<UartResponse.RADIO_TX_OK: 'radio_tx_ok'>, <UartResponse.RADIO_ERR: 'radio_err'>], data='0100001B611B8102', cmd=<UartCommand.TX: 'radio tx '>)
+lora_mac-INFO-16:43:53-start retransmit timer
+lora_phy-DEBUG-16:43:53-append UartFrame(expected_response=[<UartResponse.RADIO_ERR: 'radio_err'>, <UartResponse.RADIO_RX: 'radio_rx'>], data='0', cmd=<UartCommand.RX: 'radio rx '>) to tx_buf
+lora_phy-INFO-16:43:53-process uart response: ok
+lora_phy-DEBUG-16:43:53-unexpected response
+lora_phy-INFO-16:43:54-process uart response: radio_tx_ok
+lora_phy-INFO-16:43:54-Send UART data:UartFrame(expected_response=[<UartResponse.RADIO_ERR: 'radio_err'>, <UartResponse.RADIO_RX: 'radio_rx'>], data='0', cmd=<UartCommand.RX: 'radio rx '>)
+lora_phy-INFO-16:43:54-process uart response: ok
+lora_phy-DEBUG-16:43:54-unexpected response
+lora_phy-INFO-16:43:55-process uart response: radio_rx  02611B01000003
+lora_mac-DEBUG-16:43:55-MAC RX: LoraFrame(src_addr=LoraAddr(prefix=2, node_id=24859), dest_addr=LoraAddr(prefix=1, node_id=0), command=<MacCommand.ACK: 3>, payload='', seq=False, k=False, has_next=False)
+lora_mac-INFO-16:43:55-receive ack LoraFrame(src_addr=LoraAddr(prefix=2, node_id=24859), dest_addr=LoraAddr(prefix=1, node_id=0), command=<MacCommand.ACK: 3>, payload='', seq=False, k=False, has_next=False)
+lora_mac-DEBUG-16:43:55-correct ack number
+lora_mac-DEBUG-16:43:55-ack a JOIND_RESPONSE

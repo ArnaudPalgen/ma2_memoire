@@ -118,6 +118,7 @@ void send_ack(lora_addr_t ack_dest_addr, bool ack_seq){
     last_send_frame = ack_frame;
     LOG_DBG("SEND ack %d to ", ack_frame.seq);
     LOG_DBG_LR_ADDR(&(ack_frame.dest_addr));
+    LOG_DBG("\n");
     phy_send(ack_frame);
 }
 
@@ -134,6 +135,8 @@ void retransmit_timeout(void *ptr){
         phy_send(last_send_frame);
         retransmit_attempt ++;
         LOG_ERR("RESTART retransmit timer because retransmit frame\n");
+        phy_timeout(RX_TIME);
+        phy_rx();
         ctimer_restart(&retransmit_timer);
     }else{
         LOG_INFO("Unable to send frame ");
@@ -234,7 +237,11 @@ void on_ack(lora_frame_t* frame){
     LOG_DBG("STOP retransmit timer thanks to ACK\n");
     ctimer_stop(&retransmit_timer);
     seq=!seq;
+    if(last_send_frame.command==QUERY){
+        ctimer_restart(&query_timer);
+    }
     setState(READY);
+
 }
 
 int lora_rx(lora_frame_t frame){
@@ -365,8 +372,10 @@ PROCESS_THREAD(mac_tx, ev, data){
             }else{
                 seq = !seq;
             }
-
-            
+            while(!mutex_try_lock(&tx_buf_mutex)){}
+            buf_not_empty = (buf_len>0);
+            LOG_WARN("buf not empty: %d\n", buf_not_empty);
+            mutex_unlock(&tx_buf_mutex);
         } while (buf_not_empty);
         
     }
