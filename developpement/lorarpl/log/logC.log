@@ -69,14 +69,14 @@
 [46: INFO: LoRa PHY  ] UART response:ok
 [46: INFO: LoRa PHY  ] Write UART:radio rx 0
 [46: INFO: LoRa PHY  ] UART response:ok
-[47: INFO: LoRa PHY  ] UART response:radio_rx  0100001B611B8102
+[47: INFO: LoRa PHY  ] UART response:radio_rx  0100001B611B8102--------------------------------- pk reçoit ça ? c'est la join response. seq du ack incorrect ?
 [47: INFO: LoRa MAC  ] RX LoRa frame: {src:1:0 dest:27:24859 k:1 seq:0 next:0 cmd:1 data:02
 [47: INFO: LoRa MAC  ] unexpected SN -> retransmit last frame
 [47: INFO: LoRa MAC  ] retransmit timeout !
 [47: ERR : LoRa MAC  ] STOP retransmit timer thanks to retransmit_timeout
-[47: DBG : LoRa MAC  ] retransmit frame: {src:2:24859 dest:1:0 k:0 seq:1 next:0 cmd:6 data:
+[47: DBG : LoRa MAC  ] retransmit frame: {src:2:24859 dest:1:0 k:0 seq:1 next:0 cmd:6 data: ---- retransmit la query
 [47: ERR : LoRa MAC  ] RESTART retransmit timer because retransmit frame
-[47: DBG : LoRa MAC  ] drop frame
+[47: DBG : LoRa MAC  ] drop frame -------------------------------------------------------------- pk ? 
 [47: INFO: LoRa PHY  ] Write UART:radio set wdt 0
 [47: INFO: LoRa PHY  ] UART response:ok
 [47: INFO: LoRa PHY  ] Write UART:radio tx 02611B01000046
@@ -88,11 +88,11 @@
 [48: INFO: LoRa PHY  ] UART response:ok
 [49: INFO: LoRa PHY  ] UART response:radio_rx  01000002611B43
 [49: INFO: LoRa MAC  ] RX LoRa frame: {src:1:0 dest:2:24859 k:0 seq:1 next:0 cmd:3 data:
-[49: INFO: LoRa MAC  ] ACK!
+[49: INFO: LoRa MAC  ] ACK! -------------------------------------------------------------------- GOOOOD
 [49: DBG : LoRa MAC  ] STOP retransmit timer thanks to ACK
 [49: DBG : LoRa MAC  ] state is READY
 [49: WARN: LoRa MAC  ] buf not empty: 0
-[59: INFO: LoRa MAC  ] query timeout !
+[59: INFO: LoRa MAC  ] query timeout ! --------------------------------------------------------- le timer de query devrai etre restart quand le ack a été reçu
 [59: ERR : LoRa MAC  ] STOP query timer thanks to query_timeout
 [59: DBG : LoRa MAC  ] query frame built
 [59: DBG : LoRa MAC  ] MAC_SEND frame: {src:2:24859 dest:1:0 k:0 seq:0 next:0 cmd:6 data:

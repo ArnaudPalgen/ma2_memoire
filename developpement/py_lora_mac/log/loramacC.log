@@ -15,12 +15,12 @@ lora_phy-INFO-10:31:02-process uart response: ok
 lora_phy-INFO-10:31:02-Send UART data:UartFrame(expected_response=[<UartResponse.RADIO_ERR: 'radio_err'>, <UartResponse.RADIO_RX: 'radio_rx'>], data='0', cmd=<UartCommand.RX: 'radio rx '>)
 lora_phy-INFO-10:31:02-process uart response: ok
 lora_phy-DEBUG-10:31:02-unexpected response
-lora_phy-INFO-10:31:15-process uart response: radio_rx  1B611B01000000
+lora_phy-INFO-10:31:15-process uart response: radio_rx  1B611B01000000   ------ reçoit la join frame
 lora_mac-DEBUG-10:31:15-MAC RX: LoraFrame(src_addr=LoraAddr(prefix=27, node_id=24859), dest_addr=LoraAddr(prefix=1, node_id=0), command=<MacCommand.JOIN: 0>, payload='', seq=False, k=False, has_next=False)
 lora_mac-DEBUG-10:31:15-look child with prefix: 27
 lora_mac-INFO-10:31:15-reveive join frame LoraFrame(src_addr=LoraAddr(prefix=27, node_id=24859), dest_addr=LoraAddr(prefix=1, node_id=0), command=<MacCommand.JOIN: 0>, payload='', seq=False, k=False, has_next=False)
 lora_mac-DEBUG-10:31:15-new child:LoraAddr(prefix=27, node_id=24859)
-lora_mac-DEBUG-10:31:15-send join response
+lora_mac-DEBUG-10:31:15-send join response                               ------ send la join response
 lora_mac-DEBUG-10:31:15-in mac tx. FULL:False
 lora_mac-DEBUG-10:31:15-put for frame to buf of <__main__.LoraChild object at 0x7f8187724310>
 lora_mac-WARNING-10:31:15-TX send frame: LoraFrame(src_addr=LoraAddr(prefix=1, node_id=0), dest_addr=LoraAddr(prefix=27, node_id=24859), command=<MacCommand.JOIN_RESPONSE: 1>, payload='02', seq=False, k=True, has_next=False)
@@ -36,11 +36,12 @@ lora_phy-INFO-10:31:15-process uart response: ok
 lora_phy-INFO-10:31:15-Send UART data:UartFrame(expected_response=[<UartResponse.RADIO_ERR: 'radio_err'>, <UartResponse.RADIO_RX: 'radio_rx'>], data='0', cmd=<UartCommand.RX: 'radio rx '>)
 lora_phy-INFO-10:31:15-process uart response: ok
 lora_phy-DEBUG-10:31:15-unexpected response
-lora_phy-INFO-10:31:20-process uart response: radio_rx  1B611B01000000
+lora_phy-INFO-10:31:20-process uart response: radio_rx  1B611B01000000 ------ join frame x2
 lora_mac-DEBUG-10:31:20-MAC RX: LoraFrame(src_addr=LoraAddr(prefix=27, node_id=24859), dest_addr=LoraAddr(prefix=1, node_id=0), command=<MacCommand.JOIN: 0>, payload='', seq=False, k=False, has_next=False)
 lora_mac-DEBUG-10:31:20-look child with prefix: 27
 lora_mac-INFO-10:31:20-Child <__main__.LoraChild object at 0x7f8187724310> already exist
-lora_phy-INFO-10:31:20-Send UART data:UartFrame(expected_response=[<UartResponse.RADIO_TX_OK: 'radio_tx_ok'>, <UartResponse.RADIO_ERR: 'radio_err'>], data='0100001B611B8102', cmd=<UartCommand.TX: 'radio tx '>)
+lora_phy-INFO-10:31:20-Send UART data: --- renvoi direct de la dernière frame envoyée
+                        UartFrame(expected_response=[<UartResponse.RADIO_TX_OK: 'radio_tx_ok'>, <UartResponse.RADIO_ERR: 'radio_err'>], data='0100001B611B8102', cmd=<UartCommand.TX: 'radio tx '>)
 lora_phy-INFO-10:31:20-process uart response: ok
 lora_phy-DEBUG-10:31:20-unexpected response
 lora_mac-INFO-10:31:20-retransmit timeout from child <__main__.LoraChild object at 0x7f8187724310>
@@ -52,12 +53,12 @@ lora_phy-INFO-10:31:21-process uart response: ok
 lora_phy-INFO-10:31:21-Send UART data:UartFrame(expected_response=[<UartResponse.RADIO_ERR: 'radio_err'>, <UartResponse.RADIO_RX: 'radio_rx'>], data='0', cmd=<UartCommand.RX: 'radio rx '>)
 lora_phy-INFO-10:31:21-process uart response: ok
 lora_phy-DEBUG-10:31:21-unexpected response
-lora_phy-INFO-10:31:22-process uart response: radio_rx  02611B01000003
+lora_phy-INFO-10:31:22-process uart response: radio_rx  02611B01000003             -------- reçoit le ACK
 lora_mac-DEBUG-10:31:22-MAC RX: LoraFrame(src_addr=LoraAddr(prefix=2, node_id=24859), dest_addr=LoraAddr(prefix=1, node_id=0), command=<MacCommand.ACK: 3>, payload='', seq=False, k=False, has_next=False)
 lora_mac-DEBUG-10:31:22-look child with prefix: 2
 lora_mac-INFO-10:31:22-receive ack LoraFrame(src_addr=LoraAddr(prefix=2, node_id=24859), dest_addr=LoraAddr(prefix=1, node_id=0), command=<MacCommand.ACK: 3>, payload='', seq=False, k=False, has_next=False)
 lora_mac-DEBUG-10:31:22-correct ack number
-lora_mac-DEBUG-10:31:22-ack a JOIND_RESPONSE
+lora_mac-DEBUG-10:31:22-ack a JOIND_RESPONSE                           ---- voit bien que c'est pour la join response
 lora_mac-DEBUG-10:31:22-update child with prefix 2
 lora_phy-DEBUG-10:31:22-append UartFrame(expected_response=[<UartResponse.OK: 'ok'>], data='0', cmd=<UartCommand.SET_WDT: 'radio set wdt '>) to tx_buf
 lora_phy-DEBUG-10:31:22-append UartFrame(expected_response=[<UartResponse.RADIO_ERR: 'radio_err'>, <UartResponse.RADIO_RX: 'radio_rx'>], data='0', cmd=<UartCommand.RX: 'radio rx '>) to tx_buf
@@ -66,11 +67,11 @@ lora_phy-INFO-10:31:22-process uart response: ok
 lora_phy-INFO-10:31:22-Send UART data:UartFrame(expected_response=[<UartResponse.RADIO_ERR: 'radio_err'>, <UartResponse.RADIO_RX: 'radio_rx'>], data='0', cmd=<UartCommand.RX: 'radio rx '>)
 lora_phy-INFO-10:31:22-process uart response: ok
 lora_phy-DEBUG-10:31:22-unexpected response
-lora_phy-INFO-10:31:32-process uart response: radio_rx  02611B01000046
+lora_phy-INFO-10:31:32-process uart response: radio_rx  02611B01000046            ------- reçoit la query
 lora_mac-DEBUG-10:31:32-MAC RX: LoraFrame(src_addr=LoraAddr(prefix=2, node_id=24859), dest_addr=LoraAddr(prefix=1, node_id=0), command=<MacCommand.QUERY: 6>, payload='', seq=True, k=False, has_next=False)
 lora_mac-DEBUG-10:31:32-look child with prefix: 2
-lora_mac-DEBUG-10:31:32-In _on_query
-lora_mac-DEBUG-10:31:32-child buffer empty -> send ack
+lora_mac-DEBUG-10:31:32-In _on_query      ----- la comprend bien
+lora_mac-DEBUG-10:31:32-child buffer empty -> send ack    ----- envoi d'un ack car aucune donnée à envoyer
 lora_phy-DEBUG-10:31:32-append UartFrame(expected_response=[<UartResponse.RADIO_TX_OK: 'radio_tx_ok'>, <UartResponse.RADIO_ERR: 'radio_err'>], data='01000002611B43', cmd=<UartCommand.TX: 'radio tx '>) to tx_buf
 lora_phy-INFO-10:31:32-Send UART data:UartFrame(expected_response=[<UartResponse.RADIO_TX_OK: 'radio_tx_ok'>, <UartResponse.RADIO_ERR: 'radio_err'>], data='0100001B611B8102', cmd=<UartCommand.TX: 'radio tx '>)
 lora_phy-INFO-10:31:32-process uart response: ok
@@ -81,7 +82,7 @@ lora_phy-INFO-10:31:33-process uart response: ok
 lora_phy-INFO-10:31:33-Send UART data:UartFrame(expected_response=[<UartResponse.RADIO_ERR: 'radio_err'>, <UartResponse.RADIO_RX: 'radio_rx'>], data='0', cmd=<UartCommand.RX: 'radio rx '>)
 lora_phy-INFO-10:31:33-process uart response: ok
 lora_phy-DEBUG-10:31:33-unexpected response
-lora_phy-INFO-10:31:34-process uart response: radio_rx  02611B01000046
+lora_phy-INFO-10:31:34-process uart response: radio_rx  02611B01000046                ----- reçoit la query x2
 lora_mac-DEBUG-10:31:34-MAC RX: LoraFrame(src_addr=LoraAddr(prefix=2, node_id=24859), dest_addr=LoraAddr(prefix=1, node_id=0), command=<MacCommand.QUERY: 6>, payload='', seq=True, k=False, has_next=False)
 lora_mac-DEBUG-10:31:34-look child with prefix: 2
 lora_phy-DEBUG-10:31:34-append UartFrame(expected_response=[<UartResponse.RADIO_TX_OK: 'radio_tx_ok'>, <UartResponse.RADIO_ERR: 'radio_err'>], data='0100001B611B8102', cmd=<UartCommand.TX: 'radio tx '>) to tx_buf
