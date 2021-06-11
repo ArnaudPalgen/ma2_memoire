@@ -237,6 +237,8 @@ const struct uip_fallback_interface rpl_interface = {
 --------------------------------
 ##### Infos sur le buffer uip
 
+declaré dans net/ipv6/uip.h +- l510
+
 ##### Infos sur const struct uip_fallback_interface rpl_interface
 uip_fallback_interface est aussi définie dans os/net/ipv6/uip.h<br>
 et dans os/net/ipv6/tcpip.c:
