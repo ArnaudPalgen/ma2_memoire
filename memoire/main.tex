@@ -2,9 +2,11 @@
 \documentclass[12pt,a4paper,oneside]{report}
 
 %%%%%%%%%%%%%%%%%%%%% packages %%%%%%%%%%%%%%%%%%%%%
-\usepackage[frenchb]{babel} 
+\usepackage[french]{babel} 
 \usepackage[utf8]{inputenc}
 \usepackage[T1]{fontenc}
+
+\usepackage[table]{xcolor} %for colors
 
 \usepackage{graphicx} % images, colors, etc
 \usepackage[toc]{glossaries} % glossaries
@@ -22,7 +24,6 @@
 %\usepackage{enumitem}% control layout of the three basic list environments.
 
 
-\usepackage{xcolor} %for colors
 
 \usepackage{fancyhdr} % page style
 
@@ -77,17 +78,18 @@
 \listoffigures
 \pagenumbering{arabic}
 %%%%%%%%%%%%%%%%%%%%% intro %%%%%%%%%%%%%%%%%%%%%
-\input{src/intro.tex}
+%\input{src/intro.tex}
 \newpage
 %%%%%%%%%%%%%%%%%%%%% content %%%%%%%%%%%%%%%%%%%%%
-\input{src/802.15.4.tex}
-\input{src/rtos.tex}
+\input{src/zolertia.tex}
+%\input{src/802.15.4.tex}
+%\input{src/rtos.tex}
 %%%%%%%%%%%%%%%%%%%%% glossaries %%%%%%%%%%%%%%%%%%%%%
 %\printglossaries
 
 %%%%%%%%%%%%%%%%%%%%% bibliography %%%%%%%%%%%%%%%%%%%%%
-%\bibliography{bibliography}{}
-%\bibliographystyle{plain}
+\bibliography{bibliography}{}
+\bibliographystyle{plain}
 
 %%%%%%%%%%%%%%%%%%%%% notes %%%%%%%%%%%%%%%%%%%%%
 %<type>:<chapter_label_name>-<label>
@@ -96,9 +98,11 @@
 % - sec: section
 % - subsec: sub section
 % - fig: pictures
+% - tb: tables
 %
 % chapters:
 % - intro
+% - state
 %
 %%%%%%%%%%%%%%%%%%%%% structure %%%%%%%%%%%%%%%%%%%%%
 % TODO
