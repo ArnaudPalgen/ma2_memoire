@@ -38,7 +38,7 @@ La table~\ref{tb:state-spec} reprend les principales spécifications du Zolertia
         \hline
     \end{tabular}
     \caption{Spécifications du Zolertia RE-Mote rev.b~\cite{zolertia-remote:datasheet}.}
-    \label{tb:state-spec}
+    \label{tb:state-spec} reprend la consommation de courant du RN2483 
 \end{table}
 
 \subsection*{RN2483}
@@ -61,6 +61,21 @@ La table~\ref{tb:state-spec} reprend les principales spécifications du Zolertia
         \caption{Schéma-bloc du RN2483~\cite{rn2483:datasheet}.}
         \label{fig:state-rn2484-block}
     \end{figure}
-    %TODO tableau de consommation ?
+    La table~\ref{tb:state-rn2483-consumption} reprend la consommation électrique du RN2483 en fonction de son mode de fonctionnement.
+    \begin{table}[H]
+        \centering
+        \begin{tabular}{| *{4}{c|} }
+            \hline
+            Mode & \multicolumn{3}{c|}{\multirow{1}{*}{Courant (mA)}}\\ \cline{2-4}
+             & VDD = 2.1V & VDD = 3.3V  & VDD = 3.6V \\ \hhline{|=|=|=|=|}
+            Idle & 1.7 & 2.8 & 3.1 \\ \hline
+            Transmit & 28.6 & 38.9 & 44.5 \\ \hline
+            Sleep & 0.0015 & 0.0016 & 0.0016 \\ \hline
+            Receive & 12.96 & 14.22 & 14.69 \\ \hline
+        \end{tabular}
+        \caption{Consommation de courant (à 25 °C) \cite{rn2483:datasheet}.}
+        \label{tb:state-rn2483-consumption}
+    \end{table}
+
 \subsection*{Raspberry Pi}
 
