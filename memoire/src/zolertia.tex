@@ -42,6 +42,25 @@ La table~\ref{tb:state-spec} reprend les principales spécifications du Zolertia
 \end{table}
 
 \subsection*{RN2483}
+    Le RN2483 (Fig.~\ref{fig:state-rn2483}) est un modem LoRa compatible LoRaWAN$^{TM}$ basse énergie.
+    La communication avec ce modem ce fait par des commandes ASCII envoyée via une interface UART. Il prend en charge les modulations FSK, GFSK et LoRa. Il possède également 14 GPIOs ??pour le contrôle et le status, partagés avec 14 inputs analogiques.??%TODO
+    Ses fréquences opérationnelles sont situées dans les bandes de fréquences 433 MHz et 868 MHz. D'après la datasheet, 
+    sa portée maximale est de 15km en agglomération et 5km en zone urbaine. Comme l'illustre la figure.~\ref{fig:state-rn2483}, pour ce mémoire, le RN2483 a été monté sur un carte d'interface réalisée par B.Quoitin qui comporte deux leds, une petite antenne ainsi que les connecteurs permettant d'utiliser des câbles de prototypages.
 
+    \begin{figure}[H]%TODO changer figure
+        \centering
+        \includegraphics[scale=0.3]{res/rn2483.png}
+        \caption{RN2483~\cite{rn2483:shop}.}
+        \label{fig:state-rn2483}
+    \end{figure}
+
+    La figure \ref{fig:state-rn2484-block} reprend le schéma-bloc du RN2483. Il contient notemment l'interface UART, les antennes 433 MHz et 868Mhz ainsi que les GPIOs et la stack LoRaWan.
+    \begin{figure}[H]
+        \centering
+        \includegraphics[scale=0.4]{res/rn2483-block-diagram.png}
+        \caption{Schéma-bloc du RN2483~\cite{rn2483:datasheet}.}
+        \label{fig:state-rn2484-block}
+    \end{figure}
+    %TODO tableau de consommation ?
 \subsection*{Raspberry Pi}
 
