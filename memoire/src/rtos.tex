@@ -2,25 +2,44 @@
 
 Un RTOS (Real Time Operating System) est un sytème d'exploitation temps réels principalement destiné aux systèmes embarqués.
 
-Etant donné que ce projet utilise le protocole 802.15.4 ainsi que TSCH, le RTOS choisis, doit supporter la couche physique 802.15.4, le mode TSCH pour la couche MAC de 802.15.4.
+Etant donné que ce projet utilise le protocole 802.15.4 ainsi que TSCH, le RTOS choisis doit les prendre en charge ainsi qu'un ou plusieurs algorithme d'ordonnancement de TSCH
 
-Le RTOS choisis doit également posséder une implémentation d'un ou plusieurs algorithme d'ordonnancement de TSCH. Il est également préférable, que le RTOS choisis, supprote déja la plateforme utilisée. Une implémentation de la LoRa n'est pas nécessaire car les communications Lora sont réalisées via la RN2483 qui est controlé par UART.
+Il est également préférable, que le RTOS choisis, supporte déjà la plateforme utilisée. Une implémentation de la LoRa n'est pas nécessaire car les communications Lora sont réalisées via le RN2483 qui est controlé par UART.
 
-Pour effectuer ce choix, les RTOS les plus connus ont été analysés: Contiki OS, FreeRTOS, RIOT OS et Zephyr.
+Pour effectuer ce choix, les RTOS suivants ont été comparés: Contiki OS, FreeRTOS, RIOT OS et Zephyr.
 
-Le tableau ci-dessous illustre la comparaison de différents RTOS. Les critères de comparaison
-sont les suivants: L'implémentation du protocole 802.15.4, 
+\subsection*{Contiki OS}
+    Le développement publique de Contiki a débuté en octobre 2012\footnote{Date de création du repository Github.} Dans un premier repository: contiki~\cite{contiki-repo:old}. Un nouveau développement a démarré en mai 2017 sous le nom de Contiki-NG~\cite{contiki-repo:ng}. C'est donc ce dernier qui est utilisé pour la comparaison est qui est dénommé par la suite Contiki.
 
-Contiki oS est un RTOS mature, qui dispose de tout ce qui peut etre utile pour ce mémoire.
+    Cet OS open-source et multi-plateforme implémente toute une série de protocoles de communications basse énergie tels que IEEE 802.15.4, 6TiSCH, IPv6/6LoWPAN et RPL. En plus de 6TiSCH, un ordonnanceur TSCH, Orchestra, est implémenté.
+    TODO udp/tcp
 
+    Contiki est également compatible avec le Zolertia RE-Mote. Il est accompagné de Cooja, un simulateur réseau qui permet de simuler les communications entre plusieurs noeuds utilisant Contiki.
 
+\subsection*{FreeRTOS}
+    D'après le site officiel de FreeRTOS~\cite{freertos}, ce RTOS est développé depuis 15 ans.
+    TODO compatible avec zolertia ?
+
+    \subsection*{RIOT OS}
+    Le développement publique de RIOT a débuté en décembre 2012\footnotemark[1].
+    
+    D'après le site officiel, cet OS supporte 229 carte de développement et 64 CPU dont le Zolertia RE-Mote. 
+
+    La pile réseau de RIOT comporte les protocoles notemment 6LoWPAN, IPv6, RPL, LoRaWan, 802.15.4.
+
+\subsection*{Zephyr}
+    TODO
+
+Le table~\ref{tb:state-rtos-choice} résume la comparaison de ces RTOS.
+
+Le RTOS choisi est Contiki OS. Il a été choisi pour sa maturié, la prise en charge du Zolertia RE-Mote et sa pile réseau complète.
 
 
 %https://github.com/Lora-net/LoRaMac-node/blob/ba17382bd5109513937afad07f068a781a503ef6/src/radio/radio.h
 \begin{table}[H]
     \begin{adjustbox}{width=\textwidth}
         \begin{tabular}{c||c|c|c|c|c|c|c}
-            RTOS                & 802.15.4 & ord. TSCH         & LoRa          & IPv6    & routage IP & comp.   \\ \hline
+            RTOS & 802.15.4 & ord. TSCH & LoRa & IPv6 & routage IP & comp. \\ \hline
 
             \textbf{Contiki OS} & $\surd$  & 6Tisch, Orchestra & Projet KRATOS & $\surd$ & RPL        & $\surd$ \\ \hline
 
