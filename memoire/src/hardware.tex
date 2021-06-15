@@ -79,3 +79,31 @@ La table~\ref{tb:state-spec} reprend les principales spécifications du Zolertia
 
 \subsection*{Raspberry Pi}
 
+Le Raspberri Pi est un ordinateur monocarte. Le modèle utilisé pour ce projet est un Raspberry Pi 3 modèle B+ (Fig.~\ref{fig:state-raspberrypi}). La table \ref{tb:state-raspberrypi-spec} reprend les principales caractéristiques de ce modèle.
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[scale=0.4]{res/raspberrypi3b+.png}
+    \caption{Raspberry Pi 3B+~\cite{raspberry:shop}.}
+    \label{fig:state-raspberrypi}
+\end{figure}
+
+\begin{table}[H]
+    \centering
+    \begin{tabular}{|c|p{0.75\textwidth}|}
+        \hline
+        \rowcolor{lightgray}
+        Element            & Spécification\\
+        CPU & Broadcom BCM2837B0, Cortex-A53 64-bit SoC à 1.4GHz\\ \hline
+        Mémoire & 1GB LPDDR2 SDRAM \\ \hline
+        Connectivité & 
+        \begin{itemize}
+            \item IEEE 802.11.b/g/n/ac, Bluetooth 4.2, BLE
+            \item Gigabit Ethernet over USB 2.0
+            \item 4 × USB 2.0 ports
+        \end{itemize}\\ \hline
+        Alimentation & 5V/2.5A DC\\ \hline
+    \end{tabular}
+    \caption{Spécifications du Raspberry Pi 3B+ \cite{raspberry:shop}.}
+    \label{tb:state-raspberrypi-spec}
+\end{table}
