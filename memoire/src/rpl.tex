@@ -28,13 +28,18 @@ Cette section décris brièvement deux fonctions objectif implémentées dans Co
 \begin{itemize}
     \item \subsubsection*{OF0}%rfc6552
             Objective Function Zero est une fonction dont l'objectif est de choisir un parent qui permettra à un noeud d'avoir la racine du DODAG le plus proche possible. Le rang d'un noeud $R(N)$ est calculé comme suit:
-            \begin{equation}
-                ranck\_increase = (Rf * Sp + Sr) * MinHopRankIncrease
-                \newline
-                R(N) = R(P) + ranck\_increase
-            \end{equation}
-    \item \subsubsection*{MRHOF}
-            Minimum Rank with Hysteresis Objective Function
+                \[ranck\_increase = (Rf * Sp + Sr) * MinHopRankIncrease\]
+                \[R(N) = R(P) + ranck\_increase\]
+                où
+                \begin{itemize}
+                    \item[$\bullet$] $Rf$ est le $rank\_factor$ et $Sr \leq stretch\_of\_rank$ avec $rank\_factor$ et $stretch\_of\_rank$ deux paramètres de la fonction
+                    \item[$\bullet$] $Sp$ est le $step_of_rank$ qui est une valeur basée sur les propriétés du lien
+                    \item[$\bullet$] $MinHopRankIncrease$ est une constante
+                    \item[$\bullet$] $R(p)$ est le rang d'un parent p
+                \end{itemize}
+                
+    \item \subsubsection*{MRHOF}%rfc6719
+            Minimum Rank with Hysteresis Objective Function est une fonction dont l'objectif est de 
 \end{itemize}
 
 
