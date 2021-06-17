@@ -32,6 +32,9 @@
 
 
 \usepackage{fancyhdr} % page style
+\definecolor{ForestGreen}{RGB}{34,139,34}
+\newcommand{\todo}[1]{\textcolor{ForestGreen}{\textbf{TODO: #1}}}
+
 
 %%%%%%%%%%%%%%%%%%%%% page style %%%%%%%%%%%%%%%%%%%%%
 \pagestyle{fancy}
@@ -87,6 +90,7 @@
 %\input{src/intro.tex}
 \newpage
 %%%%%%%%%%%%%%%%%%%%% content %%%%%%%%%%%%%%%%%%%%%
+\todo{hello}
 \input{src/hardware.tex}
 \newpage
 \input{src/rtos.tex}

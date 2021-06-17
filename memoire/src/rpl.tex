@@ -32,11 +32,12 @@ Cette section décris brièvement deux fonctions objectif implémentées dans Co
                 \[R(N) = R(P) + ranck\_increase\]
                 où
                 \begin{itemize}
-                    \item[$\bullet$] $Rf$ est le $rank\_factor$ et $Sr \leq stretch\_of\_rank$ avec $rank\_factor$ et $stretch\_of\_rank$ deux paramètres de la fonction
-                    \item[$\bullet$] $Sp$ est le $step_of_rank$ qui est une valeur basée sur les propriétés du lien
-                    \item[$\bullet$] $MinHopRankIncrease$ est une constante
-                    \item[$\bullet$] $R(p)$ est le rang d'un parent p
+                    \item $Rf$ est le $rank\_factor$ et $Sr \leq stretch\_of\_rank$ avec $rank\_factor$ et $stretch\_of\_rank$ deux paramètres de la fonction
+                    \item $Sp$ est le $step\_of\_rank$ qui est une valeur basée sur les propriétés du lien
+                    \item $MinHopRankIncrease$ est une constante
+                    \item $R(p)$ est le rang d'un parent p
                 \end{itemize}
+                $R(N)$ est calculé pour chaque parent potentiel. Le parent potentiel qui implique le plus petit $R(N)$ sera choisi.
                 
     \item \subsubsection*{MRHOF}%rfc6719
             Minimum Rank with Hysteresis Objective Function est une fonction dont l'objectif est de 
@@ -45,14 +46,44 @@ Cette section décris brièvement deux fonctions objectif implémentées dans Co
 
 
 
-\subsection*{Types de messages}
+\subsection*{Messages RPL}
 %TODO décrire le format des différents messages
+\subsubsection*{DIS}
+
+\subsubsection*{DIO}
+    Les DIOs (DODAG Information Object) annoncent des informations sur le DODAG qui permettent aux noeuds de découvrir une instant RPL, sélectionner un parent ou encore de maintenir le DODAG.
+    Un DIO, illustré à la figure~\ref{fig:state-dio} inclu notemment les champs suivants:
+    \begin{itemize}
+        \item InstanceID: Identifie l'instance RPL du DODAG
+        \item Rank: Indique le rang du noeud qui émet le DIO
+        \item MOP (Mode of Operation): Le mode d'opération de l'instance RPL \todo{c.f. SECTION}
+        \begin{enumerate}
+            \setcounter{enumi}{-1}
+            \item Pas de routes descendantes
+            \item Non-storing mode
+            \item Storing mode sans multicast
+            \item Storing mode avec multicast
+        \end{enumerate}
+        \item DODAGID: Adresse IPv6 définie par la racine qui identifie le DODAG
+    \end{itemize}
+    \begin{figure}
+        \centering
+        \includegraphics[scale=0.5]{res/dio.drawio.png}
+        \caption{DODAG Information Object.}
+        \label{fig:state-dio}
+    \end{figure}
+
+\subsubsection*{DAO}
+    Les DAOs (Destination Advertisement Object)
+
+\subsubsection*{DAO-ACK}
 
 \subsection*{Construction du réseau}
 %TODO décrire les étapes de construction d'un réseau
 
 \subsection*{Modes de fonctionnements}
-%TODO parler des différents modes de fonctionnement: Storing mode/non-storing mode
+\todo{parler des différents modes de fonctionnement: Storing mode/non-storing mode}
+
 
 \subsection*{Discussion}
 %TODO RPL good parce que fait pour LLN (intro article eval RPL) et implémenté dans Contiki mais améliorations pour l'exterieur et grands réseaux (conclusion article eval RPL)
