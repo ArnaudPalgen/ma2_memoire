@@ -47,7 +47,7 @@ Cette section décris brièvement deux fonctions objectif implémentées dans Co
 
 \subsection*{Messages RPL}
 
-\subsubsection*{DIO}
+\subsubsection*{DIO}%TODO transmis avec Trickle (??timer??) RFC6206
     Les DIOs (DODAG Information Object) annoncent des informations sur le DODAG qui permettent aux noeuds de découvrir une instant RPL, de sélectionner un parent ou encore de maintenir le DODAG.
     Un DIO, illustré à la figure~\ref{fig:state-dio}, inclu notemment les champs suivants:
     \begin{itemize}
@@ -95,10 +95,25 @@ Cette section décris brièvement deux fonctions objectif implémentées dans Co
 
 \subsection*{Construction du réseau}
 %TODO décrire les étapes de construction d'un réseau
+%- upward routes construction:
+%       p16: maintenues et construites avec les DIOs
+%       p19: alg de construction
+%       p66: si la dest n'est pas dans le dodag, la root envoi le paquet to outside or drop
+%- downward routes
+%       p19: DAO pour maintenir et construire
+%
+%
+%
+%
+
 
 \subsection*{Modes de fonctionnements}
-%todo parler des différents modes de fonctionnement: Storing mode/non-storing mode
-%todo dao RFC p41
+%todo Storing mode/non-storing mode
+% dao RFC p41
+% p19, 20
+% p77:9 et 9.1
+% Tous les noeuds qui rejoignent un DODAG doivent supporter le MOP de la racine.
+% S'ils ne le supportent pas, ils doivent le rejoindre comme feuille
 
 
 \subsection*{Discussion}
@@ -113,3 +128,6 @@ Cette section décris brièvement deux fonctions objectif implémentées dans Co
 %  number={},
 %  pages={1-6},
 %  doi={10.1109/CISS.2010.5464820}}
+
+%p9: peut bind un subnet
+%p17: DODAG repair
