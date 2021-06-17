@@ -9,20 +9,19 @@ Ce protocole à vecteur de distance est un protocole proactif, c'est à dire que
 RPL sépare le traitement et la transmission des paquets de l'optimisation de l'objectif de routage. Cela permet de l'adapter à un large éventail d'applications des LLNs.
 
 \subsection*{Topologie}
-%TODO exemple de topologie + collect application noeuds-> racine
-La topologie utilisée par RPL et le DODAG (Destination Oriented Dag). Un DODAG est un graphe dirigé acyclique (DAG) ayant une seule racine.
-\begin{figure}[H]
-    \centering
-    \includegraphics[scale=0.45]{res/dodag.drawio.png}
-    \caption{DODAG.}
-    \label{fig:state-dodag}
-\end{figure}
+    La topologie utilisée par RPL est le DODAG (Destination Oriented Dag). Un DODAG est un graphe   dirigé acyclique (DAG) ayant une seule racine (Fig.~\ref{fig:state-dodag}). De part cette architecture RPL est adapté aux applcations de collecte de données ce qui est le principale objectif de ce projet. En effet, la route d'un noeud à la racine est facilement établie car tous les noeuds du chemins envoient les données à leur parent.
+
+    \begin{figure}[H]
+        \centering
+        \includegraphics[scale=0.45]{res/dodag.drawio.png}
+        \caption{DODAG.}
+        \label{fig:state-dodag}
+    \end{figure}
 
 
 \subsection*{Fonctions objectif}
-%TODO expliquer brievement MRHOF et 0F0 (celles implémentées dans contiki)
 Une fonction objectif (OF) défini comment plusieurs métriques sont utilisées pour calculer le rang d'un noeud. Le rang d'un noeud détermine sa position dans le DODAG par rapport aux autres noeuds.
-Le rang augmente stictement dans le sens descendant et diminue strictement dans le sens montant. Ainsi, $rang(n)>rang(parent(n))$. La figure~\ref{fig:state-dodag} illustre un DODAG avec des valeurs de rang fictives attribuées aux noeuds. Sur cet exemple, la racine du DODAG a comme range, la valeur par défaut \textsc{root\_rank} définie dans le RFC.
+Le rang augmente stictement dans le sens descendant et diminue strictement dans le sens montant. Ainsi, pour un noeud $n$, $rang(n)>rang(parent(n))$. La figure~\ref{fig:state-dodag} illustre un DODAG avec des valeurs de rang fictives attribuées aux noeuds. Sur cet exemple, la racine du DODAG a comme rang, la valeur par défaut \textsc{root\_rank} définie dans le RFC.
 
 Cette section décris brièvement deux fonctions objectif implémentées dans Contiki: OF0 et MRHOF.
 \begin{itemize}
@@ -47,15 +46,13 @@ Cette section décris brièvement deux fonctions objectif implémentées dans Co
 
 
 \subsection*{Messages RPL}
-%TODO décrire le format des différents messages
-\subsubsection*{DIS}
 
 \subsubsection*{DIO}
-    Les DIOs (DODAG Information Object) annoncent des informations sur le DODAG qui permettent aux noeuds de découvrir une instant RPL, sélectionner un parent ou encore de maintenir le DODAG.
-    Un DIO, illustré à la figure~\ref{fig:state-dio} inclu notemment les champs suivants:
+    Les DIOs (DODAG Information Object) annoncent des informations sur le DODAG qui permettent aux noeuds de découvrir une instant RPL, de sélectionner un parent ou encore de maintenir le DODAG.
+    Un DIO, illustré à la figure~\ref{fig:state-dio}, inclu notemment les champs suivants:
     \begin{itemize}
         \item InstanceID: Identifie l'instance RPL du DODAG
-        \item Rank: Indique le rang du noeud qui émet le DIO
+        \item Rank: Le rang du noeud qui émet le DIO
         \item MOP (Mode of Operation): Le mode d'opération de l'instance RPL \todo{c.f. SECTION}
         \begin{enumerate}
             \setcounter{enumi}{-1}
@@ -66,23 +63,42 @@ Cette section décris brièvement deux fonctions objectif implémentées dans Co
         \end{enumerate}
         \item DODAGID: Adresse IPv6 définie par la racine qui identifie le DODAG
     \end{itemize}
-    \begin{figure}
+    \begin{figure}[H]
         \centering
         \includegraphics[scale=0.5]{res/dio.drawio.png}
         \caption{DODAG Information Object.}
         \label{fig:state-dio}
     \end{figure}
 
-\subsubsection*{DAO}
-    Les DAOs (Destination Advertisement Object)
+\subsubsection*{DIS}
+    Les DODAG Information Solocitation (DIS) sont utilisés pour solicité un DIO d'un noeud RPL.
+
+\subsubsection*{DAO}%p42
+    Les DAOs (Destination Advertisement Object) sont utilisés pour établir les routes descendantes.
+    Ils sont donc envoyés vers le haut du DODAG. Le format du DAO est illustré à la figure~\ref{fig:state-dao}. Un DAO est composé des champs suivants:
+    \begin{itemize}
+        \item InstanceID: identifie l'instance du DODAG
+        \item K: indique que le destinataire doit répondre avec un DAO-ACK
+        \item D: indique que le DODAGID est présent
+        \item DAOSequence: Incrémenté à chaque DAO d'un noeud et répété dans le DAO-ACK
+        \item DODAGID (optionnel)
+    \end{itemize}
+    \begin{figure}[H]
+        \centering
+        \includegraphics[scale=0.5]{res/dao.drawio.png}
+        \caption{DODAG Information Object.}
+        \label{fig:state-dao}
+    \end{figure}
 
 \subsubsection*{DAO-ACK}
+    Le format d'un DAO-ACK est similaire à celui d'un DAO. Il n'est donc pas utile de le décrire.
 
 \subsection*{Construction du réseau}
 %TODO décrire les étapes de construction d'un réseau
 
 \subsection*{Modes de fonctionnements}
-\todo{parler des différents modes de fonctionnement: Storing mode/non-storing mode}
+%todo parler des différents modes de fonctionnement: Storing mode/non-storing mode
+%todo dao RFC p41
 
 
 \subsection*{Discussion}
