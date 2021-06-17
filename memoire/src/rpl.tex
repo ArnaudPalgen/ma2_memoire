@@ -95,16 +95,20 @@ Cette section décris brièvement deux fonctions objectif implémentées dans Co
 
 \subsection*{Construction du réseau}
 %TODO décrire les étapes de construction d'un réseau
+
 %- upward routes construction:
 %       p16: maintenues et construites avec les DIOs
 %       p19: alg de construction
 %       p66: si la dest n'est pas dans le dodag, la root envoi le paquet to outside or drop
 %- downward routes
 %       p19: DAO pour maintenir et construire
-%
-%
-%
-%
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[scale=0.5]{res/dao-dio.drawio.png}
+    \caption{Propagation des DIOs et DAOs.}
+    \label{fig:state-dio-dao}
+\end{figure}
 
 
 \subsection*{Modes de fonctionnements}
