@@ -42,9 +42,6 @@ Cette section décris brièvement deux fonctions objectif implémentées dans Co
             Minimum Rank with Hysteresis Objective Function est une fonction dont l'objectif est de 
 \end{itemize}
 
-
-
-
 \subsection*{Messages RPL}
 
 \subsubsection*{DIO}%TODO transmis avec Trickle (??timer??) RFC6206
@@ -133,15 +130,15 @@ Cette section décris brièvement deux fonctions objectif implémentées dans Co
             RPL ne maintient pas de routes descendantes. Dans ce MOP, les DAOs ne sont pas émis par les noeuds d'un DODAG, et les noeuds ignorent les DAOs.
         \item \textbf{Non-storing mode}\\
             Dans ce mode, les DAOs sont envoyés en unicast à la racine du DODAG.
-            Les routes sont établies par source routing. C'est à dire que les paquets remontent jusqu'à la racine du DODAG qui place dans les paquets tous les sauts de la route
-            source routing: les paquets remoonte le dodag jusqu'à la racine avant de redescendre
-            et c'est la racine qui indique tous les sauts.
-            source/dest DAO unique-local ou global
+            Les noeuds ne stockent pas de routes descendantes. Donc les routes sont établies par source routing. C'est à dire que les paquets remontent jusqu'à la racine du DODAG qui place dans les paquets tous les sauts de la route
+            Pour ensuite redescendre.
+            %source/dest DAO unique-local ou global
         \item \textbf{Storing mode}\\
             Le storing mode peut être utilisé avec ou sans multicast.
             Dans ce mode, les DAOs sont envoyées en unicast par les noeuds à leur parent(s)
-            les paquets remontent jusqu'à un ancetre commun source et destination des DAO: link-local
-            Les noeuds stockent les routes de leur sous DODAG et chaque saut dans le chemin examine sa table de routage pour choisir le saut suivant
+            Les paquets remontent jusqu'à un ancêtre commun avec la destination avant de redescendre vers celle-ci.
+            Les noeuds stockent les routes de leur sous DODAG. Ainsi, chanque saut dans un chemin examine sa table de routage pour choisir le saut suivant.
+            %source et destination des DAO: link-local
     \end{itemize}
     \begin{figure}[H]
         \centering
