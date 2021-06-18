@@ -53,7 +53,7 @@ Cette section décris brièvement deux fonctions objectif implémentées dans Co
     \begin{itemize}
         \item InstanceID: Identifie l'instance RPL du DODAG
         \item Rank: Le rang du noeud qui émet le DIO
-        \item MOP (Mode of Operation): Le mode d'opération de l'instance RPL \todo{c.f. SECTION}
+        \item MOP (Mode of Operation): Le mode d'opération de l'instance RPL (c.f. \fullref{subsec:state-mop}).
         \begin{enumerate}
             \setcounter{enumi}{-1}
             \item Pas de routes descendantes
@@ -69,6 +69,8 @@ Cette section décris brièvement deux fonctions objectif implémentées dans Co
         \caption{DODAG Information Object.}
         \label{fig:state-dio}
     \end{figure}
+
+    Les DIOs sont transmis en utilisant l'algorithme Trickle définis dans~\cite{trickle:rfc}.
 
 \subsubsection*{DIS}
     Les DODAG Information Solocitation (DIS) sont utilisés pour solicité un DIO d'un noeud RPL.
@@ -94,14 +96,24 @@ Cette section décris brièvement deux fonctions objectif implémentées dans Co
     Le format d'un DAO-ACK est similaire à celui d'un DAO. Il n'est donc pas utile de le décrire.
 
 \subsection*{Construction du réseau}
-%TODO décrire les étapes de construction d'un réseau
+    La construction d'un DODAG est réalisée via l'échange de messages DIOs pour les routes montantes et de DAOs pour les routes descendantes. La figure~\ref{fig:state-dio-dao} illustre l'échange de ces messages.
 
-%- upward routes construction:
-%       p16: maintenues et construites avec les DIOs
-%       p19: alg de construction
-%       p66: si la dest n'est pas dans le dodag, la root envoi le paquet to outside or drop
-%- downward routes
-%       p19: DAO pour maintenir et construire
+\subsubsection*{Routes Montantes}
+    %rfc: p 16, 19, 66
+    Les routes montantes sont construites et maintenues avec les DIOs.
+    L'algorithme de construction de DODAG est le suivant:
+    \begin{enumerate}
+        \item Les noeuds étant configurés comme racine d'un DODAG diffusent des DIOs en mutlicast à tous les noeuds RPL
+        \item Les noeuds voulant rejoindre un DODAG écoutent ces DIOs et utilisent leurs informations pour rejoindre le DODAG (i.e. sélectionner un parent) ou maintenir le DODAG existant en accord avec la fonction objectif
+        \item Les noeuds rajoutes des entrée dans leur table de routage pour les destinations spécifiées dans le DIO via leurs parents.
+    \end{enumerate}
+
+    Si une adresse de destination n'appartient pas au DODAG, la racine du DODAG peu transférer les paquets à l'exterieur de ce réseau, ou, si elle n'en est pas capable, les ignorer.     
+
+\subsubsection*{Routes Descendantes}
+    %rfc: p 19
+    Les routes descendantes sont construites et maintenues avec les DAOS.
+    L'échange des DAOs différe selon le mode de fonctionnement (MOP) du réseau. Ces différences sont détaillées en \fullref{subsec:state-mop}.
 
 \begin{figure}[H]
     \centering
@@ -110,14 +122,36 @@ Cette section décris brièvement deux fonctions objectif implémentées dans Co
     \label{fig:state-dio-dao}
 \end{figure}
 
+\subsection{Maintenance du réseau}
 
-\subsection*{Modes de fonctionnements}
-%todo Storing mode/non-storing mode
-% dao RFC p41
-% p19, 20
-% p77:9 et 9.1
-% Tous les noeuds qui rejoignent un DODAG doivent supporter le MOP de la racine.
-% S'ils ne le supportent pas, ils doivent le rejoindre comme feuille
+
+\subsection*{Modes de fonctionnements}\label{subsec:state-mop}
+    %RFC p 19,20,41,77,78
+    Le mode de fonctionnement d'une instance RPL, est défini administrativement et est annoncé par la racine. Les modes suivants sont disponibles:
+    \begin{itemize}
+        \item \textbf{Pas de routes descendantes}\\
+            RPL ne maintient pas de routes descendantes. Dans ce MOP, les DAOs ne sont pas émis par les noeuds d'un DODAG, et les noeuds ignorent les DAOs.
+        \item \textbf{Non-storing mode}\\
+            Dans ce mode, les DAOs sont envoyés en unicast à la racine du DODAG.
+            Les routes sont établies par source routing. C'est à dire que les paquets remontent jusqu'à la racine du DODAG qui place dans les paquets tous les sauts de la route
+            source routing: les paquets remoonte le dodag jusqu'à la racine avant de redescendre
+            et c'est la racine qui indique tous les sauts.
+            source/dest DAO unique-local ou global
+        \item \textbf{Storing mode}\\
+            Le storing mode peut être utilisé avec ou sans multicast.
+            Dans ce mode, les DAOs sont envoyées en unicast par les noeuds à leur parent(s)
+            les paquets remontent jusqu'à un ancetre commun source et destination des DAO: link-local
+            Les noeuds stockent les routes de leur sous DODAG et chaque saut dans le chemin examine sa table de routage pour choisir le saut suivant
+    \end{itemize}
+    \begin{figure}[H]
+        \centering
+        \includegraphics[scale=0.4]{res/storing-nonstoring.drawio.png}
+        \caption{TODO}
+        \label{fig:state:TODO}
+    \end{figure}
+
+    Un noeud voulant rejoindre un DODAG doit être compatible avec le MOP du DODAG. Si ce n'est pas le cas, il doit rejoindre le DODAG comme feuille.
+
 
 
 \subsection*{Discussion}
