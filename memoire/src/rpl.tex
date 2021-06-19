@@ -119,7 +119,7 @@ Cette section décris brièvement deux fonctions objectif implémentées dans Co
     \label{fig:state-dio-dao}
 \end{figure}
 
-\subsection{Maintenance du réseau}
+%\subsection{Maintenance du réseau}
 
 
 \subsection*{Modes de fonctionnements}\label{subsec:state-mop}
@@ -130,21 +130,31 @@ Cette section décris brièvement deux fonctions objectif implémentées dans Co
             RPL ne maintient pas de routes descendantes. Dans ce MOP, les DAOs ne sont pas émis par les noeuds d'un DODAG, et les noeuds ignorent les DAOs.
         \item \textbf{Non-storing mode}\\
             Dans ce mode, les DAOs sont envoyés en unicast à la racine du DODAG.
-            Les noeuds ne stockent pas de routes descendantes. Donc les routes sont établies par source routing. C'est à dire que les paquets remontent jusqu'à la racine du DODAG qui place dans les paquets tous les sauts de la route
-            Pour ensuite redescendre.
+            Les noeuds ne stockent pas de routes descendantes. Donc les routes sont établies par source routing. C'est à dire que les paquets remontent jusqu'à la racine du DODAG qui place dans les paquets tous les sauts de la route pour ensuite redescendre (Fig.~\ref{fig:state-path-nonstoring}).
             %source/dest DAO unique-local ou global
         \item \textbf{Storing mode}\\
             Le storing mode peut être utilisé avec ou sans multicast.
             Dans ce mode, les DAOs sont envoyées en unicast par les noeuds à leur parent(s)
-            Les paquets remontent jusqu'à un ancêtre commun avec la destination avant de redescendre vers celle-ci.
+            Les paquets remontent jusqu'à un ancêtre commun avec la destination avant de redescendre vers celle-ci (Fig.~\ref{fig:state-path-storing}).
             Les noeuds stockent les routes de leur sous DODAG. Ainsi, chanque saut dans un chemin examine sa table de routage pour choisir le saut suivant.
             %source et destination des DAO: link-local
     \end{itemize}
+    
     \begin{figure}[H]
         \centering
-        \includegraphics[scale=0.4]{res/storing-nonstoring.drawio.png}
-        \caption{TODO}
-        \label{fig:state:TODO}
+        \begin{subfigure}[b]{0.45\textwidth}
+            \includegraphics[scale=0.4]{res/rpl-nonstoring.drawio.png}
+            \caption{Non-Storing.}
+            \label{fig:state-path-nonstoring}
+        \end{subfigure}
+        \hfill
+        \begin{subfigure}[b]{0.45\textwidth}
+            \includegraphics[scale=0.4]{res/rpl-storing.drawio.png}
+            \caption{Storing.}
+            \label{fig:state-path-storing}
+        \end{subfigure}
+        \caption{Chemin d'un paquet en fonction du MOP.}
+        \label{fig:state-path-mop}
     \end{figure}
 
     Un noeud voulant rejoindre un DODAG doit être compatible avec le MOP du DODAG. Si ce n'est pas le cas, il doit rejoindre le DODAG comme feuille.
