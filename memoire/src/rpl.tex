@@ -44,7 +44,7 @@ Cette section décris brièvement deux fonctions objectif implémentées dans Co
 
 \subsection*{Messages RPL}
 
-\subsubsection*{DIO}%TODO transmis avec Trickle (??timer??) RFC6206
+\subsubsection*{DIO}
     Les DIOs (DODAG Information Object) annoncent des informations sur le DODAG qui permettent aux noeuds de découvrir une instant RPL, de sélectionner un parent ou encore de maintenir le DODAG.
     Un DIO, illustré à la figure~\ref{fig:state-dio}, inclu notemment les champs suivants:
     \begin{itemize}
@@ -162,17 +162,15 @@ Cette section décris brièvement deux fonctions objectif implémentées dans Co
 
 
 \subsection*{Discussion}
-%TODO RPL good parce que fait pour LLN (intro article eval RPL) et implémenté dans Contiki mais améliorations pour l'exterieur et grands réseaux (conclusion article eval RPL)
-%%bib:
-%@INPROCEEDINGS{5464820,
-%  author={Tripathi, J. and de Oliveira, J. C. and Vasseur, J. P.},
-%  booktitle={2010 44th Annual Conference on Information Sciences and Systems (CISS)}, 
-%  title={A performance evaluation study of RPL: Routing Protocol for Low power and Lossy Networks}, 
-%  year={2010},
-%  volume={},
-%  number={},
-%  pages={1-6},
-%  doi={10.1109/CISS.2010.5464820}}
+
+    D'après \cite{rpl:study}, après avoir été étudiés par le groupe de travail IETF roll (Routing Over Low power and Lossy networks (roll), il s'est avéré que les protocoles tel que OSPF, AODV ou OLSR ne satisfont pas toutes les exigences des LLNs. C'est pour cette raison que ce groupe de travail a introduit RPL.
+
+    De plus, de part sa topologie et son fonctionnement, RPL est optimisé pour la collecte de données ce qui est l'utilisation principale pour ce mémoire.
+
+    
+
+    %todo article qui regroupe plusieurs etudes: implémentation pas idéale dans COntiki mais article de 2017 -> corrigé depuis ??
+
 
 %p9: peut bind un subnet
 %p17: DODAG repair
