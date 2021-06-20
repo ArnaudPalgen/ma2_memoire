@@ -3,7 +3,7 @@
 \renewcommand{\rightmark}{RPL}
 %TODO tour des protocoles de routages ??
 
-Routing Protocol for Low-Power and Lossy Networks (RPL) est un protocole de routage IPv6 destiné aux réseaux dont les noeuds sont contraints en énergie et dont les liens entre ces noeuds sont soumis à des pertes importantes de paquets (Low-power and Lossy Networks (LLNs)).
+Routing Protocol for Low-Power and Lossy Networks~\cite{rfc:rpl} est un protocole de routage IPv6 destiné aux réseaux dont les noeuds sont contraints en énergie et dont les liens entre ces noeuds sont soumis à des pertes importantes de paquets (Low-power and Lossy Networks (LLNs)).
 Ce protocole à vecteur de distance est un protocole proactif, c'est à dire que les routes sont établies avant qu'elles ne soient nécessaires.
 
 RPL sépare le traitement et la transmission des paquets de l'optimisation de l'objectif de routage. Cela permet de l'adapter à un large éventail d'applications des LLNs.
@@ -13,7 +13,7 @@ RPL sépare le traitement et la transmission des paquets de l'optimisation de l'
 
     \begin{figure}[H]
         \centering
-        \includegraphics[scale=0.45]{res/dodag.drawio.png}
+        \includegraphics[scale=0.45]{res/pictures/dodag.drawio.png}
         \caption{DODAG.}
         \label{fig:state-dodag}
     \end{figure}
@@ -25,8 +25,8 @@ Le rang augmente stictement dans le sens descendant et diminue strictement dans 
 
 Cette section décris brièvement deux fonctions objectif implémentées dans Contiki: OF0 et MRHOF.
 \begin{itemize}
-    \item \subsubsection*{OF0}%rfc6552
-            Objective Function Zero est une fonction dont l'objectif est de choisir un parent qui permettra à un noeud d'avoir la racine du DODAG le plus proche possible. Le rang d'un noeud $R(N)$ est calculé comme suit:
+    \item \subsubsection*{OF0}
+            Objective Function Zero~\cite{rfc:of0} est une fonction dont l'objectif est de choisir un parent qui permettra à un noeud d'avoir la racine du DODAG le plus proche possible. Le rang d'un noeud $R(N)$ est calculé comme suit:
                 \[ranck\_increase = (Rf * Sp + Sr) * MinHopRankIncrease\]
                 \[R(N) = R(P) + ranck\_increase\]
                 où
@@ -39,7 +39,19 @@ Cette section décris brièvement deux fonctions objectif implémentées dans Co
                 $R(N)$ est calculé pour chaque parent potentiel. Le parent potentiel qui implique le plus petit $R(N)$ sera choisi.
                 
     \item \subsubsection*{MRHOF}%rfc6719
-            Minimum Rank with Hysteresis Objective Function est une fonction dont l'objectif est de 
+            Minimum Rank with Hysteresis Objective Function~\cite{rfc:mrhof} est une fonction dont l'objectif est de sélectionner les routes qui minimisent une métrique additive en utilisant l'hystérésis
+            pour réduire les changements de parents en réponse a de petites variations de la métrique.
+            
+            Pour cela, un noeud va calculer le coût des chemins avec chaque candidat parent. Ce coût sera la somme de deux éléments:
+            \begin{itemize}
+                \item La valeur de la métrique utlisée contenue dans les DIOs d'un candidat parent
+                \item La valeur de la métrique for le lien entre ce noeud et le candidat parent
+            \end{itemize}
+            Si le coût d'un chemin est plus grand qu'une constante \textsc{MAX\_LINK\_METRIC}, 
+            le noeud va exclure le candidat parent utilisant ce lien.
+
+            Un noeud va choisir comme parent le candidat parent pour lequel le coût du chemin est le plus petit. Le changement de parent ne s'effectue pas si ce nouveau coût est plus petit que le coût actuel moins \textsc{PARENT\_SWITCH\_THRESHOLD}. Ceci est l'hystérésis
+            de MRHOF.
 \end{itemize}
 
 \subsection*{Messages RPL}
@@ -62,12 +74,12 @@ Cette section décris brièvement deux fonctions objectif implémentées dans Co
     \end{itemize}
     \begin{figure}[H]
         \centering
-        \includegraphics[scale=0.5]{res/dio.drawio.png}
+        \includegraphics[scale=0.5]{res/pictures/dio.drawio.png}
         \caption{DODAG Information Object.}
         \label{fig:state-dio}
     \end{figure}
 
-    Les DIOs sont transmis en utilisant l'algorithme Trickle définis dans~\cite{trickle:rfc}.
+    Les DIOs sont transmis en utilisant l'algorithme Trickle définis dans~\cite{rfc:trickle}.
 
 \subsubsection*{DIS}
     Les DODAG Information Solocitation (DIS) sont utilisés pour solicité un DIO d'un noeud RPL.
@@ -84,7 +96,7 @@ Cette section décris brièvement deux fonctions objectif implémentées dans Co
     \end{itemize}
     \begin{figure}[H]
         \centering
-        \includegraphics[scale=0.5]{res/dao.drawio.png}
+        \includegraphics[scale=0.5]{res/pictures/dao.drawio.png}
         \caption{DODAG Information Object.}
         \label{fig:state-dao}
     \end{figure}
@@ -114,7 +126,7 @@ Cette section décris brièvement deux fonctions objectif implémentées dans Co
 
 \begin{figure}[H]
     \centering
-    \includegraphics[scale=0.5]{res/dao-dio.drawio.png}
+    \includegraphics[scale=0.5]{res/pictures/dao-dio.drawio.png}
     \caption{Propagation des DIOs et DAOs.}
     \label{fig:state-dio-dao}
 \end{figure}
@@ -143,13 +155,13 @@ Cette section décris brièvement deux fonctions objectif implémentées dans Co
     \begin{figure}[H]
         \centering
         \begin{subfigure}[b]{0.45\textwidth}
-            \includegraphics[scale=0.4]{res/rpl-nonstoring.drawio.png}
+            \includegraphics[scale=0.4]{res/pictures/rpl-nonstoring.drawio.png}
             \caption{Non-Storing.}
             \label{fig:state-path-nonstoring}
         \end{subfigure}
         \hfill
         \begin{subfigure}[b]{0.45\textwidth}
-            \includegraphics[scale=0.4]{res/rpl-storing.drawio.png}
+            \includegraphics[scale=0.4]{res/pictures/rpl-storing.drawio.png}
             \caption{Storing.}
             \label{fig:state-path-storing}
         \end{subfigure}
@@ -163,7 +175,7 @@ Cette section décris brièvement deux fonctions objectif implémentées dans Co
 
 \subsection*{Discussion}
 
-    D'après \cite{rpl:study}, après avoir été étudiés par le groupe de travail IETF roll (Routing Over Low power and Lossy networks (roll), il s'est avéré que les protocoles tel que OSPF, AODV ou OLSR ne satisfont pas toutes les exigences des LLNs. C'est pour cette raison que ce groupe de travail a introduit RPL.
+    D'après\cite{paper:rpl-study}, après avoir été étudiés par le groupe de travail IETF roll (Routing Over Low power and Lossy networks (roll), il s'est avéré que les protocoles tel que OSPF, AODV ou OLSR ne satisfont pas toutes les exigences des LLNs. C'est pour cette raison que ce groupe de travail a introduit RPL.
 
     De plus, de part sa topologie et son fonctionnement, RPL est optimisé pour la collecte de données ce qui est l'utilisation principale pour ce mémoire.
 
