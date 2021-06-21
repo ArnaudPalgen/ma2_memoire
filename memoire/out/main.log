@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.20 (TeX Live 2019/Debian) (preloaded format=pdflatex 2020.9.15)  20 JUN 2021 20:50
+This is pdfTeX, Version 3.14159265-2.6-1.40.20 (TeX Live 2019/Debian) (preloaded format=pdflatex 2020.9.15)  21 JUN 2021 21:00
 entering extended mode
  \write18 enabled.
  file:line:error style messages enabled.
@@ -889,7 +889,7 @@ File: res/pictures/raspberrypi3b+.png Graphic file (type png)
 Package pdftex.def Info: res/pictures/raspberrypi3b+.png  used on input line 86.
 (pdftex.def)             Requested size: 240.89572pt x 160.59715pt.
  [4 <./res/pictures/rn2483-block-diagram.png>]) [5 <./res/pictures/raspberrypi3b+.png>] (./src/rtos.tex
-Overfull \hbox (2.80539pt too wide) in paragraph at lines 16--18
+Overfull \hbox (2.80539pt too wide) in paragraph at lines 17--19
 []\T1/cmr/m/n/12 L'implémentation des pro-ces-sus est ba-sée sur la li-brai-rie Pro-to-threads [[]]
  []
 
@@ -953,9 +953,9 @@ Package rerunfilecheck Info: File `main.out' has not changed.
 (rerunfilecheck)             Checksum: <no file>.
  ) 
 Here is how much of TeX's memory you used:
- 28001 strings out of 481239
- 527278 string characters out of 5920377
- 835143 words of memory out of 5000000
+ 28000 strings out of 481239
+ 527267 string characters out of 5920377
+ 836143 words of memory out of 5000000
  42566 multiletter control sequences out of 15000+600000
  548531 words of font info for 55 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
@@ -987,10 +987,10 @@ pdfTeX warning (dest): name{cite.rn2483\\penalty\040\\@M\040\040:shop} has been 
 pdfTeX warning (dest): name{cite.zolertia-remote\\penalty\040\\@M\040\040:shop} has been referenced but does not exist, replaced by a fixed one
 
 {/usr/share/texmf/fonts/enc/dvips/cm-super/cm-super-ts1.enc}{/usr/share/texmf/fonts/enc/dvips/cm-super/cm-super-t1.enc}</usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi12.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi8.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmr12.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy10.pfb></usr/share/texmf/fonts/type1/public/cm-super/sfbx1200.pfb></usr/share/texmf/fonts/type1/public/cm-super/sfbx1440.pfb></usr/share/texmf/fonts/type1/public/cm-super/sfbx1728.pfb></usr/share/texmf/fonts/type1/public/cm-super/sfbx2488.pfb></usr/share/texmf/fonts/type1/public/cm-super/sfcc1200.pfb></usr/share/texmf/fonts/type1/public/cm-super/sfrm0600.pfb></usr/share/texmf/fonts/type1/public/cm-super/sfrm0800.pfb></usr/share/texmf/fonts/type1/public/cm-super/sfrm1000.pfb></usr/share/texmf/fonts/type1/public/cm-super/sfrm1095.pfb></usr/share/texmf/fonts/type1/public/cm-super/sfrm1200.pfb></usr/share/texmf/fonts/type1/public/cm-super/sfsl1200.pfb></usr/share/texmf/fonts/type1/public/cm-super/sfti1200.pfb></usr/share/texmf/fonts/type1/public/cm-super/sftt1200.pfb></usr/share/texlive/texmf-dist/fonts/type1/urw/times/utmb8a.pfb></usr/share/texlive/texmf-dist/fonts/type1/urw/times/utmr8a.pfb>
-Output written on /home/arnaud/Documents/cours/universite/cours2020-2021/memoire/ma2_memoire/memoire/out/main.pdf (19 pages, 1310349 bytes).
+Output written on /home/arnaud/Documents/cours/universite/cours2020-2021/memoire/ma2_memoire/memoire/out/main.pdf (19 pages, 1312335 bytes).
 PDF statistics:
- 380 PDF objects out of 1000 (max. 8388607)
- 305 compressed objects within 4 object streams
- 95 named destinations out of 1000 (max. 500000)
+ 379 PDF objects out of 1000 (max. 8388607)
+ 304 compressed objects within 4 object streams
+ 94 named destinations out of 1000 (max. 500000)
  107 words of extra memory for PDF output out of 10000 (max. 10000000)
 

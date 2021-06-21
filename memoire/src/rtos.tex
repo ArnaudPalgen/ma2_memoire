@@ -6,22 +6,35 @@ Etant donné que ce projet utilise le protocole 802.15.4 ainsi que TSCH, le RTOS
 
 Il est également préférable, que le RTOS choisis, supporte déjà la plateforme utilisée. Une implémentation de la LoRa n'est pas nécessaire car les communications Lora sont réalisées via le RN2483 qui est controlé par UART.
 
-Pour effectuer ce choix, les RTOS suivants ont été comparés: Contiki OS, FreeRTOS, RIOT OS et Zephyr.
+Pour effectuer ce choix, les RTOS suivants ont été comparés: Contiki OS, FreeRTOS et RIOT OS.
+%et Zephyr.
 
 \subsection*{Contiki OS}
     Le développement publique de Contiki a débuté en octobre 2012\footnote{Date de création du repository Github.}. Dans un premier repository: \textbf{contiki}~\cite{contiki-repo:old}. Un nouveau développement a démarré en mai 2017 sous le nom de \textbf{contiki-ng}~\cite{contiki-repo:ng}. C'est donc ce dernier qui est utilisé pour la comparaison est qui est dénommé par la suite "Contiki".
 
-    Cet OS open-source et multi-plateforme implémente toute une série de protocoles de communications basse énergie tels que IEEE 802.15.4, 6TiSCH, IPv6/6LoWPAN et RPL. En plus de 6TiSCH, un ordonnanceur TSCH, Orchestra, est implémenté.
+    Ce RTOS open-source et multi-plateforme implémente toute une série de protocoles de communications basse énergie tels que IEEE 802.15.4, 6TiSCH, IPv6/6LoWPAN et RPL. En plus de 6TiSCH, un ordonnanceur TSCH, Orchestra, est implémenté.
 
     L'implémentation des processus est basée sur la librairie Protothreads~\cite{paper:protothreads}
-    qui abstrait la gestion de la programmation évènementiel par des protothread dont l'utilsations est similaire aux threads. L'ordonnenceur de cette libraire est cooperatif, c'est à dire qu'il ne va jamais forcer un changement de contexte d'un processus à un autre. Le changement de contexte ne s'effectue que quand un processus rend volontairement le contrôle à l'ordonnanceur.
+    qui abstrait la gestion de la programmation évènementiel par des protothread dont l'utilsations est similaire aux threads. L'ordonnenceur de cette libraire est cooperatif, c'est à dire qu'il ne va jamais forcer un changement de contexte(ensemble des ressources nécessaires à l'éxécution d'un processus) d'un processus à un autre (contrairement à un ordonnenceur préemptif). Le changement de contexte ne s'effectue que quand un processus rend volontairement le contrôle à l'ordonnanceur.
     
     Contiki est également compatible avec le Zolertia RE-Mote. Il est accompagné de Cooja, un simulateur réseau qui permet de simuler les communications entre plusieurs noeuds utilisant Contiki.
 
 \subsection*{FreeRTOS}
     D'après le site officiel de FreeRTOS~\cite{freertos}, ce RTOS est développé depuis 15 ans.
-    TODO compatible avec zolertia ?
-    \todo{fifi}
+    Le repository Github a néanmoins été créé en septembre 2019.
+
+    Ce RTOS également open-source et multi-plateforme offre des librairies divisées en trois catégories:
+    \begin{itemize}
+
+        \item \textbf{FreeRTOS+} qui contient notemment la librairie TPC/IP et les protocoles applicatifs MQTT et HTTP,
+        \item \textbf{AWS IoT Libraries} qui fourni des librairies permettant la connectivité avec Amazon Web Services (AWS)
+        \item \textbf{FreeRTOS Labs} qui contient des librairies complètement fonctionelles mais qui sont encore en cours d'amélioration comme le support d'IPv6, LoRaWan ou le support de plusieurs interfaces réseau
+    \end{itemize}
+    
+    
+    L'ordonnanceur de tâche de FreeRTOS peut être configurer comme coopératif ou préemptif via le flag \textit{configUSE\_PREEMPTION} du fichier de configuration.
+
+    FreeRTOS n'a pour le moment pas été porté pour le Zolertia RE-Mote ou le CC2538.
 
 \subsection*{RIOT OS}
     Le développement publique de RIOT a débuté en décembre 2012\footnotemark[1].
@@ -31,9 +44,9 @@ Pour effectuer ce choix, les RTOS suivants ont été comparés: Contiki OS, Free
     La pile réseau de RIOT comporte les protocoles notemment 6LoWPAN, IPv6, RPL, LoRaWan, 802.15.4.
     TODO openwsn
 
-\subsection*{Zephyr}
-    TODO pas supporté 
-    tiny os plus de commit depuis 1 an. stack réseau ? supporté ?
+%\subsection*{Zephyr}
+%    TODO pas supporté 
+%    tiny os plus de commit depuis 1 an. stack réseau ? supporté ?
 
 Le table~\ref{tb:state-rtos-choice} résume la comparaison de ces RTOS.
 
