@@ -38,37 +38,37 @@ Pour effectuer ce choix, les RTOS suivants ont été comparés: Contiki OS, Free
 
 \subsection*{RIOT OS}
     Le développement publique de RIOT a débuté en décembre 2012\footnotemark[1].
-    
-    D'après le site officiel, cet OS supporte 229 carte de développement et 64 CPU dont le Zolertia RE-Mote. 
 
-    La pile réseau de RIOT comporte les protocoles notemment 6LoWPAN, IPv6, RPL, LoRaWan, 802.15.4.
-    TODO openwsn
+    La pile réseau de RIOT comporte notemment les protocoles 6LoWPAN, IPv6, RPL, LoRaWan, 802.15.4.
+    RIOT OS intègre la pile réseau OpenWSN~\cite{openwsn} mais cette intégration est pour le moment expérimentale.
+    
+    OpenWSN est une implèmentation open-source d'une pile réseau destinée à l'IoT. Cette pile réseau comprend les protocoles IEEE802.15.4e, 6LoWPAN, RPL, UDP et CoAP. L'objectif de cette implémentation est qu'elle puisse être utilisée sur une variété de RTOS et de plateformes.
+    
+    L'ordonnanceur de RIOT est tickless, c'est à dire qu'il n'utilise pas un timer déclanché périodiquement pour effectuer les changements de contexte. L'ordonnanceur est préemptif et basé sur des priorités. Les changements de contexte sont initiés lors d'interruptions, volontairement ou quand une opération bloquante a lieue. 
+
+    D'après le site officiel, ce RTOS supporte 229 carte de développement et 64 CPU dont le Zolertia RE-Mote. 
+
 
 %\subsection*{Zephyr}
-%    TODO pas supporté 
-%    tiny os plus de commit depuis 1 an. stack réseau ? supporté ?
+%   nothing here
+------------\\
+\subsection*{Conclusion}
+Le table~\ref{tb:state-rtos-choice} résume la comparaison de ces RTOS avec les critères les plus importants pour ce mémoire.
 
-Le table~\ref{tb:state-rtos-choice} résume la comparaison de ces RTOS.
-
-Le RTOS choisi est Contiki OS. Il a été choisi pour sa maturié, la prise en charge du Zolertia RE-Mote et sa pile réseau complète.
-
-
-%https://github.com/Lora-net/LoRaMac-node/blob/ba17382bd5109513937afad07f068a781a503ef6/src/radio/radio.h
 \begin{table}[H]
     \begin{adjustbox}{width=\textwidth}
         \begin{tabular}{c||c|c|c|c|c|c|c}
-            RTOS & 802.15.4 & ord. TSCH & LoRa & IPv6 & routage IP & comp. \\ \hline
-
-            \textbf{Contiki OS} & $\surd$  & 6Tisch, Orchestra & Projet KRATOS & $\surd$ & RPL        & $\surd$ \\ \hline
-
-            FreeRTOS            & $\times$ & $\times$          & $\surd$       & $\surd$ & $\times$   &    $\times$     \\ \hline
-
-            RIOT OS             & $\surd$  & $\times$          & $\surd$       & $\surd$ & RPL        &    $\surd$     \\ \hline
-
-            Zephyr              & $\surd$  & $\times$          & $\surd$       & $\surd$ & Thread     &    $\times$     \\
+            RTOS       & 802.15.4 &   TSCH   &     ord. TSCH     &       IPV6     & Routage IP & comp. RE-Mote\\ \hline
+            
+            Contiki OS & $\surd$  & $\surd$  & 6Tisch, Orchestra & $\surd$$\surd$ &     RPL    & $\surd$ \\ \hline
+            
+            FreeRTOS   & $\times$ & $\times$ &      $\times$     &     $\surd$    &  $\times$  & $\times$\\ \hline
+            RIOT OS    & $\surd$  & $\times$ &      $\times$     & $\surd$$\surd$ &     RPL    &$\surd$ \\
         \end{tabular}
     \end{adjustbox}
     \caption{Comparatif de différents RTOS.}
     \label{tb:state-rtos-choice}
 \end{table}
-TODO supprimer colonne LoRa mais citer kratos ? 
+Le RTOS choisi est Contiki OS. Il est choisi pour sa maturié, la prise en charge du Zolertia RE-Mote et sa pile réseau complète et stable.
+
+%https://github.com/Lora-net/LoRaMac-node/blob/ba17382bd5109513937afad07f068a781a503ef6/src/radio/radio.h
