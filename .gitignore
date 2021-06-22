@@ -280,3 +280,7 @@ developpement/lorarpl/build/
 */build/*
 build/*
 __pycache__/
+
+#textidote report
+*.html
+memoire/tmp/
