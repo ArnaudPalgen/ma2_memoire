@@ -1,0 +1,60 @@
+\begin{figure}[H]
+    \centering
+  \begin{tikzpicture}[node distance=1.7cm, scale=0.8, every node/.style={scale=0.8}]
+  
+    \node (start) [process] {\begin{tabular}{c} $CW = 2$ \\ BE = macMinBE \end{tabular}};
+    \node (pro1) [process, below of=in1] {\begin{tabular}{c} Skip $r \in [0, 2^{BE}-1]$ \\ backoff periods \end{tabular}};
+    \node (pro2) [process, below of=pro1] {Perform CCA};
+    \node (dec1) [decision, below of=pro2, yshift=-0.8cm] {Channel idle?};
+  
+    \node (pro2a) [process, below of=dec1, yshift=-1cm] {\begin{tabular}{c} $NB = NB+1$ \\ $BE = min(BE+1, macMaxBE)$ \end{tabular}};
+    \node (dec2) [decision, below of=pro2a, yshift=-1cm] {NB > MCB ?};
+    \node (fail) [endfail, below of=dec2, yshift=-1cm] {Failure};
+    \node (success) [endsuccess, right of=fail, xshift= 4cm] {Success};
+    
+    \draw [arrow] (start) -- (pro1);
+    \draw [arrow] (pro1) -- (pro2);
+    \draw [arrow] (pro2) -- (dec1);
+    \draw [arrow] (dec1) -- node[anchor=east] {No} (pro2a);
+    \draw [arrow] (pro2a) -- (dec2);
+    \draw [arrow] (dec2) -- node[anchor=east] {Yes} (fail);
+    \draw [arrow] (dec2) -- node[anchor=south] {No} ++(-4,0) |- (pro1);
+    \draw [arrow] (dec1) -| node[anchor=south] {Yes} (success);
+    \end{tikzpicture}
+    \caption{Schéma de l'algorithme unslotted CSMA-CA.}
+    \label{fig:etat_art-unslotted_csmaca}
+\end{figure}
+
+\begin{figure}[H]
+    \centering
+  \begin{tikzpicture}[node distance=1.7cm, scale=0.85, every node/.style={scale=0.85}]
+  
+    \node (start) [process] {\begin{tabular}{c} $NB = 0$; $CW = 2$ \\ BE = macMinBE \end{tabular}};
+    \node (in1) [process, below of=start] {\begin{tabular}{c} wait until next backoff\\ period boundary\end{tabular}};
+    \node (pro1) [process, below of=in1] {\begin{tabular}{c} Skip $r \in [0, 2^{BE}-1]$ \\ backoff periods \end{tabular}};
+    \node (pro2) [process, below of=pro1] {Perform CCA};
+    \node (dec1) [decision, below of=pro2, yshift=-0.8cm] {Channel idle?};
+  
+    \node (pro2a) [process, below of=dec1, yshift=-1cm] {\begin{tabular}{c} $NB = NB+1;CW = 2$ \\ $BE = min(BE+1, macMaxBE)$ \end{tabular}};
+    \node (pro2b) [process, right of=pro2a, xshift=4cm] {$CW = CW-1$};
+    \node (dec2) [decision, below of=pro2a, yshift=-1cm] {NB > MCB ?};
+    \node (dec3) [decision, below of=pro2b, yshift=-1cm] {CW = 0\ ?};
+    \node (fail) [endfail, below of=dec2, yshift=-1cm] {Failure};
+    \node (success) [endsuccess, below of=dec3, yshift=-1cm] {Success};
+    
+    \draw [arrow] (start) -- (in1);
+    \draw [arrow] (in1) -- (pro1);
+    \draw [arrow] (pro1) -- (pro2);
+    \draw [arrow] (pro2) -- (dec1);
+    \draw [arrow] (dec1) -| node[anchor=south] {Yes} (pro2b);
+    \draw [arrow] (dec1) -- node[anchor=east] {No} (pro2a);
+    \draw [arrow] (pro2a) -- (dec2);
+    \draw [arrow] (pro2b) -- (dec3);
+    \draw [arrow] (dec2) -- node[anchor=east] {Yes} (fail);
+    \draw [arrow] (dec2) -- node[anchor=south] {No} ++(-4,0) |- (pro1);
+    \draw [arrow] (dec3) -- node[anchor=south] {No} ++(3,0) |- (pro2);
+    \draw [arrow] (dec3) -- node[anchor=east] {Yes} (success);
+    \end{tikzpicture}
+    \caption{Schéma de l'algorithme slotted CSMA-CA.}
+    \label{fig:etat_art-slotted_csmaca}
+  \end{figure}
