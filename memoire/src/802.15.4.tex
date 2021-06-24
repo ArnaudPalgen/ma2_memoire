@@ -59,21 +59,21 @@
         %ID aux autres noeuds sans avoir été préalablement associés.
     \end{enumerate}
     D'après \cite{paper:802.15.4e-survey}, le standart ne définit que brièvement AMCA et BLINK.
-    LLDN est destiné aux réseaux à un seul saut et utilisant un seul canal. Il n'est donc pas pertinent pour ce projet. DSME utilise le concept de multi-superframe semblable aux superframe de IEEE 802.15.4 mise à part la CFP qui divie chacun des 7 slots en plusieurs fréquences. Les noeuds du réseau envisagé étant contraint en énergie, et comme ce mode nécessite un coordinateur, il n'est pas approprié à ce projet.
+    LLDN est destiné aux réseaux à un seul saut et utilisant un seul canal. Il n'est donc pas pertinent pour ce projet. DSME utilise le concept de multi-superframe semblable aux superframe de IEEE 802.15.4 mise à part la CFP qui divie chacun des 7 slots en plusieurs fréquences.
 
 
 \subsection{TSCH (Time Slotted Channel Hopping)}\label{subsec:etat_art-802.15.4.tsch}
 
-Ce mode de fonctionnement de la couche MAC, comme son nom l'indique, supporte à la fois les sauts en fréquence et des communications divisées en temps.\\
+Ce mode de fonctionnement de la couche MAC, comme son nom l'indique, supporte à la fois les sauts en fréquence et des communications divisées en temps. Ces mécanismes réduisent efficacement les effets des interférences et les collisions ce qui améliore la fiabilité du réseau.
 
-\textbf{Slotframe}\\
+\subsubsection*{Slotframe}
 Dans ce mode, le concept de superframe de 802.15.4 est remplacé par le concept de slotframe.
 Une slotframe est un intervalle de temps qui divisé en timeslots. Chaque timeslot permet à un noeud d'envoyer une trame et d'éventuellement recevoir son acquitement (ack).
 Chaque timeslot possède un identifiant appellé \textit{Absolute Slot Number} (ASN)
 et un identifiant au sein de la slotframe appelé \textit{Time Slot Number} (TSN).
 
-La figure \ref{todo} illustre une slotframe composée de trois timeslots.
-Dans cet exemple, on considère 3 noeuds: N, T et U. Chaque timeslot permet une communication.
+TSCH permet l'utilisation de timeslots partagés et dédiés. Dans les timeslots partagés plusieurs noeuds peuvent communiquer. Dans ce cas, CSMA/CA est utilisé. Pour les timeslots dédiés, seul deux noeuds peuvent communiquer. La figure~\ref{fig:state-slotframe} illustre une slotframe composée de trois timeslots.
+Dans cet exemple, on considère 3 noeuds: N, T et U. Chaque timeslot permet une communication entre deux noeud.
 Par exemple le timeslot ayant comme TSN 0, permet à N de transmettre vers T.
 
 \begin{figure}[H]
@@ -83,6 +83,24 @@ Par exemple le timeslot ayant comme TSN 0, permet à N de transmettre vers T.
   \label{fig:state-slotframe}
 \end{figure}
 
-\textbf{Channel Hopping}\\
+\subsubsection*{Channel Hopping}
 
-TSCH peut utiliser 15 canaux différents numérotés de 0 à 15.
+TSCH peut utiliser 16 canaux différents numérotés de 0 à 15. Un lien entre deux noeuds dans TSCH est alors défini par la paire (timeslot, canal). Ainsi, chaque slot frame est divisiée par le nombre de canaux utilisé dans le réseau (Fig.~\ref{fig:state-tsch}). figure~\ref*{fig:state-slotframe}  Soit f la fréquence utilisée pour la communication entre deux noeuds:
+
+\[
+    f = F[(ASN + channel Offset)\% N_{channels}]
+\]
+
+où $N_{channels}$ est le nombre de canaux utilisés pour le réseau. F peut être vue comme une table qui contient une séquence de canaux.
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[scale=0.5]{res/pictures/tsch.drawio.png}
+    \caption{Time Slotted Channel Hopping.}
+    \label{fig:state-tsch}
+\end{figure}
+
+
+%\subsubsection*{Formation du PAN}
+
+%\subsubsection*{Synchronisation en temps}
