@@ -1,0 +1,32 @@
+\section{Format d'adresse}\label{sec:archi-adresses}
+\renewcommand{\rightmark}{Format d'adresse}
+
+Cette section décris les possibilités envisagées pour le choix du format des adresses utilisées pour les communications LoRa et motive le choix d'un format. Dans chaque hypothèse, un réseau RPL possède un préfixe IPv6.
+
+\subsection*{Adresse IPv6}
+    La première solution envisagée est d'utiliser les adresses IPv6 des noeuds.
+    Une racine RPL (resp. racine LoRa) peut ainsi vérifier si un paquet est destiné à son réseau
+    via le préfixe de l'adresse de destintation.
+    Cette solution est la plus simple à mettre en oeuvre car elle ne nécéssite pas de table de routage ou de processus de conversion d'adresse. Néanmoins la taille des adresses IP est de 128 bits.
+
+\subsection*{Préfixe et \textit{node-id}}
+    Le \textit{node-id} est un identifiant sur 16 bits de noeud utilisé dans Contiki. Son calcul, basé sur les deux derniers octets de l'adresse mac du noeud (link-layer address) est le suivant:
+    \[
+        node\_id = link\_addr[s-1] + (link\_addr[size -2] << 8)
+    \]
+    où s est la taille de la link-layer address.\\
+
+    Le format d'adresse utilisée serait alors un préfixe sur 8 bits et le \textit{node-id} sur 16 bits ce qui fait un total de 24 bits.
+
+    L'avantage de cette solution est que la taille des adresses est nettement réduite. Néanmoins, un processus de conversion est nécessaire ainsi qu'une table de conversion d'un \textit{node-id} vers une adresse MAC pour chaque noeud RPL. En effet, le calcul du \textit{node-id} ne permet de reconstituer l'adresse MAC de 64 bits à partir de celui-ci.
+
+\subsection*{Préfixe et adresse MAC}
+    Pour résoudre le problème de la conversion \textit{node-id}$\leftrightarrow	$ adresse MAC, cette solution consiste à remplacer le \textit{node-id} par l'adresse MAC d'un noeud.
+
+    Cette solution permet une conversion d'adresse simple et la taille des adresses est de 72 bits (64 bits de l'adresse MAC et 8 bits du préfixe).
+
+\subsection*{Solution retenue}
+    La solution retenue est l'utilisation du préfixe de 8 bits et du \textit{node-id} car c'est la solution qui offre les adresses les plus courtes. Pour éviter l'utilisation d'une table de conversion \textit{node-id}$\leftrightarrow$ adresse MAC, une meilleure solution que d'utiliser les adresses MAC des noeuds et de modifier les 6 premiers octets de cette dernière. Cela permet de reconstituer une adresse IPv6 simplement, mais cela réduits le nombre d'adresses possible
+    Malgré tout, le nombre d'adresse possible reste largement suffisant pour ce projet.
+
+    %todo schéma conversion, adresse de la racine 
