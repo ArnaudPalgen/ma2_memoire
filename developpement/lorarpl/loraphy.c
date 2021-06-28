@@ -37,13 +37,13 @@ const char* uart_command[7]={"mac pause", "radio set mod ", "radio set freq ", "
 mutex_t response_mutex;//mutex for expected_response
 mutex_t tx_buf_mutex;// mutex for tx_buffer
 
-static process_event_t new_tx_frame_event;//event that signals to the TX process that a new frame is available to be sent 
-static process_event_t can_send_event;//event that signals to the TX process that the correct UART response was received
+static process_event_t new_tx_frame_event;//event that signals to the TX process that a new frame is available to be sent //V
+static process_event_t can_send_event;//event that signals to the TX process that the correct UART response was received//V
 
 static bool can_send = true;
 
-PROCESS(ph_rx, "LoRa-PHY rx process");
-PROCESS(ph_tx, "LoRa-PHY tx process");
+PROCESS(ph_rx, "LoRa-PHY rx process");//V
+PROCESS(ph_tx, "LoRa-PHY tx process");//V
 
 
 /*---------------------------------------------------------------------------*/
@@ -262,15 +262,15 @@ int uart_tx(uart_frame_t uart_frame){
 void phy_init(){
     //add config command to tx_buf
     //send event to process
-    LOG_INFO("Init LoRa PHY\n");
+    LOG_INFO("Init LoRa PHY\n");//V
 
     //create events
-    new_tx_frame_event = process_alloc_event();
-    can_send_event = process_alloc_event();
+    new_tx_frame_event = process_alloc_event();//V
+    can_send_event = process_alloc_event();//V
     
     //start process
-    process_start(&ph_rx, NULL);
-    process_start(&ph_tx, NULL);
+    process_start(&ph_rx, NULL);//V
+    process_start(&ph_tx, NULL);//V
 
     //send initialisation UART commands
     uart_frame_t mac_pause = {MAC_PAUSE, STR, {.s=""}, {U_INT, NONE}};
@@ -336,14 +336,14 @@ int phy_rx(){
 
 /*---------------------------------------------------------------------------*/
 // process
-PROCESS_THREAD(ph_rx, ev, data){
+PROCESS_THREAD(ph_rx, ev, data){//V
     PROCESS_BEGIN();
     
     //UART configuration
     uart_init(UART);
     uart_set_input(UART, &uart_rx);
     
-    PROCESS_END();
+    PROCESS_END();//V
 }
 
 bool buf_empty(){
@@ -354,12 +354,12 @@ bool buf_empty(){
     return result;
 }
 
-PROCESS_THREAD(ph_tx, ev, data){
+PROCESS_THREAD(ph_tx, ev, data){//V
     
     uart_frame_t uart_frame;
     bool buf_empty_var;
     
-    PROCESS_BEGIN();
+    PROCESS_BEGIN();//V
 
     //main process
     while (true){
@@ -412,5 +412,5 @@ PROCESS_THREAD(ph_tx, ev, data){
         }
     }
 
-    PROCESS_END();
+    PROCESS_END();//V
 }

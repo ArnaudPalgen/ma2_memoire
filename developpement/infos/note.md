@@ -156,8 +156,8 @@ taille en bit max: 2040
 V
 
 ```
-|<---24---->|<----24--->|<-1->|<-1-->|<---2--->|<--8--->|<--4--->|<(2040-56=1984)>|
-| dest addr |  src addr |  k  | next | reserved|  seq   |command |     payload    |
+|<---24---->|<----24--->|<-1->|<-1-->|<---2--->|<--4--->|<--8--->|<(2040-56=1984)>|
+| dest addr |  src addr |  k  | next | reserved|command |  seq   |     payload    |
 ```
 
 - dest addr: adresse custom de destination
