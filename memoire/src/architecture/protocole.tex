@@ -1,0 +1,21 @@
+\section{LoRaMAC}\label{sec:archi-loramac:proto}
+\renewcommand{\rightmark}{LoRaMac}
+
+    Cette section décris le protocole MAC mis en place pour les communications LoRa. Ce protocole est donc utilisé pour les communications entre la racine LoRa et les racines RPL. Ces dernières étant contraintes en énergie, leur radio LoRa n'est pas tout le temps allumée. Le protocole prend donc en compte cette contrainte.
+
+\subsection{Etats d'une Racine RPL}
+    Les racines RPL, utilisent 3 états. A l'initiation du réseau, une racine RPL se trouve dans l'état \textit{alone}. Elle demande ensuite son préfixe à la racine LoRa, et une fois celui-ci reçu, la racine RPL se trouve dans l'état \textit{ready}. Quand une racine RPL envoie une trame qui nécéssite un acquittement, tant que celui-ci n'est pas reçu elle se trouvera dans l'état \textit{wait\_response}. Une fois l'acquittement reçu, elle retournera dans l'état \textit{ready}.
+    Les trames qui doivent être envoyées le seront en fonction de l'état dans lequel se trouve une racine RPL. Dans l'état \textit{ready}, les trames peuvent être envoyées mais ce n'est pas le cas dans les états \textit{alone} et \textit{wait\_response}. En effet dans le premier la racine RPL ne peut pas envoyer de données car elle n'a pas encore rejoint le réseau et dans le second, elle attend un acquittement.
+
+\subsection{Construction du réseau}
+    A l'initialisation du réseau, une racine RPL, doit envoyer une trame avec la commande MAC JOIN. Une fois reçue par la racine LoRa, celle-ci va répondre avec une trame JOIN\_RESPONSE qui fait office d'acquittement de la trame JOIN et dont la payload est le préfixe IP que la racine RPL doit diffuser dans son réseau.
+
+    Si le trame JOIN ou la trame JOIN\_RESPONSE ne sont pas reçues, la racine 
+
+\subsection{Communications montantes}
+
+\subsection{Communications Descendantes}
+
+\subsection{Gestion des numéros de séquence}
+
+\subsection{Evitement de collision}

@@ -1,0 +1,36 @@
+\section{Trames LoRaMAC}\label{sec:archi-loramac-frame}
+\renewcommand{\rightmark}{Trames LoRaMac}
+
+    Le protocole MAC mis en place pour les communications LoRa utilise un seul format de trames illustré à la figure~\ref{fig:archi-frame}.
+    \begin{figure}[H]
+        \centering
+        \includegraphics[scale=0.5]{res/pictures/loramac-frame.drawio.png}
+        \caption{Format de trame LoRaMAC.}
+        \label{fig:archi-frame}
+    \end{figure}
+    Les trames LoRaMAC sont composées des champs suivants:
+    \begin{itemize}
+        \item Adresse de destination (24 bits)
+        \item Adresse source (24 bits)
+        \item Flag \textit{K} qui indique si la trame nécessite un acquittement (1 bit)
+        \item Flag \textit{next} qui indique si une trame suit (1 bit)
+        \item 2 bits non utilisés
+        \item La commande MAC (4 bits).\\
+        Les commandes disponibles ainsi que leurs valeurs sont reprises dans la table~\ref{tb:archi-loramac-command}
+        \item Le numéro de séquence de la trame (8 bits)
+        \item La payload ayant un MTU de 247 octets
+        \begin{table}[H]
+            \centering
+            \begin{tabular}{|c|c|}
+                \hline
+                Valeur & Commande\\ \hline
+                0 & JOIN\\ \hline
+                1 & JOIN\_RESPONSE\\ \hline
+                2 & DATA\\ \hline
+                3 & ACK\\ \hline
+                3 & QUERY\\ \hline
+            \end{tabular}
+            \caption{Commandes LoRaMAC.}
+            \label{tb:archi-loramac-command}
+        \end{table}
+    \end{itemize}
