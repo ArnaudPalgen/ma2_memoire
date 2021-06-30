@@ -30,13 +30,31 @@
     Si la trame LoRaMAC envoyée à la racine LoRa ne nécéssite pas d'acquittement, la récéption ne cette trame n'est pas garantie et la racine RPL peut directement envoyé d'autres trames.
 
 \subsection{Communications Descendantes}
-    La racine LoRa possède un buffer pour chaque réseau RPL dans lesquels elle accumule les paquets corresponts au réseau RPL. Pour chaque racine RPL, lors de l'expiration, à interval régulier, du timer \textit{query\_timer}, une trame avec la commande QUERY est transmise à la racine LoRa.
+    La racine LoRa possède un buffer pour chaque réseau RPL dans lesquel elle accumule les paquets destinés à ce réseau. Pour chaque racine RPL, lors de l'expiration, à interval régulier, du timer \textit{query\_timer}, une trame avec la commande QUERY est transmise à la racine LoRa.
 
     La réponse à cette trame doit être un acquittement, si la racine LoRa n'a pas de paquets pour cette racine RPL, ou une trame avec la commande DATA.
 
-    
+    Si la racine LoRa possède plusieurs paquets à destination du même réseau RPL, la valeur du flag \textit{next} doit être à 1 expecté pour toutes les trames envoyées expecté la dernière.
 
+    Comme pour les communications montantes, les retransmissions sont initiées par les racines RPL.
+    Le timer \textit{retransmit\_timer} est activé lorsque la QUERY est envoyée et lorsque une trame DATA a le flag \textit{next} à 1.
+
+    Si une trame nécéssite un acquittement et que l'acquittement n'est pas reçu, la racine LoRa n'envoie pas le paquet suivant. Dans ce cas deux situations sont possibles:
+    \begin{itemize}
+        \item La trame avait le flag \textit{next} à 1:\\
+            La racine RPL s'attend à une autre trame. L'acquittement va donc être retransmis à l'expiration du \textit{retransmit\_timer}. Il y a maximum 3 retransmissions.
+        \item La trame avait le flag \textit{next} à 0 ou l'acquittement a déja été retransmis trois fois:\\
+            La racine LoRa retransmettra le paquet concerné lors de la réception d'une QUERY.
+            Si cette retransmission échoue, le paquet ne sera pas transmis.
+    \end{itemize}
 
 \subsection{Gestion des numéros de séquence}
+    Les racines RPL et la racine LoRa possèdent deux compteurs: \textit{expected\_sn} et \textit{next\_sn}.
+
+    La valeur du compteur \textit{expected\_sn} est le numéro de séquence attendu de la prochaine trame reçue. Ce compteur permet de savoir si une trame a été perdue. Sa valeur est le numéro de séquence de la dernière trame reçue incrémenté de 1.
+
+    La valeur du compteur \textit{next\_sn} est le numéro de séquence de la prochaine trame. Il est incrémenté de 1 lorsqu'une trame a été envoyée.
 
 \subsection{Evitement de collision}
+    L'envoi des trames est réalisé avec l'algorithme CSMA/CA pour les racines RPL.
+    Avant l'envoi, ces noeuds écoute le canal. Si le canal est occupé, le noeud va resonder le canal après un temps aléatoire. Ce processus se répète 3 fois. Après ces trois fois, si le canal est toujours occupé, la trame ne sera pas envoyée. A chaque sondage du canal, l'interval dans lequel le temps aléatoire est choisi est aggrandit. Si le canal n'est pas occupé, la trame est envoyée.
