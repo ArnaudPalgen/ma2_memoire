@@ -1,7 +1,7 @@
 \section{Topologie}\label{sec:archi-topologie}
 \renewcommand{\rightmark}{Topologie}
 
-Cette section décrit et motive la topologie et les types de noeuds du réseau hybride IEEE 802.15.4-LoRa de capteurs. Cette toologie a été choisie pour correspondre au mieux au cas d'utilisation décrit dans l'introduction.\todo{REF INTRO}
+Cette section décrit et motive la topologie et les types de noeuds du réseau hybride IEEE 802.15.4-LoRa de capteurs. Cette topologie a été choisie pour correspondre au mieux au cas d'utilisation décrit dans l'introduction.\todo{REF INTRO}
 
 \subsection*{Types de noeuds}
     Le protocole élaboré pour ce réseau hybride défini 3 types de noeuds:
@@ -19,9 +19,9 @@ De part l'utilisation de RPL, chaque réseaux forme un DODAG.
 
 Ensuite, chaque réseau RPL est connecté à la racine LoRa via sa racine. Les liens entre les racines RPL et la racine LoRa forment une topologie en étoile.
 
-Ce choix de topoligie offre plusieurs avantages: Le fait d'avoir un ensemble de réseaux RPL implique qu'il n'y a pas qu'une seule racine RPL et donc pas qu'un seul point de défaillance; L'administration du réseau est également simplifiée. En effet, un réseau RPL pourraît, par exemple, correspondre à une parcelle de terrain. 
+Ce choix de topologie offre plusieurs avantages: Le fait d'avoir un ensemble de réseaux RPL implique qu'il n'y a pas qu'une seule racine RPL et donc pas qu'un seul point de défaillance; L'administration du réseau est également simplifiée. En effet, un réseau RPL pourraît, par exemple, correspondre à une parcelle de terrain. 
 
-L'inconvéninent de cette topologie est que la racine LoRa constitue un seul point de défaillance. Une solution plus robuste qui a été envisagée, est d'avoir un réseau maillé avec les racines RPL et les racines LoRa. Cependant, une telle architecture est difficile à mettre en oeuvre car le protocole MAC a établir pour les liens LoRa est plus complexe et nécessite un protocole de routage.
+L'inconvéninent de cette topologie est que la racine LoRa constitue un seul point de défaillance. Une solution plus robuste qui a été envisagée, est un réseau maillé pour les communications LoRa. Cependant, une telle architecture est difficile à mettre en oeuvre car le protocole MAC a établir pour les liens LoRa est plus complexe et nécessite un protocole de routage.
 
 \begin{figure}[H]
     \centering

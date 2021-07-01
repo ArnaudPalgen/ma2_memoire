@@ -4,9 +4,9 @@
     Cette section décris le protocole MAC mis en place pour les communications LoRa. Ce protocole est donc utilisé pour les communications entre la racine LoRa et les racines RPL. Ces dernières étant contraintes en énergie, leur radio LoRa n'est pas tout le temps allumée. Le protocole prend donc en compte cette contrainte.
 
 \subsection{Etats d'une Racine RPL}
-    Les racines RPL, utilisent 3 états (illustrés par la figure~\ref{fig:archi-state}). A l'initiation du réseau, une racine RPL se trouve dans l'état \textit{alone}. Elle demande ensuite son préfixe à la racine LoRa, et une fois celui-ci reçu, la racine RPL se trouve dans l'état \textit{ready}. Quand une racine RPL envoie une trame qui nécéssite un acquittement, tant que celui-ci n'est pas reçu elle se trouvera dans l'état \textit{wait\_response}. Une fois l'acquittement reçu, elle retournera dans l'état \textit{ready}.
+    Les racines RPL utilisent 3 états illustrés dans le diagramme d'état de la figure~\ref{fig:archi-state}. A l'initiation du réseau, une racine RPL se trouve dans l'état \textit{alone}. Elle demande ensuite son préfixe à la racine LoRa, et une fois celui-ci reçu, la racine RPL se trouve dans l'état \textit{ready}. Quand une racine RPL envoie une trame qui nécéssite un acquittement, tant que celui-ci n'est pas reçu elle se trouvera dans l'état \textit{wait\_response}. Une fois l'acquittement reçu, elle retournera dans l'état \textit{ready}.
     
-    Les trames qui doivent être envoyées le seront en fonction de l'état dans lequel se trouve une racine RPL. Dans l'état \textit{ready}, les trames peuvent être envoyées, mais ce n'est pas le cas dans les états \textit{alone} et \textit{wait\_response}. En effet dans le premier la racine RPL ne peut pas envoyer de données car elle n'a pas encore rejoint le réseau et dans le second, elle attend un acquittement.
+    Les trames qui doivent être envoyées le seront en fonction de l'état dans lequel se trouve une racine RPL. Dans l'état \textit{ready}, les trames peuvent être envoyées, mais ce n'est pas le cas dans les états \textit{alone} et \textit{wait\_response}. En effet dans le premier la racine RPL ne peut pas envoyer de données car elle n'a pas encore rejoint le réseau et dans le second, elle attend une réponse.
     \begin{figure}[H]
         \centering
         \includegraphics[scale=0.5]{res/pictures/loramac-state.drawio.png}
@@ -15,17 +15,17 @@
     \end{figure}
 
 \subsection{Construction du réseau}
-    A l'initialisation du réseau, une racine RPL, doit envoyer une trame avec la commande JOIN. Une fois reçue par la racine LoRa, celle-ci va répondre avec une trame JOIN\_RESPONSE qui fait office d'acquittement de la trame JOIN et dont la payload est le préfixe IP que la racine RPL doit diffuser dans son réseau.
+    A l'initialisation du réseau, une racine RPL doit envoyer une trame avec la commande JOIN. Une fois reçue par la racine LoRa, celle-ci va répondre avec une trame JOIN\_RESPONSE qui fait office d'acquittement de la trame JOIN et dont la payload est le préfixe IP que la racine RPL doit diffuser dans son réseau.
 
-    Si le trame JOIN ou la trame JOIN\_RESPONSE ne sont pas reçues, la racine RPL retransmettra la trame JOIN à l'expiration d'un timer \textit{retransmit\_timer} déclanché à l'envoi de la trame JOIN. Cette se réalise tant que la réponse n'a pas été reçue.
+    Si le trame JOIN ou la trame JOIN\_RESPONSE ne sont pas reçues, la racine RPL retransmettra la trame JOIN à l'expiration d'un timer \textit{retransmit\_timer} déclanché à l'envoi de la trame JOIN. Cette retransmission se réalise tant que la réponse n'a pas été reçue.
 
     Une fois le préfixe reçu, la racine RPL peut initialiser le réseau RPL et y diffuser le préfixe.
 
 \subsection{Communications montantes}
-    Lorsq'un paquet est destiné à la racine LoRa, par le réseau RPL, il va remonter jusqu'à la racine RPL. Ensuite celle-ci va l'envoyer à la racine LoRa. Cette dernière a toujours sa radio allumée car elle n'est pas contrainte en énergie.
+    Lorsq'un paquet est destiné à la racine LoRa, il va remonter jusqu'à la racine RPL. Ensuite celle-ci va l'envoyer à la racine LoRa. Cette dernière a toujours sa radio allumée car elle n'est pas contrainte en énergie.
 
-    Si la trame LoRaMAC envoyée à la racine LoRa nécéssite un acquittement, la racine RPL n'enverra pas d'autres trames tant que l'acquittement n'a pas été reçu (état \textit{wait\_response})
-    à l'envoie de cette trame, le timer \textit{retransmit\_timer} est déclanché. S'il expire avant que l'acquittement ne soit reçu, la trame sera retransmise pour un maximum de 3 fois.
+    Si la trame LoRaMAC envoyée à la racine LoRa nécéssite un acquittement, la racine RPL n'enverra pas d'autres trames tant que l'acquittement n'a pas été reçu (état \textit{wait\_response}).
+    A l'envoi de cette trame, le timer \textit{retransmit\_timer} est déclanché. S'il expire avant que l'acquittement ne soit reçu, la trame sera retransmise pour un maximum de 3 fois.
 
     Si la trame LoRaMAC envoyée à la racine LoRa ne nécéssite pas d'acquittement, la récéption ne cette trame n'est pas garantie et la racine RPL peut directement envoyé d'autres trames.
 
@@ -34,10 +34,10 @@
 
     La réponse à cette trame doit être un acquittement, si la racine LoRa n'a pas de paquets pour cette racine RPL, ou une trame avec la commande DATA.
 
-    Si la racine LoRa possède plusieurs paquets à destination du même réseau RPL, la valeur du flag \textit{next} doit être à 1 expecté pour toutes les trames envoyées expecté la dernière.
+    Si la racine LoRa possède plusieurs paquets à destination du même réseau RPL, la valeur du flag \textit{next} doit être à 1 pour toutes les trames envoyées expecté la dernière.
 
     Comme pour les communications montantes, les retransmissions sont initiées par les racines RPL.
-    Le timer \textit{retransmit\_timer} est activé lorsque la QUERY est envoyée et lorsque une trame DATA a le flag \textit{next} à 1.
+    Le timer \textit{retransmit\_timer} est activé lorsque la QUERY est envoyée et lorsqu'une trame DATA a le flag \textit{next} à 1.
 
     Si une trame nécéssite un acquittement et que l'acquittement n'est pas reçu, la racine LoRa n'envoie pas le paquet suivant. Dans ce cas deux situations sont possibles:
     \begin{itemize}
@@ -45,7 +45,6 @@
             La racine RPL s'attend à une autre trame. L'acquittement va donc être retransmis à l'expiration du \textit{retransmit\_timer}. Il y a maximum 3 retransmissions.
         \item La trame avait le flag \textit{next} à 0 ou l'acquittement a déja été retransmis trois fois:\\
             La racine LoRa retransmettra le paquet concerné lors de la réception d'une QUERY.
-            Si cette retransmission échoue, le paquet ne sera pas transmis.
     \end{itemize}
 
 \subsection{Gestion des numéros de séquence}
@@ -56,5 +55,5 @@
     La valeur du compteur \textit{next\_sn} est le numéro de séquence de la prochaine trame. Il est incrémenté de 1 lorsqu'une trame a été envoyée.
 
 \subsection{Evitement de collision}
-    L'envoi des trames est réalisé avec l'algorithme CSMA/CA pour les racines RPL.
-    Avant l'envoi, ces noeuds écoute le canal. Si le canal est occupé, le noeud va resonder le canal après un temps aléatoire. Ce processus se répète 3 fois. Après ces trois fois, si le canal est toujours occupé, la trame ne sera pas envoyée. A chaque sondage du canal, l'interval dans lequel le temps aléatoire est choisi est aggrandit. Si le canal n'est pas occupé, la trame est envoyée.
+    L'envoi des trames est réalisé avec l'algorithme CSMA/CA pour les racines RPL. 
+    Avant l'envoi, ces noeuds écoute le canal. Si le canal est occupé, le noeud va resonder le canal après un temps aléatoire. Ce processus se répète 3 fois. Après ces trois fois, si le canal est toujours occupé, la trame ne sera pas envoyée. A chaque sondage du canal, l'interval dans lequel le temps aléatoire est choisi est agrandit. Si le canal n'est pas occupé, la trame est envoyée.

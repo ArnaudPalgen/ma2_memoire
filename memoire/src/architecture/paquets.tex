@@ -13,12 +13,12 @@
         \item \textbf{dest\_addr}: l'adresse de destination (24 bits)
         \item \textbf{src\_addr}: l'adresse source (24 bits)
         \item \textbf{K}: un flag  qui indique si la trame nécessite un acquittement (1 bit)
-        \item \textbf{next}: un flag qui indique si une trame suit (1 bit)
+        \item \textbf{next}: un flag qui indique si une autre trame suit (1 bit)
         \item \textbf{reserved}: 2 bits non utilisés
         \item \textbf{command}: la commande MAC (4 bits).\\
         Les commandes disponibles ainsi que leurs valeurs sont reprises dans la table~\ref{tb:archi-loramac-command}
         \item \textbf{SN}: le numéro de séquence de la trame (8 bits)
-        \item \textbf{Payload}: La payload ayant un MTU de 247 octets
+        \item \textbf{Payload}: la payload ayant un MTU de 247 octets
         \begin{table}[H]
             \centering
             \begin{tabular}{|c|c|}
