@@ -18,9 +18,14 @@ Une communication LoRa dépend des paramètres suivants:
     %https://josefmtd.com/2018/08/14/spreading-factor-bandwidth-coding-rate-and-bit-rate-in-lora-english/
 \end{itemize}
 
+La relation entre SF et BW est décrite par l'équation~\ref{eq:state-lora-rs}.
+\begin{equation}\label{eq:state-lora-rs}
+    Rs = \frac{BW}{2^{SF}}
+\end{equation}
+
 \vspace{1cm}
 Le format des paquets LoRa(Fig.~\ref{fig:state-lora-frame-format}) peut être explicite ou implicite.
-Dans le mode implicite, le header n'est pas inclus dans le paquet. Pour cela, la taille de la payload, le coding rate et la présence de la Payload CRC doit être configuré 
+Dans le mode implicite, le header n'est pas inclus dans le paquet. Pour cela, la taille de la payload, le coding rate et la présence de la Payload CRC doit être configuré.
 Ce mode permet de réduire la taille du paquet et donc du temps de transmission.
 
 \begin{figure}[H]
@@ -29,4 +34,29 @@ Ce mode permet de réduire la taille du paquet et donc du temps de transmission.
     \caption{Format d'un paquet LoRa.}
     \label{fig:state-lora-frame-format}
 \end{figure}
-%Le format des paquets LoRa est illustré à la figure~\ref{fig:state-lora-frame-format}. 
+
+Le temps d'émission d'un paquet LoRa est défini par l'équation~\ref{eq:state-lora-tframe}.
+\begin{equation}\label{eq:state-lora-tframe}
+    T_{frame} = T_{preamble} + T_{payload}
+\end{equation}
+
+Où $T_{preamble}$ et $T_{payload}$ sont respectivement le temps d'émission du preamble et du payload définis aux équations \ref{eq:state-lora-tpreamble} et \ref{eq:state-lora-tpayload}.
+
+\begin{equation}\label{eq:state-lora-tpreamble}
+    T_{preamble} = (n_{preamble} + 4,25)T_{sym}
+\end{equation}
+
+\begin{equation}\label{eq:state-lora-tpayload}
+    T_{payload} = n_{payload} * T_{sym}
+\end{equation}
+
+Où $T_{sym} = \frac{1}{R_s}$, $n_{preamble}$ et $n_{payload}$ sont le nombre de symboles du preamble et du payload. $n_{preamble}$ est une valeur définie dans le module radio et $n_{payload}$ est défini par l'équation~\ref{eq:state-lora-npayload}.
+
+\begin{equation}\label{eq:state-lora-npayload}
+    \begin{split}
+    n_{payload} =8 +max
+     \left( ceil \left[ \frac{8PL - 4SF + 28 + 16CRC - 20IH}{4(SF-2DE)} \right] (CR+4), 0 \right)
+    \end{split}
+\end{equation}
+
+
