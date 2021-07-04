@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.20 (TeX Live 2019/Debian) (preloaded format=pdflatex 2020.9.15)  3 JUL 2021 14:53
+This is pdfTeX, Version 3.14159265-2.6-1.40.20 (TeX Live 2019/Debian) (preloaded format=pdflatex 2020.9.15)  4 JUL 2021 11:15
 entering extended mode
  \write18 enabled.
  file:line:error style messages enabled.
@@ -675,22 +675,29 @@ Package: multirow 2019/05/31 v2.5 Span multiple rows of a table
 \bigstrutjot=\dimen297
 ) (/usr/share/texlive/texmf-dist/tex/latex/tools/hhline.sty
 Package: hhline 2020/01/04 v2.04 Table rule package (DPC)
+) (/usr/share/texlive/texmf-dist/tex/latex/wrapfig/wrapfig.sty
+\wrapoverhang=\dimen298
+\WF@size=\dimen299
+\c@WF@wrappedlines=\count334
+\WF@box=\box71
+\WF@everypar=\toks52
+Package: wrapfig 2003/01/31  v 3.6
 ) (/usr/share/texlive/texmf-dist/tex/latex/caption/caption.sty
 Package: caption 2020/01/03 v3.4h Customizing captions (AR)
  (/usr/share/texlive/texmf-dist/tex/latex/caption/caption3.sty
 Package: caption3 2020/01/03 v1.8h caption3 kernel (AR)
 Package caption3 Info: TeX engine: e-TeX on input line 61.
-\captionmargin=\dimen298
-\captionmargin@=\dimen299
-\captionwidth=\dimen300
-\caption@tempdima=\dimen301
-\caption@indent=\dimen302
-\caption@parindent=\dimen303
-\caption@hangindent=\dimen304
+\captionmargin=\dimen300
+\captionmargin@=\dimen301
+\captionwidth=\dimen302
+\caption@tempdima=\dimen303
+\caption@indent=\dimen304
+\caption@parindent=\dimen305
+\caption@hangindent=\dimen306
 Package caption Info: Standard document class detected.
 )
-\c@caption@flags=\count334
-\c@continuedfloat=\count335
+\c@caption@flags=\count335
+\c@continuedfloat=\count336
 Package caption Info: float package is loaded.
 Package caption Info: hyperref package is loaded.
 Package caption Info: longtable package is loaded.
@@ -698,10 +705,11 @@ Package caption Info: longtable package is loaded.
 Package: ltcaption 2018/08/26 v1.4a longtable captions (AR)
 )
 Package caption Info: supertabular package is loaded.
+Package caption Info: wrapfig package is loaded.
 ) (/usr/share/texlive/texmf-dist/tex/latex/caption/subcaption.sty
 Package: subcaption 2020/01/22 v1.3d Sub-captions (AR)
-\c@subfigure=\count336
-\c@subtable=\count337
+\c@subfigure=\count337
+\c@subtable=\count338
 ) (/usr/share/texlive/texmf-dist/tex/latex/fancyhdr/fancyhdr.sty
 Package: fancyhdr 2019/01/31 v3.10 Extensive control of page headers and footers
 \f@nch@headwidth=\skip74
@@ -715,52 +723,52 @@ Package: fancyhdr 2019/01/31 v3.10 Extensive control of page headers and footers
 \f@nch@O@orf=\skip82
 ) (./theme.tex) (/usr/share/texlive/texmf-dist/tex/latex/l3backend/l3backend-pdfmode.def
 File: l3backend-pdfmode.def 2020-02-03 L3 backend support: PDF mode
-\l__kernel_color_stack_int=\count338
-\l__pdf_internal_box=\box71
+\l__kernel_color_stack_int=\count339
+\l__pdf_internal_box=\box72
 ) (/home/arnaud/Documents/cours/universite/cours2020-2021/memoire/ma2_memoire/memoire/out/main.aux)
 \openout1 = `main.aux'.
 
-LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 73.
-LaTeX Font Info:    ... okay on input line 73.
-LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 73.
-LaTeX Font Info:    ... okay on input line 73.
-LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 73.
-LaTeX Font Info:    ... okay on input line 73.
-LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 73.
-LaTeX Font Info:    ... okay on input line 73.
-LaTeX Font Info:    Checking defaults for TS1/cmr/m/n on input line 73.
-LaTeX Font Info:    ... okay on input line 73.
-LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 73.
-LaTeX Font Info:    ... okay on input line 73.
-LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 73.
-LaTeX Font Info:    ... okay on input line 73.
-LaTeX Font Info:    Checking defaults for PD1/pdf/m/n on input line 73.
-LaTeX Font Info:    ... okay on input line 73.
-LaTeX Info: Redefining \degres on input line 73.
-LaTeX Info: Redefining \dots on input line 73.
-LaTeX Info: Redefining \up on input line 73.
+LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 75.
+LaTeX Font Info:    ... okay on input line 75.
+LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 75.
+LaTeX Font Info:    ... okay on input line 75.
+LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 75.
+LaTeX Font Info:    ... okay on input line 75.
+LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 75.
+LaTeX Font Info:    ... okay on input line 75.
+LaTeX Font Info:    Checking defaults for TS1/cmr/m/n on input line 75.
+LaTeX Font Info:    ... okay on input line 75.
+LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 75.
+LaTeX Font Info:    ... okay on input line 75.
+LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 75.
+LaTeX Font Info:    ... okay on input line 75.
+LaTeX Font Info:    Checking defaults for PD1/pdf/m/n on input line 75.
+LaTeX Font Info:    ... okay on input line 75.
+LaTeX Info: Redefining \degres on input line 75.
+LaTeX Info: Redefining \dots on input line 75.
+LaTeX Info: Redefining \up on input line 75.
  (/usr/share/texlive/texmf-dist/tex/latex/tools/hhline.sty
 Package: hhline 2020/01/04 v2.04 Table rule package (DPC)
 ) (/usr/share/texlive/texmf-dist/tex/context/base/mkii/supp-pdf.mkii
 [Loading MPS to PDF converter (version 2006.09.02).]
-\scratchcounter=\count339
-\scratchdimen=\dimen305
-\scratchbox=\box72
-\nofMPsegments=\count340
-\nofMParguments=\count341
-\everyMPshowfont=\toks52
-\MPscratchCnt=\count342
-\MPscratchDim=\dimen306
-\MPnumerator=\count343
-\makeMPintoPDFobject=\count344
-\everyMPtoPDFconversion=\toks53
+\scratchcounter=\count340
+\scratchdimen=\dimen307
+\scratchbox=\box73
+\nofMPsegments=\count341
+\nofMParguments=\count342
+\everyMPshowfont=\toks53
+\MPscratchCnt=\count343
+\MPscratchDim=\dimen308
+\MPnumerator=\count344
+\makeMPintoPDFobject=\count345
+\everyMPtoPDFconversion=\toks54
 ) (/usr/share/texlive/texmf-dist/tex/latex/epstopdf-pkg/epstopdf-base.sty
 Package: epstopdf-base 2020-01-24 v2.11 Base part for package epstopdf
 Package epstopdf-base Info: Redefining graphics rule for `.eps' on input line 485.
  (/usr/share/texlive/texmf-dist/tex/latex/latexconfig/epstopdf-sys.cfg
 File: epstopdf-sys.cfg 2010/07/13 v1.3 Configuration of (r)epstopdf for TeX Live
 ))
-\AtBeginShipoutBox=\box73
+\AtBeginShipoutBox=\box74
  (/usr/share/texlive/texmf-dist/tex/latex/pdflscape/pdflscape.sty
 Package: pdflscape 2019/12/05 v0.12 Display of landscape pages in PDF (HO)
  (/usr/share/texlive/texmf-dist/tex/latex/graphics/lscape.sty
@@ -768,7 +776,7 @@ Package: lscape 2000/10/22 v3.01 Landscape Pages (DPC)
 )
 Package pdflscape Info: Auto-detected driver: pdftex on input line 81.
 )
-Package hyperref Info: Link coloring OFF on input line 73.
+Package hyperref Info: Link coloring OFF on input line 75.
  (/usr/share/texlive/texmf-dist/tex/latex/hyperref/nameref.sty
 Package: nameref 2019/09/16 v2.46 Cross-referencing by name of section
  (/usr/share/texlive/texmf-dist/tex/latex/refcount/refcount.sty
@@ -776,11 +784,11 @@ Package: refcount 2019/12/15 v3.6 Data extraction from label references (HO)
 ) (/usr/share/texlive/texmf-dist/tex/generic/gettitlestring/gettitlestring.sty
 Package: gettitlestring 2019/12/15 v1.6 Cleanup title references (HO)
 )
-\c@section@level=\count345
+\c@section@level=\count346
 )
-LaTeX Info: Redefining \ref on input line 73.
-LaTeX Info: Redefining \pageref on input line 73.
-LaTeX Info: Redefining \nameref on input line 73.
+LaTeX Info: Redefining \ref on input line 75.
+LaTeX Info: Redefining \pageref on input line 75.
+LaTeX Info: Redefining \nameref on input line 75.
  (/home/arnaud/Documents/cours/universite/cours2020-2021/memoire/ma2_memoire/memoire/out/main.out) (/home/arnaud/Documents/cours/universite/cours2020-2021/memoire/ma2_memoire/memoire/out/main.out)
 \@outlinefile=\write4
 \openout4 = `main.out'.
@@ -791,37 +799,37 @@ Package caption Info: End \AtBeginDocument code.
 <page_garde/page_garde.pdf, id=71, 597.50829pt x 845.0471pt>
 File: page_garde/page_garde.pdf Graphic file (type pdf)
 <use page_garde/page_garde.pdf>
-Package pdftex.def Info: page_garde/page_garde.pdf  used on input line 76.
+Package pdftex.def Info: page_garde/page_garde.pdf  used on input line 78.
 (pdftex.def)             Requested size: 597.50682pt x 845.04504pt.
 File: page_garde/page_garde.pdf Graphic file (type pdf)
 <use page_garde/page_garde.pdf>
-Package pdftex.def Info: page_garde/page_garde.pdf  used on input line 76.
+Package pdftex.def Info: page_garde/page_garde.pdf  used on input line 78.
 (pdftex.def)             Requested size: 597.50682pt x 845.04504pt.
 <page_garde/page_garde.pdf, id=74, page=1, 597.50829pt x 845.0471pt>
 File: page_garde/page_garde.pdf Graphic file (type pdf)
 <use page_garde/page_garde.pdf, page 1>
-Package pdftex.def Info: page_garde/page_garde.pdf , page1 used on input line 76.
+Package pdftex.def Info: page_garde/page_garde.pdf , page1 used on input line 78.
 (pdftex.def)             Requested size: 597.50682pt x 845.04504pt.
 File: page_garde/page_garde.pdf Graphic file (type pdf)
 <use page_garde/page_garde.pdf, page 1>
-Package pdftex.def Info: page_garde/page_garde.pdf , page1 used on input line 76.
+Package pdftex.def Info: page_garde/page_garde.pdf , page1 used on input line 78.
 (pdftex.def)             Requested size: 597.53416pt x 845.08372pt.
 File: page_garde/page_garde.pdf Graphic file (type pdf)
 <use page_garde/page_garde.pdf, page 1>
-Package pdftex.def Info: page_garde/page_garde.pdf , page1 used on input line 76.
+Package pdftex.def Info: page_garde/page_garde.pdf , page1 used on input line 78.
 (pdftex.def)             Requested size: 597.53416pt x 845.08372pt.
 File: page_garde/page_garde.pdf Graphic file (type pdf)
 <use page_garde/page_garde.pdf, page 1>
-Package pdftex.def Info: page_garde/page_garde.pdf , page1 used on input line 76.
+Package pdftex.def Info: page_garde/page_garde.pdf , page1 used on input line 78.
 (pdftex.def)             Requested size: 597.53416pt x 845.08372pt.
 File: page_garde/page_garde.pdf Graphic file (type pdf)
 <use page_garde/page_garde.pdf, page 1>
-Package pdftex.def Info: page_garde/page_garde.pdf , page1 used on input line 76.
+Package pdftex.def Info: page_garde/page_garde.pdf , page1 used on input line 78.
 (pdftex.def)             Requested size: 597.53416pt x 845.08372pt.
  [1
 
  <./page_garde/page_garde.pdf{/var/lib/texmf/fonts/map/pdftex/updmap/pdftex.map}>]
-Underfull \hbox (badness 10000) in paragraph at lines 84--85
+Underfull \hbox (badness 10000) in paragraph at lines 86--87
 
  []
 
@@ -852,20 +860,41 @@ l.2 \chapter
 ]
 Chapitre 1.
 (./src/etat_art/related_work.tex) (./src/etat_art/lora.tex
-<res/pictures/lora-frame-format.drawio.png, id=151, 586.19pt x 43.16125pt>
+<res/pictures/lora-sf.png, id=152, 577.15625pt x 988.69376pt>
+File: res/pictures/lora-sf.png Graphic file (type png)
+<use res/pictures/lora-sf.png>
+Package pdftex.def Info: res/pictures/lora-sf.png  used on input line 8.
+(pdftex.def)             Requested size: 144.2887pt x 247.17284pt.
+
+Overfull \hbox (27.2875pt too wide) in paragraph at lines 8--9
+[][] 
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 9--9
+[]\T1/cmr/m/sc/12 Figure \T1/cmr/m/n/12 1.1 ^^U |Si-
+ []
+
+
+Underfull \hbox (badness 2626) in paragraph at lines 9--9
+\T1/cmr/m/n/12 gnal en fonc-tion du
+ []
+
+[2
+
+ <./res/pictures/lora-sf.png>]
+<res/pictures/lora-frame-format.drawio.png, id=165, 586.19pt x 43.16125pt>
 File: res/pictures/lora-frame-format.drawio.png Graphic file (type png)
 <use res/pictures/lora-frame-format.drawio.png>
-Package pdftex.def Info: res/pictures/lora-frame-format.drawio.png  used on input line 22.
+Package pdftex.def Info: res/pictures/lora-frame-format.drawio.png  used on input line 26.
 (pdftex.def)             Requested size: 351.7167pt x 25.89694pt.
-) (./src/etat_art/802.15.4.tex [2
-
- <./res/pictures/lora-frame-format.drawio.png>]
-<res/pictures/superframe.png, id=163, 558.45pt x 162.79pt>
+) (./src/etat_art/802.15.4.tex [3 <./res/pictures/lora-frame-format.drawio.png>]
+<res/pictures/superframe.png, id=178, 558.45pt x 162.79pt>
 File: res/pictures/superframe.png Graphic file (type png)
 <use res/pictures/superframe.png>
 Package pdftex.def Info: res/pictures/superframe.png  used on input line 28.
 (pdftex.def)             Requested size: 446.76059pt x 130.23215pt.
- [3] [4 <./res/pictures/superframe.png>]
+ [4 <./res/pictures/superframe.png>]
 Overfull \hbox (21.503pt too wide) in paragraph at lines 75--78
 \T1/cmr/m/n/12 mes-lots par-ta-gés plu-sieurs noeuds peuvent com-mu-ni-quer. Dans ce cas, CSMA/CA
  []
@@ -875,13 +904,14 @@ File: res/pictures/sloframe.png Graphic file (type png)
 <use res/pictures/sloframe.png>
 Package pdftex.def Info: res/pictures/sloframe.png  used on input line 81.
 (pdftex.def)             Requested size: 288.19598pt x 76.28131pt.
-<res/pictures/tsch.drawio.png, id=192, 430.60875pt x 258.9675pt>
+[5]
+<res/pictures/tsch.drawio.png, id=203, 430.60875pt x 258.9675pt>
 File: res/pictures/tsch.drawio.png Graphic file (type png)
 <use res/pictures/tsch.drawio.png>
 Package pdftex.def Info: res/pictures/tsch.drawio.png  used on input line 98.
 (pdftex.def)             Requested size: 215.30383pt x 129.48341pt.
-[5 <./res/pictures/sloframe.png>]) (./src/etat_art/rpl.tex [6 <./res/pictures/tsch.drawio.png>]
-<res/pictures/dodag.drawio.png, id=211, 676.5275pt x 474.77374pt>
+) (./src/etat_art/rpl.tex [6 <./res/pictures/sloframe.png> <./res/pictures/tsch.drawio.png>]
+<res/pictures/dodag.drawio.png, id=216, 676.5275pt x 474.77374pt>
 File: res/pictures/dodag.drawio.png Graphic file (type png)
 <use res/pictures/dodag.drawio.png>
 Package pdftex.def Info: res/pictures/dodag.drawio.png  used on input line 16.
@@ -896,30 +926,30 @@ Overfull \hbox (66.77303pt too wide) in paragraph at lines 50--52
 \T1/cmr/m/n/12 Si le coût d'un che-min est plus grand qu'une constante \T1/cmr/m/sc/12 MAX_LINK_METRIC\T1/cmr/m/n/12 ,
  []
 
-<res/pictures/dio.drawio.png, id=233, 656.4525pt x 325.215pt>
+<res/pictures/dio.drawio.png, id=238, 656.4525pt x 325.215pt>
 File: res/pictures/dio.drawio.png Graphic file (type png)
 <use res/pictures/dio.drawio.png>
 Package pdftex.def Info: res/pictures/dio.drawio.png  used on input line 77.
 (pdftex.def)             Requested size: 328.22545pt x 162.6071pt.
 [9]
-<res/pictures/dao.drawio.png, id=247, 647.41875pt x 285.065pt>
+<res/pictures/dao.drawio.png, id=252, 647.41875pt x 285.065pt>
 File: res/pictures/dao.drawio.png Graphic file (type png)
 <use res/pictures/dao.drawio.png>
 Package pdftex.def Info: res/pictures/dao.drawio.png  used on input line 99.
 (pdftex.def)             Requested size: 323.70857pt x 142.53215pt.
  [10 <./res/pictures/dio.drawio.png>] [11 <./res/pictures/dao.drawio.png>]
-<res/pictures/dao-dio.drawio.png, id=270, 686.565pt x 494.84875pt>
+<res/pictures/dao-dio.drawio.png, id=275, 686.565pt x 494.84875pt>
 File: res/pictures/dao-dio.drawio.png Graphic file (type png)
 <use res/pictures/dao-dio.drawio.png>
 Package pdftex.def Info: res/pictures/dao-dio.drawio.png  used on input line 129.
 (pdftex.def)             Requested size: 343.28166pt x 247.42377pt.
  [12 <./res/pictures/dao-dio.drawio.png>]
-<res/pictures/rpl-nonstoring.drawio.png, id=279, 352.31625pt x 364.36125pt>
+<res/pictures/rpl-nonstoring.drawio.png, id=284, 352.31625pt x 364.36125pt>
 File: res/pictures/rpl-nonstoring.drawio.png Graphic file (type png)
 <use res/pictures/rpl-nonstoring.drawio.png>
 Package pdftex.def Info: res/pictures/rpl-nonstoring.drawio.png  used on input line 158.
 (pdftex.def)             Requested size: 140.924pt x 145.74191pt.
-<res/pictures/rpl-storing.drawio.png, id=280, 352.31625pt x 364.36125pt>
+<res/pictures/rpl-storing.drawio.png, id=285, 352.31625pt x 364.36125pt>
 File: res/pictures/rpl-storing.drawio.png Graphic file (type png)
 <use res/pictures/rpl-storing.drawio.png>
 Package pdftex.def Info: res/pictures/rpl-storing.drawio.png  used on input line 164.
@@ -944,7 +974,7 @@ Chapitre 2.
 (./src/architecture/topologie.tex [17
 
 ]
-<res/pictures/loramac-topologie.drawio.png, id=333, 613.29124pt x 422.57875pt>
+<res/pictures/loramac-topologie.drawio.png, id=338, 613.29124pt x 422.57875pt>
 File: res/pictures/loramac-topologie.drawio.png Graphic file (type png)
 <use res/pictures/loramac-topologie.drawio.png>
 Package pdftex.def Info: res/pictures/loramac-topologie.drawio.png  used on input line 28.
@@ -965,13 +995,13 @@ Underfull \hbox (badness 10000) in paragraph at lines 16--18
  []
 
 [19]) (./src/architecture/paquets.tex
-<res/pictures/loramac-frame.drawio.png, id=348, 488.82625pt x 245.91875pt>
+<res/pictures/loramac-frame.drawio.png, id=353, 488.82625pt x 245.91875pt>
 File: res/pictures/loramac-frame.drawio.png Graphic file (type png)
 <use res/pictures/loramac-frame.drawio.png>
 Package pdftex.def Info: res/pictures/loramac-frame.drawio.png  used on input line 7.
 (pdftex.def)             Requested size: 244.41252pt x 122.95906pt.
  [20 <./res/pictures/loramac-frame.drawio.png>]) (./src/architecture/protocole.tex
-<res/pictures/loramac-state.drawio.png, id=358, 625.33624pt x 381.425pt>
+<res/pictures/loramac-state.drawio.png, id=363, 625.33624pt x 381.425pt>
 File: res/pictures/loramac-state.drawio.png Graphic file (type png)
 <use res/pictures/loramac-state.drawio.png>
 Package pdftex.def Info: res/pictures/loramac-state.drawio.png  used on input line 12.
@@ -988,19 +1018,19 @@ Underfull \hbox (badness 10000) in paragraph at lines 48--52
 ) [24
 
 ]
-Package atveryend Info: Empty hook `BeforeClearDocument' on input line 130.
-Package atveryend Info: Empty hook `AfterLastShipout' on input line 130.
+Package atveryend Info: Empty hook `BeforeClearDocument' on input line 132.
+Package atveryend Info: Empty hook `AfterLastShipout' on input line 132.
  (/home/arnaud/Documents/cours/universite/cours2020-2021/memoire/ma2_memoire/memoire/out/main.aux)
-Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 130.
-Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 130.
+Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 132.
+Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 132.
 Package rerunfilecheck Info: File `main.out' has not changed.
 (rerunfilecheck)             Checksum: <no file>.
  ) 
 Here is how much of TeX's memory you used:
- 28094 strings out of 481239
- 529225 string characters out of 5920377
- 836313 words of memory out of 5000000
- 42604 multiletter control sequences out of 15000+600000
+ 28156 strings out of 481239
+ 530128 string characters out of 5920377
+ 837567 words of memory out of 5000000
+ 42660 multiletter control sequences out of 15000+600000
  548178 words of font info for 53 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
  60i,18n,96p,1115b,575s stack positions out of 5000i,500n,10000p,200000b,80000s
@@ -1023,10 +1053,10 @@ pdfTeX warning (dest): name{cite.rfc\\penalty\040\\@M\040\040:rpl} has been refe
 pdfTeX warning (dest): name{cite.paper\\penalty\040\\@M\040\040:802.15.4e-survey} has been referenced but does not exist, replaced by a fixed one
 
 {/usr/share/texmf/fonts/enc/dvips/cm-super/cm-super-t1.enc}</usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi12.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi8.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmr12.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy10.pfb></usr/share/texmf/fonts/type1/public/cm-super/sfbi1440.pfb></usr/share/texmf/fonts/type1/public/cm-super/sfbx1200.pfb></usr/share/texmf/fonts/type1/public/cm-super/sfbx1440.pfb></usr/share/texmf/fonts/type1/public/cm-super/sfbx1728.pfb></usr/share/texmf/fonts/type1/public/cm-super/sfbx2488.pfb></usr/share/texmf/fonts/type1/public/cm-super/sfcc1200.pfb></usr/share/texmf/fonts/type1/public/cm-super/sfrm0800.pfb></usr/share/texmf/fonts/type1/public/cm-super/sfrm1000.pfb></usr/share/texmf/fonts/type1/public/cm-super/sfrm1095.pfb></usr/share/texmf/fonts/type1/public/cm-super/sfrm1200.pfb></usr/share/texmf/fonts/type1/public/cm-super/sfsl1200.pfb></usr/share/texmf/fonts/type1/public/cm-super/sfti1200.pfb></usr/share/texmf/fonts/type1/public/cm-super/sftt1200.pfb></usr/share/texlive/texmf-dist/fonts/type1/urw/times/utmb8a.pfb></usr/share/texlive/texmf-dist/fonts/type1/urw/times/utmr8a.pfb>
-Output written on /home/arnaud/Documents/cours/universite/cours2020-2021/memoire/ma2_memoire/memoire/out/main.pdf (27 pages, 1012372 bytes).
+Output written on /home/arnaud/Documents/cours/universite/cours2020-2021/memoire/ma2_memoire/memoire/out/main.pdf (27 pages, 1694112 bytes).
 PDF statistics:
- 482 PDF objects out of 1000 (max. 8388607)
- 398 compressed objects within 4 object streams
- 125 named destinations out of 1000 (max. 500000)
- 226 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 488 PDF objects out of 1000 (max. 8388607)
+ 401 compressed objects within 5 object streams
+ 126 named destinations out of 1000 (max. 500000)
+ 231 words of extra memory for PDF output out of 10000 (max. 10000000)
 
