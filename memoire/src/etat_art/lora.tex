@@ -59,4 +59,10 @@ Où $T_{sym} = \frac{1}{R_s}$, $n_{preamble}$ et $n_{payload}$ sont le nombre de
     \end{split}
 \end{equation}
 
-
+où:
+\begin{itemize}
+    \item $PL$ est le nombre d'octets de la payload (1 à 255)
+    \item $IH=0$ si le header est présent, $IH=1$ sinon
+    \item $DE=1$ si $LowDataRateOptimize=1$, $DE=0$ sinon
+    \item $CR$ prend la valeur 1 pour $4/5$, 2 pour $4/6$, etc
+\end{itemize}
