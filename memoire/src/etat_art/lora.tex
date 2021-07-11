@@ -2,7 +2,8 @@
 \renewcommand{\rightmark}{LoRa}
 
 LoRa (Long Range) est une technologie radio  fonctionnant sur une modulation radio propriétaire
-détenue par Semtech. Cette modulation est dérive de la modulation \textit{chirp spread spectrum (CSS)} et permet d'obtenir des communications longues portées\todo{chiffres} et basses énergie.
+détenue par Semtech. Cette modulation est dérive de la modulation \textit{chirp spread spectrum (CSS)} et permet d'obtenir des communications longues portées et basses énergie.
+%todo chiffres
 
 \begin{wrapfigure}{r}{0.3\textwidth}
     \includegraphics[scale=0.25]{res/pictures/lora-sf.png}
@@ -12,7 +13,7 @@ détenue par Semtech. Cette modulation est dérive de la modulation \textit{chir
 Une communication LoRa dépend des paramètres suivants:
 \begin{itemize}
     \item \textbf{Spreading Factor (SF)}: SF est une variable qui définit la vitesse de balayage du signal radio (Fig~\ref{fig:state-sf}). Le spreading factor est compris entre 7 et 12. Plus la valeur est grande, plus la vitesse de balayage est petite et donc le signal est plus facile à décoder. mais le débit des données est plus faible. Donc une grande valeur de SF implique un débit plus faible mais une QoS (Quality of Service) plus élevée et inversemment pour une petite valeur de SF.
-    \item \textbf{Bandwidth (BW)}: Détermine la largeur de la bande passante. Une bande passante plus large augmente la qualité du signal. Pour LoRa, en Europe les valeurs de BW sont limitées à 125 KHz et 250KHz.\todo{ref thethingsnetwork}
+    \item \textbf{Bandwidth (BW)}: Détermine la largeur de la bande passante. Une bande passante plus large augmente la qualité du signal. Pour LoRa, en Europe, les valeurs de BW sont limitées à 125 KHz et 250KHz.\todo{ref thethingsnetwork}
     \item \textbf{Coding rate (CR)}:D'après \todo{ref}, LoRa utilise FEC (Forward error correction) pour chaque transmission. L'uilisation de cette méthode de correction d'erreur utilisant la redondance permet au signal de supporter de courtes interférences. Ainsi il possible de coder des données de 4 bits avec des redondances de 5, 6, 7 ou 8 bits. La valeur du CR se note donc 
     4/5, 4/6, 4/5 ou 4/8.
     %https://josefmtd.com/2018/08/14/spreading-factor-bandwidth-coding-rate-and-bit-rate-in-lora-english/
