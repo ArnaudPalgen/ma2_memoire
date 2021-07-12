@@ -1,59 +1,69 @@
 \section{RTOS}
 
-Un RTOS (Real Time Operating System) est un sytème d'exploitation temps réels principalement destiné aux systèmes embarqués.
+Un RTOS (Real Time Operating System) est un sytème d'exploitation temps réel principalement destiné aux systèmes embarqués. Il permet d'abstraire le matériel en fournissant une couche logicielle facilitant le développement d'une application. Un RTOS permet également de découper une application en tâches qui sont gérées par l'ordonnanceur.
 
-Etant donné que ce projet utilise le protocole 802.15.4 ainsi que TSCH, le RTOS choisis doit les prendre en charge ainsi qu'un ou plusieurs algorithme d'ordonnancement de TSCH.
+%Etant donné que ce projet utilise le protocole 802.15.4 ainsi que TSCH, le RTOS choisis doit les %prendre en charge ainsi qu'un ou plusieurs algorithme d'ordonnancement de TSCH.
+%
+%Il est également préférable, que le RTOS choisis, supporte déjà la plateforme utilisée. Une %implémentation de LoRa n'est pas nécessaire car les communications Lora sont réalisées via le %RN2483 qui est controlé par UART.
 
-Il est également préférable, que le RTOS choisis, supporte déjà la plateforme utilisée. Une implémentation de la LoRa n'est pas nécessaire car les communications Lora sont réalisées via le RN2483 qui est controlé par UART.
+Le RTOS choisi doit supporter la plateforme de utilisée. Sa pile réseau du RTOS doit comprendre les protocoles suivants: 802.15.4 pour la couche physique, TSCH avec un ou plusieurs algorithme d'ordonnancement pour la couche MAC, le support d'IPv6 et d'un algorithme de routage comme RPL pour la couche réseau et enfin, pour le transport, TCP et/ou UDP.
+
+Une implémentation de LoRa n'est pas nécessaire car les communications Lora sont réalisées via le 
+RN2483 qui est controlé par UART.
 
 Pour effectuer ce choix, les RTOS suivants ont été comparés: Contiki OS, FreeRTOS et RIOT OS.
 %et Zephyr.
 
 \subsection*{Contiki OS}
-    Le développement publique de Contiki a débuté en octobre 2012\footnote{Date de création du repository Github.}. Dans un premier repository: \textbf{contiki}~\cite{contiki-repo:old}. Un nouveau développement a démarré en mai 2017 sous le nom de \textbf{contiki-ng}~\cite{contiki-repo:ng}. C'est donc ce dernier qui est utilisé pour la comparaison est qui est dénommé par la suite "Contiki".
-
-    Ce RTOS open-source et multi-plateforme implémente toute une série de protocoles de communications basse énergie tels que IEEE 802.15.4, 6TiSCH, IPv6/6LoWPAN et RPL. En plus de 6TiSCH, un ordonnanceur TSCH, Orchestra, est implémenté.
+    Le développement publique de Contiki~\cite{paper:contiki} a débuté en octobre 2012\footnote{Date de création du repository Github.}. Dans un premier repository: \textbf{contiki}~\cite{contiki-repo:old}. Un fork de contiki a démarré en mai 2017 sous le nom de \textbf{contiki-ng}~\cite{contiki-repo:ng}. Comme le premier développement n'est plus maintenu, c'est ce dernier qui est utilisé pour la comparaison et qui est dénommé par la suite "Contiki".
 
     L'implémentation des processus est basée sur la librairie Protothreads~\cite{paper:protothreads}
-    qui abstrait la gestion de la programmation évènementiel par des protothread dont l'utilsations est similaire aux threads. L'ordonnenceur de cette libraire est cooperatif, c'est à dire qu'il ne va jamais forcer un changement de contexte(ensemble des ressources nécessaires à l'éxécution d'un processus) d'un processus à un autre (contrairement à un ordonnenceur préemptif). Le changement de contexte ne s'effectue que quand un processus rend volontairement le contrôle à l'ordonnanceur.
+    qui abstrait la gestion de la programmation événementielle par des protothreads dont l'utilsations est similaire aux threads. L'ordonnanceur de cette libraire est cooperatif, c'est à dire qu'il ne va jamais forcer un changement de contexte (ensemble des ressources nécessaires à l'éxécution d'un processus) d'un processus à un autre (contrairement à un ordonnanceur préemptif). Le changement de contexte ne s'effectue que quand un processus rend volontairement le contrôle à l'ordonnanceur.
+
+    Ce RTOS open-source et multi-plateforme implémente toute une série de protocoles de communications basse énergie tels que IEEE 802.15.4, 6TiSCH, IPv6/6LoWPAN et RPL. En plus de 6TiSCH, un ordonnanceur TSCH, Orchestra, est implémenté.
     
-    Contiki est également compatible avec le Zolertia RE-Mote. Il est accompagné de Cooja, un simulateur réseau qui permet de simuler les communications entre plusieurs noeuds utilisant Contiki.
+    %Contiki est également compatible avec le Zolertia RE-Mote. Il est accompagné de Cooja, un %simulateur réseau qui permet de simuler les communications entre plusieurs noeuds utilisant %Contiki.
+
+    Contiki supporte plusieurs plateformes en fournissant pour chacune un BSP (Board Support Package). Pour le Zolertia RE-Mote, le BSP supporte notemment la gestion de l'alimentation, des leds, des deux antennes ainsi que des interfaces UART, SPI et I2C.
+
+    Ce RTOS également est accompagné de Cooja, un simulateur réseau qui permet de simuler les communications entre plusieurs noeuds l'utilisant.
 
 \subsection*{FreeRTOS}
     D'après le site officiel de FreeRTOS~\cite{freertos}, ce RTOS est développé depuis 15 ans.
-    Le repository Github a néanmoins été créé en septembre 2019.
+    Le repository initial~\cite{freertos:repo} a été créé en 2004.
+
+    L'ordonnanceur de tâches de FreeRTOS peut être configuré comme coopératif ou préemptif via le flag \textit{configUSE\_PREEMPTION} du fichier de configuration.
 
     Ce RTOS également open-source et multi-plateforme offre des librairies divisées en trois catégories:
     \begin{itemize}
 
-        \item \textbf{FreeRTOS+} qui contient notemment la librairie TPC/IP et les protocoles applicatifs MQTT et HTTP,
+        \item \textbf{FreeRTOS+} qui contient notemment la librairie TCP/IP et les protocoles applicatifs MQTT et HTTP,
         \item \textbf{AWS IoT Libraries} qui fourni des librairies permettant la connectivité avec Amazon Web Services (AWS)
         \item \textbf{FreeRTOS Labs} qui contient des librairies complètement fonctionelles mais qui sont encore en cours d'amélioration comme le support d'IPv6, LoRaWan ou le support de plusieurs interfaces réseau
     \end{itemize}
-    
-    
-    L'ordonnanceur de tâche de FreeRTOS peut être configurer comme coopératif ou préemptif via le flag \textit{configUSE\_PREEMPTION} du fichier de configuration.
 
-    FreeRTOS n'a pour le moment pas été porté pour le Zolertia RE-Mote ou le CC2538.
+    FreeRTOS n'a pour le moment pas été porté pour le Zolertia RE-Mote ou le CC2538. Fournir un tel support est un investissement conséquent et n'est pas l'objectif de ce mémoire.
 
 \subsection*{RIOT OS}
-    Le développement publique de RIOT a débuté en décembre 2012\footnotemark[1].
+    Le développement publique de RIOT~\cite{riotos} a débuté en décembre 2012\footnotemark[1].
+
+    RIOT est un RTOS qui utilise des standards comme la programmation en C++ ou une compatibilité POSIX pour faciliter le développement d'applications IoT.
+
+    L'ordonnanceur de RIOT est tickless, c'est à dire qu'il n'utilise pas un timer déclenché périodiquement pour effectuer les changements de contexte. L'ordonnanceur est préemptif et basé sur des priorités. Les changements de contexte sont initiés lors d'interruptions, volontairement ou quand une opération bloquante a lieue. 
 
     La pile réseau de RIOT comporte notemment les protocoles 6LoWPAN, IPv6, RPL, LoRaWan, 802.15.4.
     RIOT OS intègre la pile réseau OpenWSN~\cite{openwsn} mais cette intégration est pour le moment expérimentale.
     
-    OpenWSN est une implèmentation open-source d'une pile réseau destinée à l'IoT. Cette pile réseau comprend les protocoles IEEE802.15.4e, 6LoWPAN, RPL, UDP et CoAP. L'objectif de cette implémentation est qu'elle puisse être utilisée sur une variété de RTOS et de plateformes.
-    
-    L'ordonnanceur de RIOT est tickless, c'est à dire qu'il n'utilise pas un timer déclanché périodiquement pour effectuer les changements de contexte. L'ordonnanceur est préemptif et basé sur des priorités. Les changements de contexte sont initiés lors d'interruptions, volontairement ou quand une opération bloquante a lieue. 
+    OpenWSN est une implémentation open-source d'une pile réseau destinée à l'IoT. Cette pile réseau comprend les protocoles IEEE802.15.4e, 6LoWPAN, RPL, UDP et CoAP. L'objectif de cette implémentation est qu'elle puisse être utilisée sur une variété de RTOS et de plateformes.
 
-    D'après le site officiel, ce RTOS supporte 229 carte de développement et 64 CPU dont le Zolertia RE-Mote. 
+    D'après le site officiel, ce RTOS supporte 229 carte de développement et 64 CPU dont le Zolertia RE-Mote.
 
 
 %\subsection*{Zephyr}
 %   nothing here
 ------------\\
 \subsection*{Conclusion}
-Le table~\ref{tb:state-rtos-choice} résume la comparaison de ces RTOS avec les critères les plus importants pour ce mémoire.
+Le table~\ref{tb:state-rtos-choice} résume la comparaison de ces RTOS avec les critères les plus importants pour ce mémoire. Dans cette comparaison, l'utilisation d'OpenWSN n'a pas été prise en compte pour RIOT OS car son intégration reste expérimentale.
 
 \begin{table}[H]
     \begin{adjustbox}{width=\textwidth}
@@ -69,6 +79,6 @@ Le table~\ref{tb:state-rtos-choice} résume la comparaison de ces RTOS avec les 
     \caption{Comparatif de différents RTOS.}
     \label{tb:state-rtos-choice}
 \end{table}
-Le RTOS choisi est Contiki OS. Il est choisi pour sa maturié, la prise en charge du Zolertia RE-Mote et sa pile réseau complète et stable.
+Le RTOS choisi est Contiki OS. Il est choisi pour sa maturité, la prise en charge du Zolertia RE-Mote et sa pile réseau complète et stable.
 
 %https://github.com/Lora-net/LoRaMac-node/blob/ba17382bd5109513937afad07f068a781a503ef6/src/radio/radio.h

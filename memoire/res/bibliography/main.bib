@@ -62,6 +62,12 @@
   howpublished = "\url{https://freertos.org/index.html}",
   note         = "[Accès en ligne le 15 juin 2021]"
 }
+@misc{freertos:repo,
+  key          = {FreeRTOS-repo},
+  title        = {{Initial repository of FreeRTOS}},
+  howpublished = "\url{https://freertos.org/index.html}",
+  note         = "[Accès en ligne le 15 juin 2021]"
+}
 
 @misc{openwsn,
   key          = {OpenWSN},
@@ -78,6 +84,16 @@
   note    = "[Accès en ligne le 11 juillet 2021]"
 }
 
+@ARTICLE{riotos,
+  author={Baccelli, Emmanuel and Gündoğan, Cenk and Hahm, Oliver and Kietzmann, Peter and Lenders, Martine S. and Petersen, Hauke and Schleiser, Kaspar and Schmidt, Thomas C. and Wählisch, Matthias},
+  journal={IEEE Internet of Things Journal},
+  title={RIOT: An Open Source Operating System for Low-End Embedded Devices in the IoT},
+  year={2018},
+  volume={5},
+  number={6},
+  pages={4428-4440},
+  doi={10.1109/JIOT.2018.2815038}}
+
 @inproceedings{paper:rpl-study,
 author = {Tripathi, Joydeep and Oliveira, Jose and Vasseur, J.-P},
 title = {A performance evaluation study of RPL: Routing Protocol for Low power and Lossy Networks},
@@ -89,21 +105,64 @@ doi = {10.1109/CISS.2010.5464820}
 }
 
 @inproceedings{paper:protothreads,
-author = {Dunkels, Adam and Schmidt, Oliver and Voigt, Thiemo and Ali, Muneeb},
-title = {Protothreads: Simplifying Event-Driven Programming of Memory-Constrained Embedded Systems},
-year = {2006},
-isbn = {1595933433},
-publisher = {Association for Computing Machinery},
-address = {New York, NY, USA},
-url = {https://doi.org/10.1145/1182807.1182811},
-doi = {10.1145/1182807.1182811},
-abstract = {Event-driven programming is a popular model for writing programs for tiny embedded systems and sensor network nodes. While event-driven programming can keep the memory overhead down, it enforces a state machine programming style which makes many programs difficult to write, maintain, and debug. We present a novel programming abstraction called protothreads that makes it possible to write event-driven programs in a thread-like style, with a memory overhead of only two bytes per protothread. We show that protothreads significantly reduce the complexity of a number of widely used programs previously written with event-driven state machines. For the examined programs the majority of the state machines could be entirely removed. In the other cases the number of states and transitions was drastically decreased. With protothreads the number of lines of code was reduced by one third. The execution time overhead of protothreads is on the order of a few processor cycles.},
-booktitle = {Proceedings of the 4th International Conference on Embedded Networked Sensor Systems},
-pages = {29–42},
-numpages = {14},
-keywords = {threads, embedded systems, wireless sensor networks},
-location = {Boulder, Colorado, USA},
-series = {SenSys '06}
+  author = {Adam Dunkels and Oliver Schmidt and Thiemo Voigt and
+                  Muneeb Ali},
+  title = {Protothreads: Simplifying Event-Driven Programming
+                  of Memory-Constrained Embedded Systems},
+  booktitle = {Proceedings of the Fourth ACM Conference on Embedded
+                  Networked Sensor Systems (SenSys 2006)},
+  year = 2006,
+  month = nov,
+  address = {Boulder, Colorado, USA},
+  abstract = {Event-driven programming is a popular model for
+                  writing programs for tiny embedded systems and
+                  sensor network nodes. While event-driven programming
+                  can keep the memory overhead down, it enforces a
+                  state machine programming style which makes many
+                  programs difficult to write, maintain, and debug. We
+                  present a novel programming abstraction called
+                  protothreads that makes it possible to write
+                  event-driven programs in a thread-like style, with a
+                  memory overhead of only two bytes per
+                  protothread. We show that protothreads significantly
+                  reduce the complexity of a number of widely used
+                  programs previously written with event-driven state
+                  machines. For the examined programs the majority of
+                  the state machines could be entirely removed. In the
+                  other cases the number of states and transitions was
+                  drastically decreased. With protothreads the number
+                  of lines of code was reduced by one third. The
+                  execution time overhead of protothreads is on the
+                  order of a few processor cycles.},
+  url = {http://dunkels.com/adam/dunkels06protothreads.pdf},
+  ppt = {http://dunkels.com/adam/dunkels06protothreads.ppt}
+}
+
+@inproceedings{paper:contiki,
+  author = {Adam Dunkels and Björn Grönvall and Thiemo Voigt},
+  title = {Contiki - a Lightweight and Flexible Operating
+                  System for Tiny Networked Sensors},
+  year = 2004,
+  month = nov,
+  booktitle = {Proceedings of the First IEEE Workshop on Embedded
+                  Networked Sensors (Emnets-I)},
+  address = {Tampa, Florida, USA},
+  url = {http://dunkels.com/adam/dunkels04contiki.pdf},
+  abstract = {Wireless sensor networks are composed of large
+                  numbers of tiny networked devices that communicate
+                  untethered. For large scale networks it is important
+                  to be able to dynamically download code into the
+                  network. In this paper we present Contiki, a
+                  lightweight operating system with support for
+                  dynamic loading and replacement of individual
+                  programs and services. Contiki is built around an
+                  event-driven kernel but provides optional preemptive
+                  multithreading that can be applied to individual
+                  processes. We show that dynamic loading and
+                  unloading is feasible in a resource constrained
+                  environment, while keeping the base system
+                  lightweight and compact.},
+  ppt = {http://dunkels.com/adam/slides/contiki-emnets.ppt}
 }
 
 @article{paper:802.15.4e-survey,
