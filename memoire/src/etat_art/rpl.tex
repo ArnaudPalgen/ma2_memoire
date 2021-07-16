@@ -3,13 +3,14 @@
 \renewcommand{\rightmark}{RPL}
 %TODO tour des protocoles de routages ??
 
-Routing Protocol for Low-Power and Lossy Networks~\cite{rfc:rpl} est un protocole de routage IPv6 destiné aux réseaux dont les noeuds sont contraints en énergie et dont les liens entre ces noeuds sont soumis à des pertes importantes de paquets (Low-power and Lossy Networks (LLNs)).
+Routing Protocol for Low-Power and Lossy Networks~\cite{rfc:rpl} est un protocole de routage IPv6 destiné aux réseaux dont les noeuds sont contraints en énergie et dont les liens sont soumis à des pertes importantes de paquets (Low-power and Lossy Networks, LLNs).
 Ce protocole à vecteur de distance est un protocole proactif, c'est à dire que les routes sont établies avant qu'elles ne soient nécessaires.
 
-RPL sépare le traitement et la transmission des paquets de l'optimisation de l'objectif de routage. Cela permet de l'adapter à un large éventail d'applications des LLNs.
+RPL sépare le traitement et la transmission des paquets de contrôle de l'optimisation de l'objectif de routage. Cela permet de l'adapter à un large éventail d'applications des LLNs comme la domotique, l'automatisation industriel ou encore la récolte de données.
+
 
 \subsection*{Topologie}
-    La topologie utilisée par RPL est le DODAG (Destination Oriented Dag). Un DODAG est un graphe   dirigé acyclique (DAG) ayant une seule racine (Fig.~\ref{fig:state-dodag}). De part cette architecture RPL est adapté aux applcations de collecte de données ce qui est le principale objectif de ce projet. En effet, la route d'un noeud à la racine est facilement établie car tous les noeuds du chemins envoient les données à leur parent.
+    RPL construit un DODAG (Destination Oriented Directed Acyclic Graph). Un DODAG est un graphe   dirigé acyclique (DAG) ayant une seule racine (Fig.~\ref{fig:state-dodag}). De par cette architecture RPL est adapté aux applications de collecte de données ce qui est le principale objectif de ce projet. En effet, la route d'un noeud à la racine est facilement établie car tous les noeuds du chemins envoient les données à leur parent.
 
     \begin{figure}[H]
         \centering
@@ -20,8 +21,8 @@ RPL sépare le traitement et la transmission des paquets de l'optimisation de l'
 
 
 \subsection*{Fonctions objectif}
-Une fonction objectif (OF) défini comment plusieurs métriques sont utilisées pour calculer le rang d'un noeud. Le rang d'un noeud détermine sa position dans le DODAG par rapport aux autres noeuds.
-Le rang augmente stictement dans le sens descendant et diminue strictement dans le sens montant. Ainsi, pour un noeud $n$, $rang(n)>rang(parent(n))$. La figure~\ref{fig:state-dodag} illustre un DODAG avec des valeurs de rang fictives attribuées aux noeuds. Sur cet exemple, la racine du DODAG a comme rang, la valeur par défaut \textsc{root\_rank} définie dans le RFC.
+Une fonction objectif (OF) définit comment plusieurs métriques sont utilisées pour calculer le rang d'un noeud. Le rang d'un noeud détermine sa position dans le DODAG par rapport aux autres noeuds.
+Le rang augmente strictement dans le sens descendant et diminue strictement dans le sens montant. Ainsi, pour un noeud $n$, $rang(n)>rang(parent(n))$. La figure~\ref{fig:state-dodag} illustre un DODAG avec des valeurs de rang fictives attribuées aux noeuds. Sur cet exemple, la racine du DODAG a comme rang, la valeur par défaut \textsc{root\_rank} définie dans le RFC.
 
 Cette section décris brièvement deux fonctions objectif implémentées dans Contiki: OF0 et MRHOF.
 \begin{itemize}
