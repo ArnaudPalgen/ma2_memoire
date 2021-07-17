@@ -4,9 +4,15 @@
 %TODO tour des protocoles de routages ??
 
 Routing Protocol for Low-Power and Lossy Networks~\cite{rfc:rpl} est un protocole de routage IPv6 destiné aux réseaux dont les noeuds sont contraints en énergie et dont les liens sont soumis à des pertes importantes de paquets (Low-power and Lossy Networks, LLNs).
+
+D'après l'article de Tripathi, Oliveira et Vasseur~\cite{paper:rpl-study}, après avoir été étudiés par le groupe de travail IETF roll (Routing Over Low power and Lossy networks), il s'est avéré que les protocoles tel que OSPF, AODV ou OLSR ne satisfont pas toutes les exigences des LLNs. C'est pour cette raison que ce groupe de travail a introduit RPL.
 Ce protocole à vecteur de distance est un protocole proactif, c'est à dire que les routes sont établies avant qu'elles ne soient nécessaires.
 
+
+
 RPL sépare le traitement et la transmission des paquets de contrôle de l'optimisation de l'objectif de routage. Cela permet de l'adapter à un large éventail d'applications des LLNs comme la domotique, l'automatisation industriel ou encore la récolte de données.
+
+De plus, de part sa topologie et son fonctionnement, RPL est optimisé pour la collecte de données ce qui est l'utilisation principale pour ce mémoire.
 
 
 \subsection*{Topologie}
@@ -22,7 +28,7 @@ RPL sépare le traitement et la transmission des paquets de contrôle de l'optim
 
 \subsection*{Fonctions objectif}
 Une fonction objectif (OF) définit comment plusieurs métriques sont utilisées pour calculer le rang d'un noeud. Celui-ci détermine la position du noeud dans le DODAG par rapport aux autres noeuds.
-Le rang augmente strictement dans le sens descendant et diminue strictement dans le sens montant. Ainsi, pour un noeud $n$, $rang(n)>rang(parent(n))$. La figure~\ref{fig:state-dodag} illustre un DODAG avec des valeurs de rang fictives attribuées aux noeuds. Sur cet exemple, la racine du DODAG a comme rang, la valeur par défaut $\textsc{root\_rank}=1$ définie dans le RFC.
+Le rang augmente strictement dans le sens descendant et diminue strictement dans le sens montant. Ainsi, pour un noeud $n$, la propriété $rang(n)>rang(parent(n))$ est toujours vérifiée. La figure~\ref{fig:state-dodag} illustre un DODAG avec des valeurs de rang fictives respectant cette propriété. Sur cet exemple, la racine du DODAG a comme rang, la valeur par défaut $\textsc{root\_rank}=1$ définie dans le RFC.
 
 Cette section décrit brièvement les fonction objetif OF0 et MRHOF, sur base du RFC 6552~\cite{rfc:of0} et du RFC 6719 ~\cite{rfc:mrhof}, qui sont implémentées dans Contiki.
 
@@ -83,10 +89,11 @@ Cette section décrit brièvement les fonction objetif OF0 et MRHOF, sur base du
             Le RFC 6719 recommande 192 comme valeur pour \textsl{\textsc{parent\_switch\_treshold}} si la métrique utilisée est ETX.
 
 \subsection*{Messages RPL}
+    RPL défini quatre types de mesages de contrôles: DIO, DIS, DAO et DAO-ACK. Ces messages de contôles sont des messages ICMPv6. Le RFC 6550~\cite{rfc:rpl} indique que ces messages ont la portée d'un lien, à l'exception des DAO/DAO-ACK qui dans le mode de fonctionnement \textit{non-storing} sont envoyés en unicast et donc utilisent des adresse unique-local our global. Pour tous les autres messages, les adresses sources sont des adresses link-local et les adresses de destination sont soit link-local soit l'adresse multicast pour tous les noeuds RPL qui est \texttt{ff02::1a}
 
 \subsubsection*{DIO}
-    Les DIOs (DODAG Information Object) annoncent des informations sur le DODAG qui permettent aux noeuds de découvrir une instant RPL, de sélectionner un parent ou encore de maintenir le DODAG.
-    Un DIO, illustré à la figure~\ref{fig:state-dio}, inclu notemment les champs suivants:
+    Les DIOs (DODAG Information Object) annoncent des informations sur le DODAG qui permettent aux noeuds de découvrir une instance RPL, de sélectionner un parent ou encore de maintenir le DODAG.
+    Un DIO, illustré à la figure~\ref{fig:state-dio}, inclu notamment les champs suivants:
     \begin{itemize}
         \item InstanceID: Identifie l'instance RPL du DODAG
         \item Rank: Le rang du noeud qui émet le DIO
@@ -107,7 +114,7 @@ Cette section décrit brièvement les fonction objetif OF0 et MRHOF, sur base du
         \label{fig:state-dio}
     \end{figure}
 
-    Les DIOs sont transmis en utilisant l'algorithme Trickle définis dans~\cite{rfc:trickle}.
+    Les DIOs sont transmis en utilisant l'algorithme Trickle~\cite{rfc:trickle}.
 
 \subsubsection*{DIS}
     Les DODAG Information Solocitation (DIS) sont utilisés pour solicité un DIO d'un noeud RPL.
@@ -201,11 +208,11 @@ Cette section décrit brièvement les fonction objetif OF0 et MRHOF, sur base du
 
 
 
-\subsection*{Discussion}
-
-    D'après~\cite{paper:rpl-study}, après avoir été étudiés par le groupe de travail IETF roll (Routing Over Low power and Lossy networks (roll), il s'est avéré que les protocoles tel que OSPF, AODV ou OLSR ne satisfont pas toutes les exigences des LLNs. C'est pour cette raison que ce groupe de travail a introduit RPL.
-
-    De plus, de part sa topologie et son fonctionnement, RPL est optimisé pour la collecte de données ce qui est l'utilisation principale pour ce mémoire.
+%\subsection*{Discussion}
+%
+%    D'après~\cite{paper:rpl-study}, après avoir été étudiés par le groupe de travail IETF roll %(Routing Over Low power and Lossy networks (roll), il s'est avéré que les protocoles tel que %OSPF, AODV ou OLSR ne satisfont pas toutes les exigences des LLNs. C'est pour cette raison que %ce groupe de travail a introduit RPL.
+%
+%    De plus, de part sa topologie et son fonctionnement, RPL est optimisé pour la collecte de %données ce qui est l'utilisation principale pour ce mémoire.
 
     %todo article qui regroupe plusieurs etudes: implémentation pas idéale dans COntiki mais article de 2017 -> corrigé depuis ??
 
