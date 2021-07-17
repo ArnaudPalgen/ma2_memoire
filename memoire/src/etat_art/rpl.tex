@@ -21,39 +21,66 @@ RPL sépare le traitement et la transmission des paquets de contrôle de l'optim
 
 
 \subsection*{Fonctions objectif}
-Une fonction objectif (OF) définit comment plusieurs métriques sont utilisées pour calculer le rang d'un noeud. Le rang d'un noeud détermine sa position dans le DODAG par rapport aux autres noeuds.
-Le rang augmente strictement dans le sens descendant et diminue strictement dans le sens montant. Ainsi, pour un noeud $n$, $rang(n)>rang(parent(n))$. La figure~\ref{fig:state-dodag} illustre un DODAG avec des valeurs de rang fictives attribuées aux noeuds. Sur cet exemple, la racine du DODAG a comme rang, la valeur par défaut \textsc{root\_rank} définie dans le RFC.
+Une fonction objectif (OF) définit comment plusieurs métriques sont utilisées pour calculer le rang d'un noeud. Celui-ci détermine la position du noeud dans le DODAG par rapport aux autres noeuds.
+Le rang augmente strictement dans le sens descendant et diminue strictement dans le sens montant. Ainsi, pour un noeud $n$, $rang(n)>rang(parent(n))$. La figure~\ref{fig:state-dodag} illustre un DODAG avec des valeurs de rang fictives attribuées aux noeuds. Sur cet exemple, la racine du DODAG a comme rang, la valeur par défaut $\textsc{root\_rank}=1$ définie dans le RFC.
 
-Cette section décris brièvement deux fonctions objectif implémentées dans Contiki: OF0 et MRHOF.
-\begin{itemize}
-    \item \subsubsection*{OF0}
-            Objective Function Zero~\cite{rfc:of0} est une fonction dont l'objectif est de choisir un parent qui permettra à un noeud d'avoir la racine du DODAG le plus proche possible. Le rang d'un noeud $R(N)$ est calculé comme suit:
-                \[ranck\_increase = (Rf * Sp + Sr) * MinHopRankIncrease\]
-                \[R(N) = R(P) + ranck\_increase\]
-                où
-                \begin{itemize}
-                    \item $Rf$ est le $rank\_factor$ et $Sr \leq stretch\_of\_rank$ avec $rank\_factor$ et $stretch\_of\_rank$ deux paramètres de la fonction
-                    \item $Sp$ est le $step\_of\_rank$ qui est une valeur basée sur les propriétés du lien
-                    \item $MinHopRankIncrease$ est une constante
-                    \item $R(p)$ est le rang d'un parent p
-                \end{itemize}
-                $R(N)$ est calculé pour chaque parent potentiel. Le parent potentiel qui implique le plus petit $R(N)$ sera choisi.
+Cette section décrit brièvement les fonction objetif OF0 et MRHOF, sur base du RFC 6552~\cite{rfc:of0} et du RFC 6719 ~\cite{rfc:mrhof}, qui sont implémentées dans Contiki.
+
+    \subsubsection*{OF0}
+        \textit{Objective Function Zero} est une fonction dont l'objectif est de choisir un parent qui permettra à un noeud d'avoir la racine du DODAG le plus proche possible.
+        Le calcul du rang d'un noeud $N$, $R(N)$, est décrit par l'équation~\ref{eq:state-rankOF0}. Il est calculé pour chaque parent potentiel. Le parent préféré choisi sera alors le parent potentiel qui implique le plus petit $R(N)$.\par
+
+
+        Le calcul du rang commence par le calcul de la variable \textit{step\_of\_rank} ($Sp$) qui est 
+        basée sur  les propriétés et métriques du lien avec le parent potentiel. Le RFC 
+        recommande de baser ce calcul sur des propriétés dynamiques comme la métrique \textit{expected transmission count (ETX)} décrit dans l'article de Couto, Aguayo, Bicket et Morris
+        ~\cite{paper:etx} qui est une métrique qui permet de minimiser le nombre de transmissions requises pour transmettre un paquet.
+        car utiliser des propriétés statiques, comme un coût administratif, revient à avoir un
+        rang analogue au nombre de sauts. $Sp$ est mutlipliée par la variable \textit{rank\_factor} ($Rf$) qui est utilisée pour multiplier son effet dans le calcul de
+        \textit{rank\_increase}. $Rf$ doit être un entier strictement positif et sa valeur par défaut est 1.
+
+        $Sr$ est un terme plus petit ou égal à la variable \textit{stretch\_of\_rank} qui est l'augmentation maximum de \textit{step\_of\_rank} avec le parent.
+
+
+        La variable \textit{rank\_increase} est multipliée par le facteur \textit{MinHopRankIncrease} qui est défini par le RFC 6550~\cite{rfc:rpl} comme l'augmentation minimum du rang entre un noeud et n'importe lequel de ses parents. Sa valeur par défaut est \textsl{\textsc{default\_min\_hop\_rank\_increase}} qui a une valeur de 256.
+        
+        La variable $R(P)$ est le rang d'un parent $P$.
+
+        \begin{equation}\label{eq:state-rankOF0}
+            \begin{aligned}
+                rank\_increase &= (Rf * Sp + Sr) * MinHopRankIncrease\\
+                R(N) &= R(P) + rank\_increase    
+            \end{aligned}
+        \end{equation} 
+        %Le rang d'un noeud $R(N)$ est calculé comme suit:
+        %    \[rank\_increase = (Rf * Sp + Sr) * MinHopRankIncrease\]
+        %    \[R(N) = R(P) + rank\_increase\]
+        %    où
+        %    \begin{itemize}
+        %        \item $Rf$ est le $rank\_factor$ et $Sr \leq stretch\_of\_rank$ avec %$rank\_factor$ et $stretch\_of\_rank$ deux paramètres de la fonction
+        %        
+        %        \item $Sp$ est le $step\_of\_rank$ qui est une valeur basée sur les propriétés %du lien. 
+        %        
+        %        \item $MinHopRankIncrease$ est une constante
+        %        
+        %        \item $R(P)$ est le rang d'un parent $p$
+        %    \end{itemize}
+        %    $R(N)$ est calculé pour chaque parent potentiel. Le parent préféré choisi sera %alors le parent potentiel qui implique le plus petit $R(N)$.
                 
-    \item \subsubsection*{MRHOF}%rfc6719
-            Minimum Rank with Hysteresis Objective Function~\cite{rfc:mrhof} est une fonction dont l'objectif est de sélectionner les routes qui minimisent une métrique additive en utilisant l'hystérésis
+    \subsubsection*{MRHOF}%rfc6719
+            \textit{Minimum Rank with Hysteresis Objective Function} est une fonction dont l'objectif est de sélectionner les routes qui minimisent une métrique additive en utilisant l'hystérésis
             pour réduire les changements de parents en réponse a de petites variations de la métrique.
             
             Pour cela, un noeud va calculer le coût des chemins avec chaque candidat parent. Ce coût sera la somme de deux éléments:
             \begin{itemize}
-                \item La valeur de la métrique utlisée contenue dans les DIOs d'un candidat parent
-                \item La valeur de la métrique for le lien entre ce noeud et le candidat parent
+                \item La valeur de la métrique utilisée contenue dans les DIOs d'un candidat parent
+                \item La valeur de la métrique pour le lien entre ce noeud et le candidat parent
             \end{itemize}
-            Si le coût d'un chemin est plus grand qu'une constante \textsc{MAX\_LINK\_METRIC}, 
+            Si le coût d'un chemin est plus grand qu'une constante \textsl{\textsc{max\_link\_metric}} dont la valeur recommandée par le RFC 6719~\cite{rfc:mrhof} est 512,
             le noeud va exclure le candidat parent utilisant ce lien.
-
-            Un noeud va choisir comme parent le candidat parent pour lequel le coût du chemin est le plus petit. Le changement de parent ne s'effectue pas si ce nouveau coût est plus petit que le coût actuel moins \textsc{PARENT\_SWITCH\_THRESHOLD}. Ceci est l'hystérésis
-            de MRHOF.
-\end{itemize}
+            Un noeud va choisir comme parent le candidat parent pour lequel le coût du chemin est le plus petit. Le changement de parent ne s'effectue que si 
+            \[ |cost-old\_cost| > \textsc{parent\_switch\_treshold} \]
+            Le RFC 6719 recommande 192 comme valeur pour \textsl{\textsc{parent\_switch\_treshold}} si la métrique utilisée est ETX.
 
 \subsection*{Messages RPL}
 
