@@ -114,10 +114,10 @@ Cette section décrit brièvement les fonction objetif OF0 et MRHOF, sur base du
         \label{fig:state-dio}
     \end{figure}
 
-    Les DIOs sont transmis en utilisant l'algorithme Trickle~\cite{rfc:trickle}.
+    Les DIOs sont transmis en utilisant l'algorithme Trickle~\cite{rfc:trickle}. Cet algorithme permet de réduire la quantité de messages envoyés en réduisant les transmissions quand les conditions sont stables et en les augmentant lorsque qu'un changement est observé dans le réseau.
 
 \subsubsection*{DIS}
-    Les DODAG Information Solocitation (DIS) sont utilisés pour solicité un DIO d'un noeud RPL.
+    Les DODAG Information Solicitation (DIS) sont utilisés pour soliciter un DIO d'un noeud RPL.
 
 \subsubsection*{DAO}%p42
     Les DAOs (Destination Advertisement Object) sont utilisés pour établir les routes descendantes.
@@ -145,14 +145,17 @@ Cette section décrit brièvement les fonction objetif OF0 et MRHOF, sur base du
 \subsubsection*{Routes Montantes}
     %rfc: p 16, 19, 66
     Les routes montantes sont construites et maintenues avec les DIOs.
-    L'algorithme de construction de DODAG est le suivant:
+    L'algorithme de construction du DODAG est le suivant:
     \begin{enumerate}
-        \item Les noeuds étant configurés comme racine d'un DODAG diffusent des DIOs en mutlicast à tous les noeuds RPL
+        \item Les noeuds étant configurés comme racine d'un DODAG diffusent des DIOs en multicast à tous les noeuds RPL
         \item Les noeuds voulant rejoindre un DODAG écoutent ces DIOs et utilisent leurs informations pour rejoindre le DODAG (i.e. sélectionner un parent) ou maintenir le DODAG existant en accord avec la fonction objectif
-        \item Les noeuds rajoutes des entrée dans leur table de routage pour les destinations spécifiées dans le DIO via leurs parents.
+        \item Les noeuds rajoutent des entrées dans leur table de routage pour les destinations spécifiées dans le DIO via leurs parents
+        \item Une fois qu'un noeud a rejoint le DODAG, il diffuse à son tour des DIOs pour que d'autres noeuds puissent rejoindre le DODAG.
     \end{enumerate}
 
-    Si une adresse de destination n'appartient pas au DODAG, la racine du DODAG peu transférer les paquets à l'exterieur de ce réseau, ou, si elle n'en est pas capable, les ignorer.     
+    Les noeuds qui opèrent comme feuille peuvent émettre des DIOs mais le rang contenu dans le DIO doit être l'infini. De cette manière une feuille ne sera pas choisie comme parent.
+
+    Si une adresse de destination n'appartient pas au DODAG, la racine du DODAG peut transférer les paquets à l'exterieur de ce réseau, ou, si elle n'en est pas capable, les ignorer.     
 
 \subsubsection*{Routes Descendantes}
     %rfc: p 19
@@ -177,13 +180,21 @@ Cette section décrit brièvement les fonction objetif OF0 et MRHOF, sur base du
             RPL ne maintient pas de routes descendantes. Dans ce MOP, les DAOs ne sont pas émis par les noeuds d'un DODAG, et les noeuds ignorent les DAOs.
         \item \textbf{Non-storing mode}\\
             Dans ce mode, les DAOs sont envoyés en unicast à la racine du DODAG.
-            Les noeuds ne stockent pas de routes descendantes. Donc les routes sont établies par source routing. C'est à dire que les paquets remontent jusqu'à la racine du DODAG qui place dans les paquets tous les sauts de la route pour ensuite redescendre (Fig.~\ref{fig:state-path-nonstoring}).
+            Les noeuds ne stockent pas de routes descendantes.
+            
+            %--new
+            L'envoi des paquets le long de ces routes se fait donc par source-routing. Cela signifie qu'une en-tête de routage est ajoutée aux datagrammes par la racine. Le RFC 6554~\cite{rfc:rpl-routing-header} défini les mécanismes liés à ce type d'en-tête ainsi que son format qui est similaire à celui de l'en-tête de routage IPv6~\cite{rfc:ipv6} (de Type 0). Toutefois, il introduit un mécanisme qui permet de compresser les adresses quand elles ont toutes le même préfixe.
+
+            Dans ce mode, les paquets remontent donc jusqu'à la racine, qui rajoute l'en-tête de routage pour ensuite redescendre jusqu'au noeud de destination (Fig.~\ref{fig:state-path-nonstoring}).
+            %--old
+            %Donc les routes sont établies par source routing. C'est à dire que les paquets %remontent jusqu'à la racine du DODAG qui place dans les paquets tous les sauts de la %route pour ensuite redescendre (Fig.~\ref{fig:state-path-nonstoring}).
             %source/dest DAO unique-local ou global
+            %--
         \item \textbf{Storing mode}\\
             Le storing mode peut être utilisé avec ou sans multicast.
-            Dans ce mode, les DAOs sont envoyées en unicast par les noeuds à leur parent(s)
+            Dans ce mode, les DAOs sont envoyées en unicast par les noeuds à leur parent.
             Les paquets remontent jusqu'à un ancêtre commun avec la destination avant de redescendre vers celle-ci (Fig.~\ref{fig:state-path-storing}).
-            Les noeuds stockent les routes de leur sous DODAG. Ainsi, chanque saut dans un chemin examine sa table de routage pour choisir le saut suivant.
+            Les noeuds stockent les routes de leur sous DODAG. Ainsi, chaque saut dans un chemin examine sa table de routage pour choisir le saut suivant.
             %source et destination des DAO: link-local
     \end{itemize}
     
