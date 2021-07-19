@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.20 (TeX Live 2019/Debian) (preloaded format=pdflatex 2020.9.15)  19 JUL 2021 08:28
+This is pdfTeX, Version 3.14159265-2.6-1.40.20 (TeX Live 2019/Debian) (preloaded format=pdflatex 2020.9.15)  19 JUL 2021 19:22
 entering extended mode
  \write18 enabled.
  file:line:error style messages enabled.
@@ -840,7 +840,7 @@ LaTeX Info: Redefining \nameref on input line 79.
  ABD: EveryShipout initializing macros
 Package caption Info: Begin \AtBeginDocument code.
 Package caption Info: End \AtBeginDocument code.
-<page_garde/page_garde.pdf, id=75, 597.50829pt x 845.0471pt>
+<page_garde/page_garde.pdf, id=55, 597.50829pt x 845.0471pt>
 File: page_garde/page_garde.pdf Graphic file (type pdf)
 <use page_garde/page_garde.pdf>
 Package pdftex.def Info: page_garde/page_garde.pdf  used on input line 82.
@@ -849,7 +849,7 @@ File: page_garde/page_garde.pdf Graphic file (type pdf)
 <use page_garde/page_garde.pdf>
 Package pdftex.def Info: page_garde/page_garde.pdf  used on input line 82.
 (pdftex.def)             Requested size: 597.50682pt x 845.04504pt.
-<page_garde/page_garde.pdf, id=78, page=1, 597.50829pt x 845.0471pt>
+<page_garde/page_garde.pdf, id=58, page=1, 597.50829pt x 845.0471pt>
 File: page_garde/page_garde.pdf Graphic file (type pdf)
 <use page_garde/page_garde.pdf, page 1>
 Package pdftex.def Info: page_garde/page_garde.pdf , page1 used on input line 82.
@@ -927,7 +927,7 @@ l.2 \chapter
 ]
 Chapitre 1.
 (./src/etat_art/related_work.tex) (./src/etat_art/lora.tex
-<res/pictures/lora-sf.png, id=172, 577.15625pt x 988.69376pt>
+<res/pictures/lora-sf.png, id=151, 577.15625pt x 988.69376pt>
 File: res/pictures/lora-sf.png Graphic file (type png)
 <use res/pictures/lora-sf.png>
 Package pdftex.def Info: res/pictures/lora-sf.png  used on input line 9.
@@ -950,7 +950,7 @@ Underfull \hbox (badness 2617) in paragraph at lines 10--10
 [2
 
  <./res/pictures/lora-sf.png>]
-<res/pictures/lora-frame-format.drawio.png, id=186, 596.2275pt x 168.63pt>
+<res/pictures/lora-frame-format.drawio.png, id=164, 596.2275pt x 168.63pt>
 File: res/pictures/lora-frame-format.drawio.png Graphic file (type png)
 <use res/pictures/lora-frame-format.drawio.png>
 Package pdftex.def Info: res/pictures/lora-frame-format.drawio.png  used on input line 34.
@@ -961,7 +961,7 @@ Overfull \hbox (2.8179pt too wide) detected at line 61
  []
 
 [3 <./res/pictures/lora-frame-format.drawio.png>]) (./src/etat_art/802.15.4.tex [4]
-<res/pictures/superframe.png, id=216, 558.45pt x 162.79pt>
+<res/pictures/superframe.png, id=195, 558.45pt x 162.79pt>
 File: res/pictures/superframe.png Graphic file (type png)
 <use res/pictures/superframe.png>
 Package pdftex.def Info: res/pictures/superframe.png  used on input line 27.
@@ -971,13 +971,13 @@ Overfull \hbox (4.31013pt too wide) in paragraph at lines 74--77
 \T1/lmr/m/n/12 mes-lots par-ta-gés plu-sieurs noeuds peuvent com-mu-ni-quer. Dans ce cas, CSMA/
  []
 
-<res/pictures/sloframe.png, id=228, 411.71138pt x 108.97406pt>
+<res/pictures/sloframe.png, id=207, 411.71138pt x 108.97406pt>
 File: res/pictures/sloframe.png Graphic file (type png)
 <use res/pictures/sloframe.png>
 Package pdftex.def Info: res/pictures/sloframe.png  used on input line 80.
 (pdftex.def)             Requested size: 288.19598pt x 76.28131pt.
 [6 <./res/pictures/sloframe.png>]
-<res/pictures/tsch.drawio.png, id=240, 430.60875pt x 258.9675pt>
+<res/pictures/tsch.drawio.png, id=219, 430.60875pt x 258.9675pt>
 File: res/pictures/tsch.drawio.png Graphic file (type png)
 <use res/pictures/tsch.drawio.png>
 Package pdftex.def Info: res/pictures/tsch.drawio.png  used on input line 97.
@@ -987,7 +987,7 @@ Overfull \hbox (12.92256pt too wide) in paragraph at lines 19--24
 []\T1/lmr/m/n/12 RPL construit un DO-DAG (Des-ti-na-tion Orien-ted Di-rec-ted Acy-clic Graph)
  []
 
-<res/pictures/dodag.drawio.png, id=251, 666.49pt x 474.77374pt>
+<res/pictures/dodag.drawio.png, id=230, 666.49pt x 474.77374pt>
 File: res/pictures/dodag.drawio.png Graphic file (type png)
 <use res/pictures/dodag.drawio.png>
 Package pdftex.def Info: res/pictures/dodag.drawio.png  used on input line 27.
@@ -1001,30 +1001,30 @@ LaTeX Font Info:    Trying to load font information for T1+lmtt on input line 98
 (/usr/share/texmf/tex/latex/lm/t1lmtt.fd
 File: t1lmtt.fd 2009/10/30 v1.6 Font defs for Latin Modern
 )
-<res/pictures/dio.drawio.png, id=287, 656.4525pt x 325.215pt>
+<res/pictures/dio.drawio.png, id=266, 656.4525pt x 325.215pt>
 File: res/pictures/dio.drawio.png Graphic file (type png)
 <use res/pictures/dio.drawio.png>
 Package pdftex.def Info: res/pictures/dio.drawio.png  used on input line 118.
 (pdftex.def)             Requested size: 328.22545pt x 162.6071pt.
  [11]
-<res/pictures/dao.drawio.png, id=302, 647.41875pt x 285.065pt>
+<res/pictures/dao.drawio.png, id=281, 647.41875pt x 285.065pt>
 File: res/pictures/dao.drawio.png Graphic file (type png)
 <use res/pictures/dao.drawio.png>
 Package pdftex.def Info: res/pictures/dao.drawio.png  used on input line 140.
 (pdftex.def)             Requested size: 323.70857pt x 142.53215pt.
  [12 <./res/pictures/dio.drawio.png>] [13 <./res/pictures/dao.drawio.png>]
-<res/pictures/dao-dio.drawio.png, id=326, 686.565pt x 494.84875pt>
+<res/pictures/dao-dio.drawio.png, id=304, 686.565pt x 494.84875pt>
 File: res/pictures/dao-dio.drawio.png Graphic file (type png)
 <use res/pictures/dao-dio.drawio.png>
 Package pdftex.def Info: res/pictures/dao-dio.drawio.png  used on input line 173.
 (pdftex.def)             Requested size: 343.28166pt x 247.42377pt.
  [14 <./res/pictures/dao-dio.drawio.png>]
-<res/pictures/rpl-nonstoring.drawio.png, id=337, 352.31625pt x 364.36125pt>
+<res/pictures/rpl-nonstoring.drawio.png, id=316, 352.31625pt x 364.36125pt>
 File: res/pictures/rpl-nonstoring.drawio.png Graphic file (type png)
 <use res/pictures/rpl-nonstoring.drawio.png>
 Package pdftex.def Info: res/pictures/rpl-nonstoring.drawio.png  used on input line 210.
 (pdftex.def)             Requested size: 140.924pt x 145.74191pt.
-<res/pictures/rpl-storing.drawio.png, id=338, 352.31625pt x 364.36125pt>
+<res/pictures/rpl-storing.drawio.png, id=317, 352.31625pt x 364.36125pt>
 File: res/pictures/rpl-storing.drawio.png Graphic file (type png)
 <use res/pictures/rpl-storing.drawio.png>
 Package pdftex.def Info: res/pictures/rpl-storing.drawio.png  used on input line 216.
@@ -1049,13 +1049,13 @@ Chapitre 2.
 (./src/architecture/topologie.tex [19
 
 ]
-<res/pictures/loramac-topologie.drawio.png, id=394, 613.29124pt x 422.57875pt>
+<res/pictures/loramac-topologie.drawio.png, id=373, 613.29124pt x 422.57875pt>
 File: res/pictures/loramac-topologie.drawio.png Graphic file (type png)
 <use res/pictures/loramac-topologie.drawio.png>
-Package pdftex.def Info: res/pictures/loramac-topologie.drawio.png  used on input line 30.
+Package pdftex.def Info: res/pictures/loramac-topologie.drawio.png  used on input line 31.
 (pdftex.def)             Requested size: 429.30093pt x 295.8031pt.
 
-Overfull \hbox (39.30093pt too wide) in paragraph at lines 30--31
+Overfull \hbox (39.30093pt too wide) in paragraph at lines 31--32
  [][] 
  []
 
@@ -1070,51 +1070,72 @@ Underfull \hbox (badness 10000) in paragraph at lines 18--20
  []
 
 [21]) (./src/architecture/paquets.tex
-<res/pictures/loramac-frame.drawio.png, id=408, 488.82625pt x 245.91875pt>
+<res/pictures/loramac-frame.drawio.png, id=387, 488.82625pt x 245.91875pt>
 File: res/pictures/loramac-frame.drawio.png Graphic file (type png)
 <use res/pictures/loramac-frame.drawio.png>
 Package pdftex.def Info: res/pictures/loramac-frame.drawio.png  used on input line 7.
 (pdftex.def)             Requested size: 244.41252pt x 122.95906pt.
- [22 <./res/pictures/loramac-frame.drawio.png>]) (./src/architecture/protocole.tex
-<res/pictures/loramac-state.drawio.png, id=419, 625.33624pt x 381.425pt>
+ [22 <./res/pictures/loramac-frame.drawio.png>]) (./src/architecture/protocole.tex [23]
+<res/pictures/loramac-state.drawio.png, id=404, 686.565pt x 423.5825pt>
 File: res/pictures/loramac-state.drawio.png Graphic file (type png)
 <use res/pictures/loramac-state.drawio.png>
 Package pdftex.def Info: res/pictures/loramac-state.drawio.png  used on input line 12.
-(pdftex.def)             Requested size: 312.66736pt x 190.71202pt.
- [23] [24 <./res/pictures/loramac-state.drawio.png>]) (./src/architecture/hardware.tex [25]
-<res/pictures/rn2483.png, id=438, 692.5875pt x 461.725pt>
+(pdftex.def)             Requested size: 343.28166pt x 211.79073pt.
+ [24 <./res/pictures/loramac-state.drawio.png>] [25]
+<res/pictures/loramac-sequence1.drawio.png, id=419, 576.1525pt x 384.43625pt>
+File: res/pictures/loramac-sequence1.drawio.png Graphic file (type png)
+<use res/pictures/loramac-sequence1.drawio.png>
+Package pdftex.def Info: res/pictures/loramac-sequence1.drawio.png  used on input line 63.
+(pdftex.def)             Requested size: 403.30399pt x 269.10353pt.
+
+Overfull \hbox (13.30399pt too wide) in paragraph at lines 63--64
+ [][] 
+ []
+
+<res/pictures/loramac-sequence2.drawio.png, id=420, 606.265pt x 483.8075pt>
+File: res/pictures/loramac-sequence2.drawio.png Graphic file (type png)
+<use res/pictures/loramac-sequence2.drawio.png>
+Package pdftex.def Info: res/pictures/loramac-sequence2.drawio.png  used on input line 69.
+(pdftex.def)             Requested size: 424.3826pt x 338.66293pt.
+
+Overfull \hbox (34.3826pt too wide) in paragraph at lines 69--70
+ [][] 
+ []
+
+[26] [27 <./res/pictures/loramac-sequence1.drawio.png>]) (./src/architecture/hardware.tex [28 <./res/pictures/loramac-sequence2.drawio.png>]
+<res/pictures/rn2483.png, id=445, 692.5875pt x 461.725pt>
 File: res/pictures/rn2483.png Graphic file (type png)
 <use res/pictures/rn2483.png>
 Package pdftex.def Info: res/pictures/rn2483.png  used on input line 15.
 (pdftex.def)             Requested size: 207.77785pt x 138.51857pt.
-<res/pictures/rn2483-block-diagram.png, id=442, 976.64874pt x 791.95876pt>
+<res/pictures/rn2483-block-diagram.png, id=449, 976.64874pt x 791.95876pt>
 File: res/pictures/rn2483-block-diagram.png Graphic file (type png)
 <use res/pictures/rn2483-block-diagram.png>
 Package pdftex.def Info: res/pictures/rn2483-block-diagram.png  used on input line 23.
 (pdftex.def)             Requested size: 292.99689pt x 237.58946pt.
- [26 <./res/pictures/rn2483.png>]
+ [29 <./res/pictures/rn2483.png>]
 LaTeX Font Info:    Trying to load font information for TS1+lmr on input line 53.
  (/usr/share/texmf/tex/latex/lm/ts1lmr.fd
 File: ts1lmr.fd 2009/10/30 v1.6 Font defs for Latin Modern
-) [27 <./res/pictures/rn2483-block-diagram.png>]
-<res/pictures/raspberrypi3b+.png, id=466, 602.25pt x 401.5pt>
+) [30 <./res/pictures/rn2483-block-diagram.png>]
+<res/pictures/raspberrypi3b+.png, id=470, 602.25pt x 401.5pt>
 File: res/pictures/raspberrypi3b+.png Graphic file (type png)
 <use res/pictures/raspberrypi3b+.png>
 Package pdftex.def Info: res/pictures/raspberrypi3b+.png  used on input line 67.
 (pdftex.def)             Requested size: 210.79065pt x 140.5271pt.
-<res/pictures/remote-zolertia.jpg, id=473, 501.875pt x 501.875pt>
+<res/pictures/remote-zolertia.jpg, id=477, 501.875pt x 501.875pt>
 File: res/pictures/remote-zolertia.jpg Graphic file (type jpg)
 <use res/pictures/remote-zolertia.jpg>
 Package pdftex.def Info: res/pictures/remote-zolertia.jpg  used on input line 103.
 (pdftex.def)             Requested size: 150.56366pt x 150.56366pt.
- [28 <./res/pictures/raspberrypi3b+.png>])) (/home/arnaud/Documents/cours/universite/cours2020-2021/memoire/ma2_memoire/memoire/out/main.bbl [29 <./res/pictures/remote-zolertia.jpg>] [30
+ [31 <./res/pictures/raspberrypi3b+.png>])) (/home/arnaud/Documents/cours/universite/cours2020-2021/memoire/ma2_memoire/memoire/out/main.bbl [32 <./res/pictures/remote-zolertia.jpg>] [33
 
 ]
 Underfull \hbox (badness 8151) in paragraph at lines 96--100
 []\T1/lmr/m/n/12 OpenWSN.  []$\T1/lmtt/m/n/12 https : / / openwsn . atlassian . net / wiki / spaces / OW /
  []
 
-) [31]
+) [34]
 Package atveryend Info: Empty hook `BeforeClearDocument' on input line 136.
 Package atveryend Info: Empty hook `AfterLastShipout' on input line 136.
  (/home/arnaud/Documents/cours/universite/cours2020-2021/memoire/ma2_memoire/memoire/out/main.aux)
@@ -1124,10 +1145,10 @@ Package rerunfilecheck Info: File `main.out' has not changed.
 (rerunfilecheck)             Checksum: <no file>.
  ) 
 Here is how much of TeX's memory you used:
- 28440 strings out of 481239
- 536327 string characters out of 5920377
- 837378 words of memory out of 5000000
- 42866 multiletter control sequences out of 15000+600000
+ 28455 strings out of 481239
+ 536824 string characters out of 5920377
+ 837547 words of memory out of 5000000
+ 42873 multiletter control sequences out of 15000+600000
  604674 words of font info for 59 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
  60i,18n,96p,1115b,579s stack positions out of 5000i,500n,10000p,200000b,80000s
@@ -1170,10 +1191,10 @@ pdfTeX warning (dest): name{cite.rn2483\\penalty\040\\@M\040\040:datasheet} has 
 pdfTeX warning (dest): name{cite.rn2483\\penalty\040\\@M\040\040:shop} has been referenced but does not exist, replaced by a fixed one
 
 {/usr/share/texmf/fonts/enc/dvips/lm/lm-ts1.enc}{/usr/share/texmf/fonts/enc/dvips/lm/lm-ec.enc}{/usr/share/texmf/fonts/enc/dvips/lm/lm-mathex.enc}{/usr/share/texmf/fonts/enc/dvips/lm/lm-mathit.enc}{/usr/share/texmf/fonts/enc/dvips/lm/lm-rm.enc}{/usr/share/texmf/fonts/enc/dvips/lm/lm-mathsy.enc}</usr/share/texmf/fonts/type1/public/lm/lmbx12.pfb></usr/share/texmf/fonts/type1/public/lm/lmbxi10.pfb></usr/share/texmf/fonts/type1/public/lm/lmcsc10.pfb></usr/share/texmf/fonts/type1/public/lm/lmcsco10.pfb></usr/share/texmf/fonts/type1/public/lm/lmex10.pfb></usr/share/texmf/fonts/type1/public/lm/lmmi12.pfb></usr/share/texmf/fonts/type1/public/lm/lmmi6.pfb></usr/share/texmf/fonts/type1/public/lm/lmmi8.pfb></usr/share/texmf/fonts/type1/public/lm/lmr10.pfb></usr/share/texmf/fonts/type1/public/lm/lmr12.pfb></usr/share/texmf/fonts/type1/public/lm/lmr6.pfb></usr/share/texmf/fonts/type1/public/lm/lmr8.pfb></usr/share/texmf/fonts/type1/public/lm/lmri12.pfb></usr/share/texmf/fonts/type1/public/lm/lmro12.pfb></usr/share/texmf/fonts/type1/public/lm/lmsy10.pfb></usr/share/texmf/fonts/type1/public/lm/lmtt12.pfb></usr/share/texlive/texmf-dist/fonts/type1/urw/times/utmb8a.pfb></usr/share/texlive/texmf-dist/fonts/type1/urw/times/utmr8a.pfb>
-Output written on /home/arnaud/Documents/cours/universite/cours2020-2021/memoire/ma2_memoire/memoire/out/main.pdf (34 pages, 2272362 bytes).
+Output written on /home/arnaud/Documents/cours/universite/cours2020-2021/memoire/ma2_memoire/memoire/out/main.pdf (37 pages, 2383103 bytes).
 PDF statistics:
- 637 PDF objects out of 1000 (max. 8388607)
+ 644 PDF objects out of 1000 (max. 8388607)
  530 compressed objects within 6 object streams
- 170 named destinations out of 1000 (max. 500000)
- 259 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 176 named destinations out of 1000 (max. 500000)
+ 229 words of extra memory for PDF output out of 10000 (max. 10000000)
 

@@ -31,14 +31,13 @@ Cette section décrit les possibilités envisagées pour le choix du format des 
     %
 
 \subsection*{Préfixe et adresse MAC}
-    Pour résoudre le problème de la conversion \textit{node-id}$\leftrightarrow	$ adresse MAC, cette solution consiste à remplacer le \textit{node-id} par l'adresse MAC d'un noeud.
+    La troisième approche envisagée a pour objectif de résoudre le problème de la conversion \textit{node-id}$\leftrightarrow	$ adresse MAC, en remplaçant le \textit{node-id} par l'adresse MAC d'un noeud.
 
     Cette solution permet une conversion d'adresse simple et la taille des adresses est de 72 bits (64 bits de l'adresse MAC et 8 bits du préfixe).
 
 \subsection*{Solution retenue}
-    La solution retenue est l'utilisation du préfixe de 8 bits et du \textit{node-id} car c'est la solution qui offre les adresses les plus courtes. Pour éviter l'utilisation d'une table de conversion \textit{node-id}$\leftrightarrow$ adresse MAC, une meilleure solution que d'utiliser les adresses MAC des noeuds et de modifier les 6 premiers octets de cette dernière. Cela permet de reconstituer une adresse IPv6 simplement, mais cela réduit le nombre d'adresses possible
-    Malgré tout, le nombre d'adresse possible reste largement suffisant pour ce projet.
+    La solution retenue est l'utilisation du préfixe de 8 bits et du \textit{node-id} car c'est la solution qui offre les adresses les plus courtes. Pour éviter l'utilisation d'une table de conversion \textit{node-id}$\leftrightarrow$ adresse MAC, une meilleure solution que d'utiliser les adresses MAC des noeuds et de modifier les 6 premiers octets de cette dernière. Cela permet de reconstituer une adresse IPv6 simplement, mais cela réduit le nombre d'adresses possibles qui reste cependant largement suffisant pour ce projet.
 
-    L'adresse de la racine LoRa est une adresse configurée administrativement.
+    L'adresse de l'interface LoRa de la racine LoRa est quand à elle configurée administrativement.
 
     %todo schéma conversion, adresse de la racine 

@@ -7,6 +7,7 @@ Cette section décrit et motive la topologie et les types de noeuds du réseau d
     Le protocole élaboré pour ce réseau hybride définit 3 types de noeuds:
     \begin{itemize}
         \item[-] La \textbf{racine LoRa} est la passerelle entre le réseau et un réseau IP externe. Elle possède donc une interface LoRa et par exemple une interface Wi-Fi, Ethernet ou 3G/4G.
+        La radio LoRa est toujours allumée car ce noeud n'est pas contraint en énergie.  
         \item[-] Les \textbf{racines RPL} sont les racines des réseaux RPL. Elles possèdent une interface LoRa pour communiquer avec la racine LoRa et une interface 802.15.4 pour communiquer avec les noeuds du réseau RPL.
         \item[-] Les \textbf{noeuds RPL} sont des noeuds des réseaux RPL.
     \end{itemize}
