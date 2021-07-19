@@ -6,19 +6,29 @@ Cette section décrit les possibilités envisagées pour le choix du format des 
 \subsection*{Adresse IPv6}
     La première solution envisagée est d'utiliser les adresses IPv6 des noeuds.
     Une racine RPL peut ainsi vérifier si un paquet est destiné à son réseau et la racine LoRa à elle même,
-    via le préfixe de l'adresse de destintation.
-    Cette solution est la plus simple à mettre en oeuvre car elle ne nécéssite pas de table de routage ou de processus de conversion d'adresse. Néanmoins la taille des adresses IP est de 128 bits.
+    via le préfixe de sous réseau de l'adresse de destintation.
+    Cette solution est la plus simple à mettre en oeuvre car elle ne nécéssite pas de table de routage ou de processus de conversion d'adresse. Cette approche a néanmoins le désavantage que les adresses IP de 128 bits sont transportées sur un lien LoRa ce qui représente un temps de transmission important.
+    
+    Néanmoins la taille des adresses IP est de 128 bits.
 
 \subsection*{Préfixe et \textit{node-id}}
-    Le \textit{node-id} est un identifiant sur 16 bits de noeud utilisé dans Contiki. Son calcul, basé sur les deux derniers octets de l'adresse MAC du noeud (\textit{link-layer address}) est le suivant:
+    Une seconde approche est d'utiliser un préfixe et le \textit{node-id}. Ce dernier est un identifiant de noeud sur 16 bits utilisé dans Contiki. Son calcul, basé sur les deux derniers octets de l'adresse MAC du noeud (\textit{link-layer address}) est le suivant:
     \[
         node\_id = link\_addr[s-1] + (link\_addr[size -2] << 8)
     \]
-    où s est la taille de la \textit{link-layer address}.\\
+    où $s$ est la taille de la \textit{link-layer address}.\\
 
-    Le format d'adresse utilisée serait alors un préfixe sur 8 bits et le \textit{node-id} sur 16 bits ce qui fait un total de 24 bits.
+    Le format d'adresse utilisé serait alors un préfixe sur 8 bits et le \textit{node-id} sur 16 bits ce qui fait un total de 24 bits.
 
-    L'avantage de cette solution est que la taille des adresses est nettement réduite. Néanmoins, un processus de conversion est nécessaire ainsi qu'une table de conversion d'un \textit{node-id} vers une adresse MAC pour chaque noeud RPL. En effet, le calcul du \textit{node-id} ne permet de reconstituer l'adresse MAC de 64 bits à partir de celui-ci.
+    L'avantage de cette solution est que la taille des adresses est réduite d'un facteur de 18,75\%. Néanmoins, un processus de conversion est nécessaire ainsi qu'une table de conversion d'un \textit{node-id} vers une adresse MAC pour chaque noeud RPL. En effet, le calcul du \textit{node-id} ne permet pas de reconstituer l'adresse MAC de 64 bits à partir de celui-ci.
+    Un autre inconvénient est que l'utilisation du préfixe de 8 bits limite le nombre de réseaux RPL à 256, ce qui reste néanmoins acceptable.
+    % === infos ===
+    % Dans contiki, la link layer address est "remplie" dans arch/zoul/platform.c par
+    % `ieee_addr_cpy_to(linkaddr_node_addr.u8, LINKADDR_SIZE);` qui est définie dans
+    % arch/cpu/cc2538/iee-addr.c qui va lire l'adresse dans la mémoire flash du cc2538
+    % sauf si IEEE_ADDR_CONF_HARDCODED est définie. Dans ce cas c'est une adresse harcodée
+    % qui est utilisée
+    %
 
 \subsection*{Préfixe et adresse MAC}
     Pour résoudre le problème de la conversion \textit{node-id}$\leftrightarrow	$ adresse MAC, cette solution consiste à remplacer le \textit{node-id} par l'adresse MAC d'un noeud.
