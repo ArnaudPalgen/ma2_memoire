@@ -1,10 +1,9 @@
-\section{Plateformes de développement}%\label{}
+\section{Plateformes de développement}\label{hardware}
 \renewcommand{\rightmark}{Plateformes de développement}
     Cette section décrit le matériel utilisée pour mettre en oeuvre la topologie décrite en \todo{ref}. Pour les racines RPL, la plateforme de développement Zolertia RE-Mote revision B est utilisée, et,  pour la racine LoRa, un Raspberry pi 3B+ est utilisé. Leur interface LoRa est un RN2483. Les noeuds des réseau RPL sont également la plateforme de développement Zolertia RE-Mote revision B.
 
-\subsection*{RN2483}
-    Le RN2483 (Fig.~\ref{fig:state-rn2483}) est un modem LoRa compatible LoRaWAN$^{TM}$ basse énergie. D'après Nestor Ayuso~\cite{ayuso_2015}, il intègre un transceiver Semtech SX1276 et un
-    microcontrôleur Microchip PIC18LF46K22.
+\subsection*{RN2483}\label{hardware:rn2483}
+    Le RN2483 (Fig.~\ref{fig:state-rn2483}) est un modem LoRa compatible LoRaWAN$^{TM}$ basse énergie. D'après Nestor Ayuso~\cite{ayuso_2015}, il intègre un transceiver Semtech SX1276~\cite{sx1276:datasheet} et un microcontrôleur Microchip PIC18LF46K22.
     La communication avec ce modem est effetuée par des commandes ASCII envoyées via une interface UART. Il prend en charge les modulations FSK, GFSK et LoRa. Il possède également 14 GPIOs (General Purpose Input/Output).
     Ses fréquences opérationnelles sont situées dans les bandes 433 MHz et 868 MHz.
     D'après la datasheet~\cite{rn2483:datasheet}, 
