@@ -2,9 +2,10 @@ import queue
 from threading import Timer, Event, Thread
 from lora_phy import LoraAddr, LoraFrame, LoraPhy, MacCommand
 from dataclasses import dataclass
-import logging as log
 from enum import Enum, auto, unique
+import logging
 
+log = logging.getLogger("LoRa ROOT.MAC")
 
 
 MAX_PREFIX = 0xFC  # 252
@@ -20,6 +21,7 @@ RX_TIME = 3000  # 3 sec
 CHILD_TX_BUF_SIZE = 5
 CHILD_QUEUE_SIZE = 10
 
+
 @unique
 class ChildState(Enum):
     NEW = auto()
@@ -27,81 +29,71 @@ class ChildState(Enum):
     WAIT_RESPONSE = auto()
 
 
-
 class LoraChild:
     def __init__(self, addr: LoraAddr, retransmit_fun: callable):
-        self.addr = addr # child's address 
-        
-        self.expected_sn = 0 # expected SN for next received frame
-        self.next_sn = 0 # SN for next sent frame
-        
-        self.state = ChildState.NEW # child's state
-        #-------------------------------------------------------------
+        self.addr = addr  # child's address
 
-        self.retransmit_fun = retransmit_fun
-        self.timer = Timer(RETRANSMIT_TIMEOUT, self.retransmit_fun, [self])
-        self.last_send_frame = None
-        self.transmit_count = 1
+        self.expected_sn = 0  # expected SN for next received frame
+        self._next_sn = 0  # SN for next sent frame
+
+        self.last_send_frame: LoraFrame = None
+
+        # -------------------------------------------------------------
         self.can_send = True
-        self.tx_buf = queue.Queue(CHILD_TX_BUF_SIZE)
-        self.lost_packet = 0
+        # self.state = ChildState.NEW  # child's state
+        # self.transmit_count = 1
+        # self.tx_buf = queue.Queue(CHILD_TX_BUF_SIZE)
+        # self.lost_packet = 0
         # self.tx_buf.put(LoraFrame(LoraAddr(ROOT_PREFIX, ROOT_ID), LoraAddr(2, 24859), MacCommand.DATA, "48656c6C6F", False, True, False))
 
+    def get_sn(self):
+        """Return the sequence number (SN) to use
+        and increment it
+
+        Returns:
+            int: the sequence number to use to send a LoRaFrame
+        """
+        sn: int = self._next_sn
+        self._next_sn += 1
+        return sn
+
+    """
     def restart_timer(self):
         self.timer = Timer(RETRANSMIT_TIMEOUT, self.retransmit_fun, [self])
         self.timer.start()
+    """
 
 
 class LoraMac:
     def __init__(self):
-        self.phy_layer = LoraPhy() # PHY layer
+        self.phy_layer = LoraPhy()  # PHY layer
+
+        # Contains all childs that didn't finish de join procedure(prefix:child)
+        self.not_joined_childs = {}
         self.childs = {}  # Contains all childs (prefix:child)
-        self.addr = LoraAddr(ROOT_PREFIX, ROOT_ID) # node address
+
+        self.addr = LoraAddr(ROOT_PREFIX, ROOT_ID)  # node address
         self.action_matcher = {
             # contains functions for processing frames according to their MAC command (command:function)
             MacCommand.JOIN: self._on_join,
             MacCommand.ACK: self._on_ack,
-            MacCommand.QUERY: self._on_query,
+            # MacCommand.QUERY: self._on_query,
         }
-        self.next_prefix = MIN_PREFIX # next prefix to use for new child
-        
-        
-        self.childs_buf = queue.Queue(CHILD_QUEUE_SIZE)
+        self.next_prefix = MIN_PREFIX  # next prefix to use for new child
+        # -----------------------------------------------------------------------
+        # self.childs_buf = queue.Queue(CHILD_QUEUE_SIZE)
 
     def mac_init(self):
-        log.info('Init MAC')
+        log.info("Init MAC")
         self.phy_layer.phy_register_listener(self._mac_rx)
         self.phy_layer.phy_init()
         self.phy_layer.phy_timeout(0)
         self.phy_layer.phy_rx()
 
-        tx_thread = Thread(target=self._tx_process)
-        tx_thread.start()
+        # tx_thread = Thread(target=self._tx_process)
+        # tx_thread.start()
 
-    def _retransmit_timeout(self, child):
-        log.info("retransmit timeout from child %s", str(child))
-        if child.transmit_count >= MAX_RETRANSMIT:
-            if child.last_send_frame.command == MacCommand.JOIN_RESPONSE:
-                r = self.childs.pop(child.addr.node_id & 255, None)
-                if r is None:
-                    log.warning("child not in list")
-                return
-            log.warning("unable to send frame %s", str(child.last_send_frame))
-            child.lost_packet += 1
-            log.info("lost frames:%d", child.lost_packet)
-            child.ack = not child.ack
-            child.last_send_frame = None
-            child.transmit_count = 1
-            child.can_send = True
-            if child.last_send_frame.has_next:
-                self.childs_buf.put(child)
-
-        else:
-            log.info("retransmit frame: %s", str(child.last_send_frame))
-            child.transmit_count += 1
-            self.phy_layer.phy_tx(child.last_send_frame)
-            child.restart_timer()
-
+    """
     def _on_query(self, frame: LoraFrame):
         log.debug("In _on_query")
         child: LoraChild = self.childs.get(frame.src_addr.prefix, None)
@@ -111,87 +103,101 @@ class LoraMac:
         if child.tx_buf.empty():
             log.debug("child buffer empty -> send ack")
             self.phy_layer.phy_tx(
-                LoraFrame(self.addr, frame.src_addr, MacCommand.ACK, "", child.ack, False, False)
+                LoraFrame(
+                    self.addr,
+                    frame.src_addr,
+                    MacCommand.ACK,
+                    "",
+                    child.ack,
+                    False,
+                    False,
+                )
             )
             child.ack = not child.ack
         else:
             self.childs_buf.put(child)
+    """
 
-    def _on_ack(self, frame: LoraFrame):
-        """ get the childs from self.childs
-            try already joined child first, after try not already joined child
-            raise key error if child is not found
-            &255 because initial prefix is unint8(node_id)
+    def _on_ack(self, frame: LoraFrame, child: LoraChild):
+        """Process an ack frame
+
+        Args:
+            frame (LoraFrame): The LoRa frame to process
+            child (LoraChild): The child that send the frame
         """
         log.info("receive ack %s", str(frame))
 
-        child = self.childs.get(frame.src_addr.prefix, self.childs.get(frame.src_addr.node_id & 255, None))
-
-        if child is None:
-            log.error("child %s don't exist", str(frame.src_addr))
-
-        if frame.seq == child.ack:
+        if frame.seq == child.last_send_frame.seq:
             log.debug("correct ack number")
-            if child.last_send_frame.command == MacCommand.JOIN_RESPONSE:
-                log.debug("ack a JOIND_RESPONSE")
-                """ ack for JOIN_RESPONSE -> update child.addr.prefix
-                    and self.last_prefix
-                """
-                new_prefix = int(child.last_send_frame.payload, 16)
-                child.addr = LoraAddr(new_prefix, frame.dest_addr.node_id)
-                log.debug("update child with prefix %d", child.addr.prefix)
-                self.childs[child.addr.prefix] = child
-                del self.childs[frame.src_addr.node_id & 255]
-                self.last_prefix = new_prefix
 
-            child.ack = not child.ack
-            child.timer.cancel()
             child.can_send = True
 
             self.phy_layer.phy_timeout(0)
             self.phy_layer.phy_rx()
+        else:
+            log.warn("incorrect sn. expected: %d", child.last_send_frame.seq)
 
-            if child.last_send_frame.has_next:
-                self.childs_buf.put(child)
+    def _on_join(self, frame: LoraFrame, child: LoraChild):
+        """Process a join frame.
+        The joining sequence is described by de diagrame below
 
-    def _on_join(self, frame: LoraFrame, child:LoraChild):
-        """[summary]
         RPL_ROOT                                                                 LORA_ROOT
             | -----------------JOIN[(prefix=node_id[0:8], node_id)]----------------> |
             | <-- JOIN_RESPONSE[(prefix=node_id[0:8], node_id), data=new_prefix] --> |
 
         Args:
-            frame (LoraFrame): [description]
-            child (LoraChild): [description]
+            frame (LoraFrame): The LoRa frame to process
+            child (LoraChild): The child that send the frame
 
-        Returns:
-            [type]: [description]
         """
         log.info("reveive join frame %s", str(frame))
 
+        if frame.seq != 0:
+            log.warn("incorrect sn")
+
         if child is not None:
+            # it's a node that have already fully joined the network -> nothing to do
+            return
+
+        # perhaps that it's a node that retransmits the JOIN frame
+        child = self.not_joined_childs[frame.src_addr.prefix]
+
+        if child is not None:
+            # it is a retransmission
             log.info("Child %s already exist->retransmit", str(child))
             self.phy_layer.phy_tx(child.last_send_frame)
             return
 
-        log.info("new child")
+        log.info("new child:%s", str(frame.src_addr))
 
         if self.next_prefix > MAX_PREFIX:
+            # can't accept new child
             log.warning("can't accept new child")
-            return # can't accept nex child
+            return
 
-        new_child = LoraChild(frame.src_addr, self._retransmit_timeout)
+        new_prefix = self.next_prefix
+        self.next_prefix += 1
 
-        self.childs[frame.src_addr.prefix] = new_child
-        log.debug("new child:%s", str(frame.src_addr))
+        # create the child
+        new_child = LoraChild(
+            LoraAddr(new_prefix, frame.src_addr.node_id), self._retransmit_timeout
+        )
+        self.childs[new_prefix] = new_child
+        self.not_joined_childs[frame.src_addr.prefix] = new_child
+        log.debug("child created")
 
+        # send the join response
         log.debug("send join response")
-        self.mac_tx(
+        self.phy_layer.phy_tx(
             LoraFrame(
-                self.addr, frame.src_addr, MacCommand.JOIN_RESPONSE, "%02X" % new_prefix, new_child.ack, True
+                self.addr,
+                frame.src_addr,
+                MacCommand.JOIN_RESPONSE,
+                "%02X" % new_prefix,
+                new_child.get_sn(),
+                False,
             )
         )
-        self.childs_buf.put(new_child)
 
     def _mac_rx(self, frame: LoraFrame):
         """Receive LoRaFrame frome the PHY layer.
@@ -209,15 +215,20 @@ class LoraMac:
             return
 
         log.debug("look child with prefix: %d", frame.src_addr.prefix)
-        child = self.childs.get(frame.src_addr.prefix, None)
+        child: LoraChild = self.childs.get(frame.src_addr.prefix, None)
         log.debug("child is: %s", str(child))
-        
+        if frame.seq == 1 and child is not None:
+            # receive the first frame from this child
+            # i.e. the join procedure is completed
+            self.not_joined_childs.popitem(child.addr.node_id & 255, None)
+
         fun = self.action_matcher.get(frame.command, None)
         if fun is not None:
             fun(frame, child)
         else:
             log.warning("unknown MAC command")
 
+    """
     def mac_tx(self, frame: LoraFrame) -> bool:
         child = self.childs[frame.dest_addr.prefix]
         log.debug("in mac tx. FULL:%s", str(child.tx_buf.full()))
@@ -226,7 +237,9 @@ class LoraMac:
             log.debug("put for frame to buf of %s", str(child))
             return True
         return False
+    """
 
+    """
     def _tx_process(self):
         while True:
 
@@ -247,7 +260,10 @@ class LoraMac:
                 except queue.Empty:
                     break
                 child.last_send_frame = frame
-                if child.tx_buf.qsize() > 0 and frame.command != MacCommand.JOIN_RESPONSE:
+                if (
+                    child.tx_buf.qsize() > 0
+                    and frame.command != MacCommand.JOIN_RESPONSE
+                ):
                     frame.has_next = True
                 frame.seq = child.ack
                 self.phy_layer.phy_tx(frame)
@@ -262,10 +278,11 @@ class LoraMac:
                     self.phy_layer.phy_rx()
                 else:
                     child.ack = not child.ack
+    """
 
 
-if __name__ == '__main__':
-    mac = LoraMac()
-    mac.mac_init()
-    # mac.mac_tx(LoraFrame(LoraAddr(ROOT_PREFIX, ROOT_ID), LoraAddr(2, 24859), MacCommand.DATA, "48656c6C6F", False, True, False))
-    # mac._mac_rx(LoraFrame.build("radio_rx  00611B01000000\r\n"))
+# if __name__ == "__main__":
+#    mac = LoraMac()
+#    mac.mac_init()
+# mac.mac_tx(LoraFrame(LoraAddr(ROOT_PREFIX, ROOT_ID), LoraAddr(2, 24859), MacCommand.DATA, "48656c6C6F", False, True, False))
+# mac._mac_rx(LoraFrame.build("radio_rx  00611B01000000\r\n"))

@@ -2,12 +2,12 @@ import serial
 import time
 import queue
 import threading
-import logging as log
 from enum import Enum, auto, unique
 from dataclasses import dataclass
+import logging
 
-log.basicConfig(format='%(module)s-%(levelname)s-%(asctime)s-%(message)s', 
-datefmt='%H:%M:%S', filename='log/loramacC.log', level=log.DEBUG)
+log = logging.getLogger("LoRa ROOT.PHY")
+
 
 HEADER_SIZE = 14
 
@@ -69,23 +69,24 @@ LoRa frame:
 | dest addr |  src addr |  k  | next | reserved|command |  seq   |     payload    |
 
 """
+
+
 @dataclass
 class LoraFrame:
     src_addr: LoraAddr
     dest_addr: LoraAddr
     command: MacCommand
     payload: str  # must be to hex
-    seq: int    #sequence number
-    k: bool = False #need ack ?
+    seq: int  # sequence number
+    k: bool = False  # need ack ?
     has_next: bool = False
 
     def toHex(self):
-        """ create flags and MAC command"""
+        """create flags and MAC command"""
         f_c = 0
         f_c |= self.k << K_FLAG_SHIFT
         f_c |= self.has_next << NEXT_FLAG_SHIFT
         f_c |= self.command.value
-        
 
         return (
             self.src_addr.toHex()
@@ -111,8 +112,8 @@ class LoraFrame:
         """ extract flags an MAC command: 8 bits """
         f_c = int(data[12:14], 16)
 
-        flag_filter = 0x01 # 1 bit
-        cmd_filter = 0x0F # 4 bits
+        flag_filter = 0x01  # 1 bit
+        cmd_filter = 0x0F  # 4 bits
 
         k = bool((f_c >> K_FLAG_SHIFT) & flag_filter)
         has_next = bool((f_c >> NEXT_FLAG_SHIFT) & flag_filter)
@@ -157,7 +158,7 @@ class LoraPhy:
 
     def phy_init(self):
         # set serial connection, call send_phy for mac pause et radio set freq
-        log.info('Init PHY')
+        log.info("Init PHY")
         self.con = serial.Serial(port=self.port, baudrate=self.baudrate)
         tx_thread = threading.Thread(target=self.uart_tx)
         rx_thread = threading.Thread(target=self.uart_rx)
@@ -175,7 +176,11 @@ class LoraPhy:
     def phy_tx(self, loraFrame: LoraFrame):
         if loraFrame is None:
             return
-        f = UartFrame([UartResponse.RADIO_TX_OK, UartResponse.RADIO_ERR], loraFrame.toHex(), UartCommand.TX)
+        f = UartFrame(
+            [UartResponse.RADIO_TX_OK, UartResponse.RADIO_ERR],
+            loraFrame.toHex(),
+            UartCommand.TX,
+        )
         self._send_phy(f)
 
     def phy_timeout(self, timeout: int):
@@ -183,7 +188,9 @@ class LoraPhy:
         self._send_phy(f)
 
     def phy_rx(self):
-        f = UartFrame([UartResponse.RADIO_ERR, UartResponse.RADIO_RX], "0", UartCommand.RX)
+        f = UartFrame(
+            [UartResponse.RADIO_ERR, UartResponse.RADIO_RX], "0", UartCommand.RX
+        )
         self._send_phy(f)
 
     # --------------------------------------------------------------------------------
@@ -207,7 +214,7 @@ class LoraPhy:
             if resp is None:
                 continue
             if resp.value in decode_data:
-                if resp==UartResponse.RADIO_RX:
+                if resp == UartResponse.RADIO_RX:
                     self.listener(LoraFrame.build(decode_data[10:].strip()))
                 return True
         log.debug("unexpected response")
@@ -228,17 +235,21 @@ class LoraPhy:
                     self.can_send_cond.wait()
             self.last_sended = self.buffer.get(block=True)
             log.info("Send UART data:" + str(self.last_sended))
-            self.con.write((self.last_sended.cmd.value + self.last_sended.data + "\r\n").encode())
+            self.con.write(
+                (self.last_sended.cmd.value + self.last_sended.data + "\r\n").encode()
+            )
             self.can_send = False
 
 
-if __name__ == '__main__':
+if __name__ == "__main__":
     print("=== test frame parsing/building ===\n")
-    a = LoraFrame(LoraAddr(178, 45797), LoraAddr(179, 49878), MacCommand.PING, '', True, k=True)
+    a = LoraFrame(
+        LoraAddr(178, 45797), LoraAddr(179, 49878), MacCommand.PING, "", True, k=True
+    )
     print(" inital frame     :", a)
     to_hex = a.toHex()
-    print(" to hex           : "+to_hex)
+    print(" to hex           : " + to_hex)
     b = LoraFrame.build(to_hex)
     print(" rebuild from hex :", b)
-    print(" frames are equals:", a==b)
+    print(" frames are equals:", a == b)
     print("\n===================================")
