@@ -12,8 +12,9 @@ datefmt='%H:%M:%S', filename='log/loramacC.log', level=log.DEBUG)
 HEADER_SIZE = 14
 
 K_FLAG_SHIFT = 7
-SEQ_FLAG_SHIFT = 6
-NEXT_FLAG_SHIFT = 5
+NEXT_FLAG_SHIFT = 6
+#
+# - - - - - - - -
 
 
 @unique
@@ -62,13 +63,19 @@ class LoraAddr:
         return "%02X" % self.prefix + "%04X" % self.node_id
 
 
+"""
+LoRa frame: 
+|<---24---->|<----24--->|<-1->|<-1-->|<---2--->|<--4--->|<--8--->|<(2040-64=1976)>|
+| dest addr |  src addr |  k  | next | reserved|command |  seq   |     payload    |
+
+"""
 @dataclass
 class LoraFrame:
     src_addr: LoraAddr
     dest_addr: LoraAddr
     command: MacCommand
     payload: str  # must be to hex
-    seq: bool    #sequence number
+    seq: int    #sequence number
     k: bool = False #need ack ?
     has_next: bool = False
 
@@ -76,14 +83,15 @@ class LoraFrame:
         """ create flags and MAC command"""
         f_c = 0
         f_c |= self.k << K_FLAG_SHIFT
-        f_c |= self.seq << SEQ_FLAG_SHIFT
         f_c |= self.has_next << NEXT_FLAG_SHIFT
         f_c |= self.command.value
+        
 
         return (
             self.src_addr.toHex()
             + self.dest_addr.toHex()
             + ("%02X" % f_c)
+            + ("%02X" % self.seq)
             + (self.payload if self.payload else "")
         )
 
@@ -92,28 +100,30 @@ class LoraFrame:
         if len(data) < HEADER_SIZE:
             return None
 
-        """ extract src addr """
+        """ extract src addr: most significant 24 bits"""
         prefix_src = int(data[0:2], 16)
         node_id_src = int(data[2:6], 16)
 
-        """ extract dest addr """
+        """ extract dest addr: next 24 bits """
         prefix_dest = int(data[6:8], 16)
         node_id_dest = int(data[8:12], 16)
 
-        """ extract flags an MAC command """
+        """ extract flags an MAC command: 8 bits """
         f_c = int(data[12:14], 16)
 
-        flag_filter = 0x01
-        cmd_filter = 0x0F
+        flag_filter = 0x01 # 1 bit
+        cmd_filter = 0x0F # 4 bits
 
         k = bool((f_c >> K_FLAG_SHIFT) & flag_filter)
-        seq = bool((f_c >> SEQ_FLAG_SHIFT) & flag_filter)
         has_next = bool((f_c >> NEXT_FLAG_SHIFT) & flag_filter)
 
         cmd = MacCommand(f_c & cmd_filter)
 
+        """ extract sequence number: 8 bits """
+        seq = int(data[14:16])
+
         """ extract payload """
-        payload = data[14:]
+        payload = data[16:]
 
         """ create LoraFrame with computed values"""
         return LoraFrame(
