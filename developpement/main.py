@@ -16,9 +16,9 @@ def serial_log(port, baudrate):
     con = serial.Serial(port=port, baudrate=baudrate)
     while True:
         data = con.readline()
-        print("data: " + data.strip().decode())
-        logger.debug(data.strip().decode())
 
+        s = data.strip().decode(encoding="utf-8", errors="ignore")[1:]
+        logger.debug(s)
 
 def main():
     mac_layer.mac_init()
@@ -29,6 +29,7 @@ if __name__ == "__main__":
 
     print(__name__)
     import logging.config
-    logging.config.fileConfig('./logging.conf')
+
+    logging.config.fileConfig("./logging.conf")
 
     main()
