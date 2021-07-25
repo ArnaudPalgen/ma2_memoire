@@ -6,7 +6,7 @@ from enum import Enum, auto, unique
 from dataclasses import dataclass
 import logging
 
-log = logging.getLogger("LoRa ROOT.PHY")
+log = logging.getLogger("LoRa_ROOT.PHY")
 
 
 HEADER_SIZE = 14

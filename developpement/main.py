@@ -1,9 +1,7 @@
 import logging
-import py_lora_mac.main as loramac
+from py_lora_mac import mac_layer
 
-logger = logging.getLogger("RPL ROOT.")
-
-LOG_DIR = "logs"
+logger = logging.getLogger("RPL_ROOT")
 
 ZOLERTIA_BAUDRATE = 115200
 RN2483_BAUDRATE = 57600
@@ -23,19 +21,14 @@ def serial_log(port, baudrate):
 
 
 def main():
-    loramac.run()
-    serial_log(PORT_0, ZOLERTIA_BAUDRATE)
+    mac_layer.mac_init()
+    serial_log(PORT_1, ZOLERTIA_BAUDRATE)
 
 
 if __name__ == "__main__":
-    import datetime
 
-    logging.basicConfig(
-        format="%(module)s-%(levelname)s-%(asctime)s-%(message)s",
-        datefmt="%H:%M:%S",
-        filename=LOG_DIR
-        + str(datetime.datetime.now().strftime("%Y%m%d-%H:%M:%S"))
-        + ".log",
-        level=logging.DEBUG,
-    )
+    print(__name__)
+    import logging.config
+    logging.config.fileConfig('./logging.conf')
+
     main()

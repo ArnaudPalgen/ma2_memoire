@@ -1,11 +1,11 @@
 import queue
 from threading import Timer, Event, Thread
-from lora_phy import LoraAddr, LoraFrame, LoraPhy, MacCommand
+from py_lora_mac.lora_phy import LoraAddr, LoraFrame, LoraPhy, MacCommand
 from dataclasses import dataclass
 from enum import Enum, auto, unique
 import logging
 
-log = logging.getLogger("LoRa ROOT.MAC")
+log = logging.getLogger("LoRa_ROOT.MAC")
 
 
 MAX_PREFIX = 0xFC  # 252
@@ -84,6 +84,7 @@ class LoraMac:
         # self.childs_buf = queue.Queue(CHILD_QUEUE_SIZE)
 
     def mac_init(self):
+        print("Init MAC")
         log.info("Init MAC")
         self.phy_layer.phy_register_listener(self._mac_rx)
         self.phy_layer.phy_init()
