@@ -98,6 +98,7 @@ class LoraFrame:
 
     @staticmethod
     def build(data: str):
+        log.debug("build frame receive data: %s", data)
         if len(data) < HEADER_SIZE:
             return None
 

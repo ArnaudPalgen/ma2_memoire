@@ -1,4 +1,5 @@
 import logging
+import sys
 from py_lora_mac import mac_layer
 
 logger = logging.getLogger("RPL_ROOT")
@@ -20,7 +21,12 @@ def serial_log(port, baudrate):
         s = data.strip().decode(encoding="utf-8", errors="ignore")[1:]
         logger.debug(s)
 
+def exception_handler(type, value, traceback):
+    s = "\n Type:"+str(type)+"\n Value:"+str(value)+"\n Traceback:"+str(traceback)
+    logger.exception(s)
+
 def main():
+    #sys.excepthook = exception_handler
     mac_layer.mac_init()
     serial_log(PORT_1, ZOLERTIA_BAUDRATE)
 

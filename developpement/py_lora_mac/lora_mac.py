@@ -30,7 +30,7 @@ class ChildState(Enum):
 
 
 class LoraChild:
-    def __init__(self, addr: LoraAddr, retransmit_fun: callable):
+    def __init__(self, addr: LoraAddr):
         self.addr = addr  # child's address
 
         self.expected_sn = 0  # expected SN for next received frame
@@ -161,7 +161,7 @@ class LoraMac:
             return
 
         # perhaps that it's a node that retransmits the JOIN frame
-        child = self.not_joined_childs[frame.src_addr.prefix]
+        child = self.not_joined_childs.get(frame.src_addr.prefix, None)
 
         if child is not None:
             # it is a retransmission
@@ -181,8 +181,7 @@ class LoraMac:
 
         # create the child
         new_child = LoraChild(
-            LoraAddr(new_prefix, frame.src_addr.node_id), self._retransmit_timeout
-        )
+            LoraAddr(new_prefix, frame.src_addr.node_id))
         self.childs[new_prefix] = new_child
         self.not_joined_childs[frame.src_addr.prefix] = new_child
         log.debug("child created")
