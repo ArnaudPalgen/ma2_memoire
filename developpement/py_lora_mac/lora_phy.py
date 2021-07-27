@@ -5,8 +5,18 @@ import threading
 from enum import Enum, auto, unique
 from dataclasses import dataclass
 import logging
+import sys
+
 
 log = logging.getLogger("LoRa_ROOT.PHY")
+
+
+def exception_handler(type, value, traceback):
+    s = "\n Type:"+str(type)+"\n Value:"+str(value)+"\n Traceback:"+str(traceback)
+    log.exception(s)
+    sys.exit(1)
+
+sys.excepthook = exception_handler
 
 
 HEADER_SIZE = 14
@@ -61,6 +71,9 @@ class LoraAddr:
 
     def toHex(self):
         return "%02X" % self.prefix + "%04X" % self.node_id
+
+    def __str__(self):
+        return str(self.prefix)+":"+str(self.node_id)
 
 
 """
@@ -122,7 +135,7 @@ class LoraFrame:
         cmd = MacCommand(f_c & cmd_filter)
 
         """ extract sequence number: 8 bits """
-        seq = int(data[14:16])
+        seq = int(data[14:16], 16)
 
         """ extract payload """
         payload = data[16:]

@@ -24,9 +24,10 @@ def serial_log(port, baudrate):
 def exception_handler(type, value, traceback):
     s = "\n Type:"+str(type)+"\n Value:"+str(value)+"\n Traceback:"+str(traceback)
     logger.exception(s)
+    sys.exit(1)
 
 def main():
-    #sys.excepthook = exception_handler
+    sys.excepthook = exception_handler
     mac_layer.mac_init()
     serial_log(PORT_1, ZOLERTIA_BAUDRATE)
 
