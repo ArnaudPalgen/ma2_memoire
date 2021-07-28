@@ -12,9 +12,17 @@ log = logging.getLogger("LoRa_ROOT.PHY")
 
 
 def exception_handler(type, value, traceback):
-    s = "\n Type:"+str(type)+"\n Value:"+str(value)+"\n Traceback:"+str(traceback)
+    s = (
+        "\n Type:"
+        + str(type)
+        + "\n Value:"
+        + str(value)
+        + "\n Traceback:"
+        + str(traceback)
+    )
     log.exception(s)
     sys.exit(1)
+
 
 sys.excepthook = exception_handler
 
@@ -73,7 +81,7 @@ class LoraAddr:
         return "%02X" % self.prefix + "%04X" % self.node_id
 
     def __str__(self):
-        return str(self.prefix)+":"+str(self.node_id)
+        return str(self.prefix) + ":" + str(self.node_id)
 
 
 """
@@ -165,10 +173,12 @@ class LoraPhy:
         self.port = port
         self.baudrate = baudrate
         self.buffer = queue.Queue(10)
-        self.listener = None
+        self.rx_buffer = queue.Queue(50)
+        #self.listener = None
         self.can_send = True
         self.can_send_cond = threading.Condition()
         self.last_sended = None
+        self.tx_lock = threading.Lock()
 
     def phy_init(self):
         # set serial connection, call send_phy for mac pause et radio set freq
@@ -184,10 +194,11 @@ class LoraPhy:
         with self.can_send_cond:
             self.can_send_cond.notify_all()
 
-    def phy_register_listener(self, listener):
-        self.listener = listener
+    #def phy_register_listener(self, listener):
+    #    self.listener = listener
 
     def phy_tx(self, loraFrame: LoraFrame):
+        self.tx_lock.acquire()
         if loraFrame is None:
             return
         f = UartFrame(
@@ -196,6 +207,7 @@ class LoraPhy:
             UartCommand.TX,
         )
         self._send_phy(f)
+        self.tx_lock.release()
 
     def phy_timeout(self, timeout: int):
         f = UartFrame([UartResponse.OK], str(timeout), UartCommand.SET_WDT)
@@ -229,10 +241,21 @@ class LoraPhy:
                 continue
             if resp.value in decode_data:
                 if resp == UartResponse.RADIO_RX:
-                    self.listener(LoraFrame.build(decode_data[10:].strip()))
+                    # self.listener(LoraFrame.build(decode_data[10:].strip()))
+                    try:
+                        self.rx_buffer.put(
+                            LoraFrame.build(decode_data[10:].strip()), block=False
+                        )
+                    except queue.Full:
+                        log.warning("receive buffer full")
+
                 return True
         log.debug("unexpected response")
         return False
+
+    def getFrame(self):
+        frame = self.rx_buffer.get()
+        return frame
 
     def uart_rx(self):
         while True:

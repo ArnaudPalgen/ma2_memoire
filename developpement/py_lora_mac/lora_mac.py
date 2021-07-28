@@ -99,7 +99,7 @@ class LoraMac:
     def mac_init(self):
         print("Init MAC")
         log.info("Init MAC")
-        self.phy_layer.phy_register_listener(self._mac_rx)
+        #self.phy_layer.phy_register_listener(self._mac_rx)
         self.phy_layer.phy_init()
         self.phy_layer.phy_timeout(0)
         self.phy_layer.phy_rx()
@@ -133,8 +133,25 @@ class LoraMac:
                 )
             )
         else:
+            #start a tx thread if y'en a pas en cours
+            # can listen à faux
             pass #todo
+
+    def tx_process(self, *args, **kwargs):#send all data for a child
+        #j'envoie un paquet
+        # si attend un ack.
+            #LOCK ACK_LOCK
+            #LOCK ACK_LOCK -> BLOQUER TANT QUE ON A PAS REÇU LE ACK
+        #paquet comme last send
+        #supprime le paquet envoyé du buffer
+        #j'attends delai (mise en écoute + retransmission)
+        pass
+
     
+    
+    def listen(self):
+        self.phy_layer.phy_timeout(0) # disable watchdog timer
+        self.phy_layer.phy_rx() # listen
 
     def _on_ack(self, frame: LoraFrame, child: LoraChild):
         """Process an ack frame
@@ -150,8 +167,10 @@ class LoraMac:
 
             child.can_send = True
 
-            self.phy_layer.phy_timeout(0)
-            self.phy_layer.phy_rx()
+            #UNLOCK ACK_LOCK si locké
+            # dans ce cas, can_listen à Faux
+        elif frame.seq < child.last_send_frame.seq:
+            self.phy_layer.phy_tx(child.last_send_frame.seq)
         else:
             log.warn("incorrect sn. expected: %d", child.last_send_frame.seq)
 
@@ -172,9 +191,11 @@ class LoraMac:
 
         if frame.seq != 0:
             log.warn("incorrect sn")
+            return
 
         if child is not None:
             # it's a node that have already fully joined the network -> nothing to do
+            log.warn("node has already fully joined the network")
             return
 
         # perhaps that it's a node that retransmits the JOIN frame
@@ -214,13 +235,13 @@ class LoraMac:
                 False,
             )
         )
-        self.phy_layer.phy_timeout(0) # disable watchdog timer
-        self.phy_layer.phy_rx() # listen
 
     def _mac_rx(self, frame: LoraFrame):
         """Receive LoRaFrame frome the PHY layer.
             - checks that the destination address is correct
             - retrieves the child if exist
+            - if seq = 1, mark de child as completly joined
+            - if wait ack and frame is not ack: retransmit last packet
             - calls the appropriate function to process the frame
 
         Args:
@@ -245,6 +266,20 @@ class LoraMac:
             fun(frame, child)
         else:
             log.warning("unknown MAC command")
+
+
+    def rx_process(self):
+        while True:
+            print("hello")
+            frame = self.phy_layer.getFrame()
+            self._mac_rx(frame)
+            # si can_listen
+            self.listen()
+            # peut pas toujours listen 
+            # car apres reception d'un ack, le tx process peut avoir besoin
+            # d'envoyer des trames
+
+
 
     """
     def mac_tx(self, frame: LoraFrame) -> bool:
