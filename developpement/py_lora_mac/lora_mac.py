@@ -5,7 +5,7 @@ from dataclasses import dataclass
 from enum import Enum, auto, unique
 import logging
 import sys
-
+import time
 
 log = logging.getLogger("LoRa_ROOT.MAC")
 
@@ -29,6 +29,8 @@ RX_TIME = 3000  # 3 sec
 
 CHILD_TX_BUF_SIZE = 5
 CHILD_QUEUE_SIZE = 10
+
+MIN_WAIT_TIME = 1 # sec
 
 
 @unique
@@ -82,7 +84,7 @@ class LoraChild:
 
 class LoraMac:
     def __init__(self):
-        self.phy_layer = LoraPhy()  # PHY layer
+        self.phy_layer:LoraPhy = LoraPhy()  # PHY layer
 
         # Contains all childs that didn't finish de join procedure(prefix:child)
         self.not_joined_childs = {}
@@ -99,7 +101,10 @@ class LoraMac:
 
         # used not to listen when a tx process is going to send or is sending
         self.can_listen = True
-        self.can_listen_lock = Lock()
+        self.is_listen = False # tell if listen
+        self.listen_lock = Lock() # lock for can_listen and listen
+
+        
         # -----------------------------------------------------------------------
         # self.childs_buf = queue.Queue(CHILD_QUEUE_SIZE)
 
@@ -110,12 +115,20 @@ class LoraMac:
         self.phy_layer.phy_init()
         self.phy_layer.phy_timeout(0)
         self.phy_layer.phy_rx()
-
-        # tx_thread = Thread(target=self._tx_process)
-        # tx_thread.start()
+        self.is_listen = True
+        
+        tx_thread = Thread(target=self.rx_process)
+        tx_thread.start()
+        
 
     
     def _on_query(self, frame: LoraFrame, child: LoraChild):
+        """Process a query frame
+
+        Args:
+            frame (LoraFrame): The LoRa frame to process
+            child (LoraChild): The child that send the frame
+        """
         log.debug("In _on_query")
         if child is None:
             log.warning("child not in list")
@@ -144,13 +157,16 @@ class LoraMac:
             # can listen à faux
             if (child.tx_process is None) or (not child.tx_process.is_alive()):
                 child.tx_process = Thread(target=self.tx_process, kwargs={'child':child})
-                self.can_listen_lock.acquire()
+                self.listen_lock.acquire()
                 self.can_listen = False
-                self.can_listen_lock.release()
+                self.listen_lock.release()
                 child.tx_process.start()
             
 
     def tx_process(self, *args, **kwargs):#send all data for a child
+        """Process that sends alls the LoRaFrame in a child buffer
+        The child must pas in the **kwargs parameters
+        """
         #j'envoie un paquet
         # si attend un ack.
             #LOCK ACK_LOCK
@@ -161,17 +177,43 @@ class LoraMac:
         #paquet comme last send
         #supprime le paquet envoyé du buffer
         #j'attends delai (mise en écoute + retransmission)
-        child:LoraChild = kwargs['child']
+        child:LoraChild = kwargs['child'] # get the child
         while not child.tx_buf.empty():
             try:
-                next_frame=child.tx_buf.get_nowait()
-                
-        pass
+                next_frame=child.tx_buf.get_nowait() # get the next frame to send
+            except queue.Empty:
+                break
+            
+            if next_frame.k:
+                # if the frame need an ack, acquire the lock the first time
+                child.ack_lock.acquire()
+            
+            # set the SN and has_next flag of the frame
+            next_frame.seq = child.get_sn()
+            next_frame.has_next = not child.tx_buf.empty()
+            
+            self.phy_layer.phy_tx(next_frame) # send the frame
+            child.last_send_frame = next_frame # set the frame as last frame
 
+            if next_frame.k: # if frame need an ack
+
+                self.listen_lock.acquire()
+
+                self.is_listen = True # tell that we listen
+                self.listen() # listen
+                self.can_listen = True # tell that we can listen (because we listen)
+
+                self.listen_lock.release()
+                
+                # acquire the lock the second time
+                # this will block the process until an ack is received
+                child.ack_lock.acquire()
+            
+            time.sleep(MIN_WAIT_TIME)# wait child change his state
     
     
     def listen(self):
-        self.phy_layer.phy_timeout(0) # disable watchdog timer
+        #self.phy_layer.phy_timeout(0) # disable watchdog timer
         self.phy_layer.phy_rx() # listen
 
     def _on_ack(self, frame: LoraFrame, child: LoraChild):
@@ -186,10 +228,12 @@ class LoraMac:
         if frame.seq == child.last_send_frame.seq:
             log.debug("correct ack number")
 
-            #child.can_send = True
+            if child.ack_lock.locked(): # the child wait an ack
+                # unblock the tx process of the child by release his listen
+                self.listen_lock.acquire()
+                self.can_listen = False
+                self.listen_lock.release()
 
-            #UNLOCK ACK_LOCK si locké
-            # dans ce cas, can_listen à Faux
         elif frame.seq < child.last_send_frame.seq:
             self.phy_layer.phy_tx(child.last_send_frame.seq)
         else:
@@ -282,6 +326,12 @@ class LoraMac:
             # i.e. the join procedure is completed
             self.not_joined_childs.pop(child.addr.node_id & 255, None)
 
+        if child is not None and child.ack_lock.locked() and frame.command != MacCommand.ACK:
+            # the child wait an ack and this frame is not an ack
+            # -> retransmit last frame
+            self.phy_layer.phy_tx(child.last_send_frame)
+            return 
+
         fun = self.action_matcher.get(frame.command, None)
         if fun is not None:
             fun(frame, child)
@@ -290,73 +340,27 @@ class LoraMac:
 
 
     def rx_process(self):
+
         while True:
-            print("hello")
             frame = self.phy_layer.getFrame()
+            log.debug("RX process receive")            
+            self.listen_lock.acquire()
+            self.is_listen = False
+            log.debug("RX process set is_listen=False")
+            self.listen_lock.release()
+            
+            log.debug("RX process call mac_rx")
             self._mac_rx(frame)
-            # si can_listen
-            self.listen()
+            log.debug("RX process: mac_rx end")
+            
+            self.listen_lock.acquire()
+            log.debug("RX process acquire lock for can_listen")
+            log.debug("can listen: %s", str(self.can_listen))
+            log.debug("is_listen: %s", str(self.is_listen))
+            if self.can_listen and not self.is_listen:
+                self.listen()
+                self.is_listen = True
+            self.listen_lock.release()
             # peut pas toujours listen 
             # car apres reception d'un ack, le tx process peut avoir besoin
             # d'envoyer des trames
-
-
-
-    """
-    def mac_tx(self, frame: LoraFrame) -> bool:
-        child = self.childs[frame.dest_addr.prefix]
-        log.debug("in mac tx. FULL:%s", str(child.tx_buf.full()))
-        if not child.tx_buf.full():
-            child.tx_buf.put(frame, block=False)
-            log.debug("put for frame to buf of %s", str(child))
-            return True
-        return False
-    """
-
-    """
-    def _tx_process(self):
-        while True:
-
-            try:
-                # get  next child for wich frame are available to send
-                child = self.childs_buf.get(block=False)
-            except queue.Empty:
-                # if there is no child, we have send all frame
-                # so we listen
-                self.phy_layer.phy_timeout(0)
-                self.phy_layer.phy_rx()
-                child = self.childs_buf.get(block=True)
-
-            while child.can_send and child.tx_buf.qsize() > 0:
-                try:
-                    frame = child.tx_buf.get(block=False)
-                    log.warning("TX send frame: %s", str(frame))
-                except queue.Empty:
-                    break
-                child.last_send_frame = frame
-                if (
-                    child.tx_buf.qsize() > 0
-                    and frame.command != MacCommand.JOIN_RESPONSE
-                ):
-                    frame.has_next = True
-                frame.seq = child.ack
-                self.phy_layer.phy_tx(frame)
-                log.info("send %s", str(frame))
-                if frame.k or frame.command == MacCommand.JOIN_RESPONSE:
-                    child.timer.start()
-                    log.info("start retransmit timer")
-                    child.can_send = False
-                    if frame.has_next:
-                        self.childs_buf.put(child)
-                    self.phy_layer.phy_timeout(RX_TIME)
-                    self.phy_layer.phy_rx()
-                else:
-                    child.ack = not child.ack
-    """
-
-
-# if __name__ == "__main__":
-#    mac = LoraMac()
-#    mac.mac_init()
-# mac.mac_tx(LoraFrame(LoraAddr(ROOT_PREFIX, ROOT_ID), LoraAddr(2, 24859), MacCommand.DATA, "48656c6C6F", False, True, False))
-# mac._mac_rx(LoraFrame.build("radio_rx  00611B01000000\r\n"))
