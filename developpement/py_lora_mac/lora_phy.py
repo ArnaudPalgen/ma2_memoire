@@ -41,11 +41,11 @@ class MacCommand(Enum):
     JOIN_RESPONSE = 1
     DATA = 2
     ACK = 3
-    PING = 4
-    PONG = 5
+    PING = 4 # a supprimer
+    PONG = 5 # a supprimer
     QUERY = 6
-    CHILD = 7
-    CHILD_RESPONSE = 8
+    CHILD = 7 # a supprimer
+    CHILD_RESPONSE = 8 # a supprimer
 
 
 @unique
