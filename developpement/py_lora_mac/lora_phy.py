@@ -98,7 +98,7 @@ class LoraFrame:
     dest_addr: LoraAddr
     command: MacCommand
     payload: str  # must be to hex
-    seq: int  # sequence number
+    seq: int = 0  # sequence number
     k: bool = False  # need ack ?
     has_next: bool = False
 
@@ -235,13 +235,14 @@ class LoraPhy:
 
     def process_response(self, data: str):
         decode_data = data.decode()
-        log.info("process uart response: " + decode_data)
+        log.debug("process uart response: " + decode_data)
         for resp in self.last_sended.expected_response:
             if resp is None:
                 continue
             if resp.value in decode_data:
                 if resp == UartResponse.RADIO_RX:
                     # self.listener(LoraFrame.build(decode_data[10:].strip()))
+                    log.info("PHY RX:"+decode_data[10:].strip())
                     try:
                         self.rx_buffer.put(
                             LoraFrame.build(decode_data[10:].strip()), block=False
@@ -271,7 +272,7 @@ class LoraPhy:
                 with self.can_send_cond:
                     self.can_send_cond.wait()
             self.last_sended = self.buffer.get(block=True)
-            log.info("Send UART data:" + str(self.last_sended))
+            log.info("PHY TX:" + self.last_sended.cmd.value + self.last_sended.data)
             self.con.write(
                 (self.last_sended.cmd.value + self.last_sended.data + "\r\n").encode()
             )
