@@ -416,7 +416,7 @@ class LoraMac:
             log.debug("RX process set is_listen=False")
             self.listen_lock.release()
 
-            log.debug("RX process call mac_rx")
+            log.debug("RX process: call mac_rx")
             self._mac_rx(frame)
             log.debug("RX process: mac_rx end")
 

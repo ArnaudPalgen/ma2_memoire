@@ -109,6 +109,9 @@ class LoraFrame:
         f_c |= self.has_next << NEXT_FLAG_SHIFT
         f_c |= self.command.value
 
+        if len(self.payload)%2!=0:
+            self.payload += "0"
+
         return (
             self.src_addr.toHex()
             + self.dest_addr.toHex()
@@ -159,6 +162,9 @@ class LoraFrame:
             has_next,
         )
 
+class PayloadObject:
+    def to_hex(self):
+        raise NotImplementedError
 
 @dataclass
 class UartFrame:
@@ -198,6 +204,7 @@ class LoraPhy:
     #    self.listener = listener
 
     def phy_tx(self, loraFrame: LoraFrame):
+        log.info("MAC send:%s", str(loraFrame))
         self.tx_lock.acquire()
         if loraFrame is None:
             return
