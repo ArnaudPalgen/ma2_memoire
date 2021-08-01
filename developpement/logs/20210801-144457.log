@@ -1,3 +1,4 @@
+# send 2 downward frames with ack: OK
 lora_mac-INFO-  2021-08-01 14:44:57,829-Init MAC
 lora_phy-INFO-  2021-08-01 14:44:57,829-Init PHY
 lora_phy-INFO-  2021-08-01 14:44:57,832-PHY TX:mac pause

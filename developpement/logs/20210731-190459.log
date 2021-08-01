@@ -1,4 +1,4 @@
-# send 2 upward frames: OK
+# send 2 downward frames: OK
 lora_mac-INFO-  2021-07-31 19:04:59,169-Init MAC
 lora_phy-INFO-  2021-07-31 19:04:59,169-Init PHY
 lora_phy-INFO-  2021-07-31 19:04:59,173-PHY TX:mac pause

@@ -118,6 +118,7 @@ class LoraMac:
             MacCommand.JOIN: self._on_join,
             MacCommand.ACK: self._on_ack,
             MacCommand.QUERY: self._on_query,
+            MacCommand.DATA: self._on_data
         }
         self.next_prefix = MIN_PREFIX  # next prefix to use for new child
 
@@ -130,7 +131,7 @@ class LoraMac:
         self.can_listen = True
         self.is_listen = False  # tell if listen
         self.listen_lock = Lock()  # lock for can_listen and listen
-        self.done = False
+        #self.done = False
 
         # -----------------------------------------------------------------------
         # self.childs_buf = queue.Queue(CHILD_QUEUE_SIZE)
@@ -269,6 +270,37 @@ class LoraMac:
         # self.phy_layer.phy_timeout(0) # disable watchdog timer
         self.phy_layer.phy_rx()  # listen
 
+    def _on_data(self, frame: LoraFrame, child: LoraChild):
+        log.debug("Data ! ")
+        log.debug("expected sn: %d", child.expected_sn)
+        if frame.seq < child.expected_sn:
+            log.debug("frame.seq < expected seq")
+            if child.retransmit_count <= MAX_RETRANSMIT:
+                log.debug("retransmit")
+                self.phy_layer.phy_tx(child.last_send_frame.seq)
+            else:#todo
+                pass
+            child.retransmit_count += 1
+            return
+        elif frame.seq > child.expected_sn:
+            log.debug("frame seq > expected")
+            log.warn("lost %d frames", (frame.seq - child.expected_sn))
+            child.expected_sn = frame.seq + 1
+        if frame.k:
+            log.debug("frame want ack -> send ack")
+            ack = LoraFrame(
+                    self.addr,
+                    frame.src_addr,
+                    MacCommand.ACK,
+                    "",
+                    frame.seq,
+                    False,
+                    False,
+                )
+            self.phy_layer.phy_tx(ack)
+            child.last_send_frame = ack
+        #todo deliver data to upper layer
+
     def _on_ack(self, frame: LoraFrame, child: LoraChild):
         """Process an ack frame
 
@@ -405,10 +437,10 @@ class LoraMac:
         if frame.seq == 1 and child is not None:
             # receive the first frame from this child
             # i.e. the join procedure is completed
-            if not self.done:
-                child.tx_buf.put(LoraFrame(self.addr, child.addr, MacCommand.DATA, "ABC", k = True))
-                child.tx_buf.put(LoraFrame(self.addr, child.addr, MacCommand.DATA, "DEF", k = True))
-                self.done = True
+            #if not self.done:
+            #    child.tx_buf.put(LoraFrame(self.addr, child.addr, MacCommand.DATA, "ABC", k = True))
+            #    child.tx_buf.put(LoraFrame(self.addr, child.addr, MacCommand.DATA, "DEF", k = True))
+            #    self.done = True
             self.not_joined_childs.pop(child.addr.node_id & 255, None)
 
             # resets retransmit_count if there have been retransmissions
