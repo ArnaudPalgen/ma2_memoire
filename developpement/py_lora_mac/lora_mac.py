@@ -130,6 +130,7 @@ class LoraMac:
         self.can_listen = True
         self.is_listen = False  # tell if listen
         self.listen_lock = Lock()  # lock for can_listen and listen
+        self.done = False
 
         # -----------------------------------------------------------------------
         # self.childs_buf = queue.Queue(CHILD_QUEUE_SIZE)
@@ -205,9 +206,14 @@ class LoraMac:
         # j'attends delai (mise en écoute + retransmission)
         child: LoraChild = kwargs["child"]  # get the child
         while not child.tx_buf.empty():
+            log.debug("look for next frame")
+            log.debug("queue sizeA:%d", child.tx_buf.qsize())
             try:
                 next_frame = child.tx_buf.get_nowait()  # get the next frame to send
+                log.debug("next is: %s", str(next_frame))
+                log.debug("queue sizeB:%d", child.tx_buf.qsize())
             except queue.Empty:
+                log.warning("no next frame")
                 break
 
             if next_frame.k:
@@ -217,12 +223,12 @@ class LoraMac:
             # set the SN and has_next flag of the frame
             next_frame.seq = child.get_sn()
             next_frame.has_next = not child.tx_buf.empty()
-
+            log.debug("send next frame")
             self.phy_layer.phy_tx(next_frame)  # send the frame
             child.last_send_frame = next_frame  # set the frame as last frame
 
             if next_frame.k:  # if frame need an ack
-
+                log.debug("I wait ACK")
                 self.listen_lock.acquire()
 
                 self.is_listen = True  # tell that we listen
@@ -234,18 +240,30 @@ class LoraMac:
                 # acquire the lock the second time
                 # this will block the process until an ack is received
                 child.ack_lock.acquire()
+                child.ack_lock.release()
+            else:
+                log.debug("I don't need ack")
+                has_retransmit = True
+                while has_retransmit:
+                    log.debug("wait for a possible retransmission query from the child")
+                    # wait MIN_WAIT_TIME.
+                    # If during there is a retrasmission, wait MIN_WAIT_TIME again
+                    log.debug("WAIT retransmit")
+                    has_retransmit = child.retransmit_event.wait(MIN_WAIT_TIME)
+                    log.debug("has retransmit: %s", str(has_retransmit))
 
-            has_retransmit = True
-            while has_retransmit:
-                # wait MIN_WAIT_TIME.
-                # If during there is a retrasmission, wait MIN_WAIT_TIME again
-                has_retransmit = child.retransmit_event.wait(MIN_WAIT_TIME)
-
-            if child.transmit_count > MAX_RETRANSMIT:
-                # we have done MAX_RETRANSMIT retransmissions
-                child.not_send_count += 1
-                child.clear_transmit_count()
-                break  # stop tx_process and wait next query to transmit child's buffer
+                if child.transmit_count > MAX_RETRANSMIT:
+                    # we have done MAX_RETRANSMIT retransmissions
+                    log.warning("Max retransmit reached")
+                    child.not_send_count += 1
+                    child.clear_transmit_count()
+                    break  # stop tx_process and wait next query to transmit child's buffer
+        
+        self.listen_lock.acquire()
+        self.is_listen = True  # tell that we listen
+        self.listen()  # listen
+        self.can_listen = True  # tell that we can listen (because we listen)
+        self.listen_lock.release()
 
     def listen(self):
         # self.phy_layer.phy_timeout(0) # disable watchdog timer
@@ -265,9 +283,13 @@ class LoraMac:
 
             if child.ack_lock.locked():  # the child wait an ack
                 # unblock the tx process of the child by release his listen
+                log.debug("child wait an ack")
                 self.listen_lock.acquire()
                 self.can_listen = False
                 self.listen_lock.release()
+                child.ack_lock.release()
+            else:
+                log.debug("child don't wait an ack")
 
         elif frame.seq < child.last_send_frame.seq:  # child ask retransmission
             if child.retransmit_count <= MAX_RETRANSMIT:
@@ -383,8 +405,10 @@ class LoraMac:
         if frame.seq == 1 and child is not None:
             # receive the first frame from this child
             # i.e. the join procedure is completed
-            child.tx_buf.put(LoraFrame(self.addr, child.addr, MacCommand.DATA, "ABC"))
-            child.tx_buf.put(LoraFrame(self.addr, child.addr, MacCommand.DATA, "DEF"))
+            if not self.done:
+                child.tx_buf.put(LoraFrame(self.addr, child.addr, MacCommand.DATA, "ABC", k = True))
+                child.tx_buf.put(LoraFrame(self.addr, child.addr, MacCommand.DATA, "DEF", k = True))
+                self.done = True
             self.not_joined_childs.pop(child.addr.node_id & 255, None)
 
             # resets retransmit_count if there have been retransmissions

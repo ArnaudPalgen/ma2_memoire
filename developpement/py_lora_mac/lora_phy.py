@@ -110,7 +110,7 @@ class LoraFrame:
         f_c |= self.command.value
 
         if len(self.payload)%2!=0:
-            self.payload += "0"
+            self.payload = "0"+self.payload
 
         return (
             self.src_addr.toHex()
