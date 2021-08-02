@@ -1,7 +1,9 @@
-from ipaddress import IPv6Address
-from py_lora_mac.lora_phy import PayloadObject, StrPayload, LoraAddr
+from ipaddress import IPv6Address, AddressValueError
+from py_lora_mac.lora_phy import LoraAddr
+from py_lora_mac.payload_object import PayloadObject
 from py_lora_mac.lora_mac import LoraMac
 from typing import Union, Callable, Type
+from py_lora_mac.payload_object import PayloadObject
 import logging
 
 log = logging.getLogger("LoRa_ROOT.IP")
@@ -31,7 +33,7 @@ class LoraIP:
     def __init__(self, mac_layer: LoraMac, payloadType: Type[PayloadObject]):
         self.mac_layer = mac_layer
         self.listener = None
-        self.payload_type = payloadType
+        self.payload_object = payloadType
 
     def init(self):
         log.info("Init IP layer")
@@ -43,14 +45,27 @@ class LoraIP:
         if self.listener is None:
             log.error("Listener not defined. Please call `register_listener` before")
         else:
-            self.listener(self.lora_to_ipv6(src), self.payload_type(payload))
+            self.listener(self.lora_to_ipv6(src), self.payload_object(payload))
 
-    def send_to(self, dest_addr: IPv6Address, payload: Union[str, PayloadObject]):
+    def send_to(self, dest_addr: Union[IPv6Address, str, LoraAddr], payload: Union[str, PayloadObject]):
+        if type(dest_addr) == str:
+            try:
+                dest_addr = IPv6Address(dest_addr)
+            except AddressValueError as e:
+                try:
+                    numbers = list(map(int, dest_addr.split(":")))
+                    if len(numbers) > 2:
+                        raise ValueError
+                    dest_addr = LoraAddr(numbers[0], numbers[1])
+                except:
+                    raise ValueError("Invalid IPv6 "+e.message+" or LoRa address format.")
+        
+
         log.debug("Send " + str(payload) + " to " + dest_addr.exploded)
         if type(payload) == str:
             payload = StrPayload(payload)
         self.mac_layer.mac_send(
-            dest=self.ipv6_to_lora(dest_addr), payload=payload, k=False
+            dest=self.ipv6_to_lora(dest_addr), payload=payload.serialize, k=False
         )
 
     def register_listener(self, listener: Callable[[IPv6Address, PayloadObject], None]):

@@ -1,6 +1,8 @@
 import logging
 import sys
-from py_lora_mac import mac_layer
+from py_lora_mac import network_stack
+import time
+from threading import Thread
 
 logger = logging.getLogger("RPL_ROOT")
 
@@ -26,10 +28,19 @@ def exception_handler(type, value, traceback):
     logger.exception(s)
     sys.exit(1)
 
+def send_data_test():
+    count = 0
+    while True:
+        time.sleep(7)
+        network_stack.send_to("2:24859", "hello"+str(count))
+        count+=1
+
 def main():
     sys.excepthook = exception_handler
-    mac_layer.mac_init()
+    network_stack.init()
     serial_log(PORT_1, ZOLERTIA_BAUDRATE)
+    t = Thread(target=send_data_test)
+    t.start()
 
 
 if __name__ == "__main__":

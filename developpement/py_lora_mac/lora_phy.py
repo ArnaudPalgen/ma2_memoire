@@ -10,49 +10,36 @@ import sys
 
 log = logging.getLogger("LoRa_ROOT.PHY")
 
-
-def exception_handler(type, value, traceback):
-    s = (
-        "\n Type:"
-        + str(type)
-        + "\n Value:"
-        + str(value)
-        + "\n Traceback:"
-        + str(traceback)
-    )
-    log.exception(s)
-    sys.exit(1)
-
-
-sys.excepthook = exception_handler
-
-
 HEADER_SIZE = 14
 
 K_FLAG_SHIFT = 7
 NEXT_FLAG_SHIFT = 6
-#
-# - - - - - - - -
 
 
 @unique
 class MacCommand(Enum):
+    """The MAC commands available for LoRaMAC."""
+
     JOIN = 0
     JOIN_RESPONSE = 1
     DATA = 2
     ACK = 3
-    PING = 4 # a supprimer
-    PONG = 5 # a supprimer
+    # PING = 4
+    # PONG = 5
     QUERY = 6
-    CHILD = 7 # a supprimer
-    CHILD_RESPONSE = 8 # a supprimer
+    # CHILD = 7
+    # CHILD_RESPONSE = 8
 
 
 @unique
 class UartCommand(Enum):
+    """The UART commands used with the RN2383."""
+
     MAC_PAUSE = "mac pause"  # pause mac layer
     SET_MOD = "radio set mod "  # set radio mode (fsk or lora)
-    # set radio freq from 433050000 to 434790000 or from 863000000 to 870000000, in Hz.
+
+    # set radio freq from 433050000 to 434790000 or
+    # from 863000000 to 870000000, in Hz.
     SET_FREQ = "radio set freq "
     SET_WDT = "radio set wdt "  # set watchdog timer
     RX = "radio rx "  # receive mode
@@ -62,6 +49,8 @@ class UartCommand(Enum):
 
 @unique
 class UartResponse(Enum):
+    """The possible UART responses for the RN2483."""
+
     OK = "ok"
     INVALID_PARAM = "invalid_param"
     RADIO_ERR = "radio_err"
@@ -74,6 +63,17 @@ class UartResponse(Enum):
 
 @dataclass(frozen=True)
 class LoraAddr:
+    """A LoRaMAC address
+
+    The format of a LoRaMAC adress is the following (size in bits):
+                |<---8-->|<---16-->|
+                | prefix | node-id |
+    
+    Attributes:
+        prefix: An integer which is the prefix of the address.
+        node_id: An integer chich is the node id of the node.
+    """
+
     prefix: int
     node_id: int
 
@@ -84,16 +84,25 @@ class LoraAddr:
         return str(self.prefix) + ":" + str(self.node_id)
 
 
-"""
-LoRa frame: 
+@dataclass
+class LoraFrame:
+    """ A LoRaMAC frame
+
+    The format of a LoRaMAC frame is the following (size in bits):
+
 |<---24---->|<----24--->|<-1->|<-1-->|<---2--->|<--4--->|<--8--->|<(2040-64=1976)>|
 | dest addr |  src addr |  k  | next | reserved|command |  seq   |     payload    |
 
-"""
+    Attributes:
+        src_addr: 
+        dest_addr: 
+        command: 
+        payload: 
+        seq: 
+        k: 
+        has_next: 
+    """
 
-
-@dataclass
-class LoraFrame:
     src_addr: LoraAddr
     dest_addr: LoraAddr
     command: MacCommand
@@ -109,8 +118,8 @@ class LoraFrame:
         f_c |= self.has_next << NEXT_FLAG_SHIFT
         f_c |= self.command.value
 
-        if len(self.payload)%2!=0:
-            self.payload = "0"+self.payload
+        if len(self.payload) % 2 != 0:
+            self.payload = "0" + self.payload
 
         return (
             self.src_addr.toHex()
@@ -162,9 +171,6 @@ class LoraFrame:
             has_next,
         )
 
-class PayloadObject:
-    def to_hex(self):
-        raise NotImplementedError
 
 @dataclass
 class UartFrame:
@@ -180,7 +186,7 @@ class LoraPhy:
         self.baudrate = baudrate
         self.buffer = queue.Queue(10)
         self.rx_buffer = queue.Queue(50)
-        #self.listener = None
+        # self.listener = None
         self.can_send = True
         self.can_send_cond = threading.Condition()
         self.last_sended = None
@@ -200,7 +206,7 @@ class LoraPhy:
         with self.can_send_cond:
             self.can_send_cond.notify_all()
 
-    #def phy_register_listener(self, listener):
+    # def phy_register_listener(self, listener):
     #    self.listener = listener
 
     def phy_tx(self, loraFrame: LoraFrame):
@@ -249,7 +255,7 @@ class LoraPhy:
             if resp.value in decode_data:
                 if resp == UartResponse.RADIO_RX:
                     # self.listener(LoraFrame.build(decode_data[10:].strip()))
-                    log.info("PHY RX:"+decode_data[10:].strip())
+                    log.info("PHY RX:" + decode_data[10:].strip())
                     try:
                         self.rx_buffer.put(
                             LoraFrame.build(decode_data[10:].strip()), block=False
