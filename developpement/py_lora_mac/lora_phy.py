@@ -1,11 +1,9 @@
 import serial
-import time
 import queue
 import threading
 from enum import Enum, auto, unique
 from dataclasses import dataclass
 import logging
-import sys
 
 
 log = logging.getLogger("LoRa_ROOT.PHY")
@@ -24,11 +22,7 @@ class MacCommand(Enum):
     JOIN_RESPONSE = 1
     DATA = 2
     ACK = 3
-    # PING = 4
-    # PONG = 5
     QUERY = 6
-    # CHILD = 7
-    # CHILD_RESPONSE = 8
 
 
 @unique
@@ -68,7 +62,7 @@ class LoraAddr:
     The format of a LoRaMAC adress is the following (size in bits):
                 |<---8-->|<---16-->|
                 | prefix | node-id |
-    
+
     Attributes:
         prefix: An integer which is the prefix of the address.
         node_id: An integer chich is the node id of the node.
@@ -77,7 +71,12 @@ class LoraAddr:
     prefix: int
     node_id: int
 
-    def toHex(self):
+    def toHex(self) -> str:
+        """Serialize the adress to a string in hexadecimal.
+
+        Returns:
+            str: The serialized address
+        """
         return "%02X" % self.prefix + "%04X" % self.node_id
 
     def __str__(self):
@@ -86,39 +85,48 @@ class LoraAddr:
 
 @dataclass
 class LoraFrame:
-    """ A LoRaMAC frame
+    """A LoRaMAC frame
 
-    The format of a LoRaMAC frame is the following (size in bits):
+        The format of a LoRaMAC frame is the following (size in bits):
 
-|<---24---->|<----24--->|<-1->|<-1-->|<---2--->|<--4--->|<--8--->|<(2040-64=1976)>|
-| dest addr |  src addr |  k  | next | reserved|command |  seq   |     payload    |
+    |<---24---->|<----24--->|<-1->|<-1-->|<---2--->|<--4--->|<--8--->|<(2040-64=1976)>|
+    | dest addr |  src addr |  k  | next | reserved|command |  seq   |     payload    |
 
-    Attributes:
-        src_addr: 
-        dest_addr: 
-        command: 
-        payload: 
-        seq: 
-        k: 
-        has_next: 
+        Attributes:
+            src_addr: The source address
+            dest_addr: The Destination address
+            command: The MAC command (c.f. MacCommand)
+            payload: The payload. Must be a string in hexadecimal
+            seq: The sequence number
+            k: True if the frame need an ack, False otherwise
+            has_next: True true if another frame follows it, False otherwise. Only used for downward traffic
     """
 
     src_addr: LoraAddr
     dest_addr: LoraAddr
     command: MacCommand
-    payload: str  # must be to hex
-    seq: int = 0  # sequence number
-    k: bool = False  # need ack ?
+    payload: str
+    seq: int = 0
+    k: bool = False
     has_next: bool = False
 
-    def toHex(self):
-        """create flags and MAC command"""
+    def toHex(self) -> str:
+        """Serialize the frame.
+
+        Returns:
+            str: The serialized frame
+        """
+
+        # create flags and MAC command
         f_c = 0
         f_c |= self.k << K_FLAG_SHIFT
         f_c |= self.has_next << NEXT_FLAG_SHIFT
         f_c |= self.command.value
 
+        # check that the size of the payload is even
         if len(self.payload) % 2 != 0:
+            # The size must be even because one character is 4 bits and we can't send a half a byte
+            # if not even add a zero
             self.payload = "0" + self.payload
 
         return (
@@ -131,6 +139,13 @@ class LoraFrame:
 
     @staticmethod
     def build(data: str):
+        """Deserialize (or build) a LoRaFrame.
+
+        Returns:
+            LoraFrame: The frame built from the data.
+
+        """
+
         log.debug("build frame receive data: %s", data)
         if len(data) < HEADER_SIZE:
             return None
@@ -174,44 +189,67 @@ class LoraFrame:
 
 @dataclass
 class UartFrame:
+    """An UART paquet
+
+    Attributes:
+        expected_response: The expected UART response to this paquet
+        data: The sent data
+        cmd: The UART command (c.f. UartCommand)
+    """
+
     expected_response: list
     data: str
     cmd: UartCommand
 
 
 class LoraPhy:
+    """The LoRaMAC PHY layer.
+
+    The PHY layer is the driver for the RN2483.
+
+    """
+
     def __init__(self, port="/dev/ttyUSB0", baudrate=57600):
-        self.con = None
-        self.port = port
-        self.baudrate = baudrate
-        self.buffer = queue.Queue(10)
-        self.rx_buffer = queue.Queue(50)
-        # self.listener = None
-        self.can_send = True
-        self.can_send_cond = threading.Condition()
-        self.last_sended = None
-        self.tx_lock = threading.Lock()
+        self._con = None  # The serial conenction
+        self._port = port  # The serial port
+        self._baudrate = baudrate  # The serial baudrate
+        self._buffer = queue.Queue(10)  # The TX buffer
+        self._rx_buffer = queue.Queue(50)  # the RX buffer
+        self._can_send = True  # True if the tx process can send, False otherwise
+        self._can_send_cond = threading.Condition()  # condition used by the tx_process
+        self._last_sended = None  # the last sended frame
+        self._tx_lock = threading.Lock()  # lock used for phy_tx()
 
     def phy_init(self):
+        """Init the PHY layer.
+
+        - Set the serial connection
+        - Prepare the RN2483 for communications (mac pause, radio set freq)
+        """
         # set serial connection, call send_phy for mac pause et radio set freq
         log.info("Init PHY")
-        self.con = serial.Serial(port=self.port, baudrate=self.baudrate)
-        tx_thread = threading.Thread(target=self.uart_tx)
-        rx_thread = threading.Thread(target=self.uart_rx)
+        self._con = serial.Serial(port=self._port, baudrate=self._baudrate)
+        tx_thread = threading.Thread(target=self._uart_tx)
+        rx_thread = threading.Thread(target=self._uart_rx)
         self._send_phy(UartFrame([UartResponse.U_INT], "", UartCommand.MAC_PAUSE))
         self._send_phy(UartFrame([UartResponse.OK], "868100000", UartCommand.SET_FREQ))
         rx_thread.start()
         tx_thread.start()
 
-        with self.can_send_cond:
-            self.can_send_cond.notify_all()
-
-    # def phy_register_listener(self, listener):
-    #    self.listener = listener
+        with self._can_send_cond:
+            self._can_send_cond.notify_all()
 
     def phy_tx(self, loraFrame: LoraFrame):
+        """Method to use to send LoraFrame.
+
+        Prepare the UART paquet from the lora frame.
+
+        Args:
+            loraFrame (LoraFrame): The frame to sent.
+        """
+
         log.info("MAC send:%s", str(loraFrame))
-        self.tx_lock.acquire()
+        self._tx_lock.acquire()
         if loraFrame is None:
             return
         f = UartFrame(
@@ -220,44 +258,69 @@ class LoraPhy:
             UartCommand.TX,
         )
         self._send_phy(f)
-        self.tx_lock.release()
+        self._tx_lock.release()
 
     def phy_timeout(self, timeout: int):
+        """Set the RN2483 radio watchdog timer.
+
+        Args:
+            timeout (int): The timeout (in milliseconds)
+        """
         f = UartFrame([UartResponse.OK], str(timeout), UartCommand.SET_WDT)
         self._send_phy(f)
 
     def phy_rx(self):
+        """Set the radio the reception mode"""
+
         f = UartFrame(
             [UartResponse.RADIO_ERR, UartResponse.RADIO_RX], "0", UartCommand.RX
         )
         self._send_phy(f)
 
-    # --------------------------------------------------------------------------------
-    def _send_phy(self, data):  # append data to buffer
+    def _send_phy(self, data: UartFrame) -> bool:  # append data to buffer
+        """Append data to the TX buffer.
+
+        Args:
+            data (UartFrame): The UART frame to put in the tx buffer.
+
+        Raises:
+            TypeError: If the data type is not UartFrame
+
+        Returns:
+            bool: True if the data has been added to the buffer, False otherwise
+        """
+
         if type(data) != UartFrame:
             raise TypeError("Data must be UartFrame. actual type: ", type(data))
 
         try:
             log.debug("append %s to tx_buf", str(data))
-            self.buffer.put(data, block=False)
+            self._buffer.put(data, block=False)
         except queue.Full:
-            log.warning("  buffer full")
+            log.warning("buffer full")
             return False
 
         return True
 
-    def process_response(self, data: str):
+    def _process_response(self, data: str) -> bool:
+        """Process an UART response.
+
+        Args:
+            data (str): The UART response.
+
+        Returns:
+            bool: True if the answer is the one expected, False otherwise.
+        """
         decode_data = data.decode()
         log.debug("process uart response: " + decode_data)
-        for resp in self.last_sended.expected_response:
+        for resp in self._last_sended.expected_response:
             if resp is None:
                 continue
-            if resp.value in decode_data:
-                if resp == UartResponse.RADIO_RX:
-                    # self.listener(LoraFrame.build(decode_data[10:].strip()))
+            if resp.value in decode_data:  # the response is the one expected
+                if resp == UartResponse.RADIO_RX:  # the response is DATA
                     log.info("PHY RX:" + decode_data[10:].strip())
                     try:
-                        self.rx_buffer.put(
+                        self._rx_buffer.put(
                             LoraFrame.build(decode_data[10:].strip()), block=False
                         )
                     except queue.Full:
@@ -267,40 +330,35 @@ class LoraPhy:
         log.debug("unexpected response")
         return False
 
-    def getFrame(self):
-        frame = self.rx_buffer.get()
+    def getFrame(self) -> LoraFrame:
+        """Get the next received frame.
+
+        This method block until a frame is available.
+
+        Returns:
+            LoraFrame: A received frame.
+        """
+        frame = self._rx_buffer.get()
         return frame
 
-    def uart_rx(self):
+    def _uart_rx(self):
+        """Method used as Thread to read data from the serial connection."""
         while True:
-            data = self.con.readline()
-            if self.process_response(data.strip()):
-                with self.can_send_cond:
-                    self.can_send = True
-                    self.can_send_cond.notify_all()
+            data = self._con.readline()
+            if self._process_response(data.strip()):
+                with self._can_send_cond:
+                    self._can_send = True
+                    self._can_send_cond.notify_all()
 
-    def uart_tx(self):
+    def _uart_tx(self):
+        """Method used as Thread to send data to the serial connection."""
         while True:
-            while self.con is None or not self.can_send:
-                with self.can_send_cond:
-                    self.can_send_cond.wait()
-            self.last_sended = self.buffer.get(block=True)
-            log.info("PHY TX:" + self.last_sended.cmd.value + self.last_sended.data)
-            self.con.write(
-                (self.last_sended.cmd.value + self.last_sended.data + "\r\n").encode()
+            while self._con is None or not self._can_send:
+                with self._can_send_cond:
+                    self._can_send_cond.wait()
+            self._last_sended = self._buffer.get(block=True)
+            log.info("PHY TX:" + self._last_sended.cmd.value + self._last_sended.data)
+            self._con.write(
+                (self._last_sended.cmd.value + self._last_sended.data + "\r\n").encode()
             )
-            self.can_send = False
-
-
-if __name__ == "__main__":
-    print("=== test frame parsing/building ===\n")
-    a = LoraFrame(
-        LoraAddr(178, 45797), LoraAddr(179, 49878), MacCommand.PING, "", True, k=True
-    )
-    print(" inital frame     :", a)
-    to_hex = a.toHex()
-    print(" to hex           : " + to_hex)
-    b = LoraFrame.build(to_hex)
-    print(" rebuild from hex :", b)
-    print(" frames are equals:", a == b)
-    print("\n===================================")
+            self._can_send = False

@@ -105,7 +105,7 @@ class LoraMac:
         #self.done = False
 
 
-    def mac_init(self):
+    def init(self):
         print("Init MAC")
         log.info("Init MAC")
         self.phy_layer.phy_init()
@@ -119,7 +119,7 @@ class LoraMac:
     def mac_send(self, dest:LoraAddr, payload:str, k=False):
         try:
             child = self.childs[dest.prefix]
-            child.tx_buf.put(payload.encode())
+            child.tx_buf.put(LoraFrame(self.addr, dest, MacCommand.DATA, payload))
         except KeyError:
             log.error("Destination %s unreachable", dest)
 

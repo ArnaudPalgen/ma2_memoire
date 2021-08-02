@@ -1,9 +1,8 @@
 from ipaddress import IPv6Address, AddressValueError
 from py_lora_mac.lora_phy import LoraAddr
-from py_lora_mac.payload_object import PayloadObject
+from py_lora_mac.payload_object import PayloadObject, StrPayload
 from py_lora_mac.lora_mac import LoraMac
 from typing import Union, Callable, Type
-from py_lora_mac.payload_object import PayloadObject
 import logging
 
 log = logging.getLogger("LoRa_ROOT.IP")
@@ -60,13 +59,18 @@ class LoraIP:
                 except:
                     raise ValueError("Invalid IPv6 "+e.message+" or LoRa address format.")
         
-
-        log.debug("Send " + str(payload) + " to " + dest_addr.exploded)
         if type(payload) == str:
             payload = StrPayload(payload)
-        self.mac_layer.mac_send(
-            dest=self.ipv6_to_lora(dest_addr), payload=payload.serialize, k=False
-        )
+        
+        
+        if type(dest_addr) == IPv6Address:
+            log.debug("Send " + str(payload) + " to " + dest_addr.exploded)
+            self.mac_layer.mac_send(
+                dest=self.ipv6_to_lora(dest_addr), payload=payload.serialize(), k=False)
+        else:
+            log.debug("Send " + str(payload) + " to " + str(dest_addr))
+            self.mac_layer.mac_send(
+                dest=dest_addr, payload=payload.serialize(), k=False)
 
     def register_listener(self, listener: Callable[[IPv6Address, PayloadObject], None]):
         log.debug("listener registered !")

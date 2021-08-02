@@ -30,17 +30,24 @@ def exception_handler(type, value, traceback):
 
 def send_data_test():
     count = 0
+    logger.debug("enter send data test")
+    print("YOOOOO 2")
     while True:
         time.sleep(7)
+        print("YOOOOO 3")
+        logger.debug("send data ! HELLO")
         network_stack.send_to("2:24859", "hello"+str(count))
         count+=1
 
 def main():
+    print("YOOOOO 1")
     sys.excepthook = exception_handler
     network_stack.init()
-    serial_log(PORT_1, ZOLERTIA_BAUDRATE)
-    t = Thread(target=send_data_test)
-    t.start()
+    #serial_log(PORT_1, ZOLERTIA_BAUDRATE)
+    serial_logger = Thread(target=serial_log, args=(PORT_1, ZOLERTIA_BAUDRATE))
+    serial_logger.start()
+    sender = Thread(target=send_data_test)
+    sender.start()
 
 
 if __name__ == "__main__":
