@@ -3,25 +3,26 @@ import sys
 from py_lora_mac import network_stack
 import time
 from threading import Thread
+import serial
 
-logger = logging.getLogger("RPL_ROOT")
+logger = logging.getLogger("MAIN")
 
 ZOLERTIA_BAUDRATE = 115200
 RN2483_BAUDRATE = 57600
 
 PORT_0 = "/dev/ttyUSB0"
 PORT_1 = "/dev/ttyUSB1"
+PORT_2 = "/dev/ttyUSB2"
 
 
-def serial_log(port, baudrate):
-    import serial
+def serial_log(port, baudrate, serial_logger):
 
     con = serial.Serial(port=port, baudrate=baudrate)
     while True:
         data = con.readline()
 
         s = data.strip().decode(encoding="utf-8", errors="ignore")[1:]
-        logger.debug(s)
+        serial_logger.debug(s)
 
 def exception_handler(type, value, traceback):
     s = "\n Type:"+str(type)+"\n Value:"+str(value)+"\n Traceback:"+str(traceback)
@@ -40,14 +41,18 @@ def send_data_test():
         count+=1
 
 def main():
-    print("YOOOOO 1")
+    logger.info("Welcome to LoRaMAC LOGGER")
     sys.excepthook = exception_handler
     network_stack.init()
-    #serial_log(PORT_1, ZOLERTIA_BAUDRATE)
-    serial_logger = Thread(target=serial_log, args=(PORT_1, ZOLERTIA_BAUDRATE))
-    serial_logger.start()
-    sender = Thread(target=send_data_test)
-    sender.start()
+
+    serial_logger1 = Thread(target=serial_log, args=(PORT_1, ZOLERTIA_BAUDRATE, logging.getLogger("RPL ROOT")))
+    serial_logger1.start()
+
+    #serial_logger2 = Thread(target=serial_log, args=(PORT_2, ZOLERTIA_BAUDRATE, logging.getLogger("RPL NODE")))
+    #serial_logger2.start()
+
+    #sender = Thread(target=send_data_test)
+    #sender.start()
 
 
 if __name__ == "__main__":

@@ -1,16 +1,17 @@
 from ipaddress import IPv6Address, AddressValueError
 from py_lora_mac.lora_phy import LoraAddr
-from py_lora_mac.payload_object import PayloadObject, StrPayload
 from py_lora_mac.lora_mac import LoraMac
 from typing import Union, Callable, Type
 import logging
+from scapy.all import *
+from scapy.layers.inet6 import IPv6
 
 log = logging.getLogger("LoRa_ROOT.IP")
 
 
 # Unique Local IPv6 Unicast Addresses (FC00::/7) with to L bit to 1 (c.f. RFC 4193)
 IPv6_PREFIX = "FD00"
-COMMON_LINK_ADDR_PART = "5F756D6F6E73"
+COMMON_LINK_ADDR_PART = "02124B00060D"
 
 
 class LoraIP:
@@ -25,14 +26,13 @@ class LoraIP:
 
     Attributes:
         mac_layer: The mac mayer to use
-        listener: The Callable used for incoming packet
+        upper_layer: The Callable used to send incoming packet to the upper layer
 
     """
 
-    def __init__(self, mac_layer: LoraMac, payloadType: Type[PayloadObject]):
+    def __init__(self, mac_layer: LoraMac):
         self.mac_layer = mac_layer
-        self.listener = None
-        self.payload_object = payloadType
+        self.upper_layer = None
 
     def init(self):
         log.info("Init IP layer")
@@ -40,41 +40,21 @@ class LoraIP:
         self.mac_layer.register_listener(self._on_frame)
 
     def _on_frame(self, src: LoraAddr, payload: str):
-        log.debug("Incomming frame")
-        if self.listener is None:
-            log.error("Listener not defined. Please call `register_listener` before")
+        log.debug("Incomming frame from LoRaMAC")
+        if self.upper_layer is None:
+            log.error("Upper layer not defined. Please call `register_listener` before")
         else:
-            self.listener(self.lora_to_ipv6(src), self.payload_object(payload))
+            self.upper_layer(self.build_ip_packet(payload, src, self.mac_layer.addr))
 
-    def send_to(self, dest_addr: Union[IPv6Address, str, LoraAddr], payload: Union[str, PayloadObject]):
-        if type(dest_addr) == str:
-            try:
-                dest_addr = IPv6Address(dest_addr)
-            except AddressValueError as e:
-                try:
-                    numbers = list(map(int, dest_addr.split(":")))
-                    if len(numbers) > 2:
-                        raise ValueError
-                    dest_addr = LoraAddr(numbers[0], numbers[1])
-                except:
-                    raise ValueError("Invalid IPv6 "+e.message+" or LoRa address format.")
-        
-        if type(payload) == str:
-            payload = StrPayload(payload)
-        
-        
-        if type(dest_addr) == IPv6Address:
-            log.debug("Send " + str(payload) + " to " + dest_addr.exploded)
-            self.mac_layer.mac_send(
-                dest=self.ipv6_to_lora(dest_addr), payload=payload.serialize(), k=False)
-        else:
-            log.debug("Send " + str(payload) + " to " + str(dest_addr))
-            self.mac_layer.mac_send(
-                dest=dest_addr, payload=payload.serialize(), k=False)
-
-    def register_listener(self, listener: Callable[[IPv6Address, PayloadObject], None]):
+    def register_listener(self, listener: Callable[[IPv6], None]):
         log.debug("listener registered !")
-        self.listener = listener
+        self.upper_layer = listener
+
+    def send(self, ip_packet: IPv6):
+        log.debug("Send %s", ip_packet.show())
+        payload, _, dest_addr = self.serialize_ip_packet(ip_packet)
+        log.debug("Send to RPL ROOT: " + str(dest_addr))
+        self.mac_layer.mac_send(dest=dest_addr, payload=payload, k=False)
 
     @staticmethod
     def lora_to_ipv6(addr: LoraAddr) -> IPv6Address:
@@ -98,4 +78,42 @@ class LoraIP:
         log.debug(
             "Ipv6 addr: " + addr.exploded + " converted to LoraAddr: " + str(addr)
         )
+        return result
+
+    @staticmethod
+    def serialize_ip_packet(ip_packet: IPv6):
+        hex_packet = (
+            chexdump(ip_packet, dump=True)
+            .replace("0x", "")
+            .replace(",", "")
+            .replace(" ", "")
+            .upper()
+        )
+
+        """remove adresses from the packet"""
+        f1 = hex_packet[0:16]
+        f2 = hex_packet[80:]
+        result = f1 + f2
+
+        src_addr = IPv6Address(ip_packet.dest).packed.hex().upper()
+        dest_addr = IPv6Address(ip_packet.dest).packed.hex().upper()
+        return (result, src_addr, dest_addr)
+
+    @staticmethod
+    def build_ip_packet(hex_data: str, src_addr: LoraAddr, dest_addr: LoraAddr):
+        """
+        Split the data in two parts:
+            - first_part: The first part of 8 bytes from the IPv6 header that contains: VER, TC, FL, LEN, NH, HL
+            - second_part: The rest of the IPv6 packet after the src and dest address (that are not carried in a loramac frame)
+        """
+        first_part = hex_data[0:16]
+        second_part = hex_data[80:]
+
+        """Create src and dest IPv6 addr from the LoRaMAC addresses"""
+        ip_src_addr = LoraIP.lora_to_ipv6(src_addr).packed.hex().upper()
+        ip_dest_addr = LoraIP.lora_to_ipv6(dest_addr).packed.hex().upper()
+
+        """Construct and return the IPv6 packet built from all the previous data"""
+        raw_data = bytes.fromhex(first_part + ip_src_addr + ip_dest_addr + second_part)
+        result = IPv6(raw_data)
         return result
