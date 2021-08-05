@@ -1,0 +1,147 @@
+lora_mac-INFO-  2021-08-03 17:23:34,845-Init MAC
+lora_phy-INFO-  2021-08-03 17:23:34,845-Init PHY
+lora_phy-INFO-  2021-08-03 17:23:34,848-PHY TX:mac pause
+lora_phy-INFO-  2021-08-03 17:23:34,862-PHY TX:radio set freq 868100000
+lora_phy-INFO-  2021-08-03 17:23:34,876-PHY TX:radio set wdt 0
+lora_phy-INFO-  2021-08-03 17:23:34,883-PHY TX:radio rx 0
+main-DEBUG-  2021-08-03 17:23:37,978-[13: INFO: Interface ] Button pushed
+main-DEBUG-  2021-08-03 17:23:37,980-[13: INFO: LoRa MAC  ] Init LoRa MAC
+main-DEBUG-  2021-08-03 17:23:37,981-[13: INFO: LoRa MAC  ] Node ID: 24859
+main-DEBUG-  2021-08-03 17:23:50,982-[136: INFO: Interface ] Button pushed
+main-DEBUG-  2021-08-03 17:23:50,983-[136: INFO: LoRa MAC  ] Init LoRa MAC
+main-DEBUG-  2021-08-03 17:23:50,986-[136: INFO: LoRa MAC  ] Node ID: 45560
+main-DEBUG-  2021-08-03 17:23:50,987-[136: INFO: LoRa MAC  ] New Link-layer address: 5f75.6d6f.6e73.b1f8[136: INFO: LoRa MAC  ]
+main-DEBUG-  2021-08-03 17:24:23,384-[168: INFO: App       ] Sending request 2 to 5f:756d:6f6e:735f:6172:6e61:7564::
+main-DEBUG-  2021-08-03 17:25:24,262-[229: INFO: App       ] Not reachable yet
+main-DEBUG-  2021-08-03 17:25:50,790-[13: INFO: LoRa MAC  ] New Link-layer address: 5f75.6d6f.6e73.611b[13: INFO: LoRa[0: INFO: Main      ] Starting Contiki-NG-develop/v4.7-18-ga3f6b04c5
+main-DEBUG-  2021-08-03 17:25:50,791-[0: INFO: Main      ] - Routing: RPL Lite
+main-DEBUG-  2021-08-03 17:25:50,793-[0: INFO: Main      ] - Net: sicslowpan
+main-DEBUG-  2021-08-03 17:25:51,446-[0: INFO: [0: INFO: Main      ] Starting Contiki-NG-develop/v4.7-18-ga3f6b04c5
+main-DEBUG-  2021-08-03 17:25:51,448-[0: INFO: Main      ] - Routing: RPL Lite
+main-DEBUG-  2021-08-03 17:25:52,103-[0: INFO: Main      ] - N[0: INFO: Main      ] Starting Contiki-NG-develop/v4.7-18-ga3f6b04c5
+main-DEBUG-  2021-08-03 17:25:52,105-[0: INFO: Main      ] - Routing: RPL Lite
+main-DEBUG-  2021-08-03 17:25:52,107-[0: INFO: Main      ] - Net: sicslowpan
+main-DEBUG-  2021-08-03 17:25:52,761-[0: INFO: [0: INFO: Main      ] Starting Contiki-NG-develop/v4.7-18-ga3f6b04c5
+main-DEBUG-  2021-08-03 17:25:52,763-[0: INFO: Main      ] - Routing: RPL Lite
+main-DEBUG-  2021-08-03 17:25:52,764-[0: INFO: Main      ] - Net: sicslowpan
+main-DEBUG-  2021-08-03 17:25:53,417-[0: [0: INFO: Main      ] Starting Contiki-NG-develop/v4.7-18-ga3f6b04c5
+main-DEBUG-  2021-08-03 17:25:53,419-[0: INFO: Main      ] - Routing: RPL Lite
+main-DEBUG-  2021-08-03 17:25:54,076-[0: INFO: Main      ] - Ne[0: INFO: Main      ] Starting Contiki-NG-develop/v4.7-18-ga3f6b04c5
+main-DEBUG-  2021-08-03 17:25:54,078-[0: INFO: Main      ] - Routing: RPL Lite
+main-DEBUG-  2021-08-03 17:25:54,079-[0: INFO: Main      ] - Net: sicslowpan
+main-DEBUG-  2021-08-03 17:25:54,733-[0: INFO: Main     [0: INFO: Main      ] Starting Contiki-NG-develop/v4.7-18-ga3f6b04c5
+main-DEBUG-  2021-08-03 17:25:54,735-[0: INFO: Main      ] - Routing: RPL Lite
+main-DEBUG-  2021-08-03 17:25:55,388-[0: INFO: Main      ] - Net: sicslowp[0: INFO: Main      ] Starting Contiki-NG-develop/v4.7-18-ga3f6b04c5
+main-DEBUG-  2021-08-03 17:25:55,390-[0: INFO: Main      ] - Routing: RPL Lite
+main-DEBUG-  2021-08-03 17:25:56,047-[0: INFO: Main  [0: INFO: Main      ] Starting Contiki-NG-develop/v4.7-18-ga3f6b04c5
+main-DEBUG-  2021-08-03 17:25:56,049-[0: INFO: Main      ] - Routing: RPL Lite
+main-DEBUG-  2021-08-03 17:25:56,051-[0: INFO: Main      ] - Net: sicslowpan
+main-DEBUG-  2021-08-03 17:25:56,706-[0: INFO: Main   [0: INFO: Main      ] Starting Contiki-NG-develop/v4.7-18-ga3f6b04c5
+main-DEBUG-  2021-08-03 17:25:56,707-[0: INFO: Main      ] - Routing: RPL Lite
+main-DEBUG-  2021-08-03 17:25:56,709-[0: INFO: Main      ] - Net: sicslowpan
+main-DEBUG-  2021-08-03 17:25:57,359-[0: INFO: Main     [0: INFO: Main      ] Starting Contiki-NG-develop/v4.7-18-ga3f6b04c5
+main-DEBUG-  2021-08-03 17:25:58,017-[0: INFO: Main      ] - Routing: RPL Lite[0: INFO: Main      ] Starting Contiki-NG-develop/v4.7-18-ga3f6b04c5
+main-DEBUG-  2021-08-03 17:25:58,019-[0: INFO: Main      ] - Routing: RPL Lite
+main-DEBUG-  2021-08-03 17:25:58,020-[0: INFO: Main      ] - Net: sicslowpan
+main-DEBUG-  2021-08-03 17:26:08,526-[0: INFO: [0: INFO: Main      ] Starting Contiki-NG-develop/v4.7-18-ga3f6b04c5
+main-DEBUG-  2021-08-03 17:26:08,527-[0: INFO: Main      ] - Routing: RPL Lite
+main-DEBUG-  2021-08-03 17:26:08,529-[0: INFO: Main      ] - Net: sicslowpan
+main-DEBUG-  2021-08-03 17:26:09,177-[0: INFO: Main      ] Starting Contiki-NG-develop/v4.7-18-ga3f6b04c5
+main-DEBUG-  2021-08-03 17:26:09,834-[0: INFO: Main    [0: INFO: Main      ] Starting Contiki-NG-develop/v4.7-18-ga3f6b04c5
+main-DEBUG-  2021-08-03 17:26:09,836-[0: INFO: Main      ] - Routing: RPL Lite
+main-DEBUG-  2021-08-03 17:26:09,838-[0: INFO: Main      ] - Net: sicslowpan
+main-DEBUG-  2021-08-03 17:26:10,492-[0: INFO: Main      ] Starting Contiki-NG-develop/v4.7-18-ga3f6b04c5
+main-DEBUG-  2021-08-03 17:26:10,494-[0: INFO: Main      ] - Routing: RPL Lite
+main-DEBUG-  2021-08-03 17:26:11,145-[0: INFO: Main      ] - Net: sic[0: INFO: Main      ] Starting Contiki-NG-develop/v4.7-18-ga3f6b04c5
+main-DEBUG-  2021-08-03 17:26:11,147-[0: INFO: Main      ] - Routing: RPL Lite
+main-DEBUG-  2021-08-03 17:26:11,802-[0: INFO: Mai[0: INFO: Main      ] Starting Contiki-NG-develop/v4.7-18-ga3f6b04c5
+main-DEBUG-  2021-08-03 17:26:11,804-[0: INFO: Main      ] - Routing: RPL Lite
+main-DEBUG-  2021-08-03 17:26:11,805-[0: INFO: Main      ] - Net: sicslowpan
+main-DEBUG-  2021-08-03 17:26:12,460-[0: INFO: Main      ] Starting Contiki-NG-develop/v4.7-18-ga3f6b04c5
+main-DEBUG-  2021-08-03 17:26:12,462-[0: INFO: Main      ] - Routing: RPL Lite
+main-DEBUG-  2021-08-03 17:26:12,464-[0: INFO: Main      ] - Net: sicslowpan
+main-DEBUG-  2021-08-03 17:26:13,115-[0:[0: INFO: Main      ] Starting Contiki-NG-develop/v4.7-18-ga3f6b04c5
+main-DEBUG-  2021-08-03 17:26:13,116-[0: INFO: Main      ] - Routing: RPL Lite
+main-DEBUG-  2021-08-03 17:26:13,771-[0: INFO: Main     [0: INFO: Main      ] Starting Contiki-NG-develop/v4.7-18-ga3f6b04c5
+main-DEBUG-  2021-08-03 17:26:13,772-[0: INFO: Main      ] - Routing: RPL Lite
+main-DEBUG-  2021-08-03 17:26:14,428-[0: INFO: Main      ] -[0: INFO: Main      ] Starting Contiki-NG-develop/v4.7-18-ga3f6b04c5
+main-DEBUG-  2021-08-03 17:26:14,430-[0: INFO: Main      ] - Routing: RPL Lite
+main-DEBUG-  2021-08-03 17:26:14,431-[0: INFO: Main      ] - Net: sicslowpan
+main-DEBUG-  2021-08-03 17:26:15,083-[0: INFO: Main      ] Starting Contiki-NG-develop/v4.7-18-ga3f6b04c5
+main-DEBUG-  2021-08-03 17:26:15,086-[0: INFO: Main      ] - Routing: RPL Lite
+main-DEBUG-  2021-08-03 17:26:15,740-[0: INFO: Main      ][0: INFO: Main      ] Starting Contiki-NG-develop/v4.7-18-ga3f6b04c5
+main-DEBUG-  2021-08-03 17:26:15,741-[0: INFO: Main      ] - Routing: RPL Lite
+main-DEBUG-  2021-08-03 17:26:16,397-[0: INFO: Main      ] - Net: s[0: INFO: Main      ] Starting Contiki-NG-develop/v4.7-18-ga3f6b04c5
+main-DEBUG-  2021-08-03 17:26:16,399-[0: INFO: Main      ] - Routing: RPL Lite
+main-DEBUG-  2021-08-03 17:26:16,400-[0: INFO: Main      ] - Net: sicslowpan
+main-DEBUG-  2021-08-03 17:26:17,063-[0: INFO: Main      ] Starting Contiki-NG-develop/v4.7-18-ga3f6b04c5
+main-DEBUG-  2021-08-03 17:26:17,065-[0: INFO: Main      ] - Routing: RPL Lite
+main-DEBUG-  2021-08-03 17:26:17,067-[0: INFO: Main      ] - Net: sicslowpan
+main-DEBUG-  2021-08-03 17:26:17,068-[0: INFO: Main      ] - MAC: CSMA
+main-DEBUG-  2021-08-03 17:26:17,069-[0: INFO: Main      ] - 802.15.4 PANID: 0xabcd
+main-DEBUG-  2021-08-03 17:26:17,084-[0: INFO: Main      ] - 802.15.4 Default channel: 26
+main-DEBUG-  2021-08-03 17:26:17,085-[0: INFO: Main      ] Node ID: 24859
+main-DEBUG-  2021-08-03 17:26:17,086-[0: INFO: Main      ] Link-layer address: 0012.4b00.060d.611b
+main-DEBUG-  2021-08-03 17:26:17,087-[0: INFO: Interface ] Init LoRaMAC Interface
+main-DEBUG-  2021-08-03 17:26:17,087-[0: INFO: Interface ] Welcome !
+main-DEBUG-  2021-08-03 17:26:17,098-[0: INFO: Interface ] NetStack OFF
+main-DEBUG-  2021-08-03 17:26:17,098-[0: INFO: Main      ] Tentative link-local IPv6 address: fe80::212:4b00:60d:611b
+main-DEBUG-  2021-08-03 17:26:17,099-[0: INFO: Zoul      ] Zolertia RE-Mote revision B platform
+main-DEBUG-  2021-08-03 17:26:28,691-[0: INFO: Main      ] Starting Contiki-NG-develop/v4.7-18-ga3f6b04c5
+main-DEBUG-  2021-08-03 17:26:28,692-[0: INFO: Main      ] - Routing: RPL Lite
+main-DEBUG-  2021-08-03 17:26:28,693-[0: INFO: Main      ] - Net: sicslowpan
+main-DEBUG-  2021-08-03 17:26:28,694-[0: INFO: Main      ] - MAC: CSMA
+main-DEBUG-  2021-08-03 17:26:28,695-[0: INFO: Main      ] - 802.15.4 PANID: 0xabcd
+main-DEBUG-  2021-08-03 17:26:28,713-[0: INFO: Main      ] - 802.15.4 Default channel: 26
+main-DEBUG-  2021-08-03 17:26:28,714-[0: INFO: Main      ] Node ID: 24859
+main-DEBUG-  2021-08-03 17:26:28,714-[0: INFO: Main      ] Link-layer address: 0012.4b00.060d.611b
+main-DEBUG-  2021-08-03 17:26:28,715-[0: INFO: Interface ] Init LoRaMAC Interface
+main-DEBUG-  2021-08-03 17:26:28,716-[0: INFO: Interface ] Welcome !
+main-DEBUG-  2021-08-03 17:26:28,726-[0: INFO: Interface ] NetStack OFF
+main-DEBUG-  2021-08-03 17:26:28,727-[0: INFO: Main      ] Tentative link-local IPv6 address: fe80::212:4b00:60d:611b
+main-DEBUG-  2021-08-03 17:26:28,728-[0: INFO: Zoul      ] Zolertia RE-Mote revision B platform
+main-DEBUG-  2021-08-03 17:26:32,088-[4: INFO: Interface ] Button pushed
+main-DEBUG-  2021-08-03 17:26:32,090-[4: INFO: LoRa MAC  ] Init LoRa MAC
+main-DEBUG-  2021-08-03 17:26:32,092-[4: INFO: LoRa MAC  ] Node ID: 24859
+main-DEBUG-  2021-08-03 17:26:32,095-[4: INFO: LoRa MAC  ] New Link-layer address: 5f75.6d6f.6e73.611b[4: INFO: LoRa MAC  ]
+main-DEBUG-  2021-08-03 17:26:32,096-[4: DBG : LoRa MAC  ] initial state: 0
+main-DEBUG-  2021-08-03 17:26:32,102-[4: INFO: LoRa PHY  ] Init LoRa PHY
+main-DEBUG-  2021-08-03 17:26:32,103-[4: DBG : LoRa MAC  ] SET retransmit timer
+main-DEBUG-  2021-08-03 17:26:32,103-[4: DBG : LoRa MAC  ] initialization complete
+main-DEBUG-  2021-08-03 17:26:32,104-[4: INFO: LoRa PHY  ] PHY TX:mac pause
+main-DEBUG-  2021-08-03 17:26:32,118-[4: INFO: LoRa PHY  ] PHY TX:radio set freq 868100000
+main-DEBUG-  2021-08-03 17:26:32,134-[4: INFO: LoRa PHY  ] PHY TX:radio set wdt 0
+main-DEBUG-  2021-08-03 17:26:32,144-[4: INFO: LoRa PHY  ] PHY TX:radio tx 1B611B0100000000
+main-DEBUG-  2021-08-03 17:26:33,150-[5: INFO: LoRa PHY  ] PHY TX:radio set wdt 3000
+main-DEBUG-  2021-08-03 17:26:33,161-[5: INFO: LoRa PHY  ] PHY TX:radio rx 0
+lora_phy-INFO-  2021-08-03 17:26:33,177-PHY RX:1B611B0100000000
+lora_mac-DEBUG-  2021-08-03 17:26:33,178-RX process receive
+lora_mac-DEBUG-  2021-08-03 17:26:33,178-RX process set is_listen=False
+lora_mac-DEBUG-  2021-08-03 17:26:33,178-RX process: call mac_rx
+lora_mac-DEBUG-  2021-08-03 17:26:33,178-MAC RX: LoraFrame(src_addr=LoraAddr(prefix=27, node_id=24859), dest_addr=LoraAddr(prefix=1, node_id=0), command=<MacCommand.JOIN: 0>, payload='', seq=0, k=False, has_next=False)
+lora_mac-DEBUG-  2021-08-03 17:26:33,178-look child with prefix: 27
+lora_mac-DEBUG-  2021-08-03 17:26:33,178-child is: None
+lora_mac-INFO-  2021-08-03 17:26:33,179-reveive join frame LoraFrame(src_addr=LoraAddr(prefix=27, node_id=24859), dest_addr=LoraAddr(prefix=1, node_id=0), command=<MacCommand.JOIN: 0>, payload='', seq=0, k=False, has_next=False)
+lora_mac-DEBUG-  2021-08-03 17:26:33,179-new child Child(2:24859) created
+lora_mac-DEBUG-  2021-08-03 17:26:33,179-send join response
+lora_phy-INFO-  2021-08-03 17:26:33,179-MAC send:LoraFrame(src_addr=LoraAddr(prefix=1, node_id=0), dest_addr=LoraAddr(prefix=27, node_id=24859), command=<MacCommand.JOIN_RESPONSE: 1>, payload='02', seq=0, k=False, has_next=False)
+lora_mac-DEBUG-  2021-08-03 17:26:33,179-RX process: mac_rx end
+lora_phy-INFO-  2021-08-03 17:26:33,179-PHY TX:radio tx 0100001B611B010002
+lora_mac-DEBUG-  2021-08-03 17:26:33,180-RX process acquire lock for can_listen
+lora_mac-DEBUG-  2021-08-03 17:26:33,180-can listen: True
+lora_mac-DEBUG-  2021-08-03 17:26:33,180-is_listen: False
+main-DEBUG-  2021-08-03 17:26:33,956-[0: INFO: Main      ] Starting Contiki-NG-develop/v4.7-18-ga3f6b04c5
+lora_phy-INFO-  2021-08-03 17:26:34,184-PHY TX:radio rx 0
+main-DEBUG-  2021-08-03 17:26:34,622-[0: INFO: Main      ][0: INFO: Main      ] Starting Contiki-NG-develop/v4.7-18-ga3f6b04c5
+main-DEBUG-  2021-08-03 17:26:34,625-[0: INFO: Main      ] - Routing: RPL Lite
+main-DEBUG-  2021-08-03 17:26:34,627-[0: INFO: Main      ] - Net: sicslowpan
+main-DEBUG-  2021-08-03 17:26:34,628-[0: INFO: Main      ] - MAC: CSMA
+main-DEBUG-  2021-08-03 17:26:34,629-[0: INFO: Main      ] - 802.15.4 PANID: 0xabcd
+main-DEBUG-  2021-08-03 17:26:34,643-[0: INFO: Main      ] - 802.15.4 Default channel: 26
+main-DEBUG-  2021-08-03 17:26:34,644-[0: INFO: Main      ] Node ID: 24859
+main-DEBUG-  2021-08-03 17:26:34,645-[0: INFO: Main      ] Link-layer address: 0012.4b00.060d.611b
+main-DEBUG-  2021-08-03 17:26:34,645-[0: INFO: Interface ] Init LoRaMAC Interface
+main-DEBUG-  2021-08-03 17:26:34,646-[0: INFO: Interface ] Welcome !
+main-DEBUG-  2021-08-03 17:26:34,657-[0: INFO: Interface ] NetStack OFF
+main-DEBUG-  2021-08-03 17:26:34,658-[0: INFO: Main      ] Tentative link-local IPv6 address: fe80::212:4b00:60d:611b
+main-DEBUG-  2021-08-03 17:26:34,660-[0: INFO: Zoul      ] Zolertia RE-Mote revision B platform

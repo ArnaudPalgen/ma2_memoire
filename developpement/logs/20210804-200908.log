@@ -1,0 +1,215 @@
+lora_mac-INFO-  2021-08-04 20:09:08,138-Init MAC
+lora_phy-INFO-  2021-08-04 20:09:08,138-Init PHY
+lora_phy-INFO-  2021-08-04 20:09:08,143-PHY TX:mac pause
+lora_phy-INFO-  2021-08-04 20:09:08,158-PHY TX:radio set freq 868100000
+lora_phy-INFO-  2021-08-04 20:09:08,174-PHY TX:radio set wdt 0
+lora_phy-INFO-  2021-08-04 20:09:08,188-PHY TX:radio rx 0
+lora_phy-INFO-  2021-08-04 20:09:11,896-PHY RX:1B611B0100000000
+lora_mac-DEBUG-  2021-08-04 20:09:11,897-RX process receive
+lora_mac-DEBUG-  2021-08-04 20:09:11,897-RX process set is_listen=False
+lora_mac-DEBUG-  2021-08-04 20:09:11,897-RX process: call mac_rx
+lora_mac-DEBUG-  2021-08-04 20:09:11,897-MAC RX: LoraFrame(src_addr=LoraAddr(prefix=27, node_id=24859), dest_addr=LoraAddr(prefix=1, node_id=0), command=<MacCommand.JOIN: 0>, payload='', seq=0, k=False, has_next=False)
+lora_mac-DEBUG-  2021-08-04 20:09:11,898-look child with prefix: 27
+lora_mac-DEBUG-  2021-08-04 20:09:11,898-child is: None
+lora_mac-INFO-  2021-08-04 20:09:11,898-reveive join frame LoraFrame(src_addr=LoraAddr(prefix=27, node_id=24859), dest_addr=LoraAddr(prefix=1, node_id=0), command=<MacCommand.JOIN: 0>, payload='', seq=0, k=False, has_next=False)
+lora_mac-DEBUG-  2021-08-04 20:09:11,898-new child Child(2:24859) created
+lora_mac-DEBUG-  2021-08-04 20:09:11,898-send join response
+lora_phy-INFO-  2021-08-04 20:09:11,898-MAC send:LoraFrame(src_addr=LoraAddr(prefix=1, node_id=0), dest_addr=LoraAddr(prefix=27, node_id=24859), command=<MacCommand.JOIN_RESPONSE: 1>, payload='02', seq=0, k=False, has_next=False)
+lora_mac-DEBUG-  2021-08-04 20:09:11,898-RX process: mac_rx end
+lora_mac-DEBUG-  2021-08-04 20:09:11,899-RX process acquire lock for can_listen
+lora_mac-DEBUG-  2021-08-04 20:09:11,899-can listen: True
+lora_mac-DEBUG-  2021-08-04 20:09:11,899-is_listen: False
+lora_phy-INFO-  2021-08-04 20:09:11,899-PHY TX:radio tx 0100001B611B010002
+lora_phy-INFO-  2021-08-04 20:09:12,903-PHY TX:radio rx 0
+lora_phy-INFO-  2021-08-04 20:09:24,057-PHY RX:02611B0100000601
+lora_mac-DEBUG-  2021-08-04 20:09:24,061-RX process receive
+lora_mac-DEBUG-  2021-08-04 20:09:24,062-RX process set is_listen=False
+lora_mac-DEBUG-  2021-08-04 20:09:24,063-RX process: call mac_rx
+lora_mac-DEBUG-  2021-08-04 20:09:24,063-MAC RX: LoraFrame(src_addr=LoraAddr(prefix=2, node_id=24859), dest_addr=LoraAddr(prefix=1, node_id=0), command=<MacCommand.QUERY: 6>, payload='', seq=1, k=False, has_next=False)
+lora_mac-DEBUG-  2021-08-04 20:09:24,063-look child with prefix: 2
+lora_mac-DEBUG-  2021-08-04 20:09:24,063-child is: Child(2:24859)
+lora_mac-DEBUG-  2021-08-04 20:09:24,063-In _on_query
+lora_mac-DEBUG-  2021-08-04 20:09:24,064-child buffer empty -> send ack
+lora_phy-INFO-  2021-08-04 20:09:24,064-MAC send:LoraFrame(src_addr=LoraAddr(prefix=1, node_id=0), dest_addr=LoraAddr(prefix=2, node_id=24859), command=<MacCommand.ACK: 3>, payload='', seq=1, k=False, has_next=False)
+lora_mac-DEBUG-  2021-08-04 20:09:24,064-RX process: mac_rx end
+lora_phy-INFO-  2021-08-04 20:09:24,064-PHY TX:radio tx 01000002611B0301
+lora_mac-DEBUG-  2021-08-04 20:09:24,064-RX process acquire lock for can_listen
+lora_mac-DEBUG-  2021-08-04 20:09:24,064-can listen: True
+lora_mac-DEBUG-  2021-08-04 20:09:24,064-is_listen: False
+lora_phy-INFO-  2021-08-04 20:09:25,068-PHY TX:radio rx 0
+lora_phy-INFO-  2021-08-04 20:09:36,221-PHY RX:02611B0100000602
+lora_mac-DEBUG-  2021-08-04 20:09:36,222-RX process receive
+lora_mac-DEBUG-  2021-08-04 20:09:36,223-RX process set is_listen=False
+lora_mac-DEBUG-  2021-08-04 20:09:36,223-RX process: call mac_rx
+lora_mac-DEBUG-  2021-08-04 20:09:36,224-MAC RX: LoraFrame(src_addr=LoraAddr(prefix=2, node_id=24859), dest_addr=LoraAddr(prefix=1, node_id=0), command=<MacCommand.QUERY: 6>, payload='', seq=2, k=False, has_next=False)
+lora_mac-DEBUG-  2021-08-04 20:09:36,224-look child with prefix: 2
+lora_mac-DEBUG-  2021-08-04 20:09:36,224-child is: Child(2:24859)
+lora_mac-DEBUG-  2021-08-04 20:09:36,225-In _on_query
+lora_mac-DEBUG-  2021-08-04 20:09:36,225-child buffer empty -> send ack
+lora_phy-INFO-  2021-08-04 20:09:36,225-MAC send:LoraFrame(src_addr=LoraAddr(prefix=1, node_id=0), dest_addr=LoraAddr(prefix=2, node_id=24859), command=<MacCommand.ACK: 3>, payload='', seq=2, k=False, has_next=False)
+lora_mac-DEBUG-  2021-08-04 20:09:36,225-RX process: mac_rx end
+lora_phy-INFO-  2021-08-04 20:09:36,225-PHY TX:radio tx 01000002611B0302
+lora_mac-DEBUG-  2021-08-04 20:09:36,226-RX process acquire lock for can_listen
+lora_mac-DEBUG-  2021-08-04 20:09:36,226-can listen: True
+lora_mac-DEBUG-  2021-08-04 20:09:36,227-is_listen: False
+lora_phy-INFO-  2021-08-04 20:09:37,232-PHY TX:radio rx 0
+lora_phy-INFO-  2021-08-04 20:09:48,385-PHY RX:02611B0100000603
+lora_mac-DEBUG-  2021-08-04 20:09:48,387-RX process receive
+lora_mac-DEBUG-  2021-08-04 20:09:48,387-RX process set is_listen=False
+lora_mac-DEBUG-  2021-08-04 20:09:48,387-RX process: call mac_rx
+lora_mac-DEBUG-  2021-08-04 20:09:48,387-MAC RX: LoraFrame(src_addr=LoraAddr(prefix=2, node_id=24859), dest_addr=LoraAddr(prefix=1, node_id=0), command=<MacCommand.QUERY: 6>, payload='', seq=3, k=False, has_next=False)
+lora_mac-DEBUG-  2021-08-04 20:09:48,387-look child with prefix: 2
+lora_mac-DEBUG-  2021-08-04 20:09:48,387-child is: Child(2:24859)
+lora_mac-DEBUG-  2021-08-04 20:09:48,387-In _on_query
+lora_mac-DEBUG-  2021-08-04 20:09:48,388-child buffer empty -> send ack
+lora_phy-INFO-  2021-08-04 20:09:48,388-MAC send:LoraFrame(src_addr=LoraAddr(prefix=1, node_id=0), dest_addr=LoraAddr(prefix=2, node_id=24859), command=<MacCommand.ACK: 3>, payload='', seq=3, k=False, has_next=False)
+lora_mac-DEBUG-  2021-08-04 20:09:48,388-RX process: mac_rx end
+lora_mac-DEBUG-  2021-08-04 20:09:48,388-RX process acquire lock for can_listen
+lora_mac-DEBUG-  2021-08-04 20:09:48,388-can listen: True
+lora_mac-DEBUG-  2021-08-04 20:09:48,388-is_listen: False
+lora_phy-INFO-  2021-08-04 20:09:48,388-PHY TX:radio tx 01000002611B0303
+lora_phy-INFO-  2021-08-04 20:09:49,393-PHY TX:radio rx 0
+lora_phy-INFO-  2021-08-04 20:10:00,541-PHY RX:02611B0100000604
+lora_mac-DEBUG-  2021-08-04 20:10:00,542-RX process receive
+lora_mac-DEBUG-  2021-08-04 20:10:00,542-RX process set is_listen=False
+lora_mac-DEBUG-  2021-08-04 20:10:00,542-RX process: call mac_rx
+lora_mac-DEBUG-  2021-08-04 20:10:00,542-MAC RX: LoraFrame(src_addr=LoraAddr(prefix=2, node_id=24859), dest_addr=LoraAddr(prefix=1, node_id=0), command=<MacCommand.QUERY: 6>, payload='', seq=4, k=False, has_next=False)
+lora_mac-DEBUG-  2021-08-04 20:10:00,542-look child with prefix: 2
+lora_mac-DEBUG-  2021-08-04 20:10:00,542-child is: Child(2:24859)
+lora_mac-DEBUG-  2021-08-04 20:10:00,542-In _on_query
+lora_mac-DEBUG-  2021-08-04 20:10:00,543-child buffer empty -> send ack
+lora_phy-INFO-  2021-08-04 20:10:00,543-MAC send:LoraFrame(src_addr=LoraAddr(prefix=1, node_id=0), dest_addr=LoraAddr(prefix=2, node_id=24859), command=<MacCommand.ACK: 3>, payload='', seq=4, k=False, has_next=False)
+lora_mac-DEBUG-  2021-08-04 20:10:00,543-RX process: mac_rx end
+lora_mac-DEBUG-  2021-08-04 20:10:00,543-RX process acquire lock for can_listen
+lora_mac-DEBUG-  2021-08-04 20:10:00,543-can listen: True
+lora_mac-DEBUG-  2021-08-04 20:10:00,543-is_listen: False
+lora_phy-INFO-  2021-08-04 20:10:00,543-PHY TX:radio tx 01000002611B0304
+lora_phy-INFO-  2021-08-04 20:10:01,547-PHY TX:radio rx 0
+lora_phy-INFO-  2021-08-04 20:10:12,697-PHY RX:02611B0100000605
+lora_mac-DEBUG-  2021-08-04 20:10:12,699-RX process receive
+lora_mac-DEBUG-  2021-08-04 20:10:12,699-RX process set is_listen=False
+lora_mac-DEBUG-  2021-08-04 20:10:12,699-RX process: call mac_rx
+lora_mac-DEBUG-  2021-08-04 20:10:12,699-MAC RX: LoraFrame(src_addr=LoraAddr(prefix=2, node_id=24859), dest_addr=LoraAddr(prefix=1, node_id=0), command=<MacCommand.QUERY: 6>, payload='', seq=5, k=False, has_next=False)
+lora_mac-DEBUG-  2021-08-04 20:10:12,699-look child with prefix: 2
+lora_mac-DEBUG-  2021-08-04 20:10:12,699-child is: Child(2:24859)
+lora_mac-DEBUG-  2021-08-04 20:10:12,699-In _on_query
+lora_mac-DEBUG-  2021-08-04 20:10:12,699-child buffer empty -> send ack
+lora_phy-INFO-  2021-08-04 20:10:12,700-MAC send:LoraFrame(src_addr=LoraAddr(prefix=1, node_id=0), dest_addr=LoraAddr(prefix=2, node_id=24859), command=<MacCommand.ACK: 3>, payload='', seq=5, k=False, has_next=False)
+lora_mac-DEBUG-  2021-08-04 20:10:12,700-RX process: mac_rx end
+lora_mac-DEBUG-  2021-08-04 20:10:12,700-RX process acquire lock for can_listen
+lora_mac-DEBUG-  2021-08-04 20:10:12,700-can listen: True
+lora_phy-INFO-  2021-08-04 20:10:12,700-PHY TX:radio tx 01000002611B0305
+lora_mac-DEBUG-  2021-08-04 20:10:12,700-is_listen: False
+lora_phy-INFO-  2021-08-04 20:10:13,704-PHY TX:radio rx 0
+lora_phy-INFO-  2021-08-04 20:10:24,854-PHY RX:02611B0100000606
+lora_mac-DEBUG-  2021-08-04 20:10:24,856-RX process receive
+lora_mac-DEBUG-  2021-08-04 20:10:24,856-RX process set is_listen=False
+lora_mac-DEBUG-  2021-08-04 20:10:24,857-RX process: call mac_rx
+lora_mac-DEBUG-  2021-08-04 20:10:24,857-MAC RX: LoraFrame(src_addr=LoraAddr(prefix=2, node_id=24859), dest_addr=LoraAddr(prefix=1, node_id=0), command=<MacCommand.QUERY: 6>, payload='', seq=6, k=False, has_next=False)
+lora_mac-DEBUG-  2021-08-04 20:10:24,857-look child with prefix: 2
+lora_mac-DEBUG-  2021-08-04 20:10:24,858-child is: Child(2:24859)
+lora_mac-DEBUG-  2021-08-04 20:10:24,858-In _on_query
+lora_mac-DEBUG-  2021-08-04 20:10:24,858-child buffer empty -> send ack
+lora_phy-INFO-  2021-08-04 20:10:24,858-MAC send:LoraFrame(src_addr=LoraAddr(prefix=1, node_id=0), dest_addr=LoraAddr(prefix=2, node_id=24859), command=<MacCommand.ACK: 3>, payload='', seq=6, k=False, has_next=False)
+lora_mac-DEBUG-  2021-08-04 20:10:24,858-RX process: mac_rx end
+lora_phy-INFO-  2021-08-04 20:10:24,858-PHY TX:radio tx 01000002611B0306
+lora_mac-DEBUG-  2021-08-04 20:10:24,859-RX process acquire lock for can_listen
+lora_mac-DEBUG-  2021-08-04 20:10:24,859-can listen: True
+lora_mac-DEBUG-  2021-08-04 20:10:24,859-is_listen: False
+lora_phy-INFO-  2021-08-04 20:10:25,863-PHY TX:radio rx 0
+lora_phy-INFO-  2021-08-04 20:10:37,021-PHY RX:02611B0100000607
+lora_mac-DEBUG-  2021-08-04 20:10:37,022-RX process receive
+lora_mac-DEBUG-  2021-08-04 20:10:37,022-RX process set is_listen=False
+lora_mac-DEBUG-  2021-08-04 20:10:37,022-RX process: call mac_rx
+lora_mac-DEBUG-  2021-08-04 20:10:37,022-MAC RX: LoraFrame(src_addr=LoraAddr(prefix=2, node_id=24859), dest_addr=LoraAddr(prefix=1, node_id=0), command=<MacCommand.QUERY: 6>, payload='', seq=7, k=False, has_next=False)
+lora_mac-DEBUG-  2021-08-04 20:10:37,023-look child with prefix: 2
+lora_mac-DEBUG-  2021-08-04 20:10:37,023-child is: Child(2:24859)
+lora_mac-DEBUG-  2021-08-04 20:10:37,023-In _on_query
+lora_mac-DEBUG-  2021-08-04 20:10:37,023-child buffer empty -> send ack
+lora_phy-INFO-  2021-08-04 20:10:37,023-MAC send:LoraFrame(src_addr=LoraAddr(prefix=1, node_id=0), dest_addr=LoraAddr(prefix=2, node_id=24859), command=<MacCommand.ACK: 3>, payload='', seq=7, k=False, has_next=False)
+lora_mac-DEBUG-  2021-08-04 20:10:37,024-RX process: mac_rx end
+lora_phy-INFO-  2021-08-04 20:10:37,024-PHY TX:radio tx 01000002611B0307
+lora_mac-DEBUG-  2021-08-04 20:10:37,024-RX process acquire lock for can_listen
+lora_mac-DEBUG-  2021-08-04 20:10:37,025-can listen: True
+lora_mac-DEBUG-  2021-08-04 20:10:37,025-is_listen: False
+lora_phy-INFO-  2021-08-04 20:10:38,028-PHY TX:radio rx 0
+lora_phy-INFO-  2021-08-04 20:10:49,183-PHY RX:02611B0100000608
+lora_mac-DEBUG-  2021-08-04 20:10:49,184-RX process receive
+lora_mac-DEBUG-  2021-08-04 20:10:49,186-RX process set is_listen=False
+lora_mac-DEBUG-  2021-08-04 20:10:49,186-RX process: call mac_rx
+lora_mac-DEBUG-  2021-08-04 20:10:49,188-MAC RX: LoraFrame(src_addr=LoraAddr(prefix=2, node_id=24859), dest_addr=LoraAddr(prefix=1, node_id=0), command=<MacCommand.QUERY: 6>, payload='', seq=8, k=False, has_next=False)
+lora_mac-DEBUG-  2021-08-04 20:10:49,189-look child with prefix: 2
+lora_mac-DEBUG-  2021-08-04 20:10:49,193-child is: Child(2:24859)
+lora_mac-DEBUG-  2021-08-04 20:10:49,194-In _on_query
+lora_mac-DEBUG-  2021-08-04 20:10:49,194-child buffer empty -> send ack
+lora_phy-INFO-  2021-08-04 20:10:49,195-MAC send:LoraFrame(src_addr=LoraAddr(prefix=1, node_id=0), dest_addr=LoraAddr(prefix=2, node_id=24859), command=<MacCommand.ACK: 3>, payload='', seq=8, k=False, has_next=False)
+lora_mac-DEBUG-  2021-08-04 20:10:49,195-RX process: mac_rx end
+lora_phy-INFO-  2021-08-04 20:10:49,195-PHY TX:radio tx 01000002611B0308
+lora_mac-DEBUG-  2021-08-04 20:10:49,195-RX process acquire lock for can_listen
+lora_mac-DEBUG-  2021-08-04 20:10:49,195-can listen: True
+lora_mac-DEBUG-  2021-08-04 20:10:49,196-is_listen: False
+lora_phy-INFO-  2021-08-04 20:10:50,199-PHY TX:radio rx 0
+lora_phy-INFO-  2021-08-04 20:11:01,355-PHY RX:02611B0100000609
+lora_mac-DEBUG-  2021-08-04 20:11:01,356-RX process receive
+lora_mac-DEBUG-  2021-08-04 20:11:01,356-RX process set is_listen=False
+lora_mac-DEBUG-  2021-08-04 20:11:01,356-RX process: call mac_rx
+lora_mac-DEBUG-  2021-08-04 20:11:01,356-MAC RX: LoraFrame(src_addr=LoraAddr(prefix=2, node_id=24859), dest_addr=LoraAddr(prefix=1, node_id=0), command=<MacCommand.QUERY: 6>, payload='', seq=9, k=False, has_next=False)
+lora_mac-DEBUG-  2021-08-04 20:11:01,356-look child with prefix: 2
+lora_mac-DEBUG-  2021-08-04 20:11:01,357-child is: Child(2:24859)
+lora_mac-DEBUG-  2021-08-04 20:11:01,357-In _on_query
+lora_mac-DEBUG-  2021-08-04 20:11:01,357-child buffer empty -> send ack
+lora_phy-INFO-  2021-08-04 20:11:01,358-MAC send:LoraFrame(src_addr=LoraAddr(prefix=1, node_id=0), dest_addr=LoraAddr(prefix=2, node_id=24859), command=<MacCommand.ACK: 3>, payload='', seq=9, k=False, has_next=False)
+lora_mac-DEBUG-  2021-08-04 20:11:01,358-RX process: mac_rx end
+lora_phy-INFO-  2021-08-04 20:11:01,359-PHY TX:radio tx 01000002611B0309
+lora_mac-DEBUG-  2021-08-04 20:11:01,366-RX process acquire lock for can_listen
+lora_mac-DEBUG-  2021-08-04 20:11:01,366-can listen: True
+lora_mac-DEBUG-  2021-08-04 20:11:01,367-is_listen: False
+lora_phy-INFO-  2021-08-04 20:11:02,370-PHY TX:radio rx 0
+lora_phy-INFO-  2021-08-04 20:11:13,531-PHY RX:02611B010000060A
+lora_mac-DEBUG-  2021-08-04 20:11:13,533-RX process receive
+lora_mac-DEBUG-  2021-08-04 20:11:13,533-RX process set is_listen=False
+lora_mac-DEBUG-  2021-08-04 20:11:13,533-RX process: call mac_rx
+lora_mac-DEBUG-  2021-08-04 20:11:13,533-MAC RX: LoraFrame(src_addr=LoraAddr(prefix=2, node_id=24859), dest_addr=LoraAddr(prefix=1, node_id=0), command=<MacCommand.QUERY: 6>, payload='', seq=10, k=False, has_next=False)
+lora_mac-DEBUG-  2021-08-04 20:11:13,533-look child with prefix: 2
+lora_mac-DEBUG-  2021-08-04 20:11:13,534-child is: Child(2:24859)
+lora_mac-DEBUG-  2021-08-04 20:11:13,534-In _on_query
+lora_mac-DEBUG-  2021-08-04 20:11:13,534-child buffer empty -> send ack
+lora_phy-INFO-  2021-08-04 20:11:13,534-MAC send:LoraFrame(src_addr=LoraAddr(prefix=1, node_id=0), dest_addr=LoraAddr(prefix=2, node_id=24859), command=<MacCommand.ACK: 3>, payload='', seq=10, k=False, has_next=False)
+lora_mac-DEBUG-  2021-08-04 20:11:13,534-RX process: mac_rx end
+lora_mac-DEBUG-  2021-08-04 20:11:13,534-RX process acquire lock for can_listen
+lora_mac-DEBUG-  2021-08-04 20:11:13,534-can listen: True
+lora_mac-DEBUG-  2021-08-04 20:11:13,535-is_listen: False
+lora_phy-INFO-  2021-08-04 20:11:13,535-PHY TX:radio tx 01000002611B030A
+lora_phy-INFO-  2021-08-04 20:11:14,539-PHY TX:radio rx 0
+lora_phy-INFO-  2021-08-04 20:11:25,691-PHY RX:02611B010000060B
+lora_mac-DEBUG-  2021-08-04 20:11:25,694-RX process receive
+lora_mac-DEBUG-  2021-08-04 20:11:25,695-RX process set is_listen=False
+lora_mac-DEBUG-  2021-08-04 20:11:25,695-RX process: call mac_rx
+lora_mac-DEBUG-  2021-08-04 20:11:25,695-MAC RX: LoraFrame(src_addr=LoraAddr(prefix=2, node_id=24859), dest_addr=LoraAddr(prefix=1, node_id=0), command=<MacCommand.QUERY: 6>, payload='', seq=11, k=False, has_next=False)
+lora_mac-DEBUG-  2021-08-04 20:11:25,695-look child with prefix: 2
+lora_mac-DEBUG-  2021-08-04 20:11:25,695-child is: Child(2:24859)
+lora_mac-DEBUG-  2021-08-04 20:11:25,695-In _on_query
+lora_mac-DEBUG-  2021-08-04 20:11:25,696-child buffer empty -> send ack
+lora_phy-INFO-  2021-08-04 20:11:25,696-MAC send:LoraFrame(src_addr=LoraAddr(prefix=1, node_id=0), dest_addr=LoraAddr(prefix=2, node_id=24859), command=<MacCommand.ACK: 3>, payload='', seq=11, k=False, has_next=False)
+lora_mac-DEBUG-  2021-08-04 20:11:25,696-RX process: mac_rx end
+lora_mac-DEBUG-  2021-08-04 20:11:25,696-RX process acquire lock for can_listen
+lora_mac-DEBUG-  2021-08-04 20:11:25,696-can listen: True
+lora_mac-DEBUG-  2021-08-04 20:11:25,696-is_listen: False
+lora_phy-INFO-  2021-08-04 20:11:25,696-PHY TX:radio tx 01000002611B030B
+lora_phy-INFO-  2021-08-04 20:11:26,700-PHY TX:radio rx 0
+lora_phy-INFO-  2021-08-04 20:11:37,855-PHY RX:02611B010000060C
+lora_mac-DEBUG-  2021-08-04 20:11:37,856-RX process receive
+lora_mac-DEBUG-  2021-08-04 20:11:37,856-RX process set is_listen=False
+lora_mac-DEBUG-  2021-08-04 20:11:37,856-RX process: call mac_rx
+lora_mac-DEBUG-  2021-08-04 20:11:37,856-MAC RX: LoraFrame(src_addr=LoraAddr(prefix=2, node_id=24859), dest_addr=LoraAddr(prefix=1, node_id=0), command=<MacCommand.QUERY: 6>, payload='', seq=12, k=False, has_next=False)
+lora_mac-DEBUG-  2021-08-04 20:11:37,856-look child with prefix: 2
+lora_mac-DEBUG-  2021-08-04 20:11:37,856-child is: Child(2:24859)
+lora_mac-DEBUG-  2021-08-04 20:11:37,857-In _on_query
+lora_mac-DEBUG-  2021-08-04 20:11:37,857-child buffer empty -> send ack
+lora_phy-INFO-  2021-08-04 20:11:37,857-MAC send:LoraFrame(src_addr=LoraAddr(prefix=1, node_id=0), dest_addr=LoraAddr(prefix=2, node_id=24859), command=<MacCommand.ACK: 3>, payload='', seq=12, k=False, has_next=False)
+lora_mac-DEBUG-  2021-08-04 20:11:37,857-RX process: mac_rx end
+lora_mac-DEBUG-  2021-08-04 20:11:37,857-RX process acquire lock for can_listen
+lora_mac-DEBUG-  2021-08-04 20:11:37,857-can listen: True
+lora_mac-DEBUG-  2021-08-04 20:11:37,857-is_listen: False
+lora_phy-INFO-  2021-08-04 20:11:37,857-PHY TX:radio tx 01000002611B030C
+lora_phy-INFO-  2021-08-04 20:11:38,861-PHY TX:radio rx 0

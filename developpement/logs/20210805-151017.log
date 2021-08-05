@@ -1,0 +1,70 @@
+lora_mac-INFO-  2021-08-05 15:10:17,741-Init MAC
+lora_phy-INFO-  2021-08-05 15:10:17,741-Init PHY
+lora_phy-INFO-  2021-08-05 15:10:17,744-PHY TX:mac pause
+lora_phy-INFO-  2021-08-05 15:10:17,757-PHY TX:radio set freq 868100000
+lora_phy-INFO-  2021-08-05 15:10:17,772-PHY TX:radio set wdt 0
+lora_phy-INFO-  2021-08-05 15:10:17,778-PHY TX:radio rx 0
+main-DEBUG-  2021-08-05 15:10:19,926-[0: INFO: Main      ] Starting Contiki-NG-develop/v4.7-23-g8118b245d-dirty
+main-DEBUG-  2021-08-05 15:10:19,928-[0: INFO: Main      ] - Routing: RPL Lite
+main-DEBUG-  2021-08-05 15:10:19,930-[0: INFO: Main      ] - Net: sicslowpan
+main-DEBUG-  2021-08-05 15:10:19,931-[0: INFO: Main      ] - MAC: CSMA
+main-DEBUG-  2021-08-05 15:10:19,933-[0: INFO: Main      ] - 802.15.4 PANID: 0xabcd
+main-DEBUG-  2021-08-05 15:10:19,947-[0: INFO: Main      ] - 802.15.4 Default channel: 26
+main-DEBUG-  2021-08-05 15:10:19,950-[0: INFO: Main      ] Node ID: 24859
+main-DEBUG-  2021-08-05 15:10:19,954-[0: INFO: Main      ] Link-layer address: 0012.4b00.060d.611b
+main-DEBUG-  2021-08-05 15:10:19,955-[0: INFO: Interface ] Welcome to LoRaMAC interface !
+main-DEBUG-  2021-08-05 15:10:19,957-[0: INFO: LoRa MAC  ] Init LoRa MAC
+main-DEBUG-  2021-08-05 15:10:19,970-[0: INFO: Interface ] Init LoRaMAC Interface
+main-DEBUG-  2021-08-05 15:10:19,972-[0: INFO: Interface ] Welcome !
+main-DEBUG-  2021-08-05 15:10:19,974-[0: INFO: RPL       ] initializing
+main-DEBUG-  2021-08-05 15:10:19,975-[0: INFO: Main      ] Tentative link-local IPv6 address: fe80::212:4b00:60d:611b
+main-DEBUG-  2021-08-05 15:10:19,977-[0: INFO: Zoul      ] Zolertia RE-Mote revision B platform
+main-DEBUG-  2021-08-05 15:10:20,293-[1: INFO: App       ] Welcome server
+main-DEBUG-  2021-08-05 15:10:21,651-[2: INFO: Interface ] Button pushed
+main-DEBUG-  2021-08-05 15:10:21,653-[2: INFO: LoRa MAC  ] Start LoRaMAC RPL root
+main-DEBUG-  2021-08-05 15:10:21,656-[2: DBG : LoRa MAC  ] initial state: 0
+main-DEBUG-  2021-08-05 15:10:21,657-[2: INFO: LoRa PHY  ] Init LoRa PHY
+main-DEBUG-  2021-08-05 15:10:21,658-[2: DBG : LoRa MAC  ] SET retransmit timer
+main-DEBUG-  2021-08-05 15:10:21,658-[2: DBG : LoRa MAC  ] initialization complete
+main-DEBUG-  2021-08-05 15:10:21,659-[2: INFO: LoRa PHY  ] PHY TX:mac pause
+main-DEBUG-  2021-08-05 15:10:21,670-[2: INFO: LoRa PHY  ] PHY TX:radio set freq 868100000
+main-DEBUG-  2021-08-05 15:10:21,686-[2: INFO: LoRa PHY  ] PHY TX:radio set wdt 0
+main-DEBUG-  2021-08-05 15:10:21,696-[2: INFO: LoRa PHY  ] PHY TX:radio tx 1B611B0100000000
+main-DEBUG-  2021-08-05 15:10:22,703-[3: INFO: LoRa PHY  ] PHY TX:radio set wdt 3000
+main-DEBUG-  2021-08-05 15:10:22,713-[3: INFO: LoRa PHY  ] PHY TX:radio rx 0
+lora_phy-INFO-  2021-08-05 15:10:22,730-PHY RX:1B611B0100000000
+lora_mac-DEBUG-  2021-08-05 15:10:22,730-RX process receive
+lora_mac-DEBUG-  2021-08-05 15:10:22,731-RX process set is_listen=False
+lora_mac-DEBUG-  2021-08-05 15:10:22,731-RX process: call mac_rx
+lora_mac-DEBUG-  2021-08-05 15:10:22,731-MAC RX: LoraFrame(src_addr=LoraAddr(prefix=27, node_id=24859), dest_addr=LoraAddr(prefix=1, node_id=0), command=<MacCommand.JOIN: 0>, payload='', seq=0, k=False, has_next=False)
+lora_mac-DEBUG-  2021-08-05 15:10:22,733-look child with prefix: 27
+lora_mac-DEBUG-  2021-08-05 15:10:22,735-child is: None
+lora_mac-INFO-  2021-08-05 15:10:22,735-reveive join frame LoraFrame(src_addr=LoraAddr(prefix=27, node_id=24859), dest_addr=LoraAddr(prefix=1, node_id=0), command=<MacCommand.JOIN: 0>, payload='', seq=0, k=False, has_next=False)
+lora_mac-DEBUG-  2021-08-05 15:10:22,736-new child Child(2:24859) created
+lora_mac-DEBUG-  2021-08-05 15:10:22,736-send join response
+lora_phy-INFO-  2021-08-05 15:10:22,736-MAC send:LoraFrame(src_addr=LoraAddr(prefix=1, node_id=0), dest_addr=LoraAddr(prefix=27, node_id=24859), command=<MacCommand.JOIN_RESPONSE: 1>, payload='02', seq=0, k=False, has_next=False)
+lora_mac-DEBUG-  2021-08-05 15:10:22,736-RX process: mac_rx end
+lora_phy-INFO-  2021-08-05 15:10:22,737-PHY TX:radio tx 0100001B611B010002
+lora_mac-DEBUG-  2021-08-05 15:10:22,737-RX process acquire lock for can_listen
+lora_mac-DEBUG-  2021-08-05 15:10:22,738-can listen: True
+lora_mac-DEBUG-  2021-08-05 15:10:22,739-is_listen: False
+lora_phy-INFO-  2021-08-05 15:10:23,742-PHY TX:radio rx 0
+main-DEBUG-  2021-08-05 15:10:23,798-[4: INFO: LoRa PHY  ] PHY RX:0100001B611B010002
+main-DEBUG-  2021-08-05 15:10:23,802-[4: INFO: LoRa MAC  ] RX LoRa frame: {src:1:0 dest:27:24859 k:0 seq:0 next:0 cmd:1 data:02
+main-DEBUG-  2021-08-05 15:10:23,803-[4: DBG : LoRa MAC  ] JOIN RESPONSE
+main-DEBUG-  2021-08-05 15:10:23,803-[4: DBG : LoRa MAC  ] state = READY
+main-DEBUG-  2021-08-05 15:10:23,820-[4: DBG : LoRa MAC  ] STOP retransmit timer
+main-DEBUG-  2021-08-05 15:10:23,820-[4: INFO: LoRa MAC  ] Lora Root joined
+main-DEBUG-  2021-08-05 15:10:23,821-[4: INFO: LoRa MAC  ] Node addr: 2:24859
+main-DEBUG-  2021-08-05 15:10:23,823-[4: DBG : LoRa MAC  ] START TX_PROCESS
+main-DEBUG-  2021-08-05 15:10:23,824-[4: DBG : LoRa MAC  ] MAC_TX process started
+main-DEBUG-  2021-08-05 15:10:23,825-[4: DBG : LoRa MAC  ] SET query timer
+main-DEBUG-  2021-08-05 15:10:23,842-[4: INFO: Interface ] RECEIVE LORAMAC JOINED EVENT !
+main-DEBUG-  2021-08-05 15:10:23,843-[4: INFO: Interface ] PREFIX: 2
+main-DEBUG-  2021-08-05 15:10:23,844-[4: INFO: RPL       ] IPv6 addresses:
+main-DEBUG-  2021-08-05 15:10:23,845-[4: INFO: RPL       ] -- fd00::ee00:212:4b00:60d:611b
+main-DEBUG-  2021-08-05 15:10:23,846-[4: INFO: RPL       ] -- fe80::212:4b00:60d:611b
+main-DEBUG-  2021-08-05 15:10:23,856-[4: INFO: RPL       ] reset DIO timer (Init root)
+main-DEBUG-  2021-08-05 15:10:23,858-[4: INFO: RPL       ] created DAG with instance ID 0, DAG ID fd00::ee00:212:4b00:60d:611b, rank 128
+main-DEBUG-  2021-08-05 15:10:23,860-[4: INFO: RPL       ] created a new RPL DAG
+main-DEBUG-  2021-08-05 15:10:27,401-[8: INFO: RPL       ] sending a multicast-DIO with rank 128 to ff02::1a

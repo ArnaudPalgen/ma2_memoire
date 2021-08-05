@@ -1,0 +1,31 @@
+lora_mac-INFO-  2021-08-05 14:22:06,902-Init MAC
+lora_phy-INFO-  2021-08-05 14:22:06,902-Init PHY
+lora_phy-INFO-  2021-08-05 14:22:06,905-PHY TX:mac pause
+lora_phy-INFO-  2021-08-05 14:22:06,919-PHY TX:radio set freq 868100000
+lora_phy-INFO-  2021-08-05 14:22:06,933-PHY TX:radio set wdt 0
+lora_phy-INFO-  2021-08-05 14:22:06,943-PHY TX:radio rx 0
+main-DEBUG-  2021-08-05 14:22:09,890-[4: INFO: Interface ] Button pushed
+main-DEBUG-  2021-08-05 14:22:09,892-[4: INFO: LoRa MAC  ] Start LoRaMAC RPL root
+main-DEBUG-  2021-08-05 14:22:09,893-[4: DBG : LoRa MAC  ] initial state: 0
+main-DEBUG-  2021-08-05 14:22:09,894-[4: INFO: LoRa PHY  ] Init LoRa PHY
+main-DEBUG-  2021-08-05 14:22:09,895-[4: DBG : LoRa MAC  ] SET retransmit timer
+main-DEBUG-  2021-08-05 14:22:09,897-[4: DBG : LoRa MAC  ] initialization complete
+main-DEBUG-  2021-08-05 14:22:09,898-[4: INFO: LoRa PHY  ] PHY TX:mac pause
+main-DEBUG-  2021-08-05 14:22:09,909-[4: INFO: LoRa PHY  ] PHY TX:radio set freq 868100000
+main-DEBUG-  2021-08-05 14:22:09,943-[4: INFO: RPL       ] sending a multicast-DIO with rank 128 to ff02::1a
+main-DEBUG-  2021-08-05 14:22:14,905-[9: INFO: LoRa MAC  ] retransmit timeout !
+main-DEBUG-  2021-08-05 14:22:14,907-[9: ERR : LoRa MAC  ] STOP retransmit timer thanks to retransmit_timeout
+main-DEBUG-  2021-08-05 14:22:14,911-[9: DBG : LoRa MAC  ] retransmit frame: {src:27:24859 dest:1:0 k:0 seq:0 next:0 cmd:0 data:
+main-DEBUG-  2021-08-05 14:22:14,913-[9: ERR : LoRa MAC  ] RESTART retransmit timer because a frame was retransmit
+main-DEBUG-  2021-08-05 14:22:17,281-[11: INFO: RPL       ] sending a multicast-DIO with rank 128 to ff02::1a
+main-DEBUG-  2021-08-05 14:22:19,930-[14: INFO: LoRa MAC  ] retransmit timeout !
+main-DEBUG-  2021-08-05 14:22:19,933-[14: ERR : LoRa MAC  ] STOP retransmit timer thanks to retransmit_timeout
+main-DEBUG-  2021-08-05 14:22:19,936-[14: DBG : LoRa MAC  ] retransmit frame: {src:27:24859 dest:1:0 k:0 seq:0 next:0 cmd:0 data:
+main-DEBUG-  2021-08-05 14:22:19,937-[14: ERR : LoRa MAC  ] RESTART retransmit timer because a frame was retransmit
+main-DEBUG-  2021-08-05 14:22:24,952-[19: INFO: LoRa MAC  ] retransmit timeout !
+main-DEBUG-  2021-08-05 14:22:24,955-[19: ERR : LoRa MAC  ] STOP retransmit timer thanks to retransmit_timeout
+main-DEBUG-  2021-08-05 14:22:24,957-[19: DBG : LoRa MAC  ] retransmit frame: {src:27:24859 dest:1:0 k:0 seq:0 next:0 cmd:0 data:
+main-DEBUG-  2021-08-05 14:22:24,959-[19: ERR : LoRa MAC  ] RESTART retransmit timer because a frame was retransmit
+main-DEBUG-  2021-08-05 14:22:29,965-[24: INFO: LoRa MAC  ] retransmit timeout !
+main-DEBUG-  2021-08-05 14:22:29,968-[24: ERR : LoRa MAC  ] STOP retransmit timer thanks to retransmit_timeout
+main-DEBUG-  2021-08-05 14:22:29,970-[24: INFO: LoRa MAC  ] Unable to send frame {src:27:24859 dest:1:0 k:0 seq:0 next:0 cmd:0 data:
