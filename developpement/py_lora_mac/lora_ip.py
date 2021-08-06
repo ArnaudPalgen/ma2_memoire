@@ -12,6 +12,7 @@ log = logging.getLogger("LoRa_ROOT.IP")
 # Unique Local IPv6 Unicast Addresses (FC00::/7) with to L bit to 1 (c.f. RFC 4193)
 IPv6_PREFIX = "FD00"
 COMMON_LINK_ADDR_PART = "02124B00060D"
+# 600000000010113F0000000000000000000000000000000000000000000000000000000000000000223D162E0010B25168656C6C6F20313468656C6C6F203134060D611B040E00080C00040000800001001E003C081E4040FFFFFFFFFFFFFFFF00000000FD00000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000
 
 
 class LoraIP:
@@ -44,7 +45,10 @@ class LoraIP:
         if self.upper_layer is None:
             log.error("Upper layer not defined. Please call `register_listener` before")
         else:
-            self.upper_layer(self.build_ip_packet(payload, src, self.mac_layer.addr))
+            ip_packet = self.build_ip_packet(payload, src, self.mac_layer.addr)
+            packet_info = ip_packet.show(dump=True)
+            log.debug("Rebuilt IP packet: %s", packet_info)
+            self.upper_layer()
 
     def register_listener(self, listener: Callable[[IPv6], None]):
         log.debug("listener registered !")
@@ -93,11 +97,11 @@ class LoraIP:
         """remove adresses from the packet"""
         f1 = hex_packet[0:16]
         f2 = hex_packet[80:]
-        result = f1 + f2
+        payload = f1 + f2
 
-        src_addr = IPv6Address(ip_packet.dest).packed.hex().upper()
-        dest_addr = IPv6Address(ip_packet.dest).packed.hex().upper()
-        return (result, src_addr, dest_addr)
+        src_addr = LoraIP.ipv6_to_lora(IPv6Address(ip_packet.src))
+        dest_addr = LoraIP.ipv6_to_lora(IPv6Address(ip_packet.dest))
+        return (payload, src_addr, dest_addr)
 
     @staticmethod
     def build_ip_packet(hex_data: str, src_addr: LoraAddr, dest_addr: LoraAddr):

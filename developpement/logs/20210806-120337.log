@@ -1,0 +1,1088 @@
+lora_mac-INFO-  2021-08-06 12:03:37,640-Init MAC
+lora_phy-INFO-  2021-08-06 12:03:37,640-Init PHY
+lora_phy-INFO-  2021-08-06 12:03:37,643-PHY TX:mac pause
+lora_phy-INFO-  2021-08-06 12:03:37,657-PHY TX:radio set freq 868100000
+lora_phy-INFO-  2021-08-06 12:03:37,672-PHY TX:radio set wdt 0
+lora_phy-INFO-  2021-08-06 12:03:37,679-PHY TX:radio rx 0
+main-DEBUG-  2021-08-06 12:03:39,285-[0: INFO: Main      ] Starting Contiki-NG-develop/v4.7-24-gf18a6e752-dirty
+main-DEBUG-  2021-08-06 12:03:39,286-[0: INFO: Main      ] - Routing: RPL Lite
+main-DEBUG-  2021-08-06 12:03:39,287-[0: INFO: Main      ] - Net: sicslowpan
+main-DEBUG-  2021-08-06 12:03:39,288-[0: INFO: Main      ] - MAC: CSMA
+main-DEBUG-  2021-08-06 12:03:39,289-[0: INFO: Main      ] - 802.15.4 PANID: 0xabcd
+main-DEBUG-  2021-08-06 12:03:39,310-[0: INFO: Main      ] - 802.15.4 Default channel: 26
+main-DEBUG-  2021-08-06 12:03:39,311-[0: INFO: Main      ] Node ID: 24859
+main-DEBUG-  2021-08-06 12:03:39,312-[0: INFO: Main      ] Link-layer address: 0012.4b00.060d.611b
+main-DEBUG-  2021-08-06 12:03:39,313-[0: INFO: Interface ] Welcome to LoRaMAC interface !
+main-DEBUG-  2021-08-06 12:03:39,324-[0: INFO: Interface ] Init LoRaMAC Interface
+main-DEBUG-  2021-08-06 12:03:39,325-[0: INFO: Interface ] Welcome !
+main-DEBUG-  2021-08-06 12:03:39,325-[0: INFO: RPL       ] initializing
+main-DEBUG-  2021-08-06 12:03:39,326-[0: INFO: Main      ] Tentative link-local IPv6 address: fe80::212:4b00:60d:611b
+main-DEBUG-  2021-08-06 12:03:39,327-[0: INFO: Zoul      ] Zolertia RE-Mote revision B platform
+main-DEBUG-  2021-08-06 12:03:39,647-[1: INFO: App       ] Welcome server
+main-DEBUG-  2021-08-06 12:03:43,087-[4: INFO: Interface ] Button pushed
+main-DEBUG-  2021-08-06 12:03:43,089-[4: INFO: LoRa MAC  ] Start LoRaMAC RPL root
+main-DEBUG-  2021-08-06 12:03:43,092-[4: DBG : LoRa MAC  ] initial state: 0
+main-DEBUG-  2021-08-06 12:03:43,093-[4: INFO: LoRa PHY  ] Init LoRa PHY
+main-DEBUG-  2021-08-06 12:03:43,095-[4: DBG : LoRa PHY  ] log 1
+main-DEBUG-  2021-08-06 12:03:43,096-[4: DBG : LoRa PHY  ] log 2
+main-DEBUG-  2021-08-06 12:03:43,109-[4: DBG : LoRa PHY  ] log 3
+main-DEBUG-  2021-08-06 12:03:43,110-[4: DBG : LoRa PHY  ] enter UART_TX
+main-DEBUG-  2021-08-06 12:03:43,112-[4: DBG : LoRa PHY  ] append { cmd:mac pause resp: [4294967245, none] }[4: DBG : LoRa PHY  ]  to UART TX buffer
+main-DEBUG-  2021-08-06 12:03:43,113-[4: DBG : LoRa PHY  ] enter UART_TX
+main-DEBUG-  2021-08-06 12:03:43,131-[4: DBG : LoRa PHY  ] append { cmd:radio set freq  resp: [ok, none] }[4: DBG : LoRa PHY  ]  to UART TX buffer
+main-DEBUG-  2021-08-06 12:03:43,132-[4: DBG : LoRa PHY  ] enter UART_TX
+main-DEBUG-  2021-08-06 12:03:43,133-[4: DBG : LoRa PHY  ] append { cmd:radio set wdt  resp: [ok, none] }[4: DBG : LoRa PHY  ]  to UART TX buffer
+main-DEBUG-  2021-08-06 12:03:43,134-[4: DBG : LoRa PHY  ] enter UART_TX
+main-DEBUG-  2021-08-06 12:03:43,154-[4: DBG : LoRa PHY  ] with lora frame: {src:27:24859 dest:1:0 k:0 seq:0 next:0 cmd:0 data:
+main-DEBUG-  2021-08-06 12:03:43,155-[4: DBG : LoRa PHY  ] append { cmd:radio tx  resp: [radio_tx_ok, radio_err] }[4: DBG : LoRa PHY  ]  to UART TX buffer
+main-DEBUG-  2021-08-06 12:03:43,156-[4: DBG : LoRa PHY  ] enter UART_TX
+main-DEBUG-  2021-08-06 12:03:43,176-[4: DBG : LoRa PHY  ] append { cmd:radio set wdt  resp: [ok, none] }[4: DBG : LoRa PHY  ]  to UART TX buffer
+main-DEBUG-  2021-08-06 12:03:43,177-[4: DBG : LoRa PHY  ] enter UART_TX
+main-DEBUG-  2021-08-06 12:03:43,179-[4: DBG : LoRa PHY  ] append { cmd:radio rx  resp: [radio_err, radio_rx] }[4: DBG : LoRa PHY  ]  to UART TX buffer
+main-DEBUG-  2021-08-06 12:03:43,198-[4: DBG : LoRa MAC  ] SET retransmit timer
+main-DEBUG-  2021-08-06 12:03:43,199-[4: DBG : LoRa MAC  ] initialization complete
+main-DEBUG-  2021-08-06 12:03:43,199-[4: DBG : LoRa PHY  ] log 4
+main-DEBUG-  2021-08-06 12:03:43,200-[4: DBG : LoRa PHY  ] log 5
+main-DEBUG-  2021-08-06 12:03:43,201-[4: DBG : LoRa PHY  ] log 6
+main-DEBUG-  2021-08-06 12:03:43,201-[4: DBG : LoRa PHY  ] log 7
+main-DEBUG-  2021-08-06 12:03:43,202-[4: DBG : LoRa PHY  ] log 8
+main-DEBUG-  2021-08-06 12:03:43,223-[4: DBG : LoRa PHY  ] log 9
+main-DEBUG-  2021-08-06 12:03:43,224-[4: DBG : LoRa PHY  ] log 10
+main-DEBUG-  2021-08-06 12:03:43,224-[4: DBG : LoRa PHY  ] log 11
+main-DEBUG-  2021-08-06 12:03:43,225-[4: DBG : LoRa PHY  ] log 11
+main-DEBUG-  2021-08-06 12:03:43,226-[4: DBG : LoRa PHY  ] log 12
+main-DEBUG-  2021-08-06 12:03:43,227-[4: DBG : LoRa PHY  ] log 13
+main-DEBUG-  2021-08-06 12:03:43,227-[4: DBG : LoRa PHY  ] log 14
+main-DEBUG-  2021-08-06 12:03:43,228-[4: DBG : LoRa PHY  ] log 15
+main-DEBUG-  2021-08-06 12:03:43,243-[4: DBG : LoRa PHY  ] will call write UART
+main-DEBUG-  2021-08-06 12:03:43,243-[4: INFO: LoRa PHY  ] PHY TX:mac pause
+main-DEBUG-  2021-08-06 12:03:43,244-[4: DBG : LoRa PHY  ] phy tx done
+main-DEBUG-  2021-08-06 12:03:43,244-[4: DBG : LoRa PHY  ] write uart call ended
+main-DEBUG-  2021-08-06 12:03:43,245-[4: DBG : LoRa PHY  ] wait can send
+main-DEBUG-  2021-08-06 12:03:43,265-[4: DBG : LoRa[4: DBG : LoRa PHY  ] UART response:4294967245
+main-DEBUG-  2021-08-06 12:03:43,265-[4: DBG : LoRa PHY  ] compare response with:4294967245
+main-DEBUG-  2021-08-06 12:03:43,266-[4: DBG : LoRa PHY  ]  expected !
+main-DEBUG-  2021-08-06 12:03:43,266-
+PHY  ] wait can send
+main-DEBUG-  2021-08-06 12:03:43,266-[4: DBG : LoRa PHY  ] wait can send
+main-DEBUG-  2021-08-06 12:03:43,267-[4: DBG : LoRa PHY  ] wait can send
+main-DEBUG-  2021-08-06 12:03:43,267-[4: DBG : LoRa PHY  ] wait can send
+main-DEBUG-  2021-08-06 12:03:43,287-[4: DBG : LoRa PHY  ] wait can send
+main-DEBUG-  2021-08-06 12:03:43,287-[4: DBG : LoRa PHY  ] can send !
+main-DEBUG-  2021-08-06 12:03:43,288-[4: DBG : LoRa PHY  ] log 1
+main-DEBUG-  2021-08-06 12:03:43,288-[4: DBG : LoRa PHY  ] log 2
+main-DEBUG-  2021-08-06 12:03:43,289-[4: DBG : LoRa PHY  ] log 4
+main-DEBUG-  2021-08-06 12:03:43,289-[4: DBG : LoRa PHY  ] log 5
+main-DEBUG-  2021-08-06 12:03:43,289-[4: DBG : LoRa PHY  ] log 6
+main-DEBUG-  2021-08-06 12:03:43,292-[4: DBG : LoRa PHY  ] log 7
+main-DEBUG-  2021-08-06 12:03:43,309-[4: DBG : LoRa PHY  ] log 8
+main-DEBUG-  2021-08-06 12:03:43,310-[4: DBG : LoRa PHY  ] log 9
+main-DEBUG-  2021-08-06 12:03:43,312-[4: DBG : LoRa PHY  ] log 10
+main-DEBUG-  2021-08-06 12:03:43,313-[4: DBG : LoRa PHY  ] log 11
+main-DEBUG-  2021-08-06 12:03:43,314-[4: DBG : LoRa PHY  ] log 11
+main-DEBUG-  2021-08-06 12:03:43,316-[4: DBG : LoRa PHY  ] log 12
+main-DEBUG-  2021-08-06 12:03:43,317-[4: DBG : LoRa PHY  ] log 13
+main-DEBUG-  2021-08-06 12:03:43,318-[4: DBG : LoRa PHY  ] log 14
+main-DEBUG-  2021-08-06 12:03:43,320-[4: DBG : LoRa PHY  ] log 15
+main-DEBUG-  2021-08-06 12:03:43,321-[4: DBG : LoRa PHY  ] will call write UART
+main-DEBUG-  2021-08-06 12:03:43,323-[4: INFO: LoRa PHY  ] PHY TX:radio set freq 868100000
+main-DEBUG-  2021-08-06 12:03:43,331-[4: DBG : LoRa PHY  ] phy tx done
+main-DEBUG-  2021-08-06 12:03:43,333-[4: DBG : LoRa PHY  ] write uart call ended
+main-DEBUG-  2021-08-06 12:03:43,334-[4: DBG : LoRa PHY  ] wait can send
+main-DEBUG-  2021-08-06 12:03:43,355-[4: DBG : LoRa PHY  ] UART response:ok
+main-DEBUG-  2021-08-06 12:03:43,356-[4: DBG : LoRa PHY  ] compare response with:ok
+main-DEBUG-  2021-08-06 12:03:43,359-[4: DBG : LoRa PHY  ]  expected !
+main-DEBUG-  2021-08-06 12:03:43,360-[4: DBG : LoRa PHY  ] wait can send
+main-DEBUG-  2021-08-06 12:03:43,361-[4: DBG : LoRa PHY  ] can send !
+main-DEBUG-  2021-08-06 12:03:43,361-[4: DBG : LoRa PHY  ] log 1
+main-DEBUG-  2021-08-06 12:03:43,377-[4: DBG : LoRa PHY  ] log 2
+main-DEBUG-  2021-08-06 12:03:43,377-[4: DBG : LoRa PHY  ] log 4
+main-DEBUG-  2021-08-06 12:03:43,378-[4: DBG : LoRa PHY  ] log 5
+main-DEBUG-  2021-08-06 12:03:43,380-[4: DBG : LoRa PHY  ] log 6
+main-DEBUG-  2021-08-06 12:03:43,381-[4: DBG : LoRa PHY  ] log 7
+main-DEBUG-  2021-08-06 12:03:43,382-[4: DBG : LoRa PHY  ] log 8
+main-DEBUG-  2021-08-06 12:03:43,384-[4: DBG : LoRa PHY  ] log 9
+main-DEBUG-  2021-08-06 12:03:43,386-[4: DBG : LoRa PHY  ] log 10
+main-DEBUG-  2021-08-06 12:03:43,399-[4: DBG : LoRa PHY  ] log 11
+main-DEBUG-  2021-08-06 12:03:43,399-[4: DBG : LoRa PHY  ] log 11
+main-DEBUG-  2021-08-06 12:03:43,399-[4: DBG : LoRa PHY  ] log 12
+main-DEBUG-  2021-08-06 12:03:43,400-[4: DBG : LoRa PHY  ] log 13
+main-DEBUG-  2021-08-06 12:03:43,400-[4: DBG : LoRa PHY  ] log 19
+main-DEBUG-  2021-08-06 12:03:43,401-[4: DBG : LoRa PHY  ] log 20
+main-DEBUG-  2021-08-06 12:03:43,402-[4: DBG : LoRa PHY  ] will call write UART
+main-DEBUG-  2021-08-06 12:03:43,422-[4: INFO: LoRa PHY  ] PHY TX:radio set wdt 0
+main-DEBUG-  2021-08-06 12:03:43,422-[4: DBG : LoRa PHY  ] phy tx done
+main-DEBUG-  2021-08-06 12:03:43,423-[4: DBG : LoRa PHY  ] write [4: DBG : LoRa PHY  ] UART response:ok
+main-DEBUG-  2021-08-06 12:03:43,425-[4: DBG : LoRa PHY  ] compare response with:ok
+main-DEBUG-  2021-08-06 12:03:43,426-[4: DBG : LoRa PHY  ]  expected !
+main-DEBUG-  2021-08-06 12:03:43,426-
+art call ended
+main-DEBUG-  2021-08-06 12:03:43,427-[4: DBG : LoRa PHY  ] wait can send
+main-DEBUG-  2021-08-06 12:03:43,444-[4: DBG : LoRa PHY  ] can send !
+main-DEBUG-  2021-08-06 12:03:43,444-[4: DBG : LoRa PHY  ] log 1
+main-DEBUG-  2021-08-06 12:03:43,446-[4: DBG : LoRa PHY  ] log 2
+main-DEBUG-  2021-08-06 12:03:43,448-[4: DBG : LoRa PHY  ] log 4
+main-DEBUG-  2021-08-06 12:03:43,449-[4: DBG : LoRa PHY  ] log 5
+main-DEBUG-  2021-08-06 12:03:43,450-[4: DBG : LoRa PHY  ] log 6
+main-DEBUG-  2021-08-06 12:03:43,452-[4: DBG : LoRa PHY  ] log 7
+main-DEBUG-  2021-08-06 12:03:43,454-[4: DBG : LoRa PHY  ] log 8
+main-DEBUG-  2021-08-06 12:03:43,466-[4: DBG : LoRa PHY  ] log 9
+main-DEBUG-  2021-08-06 12:03:43,466-[4: DBG : LoRa PHY  ] log 10
+main-DEBUG-  2021-08-06 12:03:43,466-[4: DBG : LoRa PHY  ] log 11
+main-DEBUG-  2021-08-06 12:03:43,466-[4: DBG : LoRa PHY  ] log 11
+main-DEBUG-  2021-08-06 12:03:43,467-[4: DBG : LoRa PHY  ] log 12
+main-DEBUG-  2021-08-06 12:03:43,467-[4: DBG : LoRa PHY  ] log 13
+main-DEBUG-  2021-08-06 12:03:43,468-[4: DBG : LoRa PHY  ] log 16
+main-DEBUG-  2021-08-06 12:03:43,488-[4: DBG : LoRa PHY  ] log 17 with lora frame:
+main-DEBUG-  2021-08-06 12:03:43,488-{src:27:24859 dest:1:0 k:0 seq:0 next:0 cmd:0 data:
+main-DEBUG-  2021-08-06 12:03:43,489-[4: DBG : LoRa PHY  ] to frame receive: {src:27:24859 dest:1:0 k:0 seq:0 next:0 cmd:0 data:
+main-DEBUG-  2021-08-06 12:03:43,490-[4: DBG : LoRa PHY  ]
+main-DEBUG-  2021-08-06 12:03:43,491-[4: DBG : LoRa PHY  ] src.prefix: 27
+main-DEBUG-  2021-08-06 12:03:43,511-[4: DBG : LoRa PHY  ] src addr: 1B611B
+main-DEBUG-  2021-08-06 12:03:43,511-[4: DBG : LoRa PHY  ] dest addr: 010000
+main-DEBUG-  2021-08-06 12:03:43,512-[4: DBG : LoRa PHY  ] flags and command:00
+main-DEBUG-  2021-08-06 12:03:43,512-[4: DBG : LoRa PHY  ] SN:00
+main-DEBUG-  2021-08-06 12:03:43,514-[4: DBG : LoRa PHY  ] TO HEX frame: 1B611B0100000000
+main-DEBUG-  2021-08-06 12:03:43,514-[4: DBG : LoRa PHY  ] log 18
+main-DEBUG-  2021-08-06 12:03:43,516-[4: DBG : LoRa PHY  ] will call write UART
+main-DEBUG-  2021-08-06 12:03:43,516-[4: INFO: LoRa PHY  ] PHY TX:radio tx 1B611B0100000000
+main-DEBUG-  2021-08-06 12:03:43,524-[4: DBG : LoRa PHY  ] phy tx done
+main-DEBUG-  2021-08-06 12:03:43,526-[4: DBG : LoRa PHY  ] write uart call ended
+main-DEBUG-  2021-08-06 12:03:43,538-[4: DBG : LoRa PHY  ] UART response:ok
+main-DEBUG-  2021-08-06 12:03:43,541-[4: DBG : LoRa PHY  ] compare response with:radio_tx_ok
+main-DEBUG-  2021-08-06 12:03:43,544-[4: DBG : LoRa PHY  ] compare response with:radio_err
+main-DEBUG-  2021-08-06 12:03:44,540-[5: DBG : LoRa PHY  ] UART response:radio_tx_ok
+main-DEBUG-  2021-08-06 12:03:44,540-[5: DBG : LoRa PHY  ] compare response with:radio_tx_ok
+main-DEBUG-  2021-08-06 12:03:44,541-[5: DBG : LoRa PHY  ]  expected !
+main-DEBUG-  2021-08-06 12:03:44,541-[5: DBG : LoRa PHY  ] wait can send
+main-DEBUG-  2021-08-06 12:03:44,542-[5: DBG : LoRa PHY  ] can send !
+main-DEBUG-  2021-08-06 12:03:44,542-[5: DBG : LoRa PHY  ] log 1
+lora_phy-INFO-  2021-08-06 12:03:44,550-PHY RX:1B611B0100000000
+lora_mac-DEBUG-  2021-08-06 12:03:44,550-RX process receive
+lora_mac-DEBUG-  2021-08-06 12:03:44,551-RX process set is_listen=False
+lora_mac-DEBUG-  2021-08-06 12:03:44,551-RX process: call mac_rx
+lora_mac-DEBUG-  2021-08-06 12:03:44,551-MAC RX: LoraFrame(src_addr=LoraAddr(prefix=27, node_id=24859), dest_addr=LoraAddr(prefix=1, node_id=0), command=<MacCommand.JOIN: 0>, payload='', seq=0, k=False, has_next=False)
+lora_mac-DEBUG-  2021-08-06 12:03:44,551-look child with prefix: 27
+lora_mac-DEBUG-  2021-08-06 12:03:44,552-child is: None
+lora_mac-INFO-  2021-08-06 12:03:44,552-reveive join frame LoraFrame(src_addr=LoraAddr(prefix=27, node_id=24859), dest_addr=LoraAddr(prefix=1, node_id=0), command=<MacCommand.JOIN: 0>, payload='', seq=0, k=False, has_next=False)
+lora_mac-DEBUG-  2021-08-06 12:03:44,553-new child Child(2:24859) created
+lora_mac-DEBUG-  2021-08-06 12:03:44,553-send join response
+lora_phy-INFO-  2021-08-06 12:03:44,553-MAC send:LoraFrame(src_addr=LoraAddr(prefix=1, node_id=0), dest_addr=LoraAddr(prefix=27, node_id=24859), command=<MacCommand.JOIN_RESPONSE: 1>, payload='02', seq=0, k=False, has_next=False)
+lora_mac-DEBUG-  2021-08-06 12:03:44,554-RX process: mac_rx end
+lora_phy-INFO-  2021-08-06 12:03:44,554-PHY TX:radio tx 0100001B611B010002
+lora_mac-DEBUG-  2021-08-06 12:03:44,555-RX process acquire lock for can_listen
+lora_mac-DEBUG-  2021-08-06 12:03:44,556-can listen: True
+lora_mac-DEBUG-  2021-08-06 12:03:44,556-is_listen: False
+main-DEBUG-  2021-08-06 12:03:44,563-[5: DBG : LoRa PHY  ] log 2
+main-DEBUG-  2021-08-06 12:03:44,563-[5: DBG : LoRa PHY  ] log 4
+main-DEBUG-  2021-08-06 12:03:44,564-[5: DBG : LoRa PHY  ] log 5
+main-DEBUG-  2021-08-06 12:03:44,564-[5: DBG : LoRa PHY  ] log 6
+main-DEBUG-  2021-08-06 12:03:44,565-[5: DBG : LoRa PHY  ] log 7
+main-DEBUG-  2021-08-06 12:03:44,565-[5: DBG : LoRa PHY  ] log 8
+main-DEBUG-  2021-08-06 12:03:44,566-[5: DBG : LoRa PHY  ] log 9
+main-DEBUG-  2021-08-06 12:03:44,566-[5: DBG : LoRa PHY  ] log 10
+main-DEBUG-  2021-08-06 12:03:44,585-[5: DBG : LoRa PHY  ] log 11
+main-DEBUG-  2021-08-06 12:03:44,585-[5: DBG : LoRa PHY  ] log 11
+main-DEBUG-  2021-08-06 12:03:44,586-[5: DBG : LoRa PHY  ] log 12
+main-DEBUG-  2021-08-06 12:03:44,586-[5: DBG : LoRa PHY  ] log 13
+main-DEBUG-  2021-08-06 12:03:44,587-[5: DBG : LoRa PHY  ] log 19
+main-DEBUG-  2021-08-06 12:03:44,587-[5: DBG : LoRa PHY  ] log 20
+main-DEBUG-  2021-08-06 12:03:44,588-[5: DBG : LoRa PHY  ] will call write UART
+main-DEBUG-  2021-08-06 12:03:44,611-[5: INFO: LoRa PHY  ] PHY TX:radio set wdt 3000
+main-DEBUG-  2021-08-06 12:03:44,611-[5: DBG : LoRa PHY  ] phy tx done
+main-DEBUG-  2021-08-06 12:03:44,612-[5: DBG : LoRa PHY  ] write uart call ended
+main-DEBUG-  2021-08-06 12:03:44,613-[5: DBG : LoRa PHY  ] UART response:ok
+main-DEBUG-  2021-08-06 12:03:44,614-[5: DBG : LoRa PHY  ] compare response with:ok
+main-DEBUG-  2021-08-06 12:03:44,614-[5: DBG : LoRa PHY  ]  expected !
+main-DEBUG-  2021-08-06 12:03:44,629-[5: DBG : LoRa PHY  ] wait can send
+main-DEBUG-  2021-08-06 12:03:44,629-[5: DBG : LoRa PHY  ] can send !
+main-DEBUG-  2021-08-06 12:03:44,631-[5: DBG : LoRa PHY  ] log 1
+main-DEBUG-  2021-08-06 12:03:44,633-[5: DBG : LoRa PHY  ] log 2
+main-DEBUG-  2021-08-06 12:03:44,633-[5: DBG : LoRa PHY  ] log 4
+main-DEBUG-  2021-08-06 12:03:44,634-[5: DBG : LoRa PHY  ] log 5
+main-DEBUG-  2021-08-06 12:03:44,635-[5: DBG : LoRa PHY  ] log 6
+main-DEBUG-  2021-08-06 12:03:44,635-[5: DBG : LoRa PHY  ] log 7
+main-DEBUG-  2021-08-06 12:03:44,652-[5: DBG : LoRa PHY  ] log 8
+main-DEBUG-  2021-08-06 12:03:44,652-[6: DBG : LoRa PHY  ] log 9
+main-DEBUG-  2021-08-06 12:03:44,653-[6: DBG : LoRa PHY  ] log 10
+main-DEBUG-  2021-08-06 12:03:44,654-[6: DBG : LoRa PHY  ] log 11
+main-DEBUG-  2021-08-06 12:03:44,655-[6: DBG : LoRa PHY  ] log 11
+main-DEBUG-  2021-08-06 12:03:44,655-[6: DBG : LoRa PHY  ] log 12
+main-DEBUG-  2021-08-06 12:03:44,655-[6: DBG : LoRa PHY  ] log 13
+main-DEBUG-  2021-08-06 12:03:44,656-[6: DBG : LoRa PHY  ] log 14
+main-DEBUG-  2021-08-06 12:03:44,674-[6: DBG : LoRa PHY  ] log 15
+main-DEBUG-  2021-08-06 12:03:44,674-[6: DBG : LoRa PHY  ] will call write UART
+main-DEBUG-  2021-08-06 12:03:44,675-[6: INFO: LoRa PHY  ] PHY TX:radio rx 0
+main-DEBUG-  2021-08-06 12:03:44,675-[6: DBG : LoRa PHY  ] phy tx done
+main-DEBUG-  2021-08-06 12:03:44,676-[6: DBG : LoRa PHY  ] write uart[6: DBG : LoRa PHY  ] UART response:ok
+main-DEBUG-  2021-08-06 12:03:44,681-[6: DBG : LoRa PHY  ] compare response with:radio_err
+main-DEBUG-  2021-08-06 12:03:44,682-[6: DBG : LoRa PHY  ] compare response with:radio_rx
+main-DEBUG-  2021-08-06 12:03:44,682- call ended
+lora_phy-INFO-  2021-08-06 12:03:45,561-PHY TX:radio rx 0
+main-DEBUG-  2021-08-06 12:03:45,617-[6: DBG : LoRa PHY  ] UART response:radio_rx  0100001B611B010002
+main-DEBUG-  2021-08-06 12:03:45,617-[6: DBG : LoRa PHY  ] compare response with:radio_err
+main-DEBUG-  2021-08-06 12:03:45,618-[6: DBG : LoRa PHY  ] compare response with:radio_rx
+main-DEBUG-  2021-08-06 12:03:45,619-[6: DBG : LoRa PHY  ] created frame a LoRa frame
+main-DEBUG-  2021-08-06 12:03:45,639-[6: INFO: LoRa PHY  ] PHY RX:0100001B611B010002
+main-DEBUG-  2021-08-06 12:03:45,640-[6: INFO: LoRa MAC  ] RX LoRa frame: {src:1:0 dest:27:24859 k:0 seq:0 next:0 cmd:1 data:02
+main-DEBUG-  2021-08-06 12:03:45,640-[6: DBG : LoRa MAC  ] JOIN RESPONSE
+main-DEBUG-  2021-08-06 12:03:45,641-[6: DBG : LoRa MAC  ] state = READY
+main-DEBUG-  2021-08-06 12:03:45,641-[6: DBG : LoRa MAC  ] STOP retransmit timer
+main-DEBUG-  2021-08-06 12:03:45,661-[6: INFO: LoRa MAC  ] Lora Root joined
+main-DEBUG-  2021-08-06 12:03:45,663-[6: INFO: LoRa MAC  ] Node addr: 2:24859
+main-DEBUG-  2021-08-06 12:03:45,665-[6: DBG : LoRa MAC  ] START TX_PROCESS
+main-DEBUG-  2021-08-06 12:03:45,668-[6: DBG : LoRa MAC  ] MAC_TX process started
+main-DEBUG-  2021-08-06 12:03:45,670-[6: DBG : LoRa MAC  ] SET query timer
+main-DEBUG-  2021-08-06 12:03:45,672-[6: DBG : LoRa PHY  ]  expected !
+main-DEBUG-  2021-08-06 12:03:45,684-[7: DBG : LoRa PHY  ] wait can send
+main-DEBUG-  2021-08-06 12:03:45,685-[7: INFO: Interface ] RECEIVE LORAMAC JOINED EVENT !
+main-DEBUG-  2021-08-06 12:03:45,685-[7: INFO: Interface ] PREFIX: 2
+main-DEBUG-  2021-08-06 12:03:45,686-[7: INFO: RPL       ] IPv6 addresses:
+main-DEBUG-  2021-08-06 12:03:45,687-[7: INFO: RPL       ] -- fd00::200:212:4b00:60d:611b
+main-DEBUG-  2021-08-06 12:03:45,706-[7: INFO: RPL       ] -- fe80::212:4b00:60d:611b
+main-DEBUG-  2021-08-06 12:03:45,706-[7: INFO: RPL       ] reset DIO timer (Init root)
+main-DEBUG-  2021-08-06 12:03:45,707-[7: INFO: RPL       ] created DAG with instance ID 0, DAG ID fd00::200:212:4b00:60d:611b, rank 128
+main-DEBUG-  2021-08-06 12:03:45,708-[7: INFO: RPL       ] created a new RPL DAG
+main-DEBUG-  2021-08-06 12:03:45,708-[7: DBG : LoRa PHY  ] wait can send
+main-DEBUG-  2021-08-06 12:03:45,720-[7: DBG : LoRa PHY  ] wait can send
+main-DEBUG-  2021-08-06 12:03:45,720-[7: DBG : LoRa PHY  ] can send !
+main-DEBUG-  2021-08-06 12:03:45,721-[7: DBG : LoRa PHY  ] log 1
+main-DEBUG-  2021-08-06 12:03:45,721-[7: DBG : LoRa PHY  ] log 2
+main-DEBUG-  2021-08-06 12:03:45,722-[7: DBG : LoRa PHY  ] log 3
+main-DEBUG-  2021-08-06 12:03:48,963-[10: INFO: RPL       ] sending a multicast-DIO with rank 128 to ff02::1a
+main-DEBUG-  2021-08-06 12:03:50,373-[11: INFO: RPL       ] received a unicast-DIO from fe80::212:4b00:60d:b1f8, instance_id 0, DAG ID fd00::200:212:4b00:60d:611b, version 240, dtsn 240, rank 65535
+main-DEBUG-  2021-08-06 12:03:53,648-[15: INFO: RPL       ] received a unicast-DIO from fe80::212:4b00:60d:b1f8, instance_id 0, DAG ID fd00::200:212:4b00:60d:611b, version 240, dtsn 240, rank 65535
+main-DEBUG-  2021-08-06 12:03:55,560-[16: INFO: RPL       ] received a unicast-DIO from fe80::212:4b00:60d:b1f8, instance_id 0, DAG ID fd00::200:212:4b00:60d:611b, version 240, dtsn 240, rank 65535
+main-DEBUG-  2021-08-06 12:03:55,610-[16: INFO: LoRa MAC  ] Query timeout !
+main-DEBUG-  2021-08-06 12:03:55,611-[16: DBG : LoRa MAC  ] STOP query timer thanks to query_timeout
+main-DEBUG-  2021-08-06 12:03:55,611-[16: DBG : LoRa MAC  ] query frame built
+main-DEBUG-  2021-08-06 12:03:55,632-[16: DBG : LoRa MAC  ] Enter enqueue_packet with frame: {src:2:24859 dest:1:0 k:0 seq:1 next:0 cmd:6 data:
+main-DEBUG-  2021-08-06 12:03:55,633-[16: INFO: LoRa MAC  ] YOOOOOO 1
+main-DEBUG-  2021-08-06 12:03:55,634-[16: INFO: LoRa MAC  ] YOOOOOO 2
+main-DEBUG-  2021-08-06 12:03:55,634-[16: DBG : LoRa MAC  ] append to buffer
+main-DEBUG-  2021-08-06 12:03:55,634-[16: INFO: LoRa MAC  ] YOOOOOO 3
+main-DEBUG-  2021-08-06 12:03:55,634-[16: DBG : LoRa MAC  ] post new_tx_frame_event to TX_PROCESS
+main-DEBUG-  2021-08-06 12:03:55,655-[17: INFO: LoRa MAC  ] YOOOOOO 4
+main-DEBUG-  2021-08-06 12:03:55,656-[17: DBG : LoRa MAC  ] frame from buffer: {src:2:24859 dest:1:0 k:0 seq:1 next:0 cmd:6 data:
+main-DEBUG-  2021-08-06 12:03:55,656-[17: DBG : LoRa MAC  ] buffer size: 0
+main-DEBUG-  2021-08-06 12:03:55,657-[17: DBG : LoRa PHY  ] enter UART_TX
+main-DEBUG-  2021-08-06 12:03:55,677-[17: DBG : LoRa PHY  ] append { cmd:radio set wdt  resp: [ok, none] }[17: DBG : LoRa PHY  ]  to UART TX buffer
+main-DEBUG-  2021-08-06 12:03:55,678-[17: DBG : LoRa PHY  ] enter UART_TX
+main-DEBUG-  2021-08-06 12:03:55,679-[17: DBG : LoRa PHY  ] with lora frame: {src:2:24859 dest:1:0 k:0 seq:1 next:0 cmd:6 data:
+main-DEBUG-  2021-08-06 12:03:55,699-[17: DBG : LoRa PHY  ] append { cmd:radio tx  resp: [radio_tx_ok, radio_err] }[17: DBG : LoRa PHY  ]  to UART TX buffer
+main-DEBUG-  2021-08-06 12:03:55,700-[17: DBG : LoRa MAC  ] frame sended to PHY layer
+main-DEBUG-  2021-08-06 12:03:55,702-[17: DBG : LoRa MAC  ] START retransmit timer in mac_tx process
+main-DEBUG-  2021-08-06 12:03:55,702-[17: DBG : LoRa MAC  ] Listen during 3 s
+main-DEBUG-  2021-08-06 12:03:55,703-[17: DBG : LoRa PHY  ] enter UART_TX
+main-DEBUG-  2021-08-06 12:03:55,722-[17: DBG : LoRa PHY  ] append { cmd:radio set wdt  resp: [ok, none] }[17: DBG : LoRa PHY  ]  to UART TX buffer
+main-DEBUG-  2021-08-06 12:03:55,723-[17: DBG : LoRa PHY  ] enter UART_TX
+main-DEBUG-  2021-08-06 12:03:55,744-[17: DBG : LoRa PHY  ] append { cmd:radio rx  resp: [radio_err, radio_rx] }[17: DBG : LoRa PHY  ]  to UART TX buffer
+main-DEBUG-  2021-08-06 12:03:55,745-[17: DBG : LoRa MAC  ] wait state change to READY
+main-DEBUG-  2021-08-06 12:03:55,745-[17: DBG : LoRa PHY  ] log 4
+main-DEBUG-  2021-08-06 12:03:55,746-[17: DBG : LoRa PHY  ] log 5
+main-DEBUG-  2021-08-06 12:03:55,746-[17: DBG : LoRa PHY  ] log 6
+main-DEBUG-  2021-08-06 12:03:55,747-[17: DBG : LoRa PHY  ] log 7
+main-DEBUG-  2021-08-06 12:03:55,747-[17: DBG : LoRa PHY  ] log 8
+main-DEBUG-  2021-08-06 12:03:55,748-[17: DBG : LoRa PHY  ] log 9
+main-DEBUG-  2021-08-06 12:03:55,766-[17: DBG : LoRa PHY  ] log 10
+main-DEBUG-  2021-08-06 12:03:55,767-[17: DBG : LoRa PHY  ] log 11
+main-DEBUG-  2021-08-06 12:03:55,767-[17: DBG : LoRa PHY  ] log 11
+main-DEBUG-  2021-08-06 12:03:55,768-[17: DBG : LoRa PHY  ] log 12
+main-DEBUG-  2021-08-06 12:03:55,769-[17: DBG : LoRa PHY  ] log 13
+main-DEBUG-  2021-08-06 12:03:55,769-[17: DBG : LoRa PHY  ] log 19
+main-DEBUG-  2021-08-06 12:03:55,770-[17: DBG : LoRa PHY  ] log 20
+main-DEBUG-  2021-08-06 12:03:55,788-[17: DBG : LoRa PHY  ] will call write UART
+main-DEBUG-  2021-08-06 12:03:55,789-[17: INFO: LoRa PHY  ] PHY TX:radio set wdt 0
+main-DEBUG-  2021-08-06 12:03:55,789-[17: DBG : LoRa PHY  ] phy tx done
+main-DEBUG-  2021-08-06 12:03:55,790-[17: DBG : LoRa PHY  ] wri[17: DBG : LoRa PHY  ] UART response:ok
+main-DEBUG-  2021-08-06 12:03:55,791-[17: DBG : LoRa PHY  ] compare response with:ok
+main-DEBUG-  2021-08-06 12:03:55,810-[17: DBG : LoRa PHY  ]  expected !
+main-DEBUG-  2021-08-06 12:03:55,810-
+e uart call ended
+main-DEBUG-  2021-08-06 12:03:55,811-[17: DBG : LoRa PHY  ] wait can send
+main-DEBUG-  2021-08-06 12:03:55,811-[17: DBG : LoRa PHY  ] wait can send
+main-DEBUG-  2021-08-06 12:03:55,812-[17: DBG : LoRa PHY  ] wait can send
+main-DEBUG-  2021-08-06 12:03:55,812-[17: DBG : LoRa PHY  ] wait can send
+main-DEBUG-  2021-08-06 12:03:55,813-[17: DBG : LoRa PHY  ] can send !
+main-DEBUG-  2021-08-06 12:03:55,813-[17: DBG : LoRa PHY  ] log 1
+main-DEBUG-  2021-08-06 12:03:55,833-[17: DBG : LoRa PHY  ] log 2
+main-DEBUG-  2021-08-06 12:03:55,834-[17: DBG : LoRa PHY  ] log 4
+main-DEBUG-  2021-08-06 12:03:55,834-[17: DBG : LoRa PHY  ] log 5
+main-DEBUG-  2021-08-06 12:03:55,835-[17: DBG : LoRa PHY  ] log 6
+main-DEBUG-  2021-08-06 12:03:55,835-[17: DBG : LoRa PHY  ] log 7
+main-DEBUG-  2021-08-06 12:03:55,835-[17: DBG : LoRa PHY  ] log 8
+main-DEBUG-  2021-08-06 12:03:55,836-[17: DBG : LoRa PHY  ] log 9
+main-DEBUG-  2021-08-06 12:03:55,836-[17: DBG : LoRa PHY  ] log 10
+main-DEBUG-  2021-08-06 12:03:55,855-[17: DBG : LoRa PHY  ] log 11
+main-DEBUG-  2021-08-06 12:03:55,855-[17: DBG : LoRa PHY  ] log 11
+main-DEBUG-  2021-08-06 12:03:55,856-[17: DBG : LoRa PHY  ] log 12
+main-DEBUG-  2021-08-06 12:03:55,856-[17: DBG : LoRa PHY  ] log 13
+main-DEBUG-  2021-08-06 12:03:55,857-[17: DBG : LoRa PHY  ] log 16
+main-DEBUG-  2021-08-06 12:03:55,857-[17: DBG : LoRa PHY  ] log 17 with lora frame:
+main-DEBUG-  2021-08-06 12:03:55,877-{src:2:24859 dest:1:0 k:0 seq:1 next:0 cmd:6 data:
+main-DEBUG-  2021-08-06 12:03:55,878-[17: DBG : LoRa PHY  ] to frame receive: {src:2:24859 dest:1:0 k:0 seq:1 next:0 cmd:6 data:
+main-DEBUG-  2021-08-06 12:03:55,879-[17: DBG : LoRa PHY  ]
+main-DEBUG-  2021-08-06 12:03:55,879-[17: DBG : LoRa PHY  ] src.prefix: 2
+main-DEBUG-  2021-08-06 12:03:55,880-[17: DBG : LoRa PHY  ] src addr: 02611B
+main-DEBUG-  2021-08-06 12:03:55,899-[17: DBG : LoRa PHY  ] dest addr: 010000
+main-DEBUG-  2021-08-06 12:03:55,900-[17: DBG : LoRa PHY  ] flags and command:06
+main-DEBUG-  2021-08-06 12:03:55,900-[17: DBG : LoRa PHY  ] SN:01
+main-DEBUG-  2021-08-06 12:03:55,901-[17: DBG : LoRa PHY  ] TO HEX frame: 02611B0100000601
+main-DEBUG-  2021-08-06 12:03:55,901-[17: DBG : LoRa PHY  ] log 18
+main-DEBUG-  2021-08-06 12:03:55,902-[17: DBG : LoRa PHY  ] will call write UART
+main-DEBUG-  2021-08-06 12:03:55,903-[17: INFO: LoRa PHY  ] PHY TX:radio tx 02611B0100000601
+main-DEBUG-  2021-08-06 12:03:55,924-[17: DBG : LoRa PHY  ] phy tx done
+main-DEBUG-  2021-08-06 12:03:55,925-[17: DBG : LoRa PHY  ] write uart call ended
+main-DEBUG-  2021-08-06 12:03:55,926-[17: INFO: RPL[17: DBG : LoRa PHY  ] UART response:ok
+main-DEBUG-  2021-08-06 12:03:55,926-[17: DBG : LoRa PHY  ] compare response with:radio_tx_ok
+main-DEBUG-  2021-08-06 12:03:55,929-[17: DBG : LoRa PHY  ] compare response with:radio_err
+main-DEBUG-  2021-08-06 12:03:55,930-
+      ] sending a multicast-DIO with rank 128 to ff02::1a
+main-DEBUG-  2021-08-06 12:03:56,927-[18: DBG : LoRa PHY  ] UART response:radio_tx_ok
+main-DEBUG-  2021-08-06 12:03:56,930-[18: DBG : LoRa PHY  ] compare response with:radio_tx_ok
+main-DEBUG-  2021-08-06 12:03:56,930-[18: DBG : LoRa PHY  ]  expected !
+main-DEBUG-  2021-08-06 12:03:56,932-[18: DBG : LoRa PHY  ] wait can send
+main-DEBUG-  2021-08-06 12:03:56,933-[18: DBG : LoRa PHY  ] can send !
+lora_phy-INFO-  2021-08-06 12:03:56,936-PHY RX:02611B0100000601
+lora_mac-DEBUG-  2021-08-06 12:03:56,937-RX process receive
+lora_mac-DEBUG-  2021-08-06 12:03:56,937-RX process set is_listen=False
+lora_mac-DEBUG-  2021-08-06 12:03:56,937-RX process: call mac_rx
+lora_mac-DEBUG-  2021-08-06 12:03:56,937-MAC RX: LoraFrame(src_addr=LoraAddr(prefix=2, node_id=24859), dest_addr=LoraAddr(prefix=1, node_id=0), command=<MacCommand.QUERY: 6>, payload='', seq=1, k=False, has_next=False)
+lora_mac-DEBUG-  2021-08-06 12:03:56,937-look child with prefix: 2
+lora_mac-DEBUG-  2021-08-06 12:03:56,937-child is: Child(2:24859)
+lora_mac-DEBUG-  2021-08-06 12:03:56,938-In _on_query
+lora_mac-DEBUG-  2021-08-06 12:03:56,938-child buffer empty -> send ack
+lora_phy-INFO-  2021-08-06 12:03:56,938-MAC send:LoraFrame(src_addr=LoraAddr(prefix=1, node_id=0), dest_addr=LoraAddr(prefix=2, node_id=24859), command=<MacCommand.ACK: 3>, payload='', seq=1, k=False, has_next=False)
+lora_mac-DEBUG-  2021-08-06 12:03:56,938-RX process: mac_rx end
+lora_mac-DEBUG-  2021-08-06 12:03:56,938-RX process acquire lock for can_listen
+lora_mac-DEBUG-  2021-08-06 12:03:56,938-can listen: True
+lora_phy-INFO-  2021-08-06 12:03:56,939-PHY TX:radio tx 01000002611B0301
+lora_mac-DEBUG-  2021-08-06 12:03:56,939-is_listen: False
+main-DEBUG-  2021-08-06 12:03:56,948-[18: DBG : LoRa PHY  ] log 1
+main-DEBUG-  2021-08-06 12:03:56,948-[18: DBG : LoRa PHY  ] log 2
+main-DEBUG-  2021-08-06 12:03:56,949-[18: DBG : LoRa PHY  ] log 4
+main-DEBUG-  2021-08-06 12:03:56,952-[18: DBG : LoRa PHY  ] log 5
+main-DEBUG-  2021-08-06 12:03:56,952-[18: DBG : LoRa PHY  ] log 6
+main-DEBUG-  2021-08-06 12:03:56,953-[18: DBG : LoRa PHY  ] log 7
+main-DEBUG-  2021-08-06 12:03:56,953-[18: DBG : LoRa PHY  ] log 8
+main-DEBUG-  2021-08-06 12:03:56,953-[18: DBG : LoRa PHY  ] log 9
+main-DEBUG-  2021-08-06 12:03:56,970-[18: DBG : LoRa PHY  ] log 10
+main-DEBUG-  2021-08-06 12:03:56,970-[18: DBG : LoRa PHY  ] log 11
+main-DEBUG-  2021-08-06 12:03:56,971-[18: DBG : LoRa PHY  ] log 11
+main-DEBUG-  2021-08-06 12:03:56,971-[18: DBG : LoRa PHY  ] log 12
+main-DEBUG-  2021-08-06 12:03:56,972-[18: DBG : LoRa PHY  ] log 13
+main-DEBUG-  2021-08-06 12:03:56,973-[18: DBG : LoRa PHY  ] log 19
+main-DEBUG-  2021-08-06 12:03:56,974-[18: DBG : LoRa PHY  ] log 20
+main-DEBUG-  2021-08-06 12:03:56,975-[18: DBG : LoRa PHY  ] will call write UART
+main-DEBUG-  2021-08-06 12:03:56,992-[18: INFO: LoRa PHY  ] PHY TX:radio set wdt 3000
+main-DEBUG-  2021-08-06 12:03:56,993-[18: DBG : LoRa PHY  ] phy tx done
+main-DEBUG-  2021-08-06 12:03:56,993-[18: DBG : LoRa PHY  ] write uart call ended
+main-DEBUG-  2021-08-06 12:03:56,994-[18: DBG : LoRa PHY  ] UART response:ok
+main-DEBUG-  2021-08-06 12:03:56,994-[18: DBG : LoRa PHY  ] compare response with:ok
+main-DEBUG-  2021-08-06 12:03:57,014-[18: DBG : LoRa PHY  ]  expected !
+main-DEBUG-  2021-08-06 12:03:57,014-[18: DBG : LoRa PHY  ] wait can send
+main-DEBUG-  2021-08-06 12:03:57,015-[18: DBG : LoRa PHY  ] can send !
+main-DEBUG-  2021-08-06 12:03:57,015-[18: DBG : LoRa PHY  ] log 1
+main-DEBUG-  2021-08-06 12:03:57,015-[18: DBG : LoRa PHY  ] log 2
+main-DEBUG-  2021-08-06 12:03:57,016-[18: DBG : LoRa PHY  ] log 4
+main-DEBUG-  2021-08-06 12:03:57,016-[18: DBG : LoRa PHY  ] log 5
+main-DEBUG-  2021-08-06 12:03:57,017-[18: DBG : LoRa PHY  ] log 6
+main-DEBUG-  2021-08-06 12:03:57,036-[18: DBG : LoRa PHY  ] log 7
+main-DEBUG-  2021-08-06 12:03:57,036-[18: DBG : LoRa PHY  ] log 8
+main-DEBUG-  2021-08-06 12:03:57,037-[18: DBG : LoRa PHY  ] log 9
+main-DEBUG-  2021-08-06 12:03:57,037-[18: DBG : LoRa PHY  ] log 10
+main-DEBUG-  2021-08-06 12:03:57,038-[18: DBG : LoRa PHY  ] log 11
+main-DEBUG-  2021-08-06 12:03:57,039-[18: DBG : LoRa PHY  ] log 11
+main-DEBUG-  2021-08-06 12:03:57,039-[18: DBG : LoRa PHY  ] log 12
+main-DEBUG-  2021-08-06 12:03:57,039-[18: DBG : LoRa PHY  ] log 13
+main-DEBUG-  2021-08-06 12:03:57,059-[18: DBG : LoRa PHY  ] log 14
+main-DEBUG-  2021-08-06 12:03:57,060-[18: DBG : LoRa PHY  ] log 15
+main-DEBUG-  2021-08-06 12:03:57,061-[18: DBG : LoRa PHY  ] will call write UART
+main-DEBUG-  2021-08-06 12:03:57,062-[18: INFO: LoRa PHY  ] PHY TX:radio rx 0
+main-DEBUG-  2021-08-06 12:03:57,062-[18: DBG : LoRa PHY  ] phy tx done
+main-DEBUG-  2021-08-06 12:03:57,070-[18: DBG : LoRa PHY  ] write u[18: DBG : LoRa PHY  ] UART response:ok
+main-DEBUG-  2021-08-06 12:03:57,072-[18: DBG : LoRa PHY  ] compare response with:radio_err
+main-DEBUG-  2021-08-06 12:03:57,073-[18: DBG : LoRa PHY  ] compare response with:radio_rx
+main-DEBUG-  2021-08-06 12:03:57,073-
+rt call ended
+lora_phy-INFO-  2021-08-06 12:03:57,943-PHY TX:radio rx 0
+main-DEBUG-  2021-08-06 12:03:57,998-[19: DBG : LoRa PHY  ] UART response:radio_rx  01000002611B0301
+main-DEBUG-  2021-08-06 12:03:58,000-[19: DBG : LoRa PHY  ] compare response with:radio_err
+main-DEBUG-  2021-08-06 12:03:58,001-[19: DBG : LoRa PHY  ] compare response with:radio_rx
+main-DEBUG-  2021-08-06 12:03:58,002-[19: DBG : LoRa PHY  ] created frame a LoRa frame
+main-DEBUG-  2021-08-06 12:03:58,020-[19: INFO: LoRa PHY  ] PHY RX:01000002611B0301
+main-DEBUG-  2021-08-06 12:03:58,021-[19: INFO: LoRa MAC  ] RX LoRa frame: {src:1:0 dest:2:24859 k:0 seq:1 next:0 cmd:3 data:
+main-DEBUG-  2021-08-06 12:03:58,022-[19: INFO: LoRa MAC  ] ACK!
+main-DEBUG-  2021-08-06 12:03:58,023-[19: DBG : LoRa MAC  ] STOP retransmit timer thanks to correct ACK
+main-DEBUG-  2021-08-06 12:03:58,042-[19: DBG : LoRa PHY  ]  expected !
+main-DEBUG-  2021-08-06 12:03:58,043-[19: DBG : LoRa MAC  ] state is READY
+main-DEBUG-  2021-08-06 12:03:58,043-[19: WARN: LoRa MAC  ] buf not empty: 0
+main-DEBUG-  2021-08-06 12:03:58,044-[19: DBG : LoRa PHY  ] wait can send
+main-DEBUG-  2021-08-06 12:03:58,045-[19: DBG : LoRa PHY  ] can send !
+main-DEBUG-  2021-08-06 12:03:58,045-[19: DBG : LoRa PHY  ] log 1
+main-DEBUG-  2021-08-06 12:03:58,046-[19: DBG : LoRa PHY  ] log 2
+main-DEBUG-  2021-08-06 12:03:58,047-[19: DBG : LoRa PHY  ] log 3
+main-DEBUG-  2021-08-06 12:04:00,007-[21: INFO: RPL       ] ext hdr: packet from fd00::200:212:4b00:60d:b1f8 to fd00::200:212:4b00:60d:611b going up, sender closer 0 (284 < 128), rank error 0, loop detected 0
+main-DEBUG-  2021-08-06 12:04:00,029-[21: INFO: RPL       ] ext hdr: packet from fd00::200:212:4b00:60d:b1f8 to fd00::200:212:4b00:60d:611b going up, sender closer 0 (284 < 128), rank error 0, loop detected 0
+main-DEBUG-  2021-08-06 12:04:00,050-[21: INFO: RPL       ] received a DAO from fd00::200:212:4b00:60d:b1f8, seqno 241, lifetime 30, prefix fd00::200:212:4b00:60d:b1f8, prefix length 128, parent fd00::200:212:4b00:60d:611b
+main-DEBUG-  2021-08-06 12:04:00,051-[21: INFO: RPL       ] sending a DAO-ACK seqno 241 to fd00::200:212:4b00:60d:b1f8 with status 0
+main-DEBUG-  2021-08-06 12:04:00,053-[21: INFO: RPL       ] SRH creating source routing header with destination fd00::200:212:4b00:60d:b1f8
+main-DEBUG-  2021-08-06 12:04:00,056-[21: INFO: RPL       ] SRH path len: 0, ComprI 15, ComprE 15, ext len 8 (padding 0)
+main-DEBUG-  2021-08-06 12:04:00,069-[21: INFO: RPL       ] packet sent to 0012.4b00.060d.b1f8, status 0, tx 1, new link metric 128
+main-DEBUG-  2021-08-06 12:04:03,552-[24: INFO: RPL       ] received a multicast-DIO from fe80::212:4b00:60d:b1f8, instance_id 0, DAG ID fd00::200:212:4b00:60d:611b, version 240, dtsn 240, rank 281
+main-DEBUG-  2021-08-06 12:04:07,994-[29: INFO: LoRa MAC  ] Query timeout !
+main-DEBUG-  2021-08-06 12:04:07,996-[29: DBG : LoRa MAC  ] STOP query timer thanks to query_timeout
+main-DEBUG-  2021-08-06 12:04:07,997-[29: DBG : LoRa MAC  ] query frame built
+main-DEBUG-  2021-08-06 12:04:08,015-[29: DBG : LoRa MAC  ] Enter enqueue_packet with frame: {src:2:24859 dest:1:0 k:0 seq:2 next:0 cmd:6 data:
+main-DEBUG-  2021-08-06 12:04:08,017-[29: INFO: LoRa MAC  ] YOOOOOO 1
+main-DEBUG-  2021-08-06 12:04:08,017-[29: INFO: LoRa MAC  ] YOOOOOO 2
+main-DEBUG-  2021-08-06 12:04:08,018-[29: DBG : LoRa MAC  ] append to buffer
+main-DEBUG-  2021-08-06 12:04:08,018-[29: INFO: LoRa MAC  ] YOOOOOO 3
+main-DEBUG-  2021-08-06 12:04:08,019-[29: DBG : LoRa MAC  ] post new_tx_frame_event to TX_PROCESS
+main-DEBUG-  2021-08-06 12:04:08,037-[29: INFO: LoRa MAC  ] YOOOOOO 4
+main-DEBUG-  2021-08-06 12:04:08,038-[29: DBG : LoRa MAC  ] frame from buffer: {src:2:24859 dest:1:0 k:0 seq:2 next:0 cmd:6 data:
+main-DEBUG-  2021-08-06 12:04:08,039-[29: DBG : LoRa MAC  ] buffer size: 0
+main-DEBUG-  2021-08-06 12:04:08,039-[29: DBG : LoRa PHY  ] enter UART_TX
+main-DEBUG-  2021-08-06 12:04:08,061-[29: DBG : LoRa PHY  ] append { cmd:radio set wdt  resp: [ok, none] }[29: DBG : LoRa PHY  ]  to UART TX buffer
+main-DEBUG-  2021-08-06 12:04:08,061-[29: DBG : LoRa PHY  ] enter UART_TX
+main-DEBUG-  2021-08-06 12:04:08,062-[29: DBG : LoRa PHY  ] with lora frame: {src:2:24859 dest:1:0 k:0 seq:2 next:0 cmd:6 data:
+main-DEBUG-  2021-08-06 12:04:08,083-[29: DBG : LoRa PHY  ] append { cmd:radio tx  resp: [radio_tx_ok, radio_err] }[29: DBG : LoRa PHY  ]  to UART TX buffer
+main-DEBUG-  2021-08-06 12:04:08,083-[29: DBG : LoRa MAC  ] frame sended to PHY layer
+main-DEBUG-  2021-08-06 12:04:08,084-[29: DBG : LoRa MAC  ] START retransmit timer in mac_tx process
+main-DEBUG-  2021-08-06 12:04:08,085-[29: DBG : LoRa MAC  ] Listen during 3 s
+main-DEBUG-  2021-08-06 12:04:08,085-[29: DBG : LoRa PHY  ] enter UART_TX
+main-DEBUG-  2021-08-06 12:04:08,105-[29: DBG : LoRa PHY  ] append { cmd:radio set wdt  resp: [ok, none] }[29: DBG : LoRa PHY  ]  to UART TX buffer
+main-DEBUG-  2021-08-06 12:04:08,106-[29: DBG : LoRa PHY  ] enter UART_TX
+main-DEBUG-  2021-08-06 12:04:08,126-[29: DBG : LoRa PHY  ] append { cmd:radio rx  resp: [radio_err, radio_rx] }[29: DBG : LoRa PHY  ]  to UART TX buffer
+main-DEBUG-  2021-08-06 12:04:08,127-[29: DBG : LoRa MAC  ] wait state change to READY
+main-DEBUG-  2021-08-06 12:04:08,128-[29: DBG : LoRa PHY  ] log 4
+main-DEBUG-  2021-08-06 12:04:08,128-[29: DBG : LoRa PHY  ] log 5
+main-DEBUG-  2021-08-06 12:04:08,129-[29: DBG : LoRa PHY  ] log 6
+main-DEBUG-  2021-08-06 12:04:08,129-[29: DBG : LoRa PHY  ] log 7
+main-DEBUG-  2021-08-06 12:04:08,130-[29: DBG : LoRa PHY  ] log 8
+main-DEBUG-  2021-08-06 12:04:08,130-[29: DBG : LoRa PHY  ] log 9
+main-DEBUG-  2021-08-06 12:04:08,150-[29: DBG : LoRa PHY  ] log 10
+main-DEBUG-  2021-08-06 12:04:08,151-[29: DBG : LoRa PHY  ] log 11
+main-DEBUG-  2021-08-06 12:04:08,151-[29: DBG : LoRa PHY  ] log 11
+main-DEBUG-  2021-08-06 12:04:08,152-[29: DBG : LoRa PHY  ] log 12
+main-DEBUG-  2021-08-06 12:04:08,152-[29: DBG : LoRa PHY  ] log 13
+main-DEBUG-  2021-08-06 12:04:08,153-[29: DBG : LoRa PHY  ] log 19
+main-DEBUG-  2021-08-06 12:04:08,153-[29: DBG : LoRa PHY  ] log 20
+main-DEBUG-  2021-08-06 12:04:08,171-[29: DBG : LoRa PHY  ] will call write UART
+main-DEBUG-  2021-08-06 12:04:08,174-[29: INFO: LoRa PHY  ] PHY TX:radio set wdt 0
+main-DEBUG-  2021-08-06 12:04:08,175-[29: DBG : LoRa PHY  ] phy tx done
+main-DEBUG-  2021-08-06 12:04:08,176-[29: DBG : LoRa PHY  ] writ[29: DBG : LoRa PHY  ] UART response:ok
+main-DEBUG-  2021-08-06 12:04:08,178-[29: DBG : LoRa PHY  ] compare response with:ok
+main-DEBUG-  2021-08-06 12:04:08,193-[29: DBG : LoRa PHY  ]  expected !
+main-DEBUG-  2021-08-06 12:04:08,194-
+ uart call ended
+main-DEBUG-  2021-08-06 12:04:08,195-[29: DBG : LoRa PHY  ] wait can send
+main-DEBUG-  2021-08-06 12:04:08,196-[29: DBG : LoRa PHY  ] wait can send
+main-DEBUG-  2021-08-06 12:04:08,196-[29: DBG : LoRa PHY  ] wait can send
+main-DEBUG-  2021-08-06 12:04:08,197-[29: DBG : LoRa PHY  ] wait can send
+main-DEBUG-  2021-08-06 12:04:08,198-[29: DBG : LoRa PHY  ] can send !
+main-DEBUG-  2021-08-06 12:04:08,198-[29: DBG : LoRa PHY  ] log 1
+main-DEBUG-  2021-08-06 12:04:08,216-[29: DBG : LoRa PHY  ] log 2
+main-DEBUG-  2021-08-06 12:04:08,216-[29: DBG : LoRa PHY  ] log 4
+main-DEBUG-  2021-08-06 12:04:08,217-[29: DBG : LoRa PHY  ] log 5
+main-DEBUG-  2021-08-06 12:04:08,218-[29: DBG : LoRa PHY  ] log 6
+main-DEBUG-  2021-08-06 12:04:08,219-[29: DBG : LoRa PHY  ] log 7
+main-DEBUG-  2021-08-06 12:04:08,219-[29: DBG : LoRa PHY  ] log 8
+main-DEBUG-  2021-08-06 12:04:08,220-[29: DBG : LoRa PHY  ] log 9
+main-DEBUG-  2021-08-06 12:04:08,220-[29: DBG : LoRa PHY  ] log 10
+main-DEBUG-  2021-08-06 12:04:08,239-[29: DBG : LoRa PHY  ] log 11
+main-DEBUG-  2021-08-06 12:04:08,239-[29: DBG : LoRa PHY  ] log 11
+main-DEBUG-  2021-08-06 12:04:08,240-[29: DBG : LoRa PHY  ] log 12
+main-DEBUG-  2021-08-06 12:04:08,240-[29: DBG : LoRa PHY  ] log 13
+main-DEBUG-  2021-08-06 12:04:08,241-[29: DBG : LoRa PHY  ] log 16
+main-DEBUG-  2021-08-06 12:04:08,242-[29: DBG : LoRa PHY  ] log 17 with lora frame:
+main-DEBUG-  2021-08-06 12:04:08,260-{src:2:24859 dest:1:0 k:0 seq:2 next:0 cmd:6 data:
+main-DEBUG-  2021-08-06 12:04:08,261-[29: DBG : LoRa PHY  ] to frame receive: {src:2:24859 dest:1:0 k:0 seq:2 next:0 cmd:6 data:
+main-DEBUG-  2021-08-06 12:04:08,262-[29: DBG : LoRa PHY  ]
+main-DEBUG-  2021-08-06 12:04:08,262-[29: DBG : LoRa PHY  ] src.prefix: 2
+main-DEBUG-  2021-08-06 12:04:08,263-[29: DBG : LoRa PHY  ] src addr: 02611B
+main-DEBUG-  2021-08-06 12:04:08,282-[29: DBG : LoRa PHY  ] dest addr: 010000
+main-DEBUG-  2021-08-06 12:04:08,283-[29: DBG : LoRa PHY  ] flags and command:06
+main-DEBUG-  2021-08-06 12:04:08,284-[29: DBG : LoRa PHY  ] SN:02
+main-DEBUG-  2021-08-06 12:04:08,285-[29: DBG : LoRa PHY  ] TO HEX frame: 02611B0100000602
+main-DEBUG-  2021-08-06 12:04:08,286-[29: DBG : LoRa PHY  ] log 18
+main-DEBUG-  2021-08-06 12:04:08,288-[29: DBG : LoRa PHY  ] will call write UART
+main-DEBUG-  2021-08-06 12:04:08,289-[29: INFO: LoRa PHY  ] PHY TX:radio tx 02611B0100000602
+main-DEBUG-  2021-08-06 12:04:08,306-[29: DBG : LoRa PHY  ] phy tx done
+main-DEBUG-  2021-08-06 12:04:08,307-[29: DBG : LoRa PHY  ] write uart call ended
+main-DEBUG-  2021-08-06 12:04:08,307-[29: DBG : LoRa PHY  ] UART response:ok
+main-DEBUG-  2021-08-06 12:04:08,308-[29: DBG : LoRa PHY  ] compare response with:radio_tx_ok
+main-DEBUG-  2021-08-06 12:04:08,309-[29: DBG : LoRa PHY  ] compare response with:radio_err
+main-DEBUG-  2021-08-06 12:04:09,309-[30: DBG : LoRa PHY  ] UART response:radio_tx_ok
+main-DEBUG-  2021-08-06 12:04:09,311-[30: DBG : LoRa PHY  ] compare response with:radio_tx_ok
+main-DEBUG-  2021-08-06 12:04:09,312-[30: DBG : LoRa PHY  ]  expected !
+main-DEBUG-  2021-08-06 12:04:09,316-[30: DBG : LoRa PHY  ] wait can send
+main-DEBUG-  2021-08-06 12:04:09,317-[30: DBG : LoRa PHY  ] can send !
+lora_phy-INFO-  2021-08-06 12:04:09,324-PHY RX:02611B0100000602
+lora_mac-DEBUG-  2021-08-06 12:04:09,324-RX process receive
+lora_mac-DEBUG-  2021-08-06 12:04:09,325-RX process set is_listen=False
+lora_mac-DEBUG-  2021-08-06 12:04:09,325-RX process: call mac_rx
+lora_mac-DEBUG-  2021-08-06 12:04:09,325-MAC RX: LoraFrame(src_addr=LoraAddr(prefix=2, node_id=24859), dest_addr=LoraAddr(prefix=1, node_id=0), command=<MacCommand.QUERY: 6>, payload='', seq=2, k=False, has_next=False)
+lora_mac-DEBUG-  2021-08-06 12:04:09,325-look child with prefix: 2
+lora_mac-DEBUG-  2021-08-06 12:04:09,325-child is: Child(2:24859)
+lora_mac-DEBUG-  2021-08-06 12:04:09,325-In _on_query
+lora_mac-DEBUG-  2021-08-06 12:04:09,325-child buffer empty -> send ack
+lora_phy-INFO-  2021-08-06 12:04:09,325-MAC send:LoraFrame(src_addr=LoraAddr(prefix=1, node_id=0), dest_addr=LoraAddr(prefix=2, node_id=24859), command=<MacCommand.ACK: 3>, payload='', seq=2, k=False, has_next=False)
+lora_mac-DEBUG-  2021-08-06 12:04:09,326-RX process: mac_rx end
+lora_phy-INFO-  2021-08-06 12:04:09,326-PHY TX:radio tx 01000002611B0302
+lora_mac-DEBUG-  2021-08-06 12:04:09,326-RX process acquire lock for can_listen
+lora_mac-DEBUG-  2021-08-06 12:04:09,326-can listen: True
+lora_mac-DEBUG-  2021-08-06 12:04:09,326-is_listen: False
+main-DEBUG-  2021-08-06 12:04:09,330-[30: DBG : LoRa PHY  ] log 1
+main-DEBUG-  2021-08-06 12:04:09,331-[30: DBG : LoRa PHY  ] log 2
+main-DEBUG-  2021-08-06 12:04:09,331-[30: DBG : LoRa PHY  ] log 4
+main-DEBUG-  2021-08-06 12:04:09,332-[30: DBG : LoRa PHY  ] log 5
+main-DEBUG-  2021-08-06 12:04:09,332-[30: DBG : LoRa PHY  ] log 6
+main-DEBUG-  2021-08-06 12:04:09,333-[30: DBG : LoRa PHY  ] log 7
+main-DEBUG-  2021-08-06 12:04:09,334-[30: DBG : LoRa PHY  ] log 8
+main-DEBUG-  2021-08-06 12:04:09,335-[30: DBG : LoRa PHY  ] log 9
+main-DEBUG-  2021-08-06 12:04:09,353-[30: DBG : LoRa PHY  ] log 10
+main-DEBUG-  2021-08-06 12:04:09,354-[30: DBG : LoRa PHY  ] log 11
+main-DEBUG-  2021-08-06 12:04:09,355-[30: DBG : LoRa PHY  ] log 11
+main-DEBUG-  2021-08-06 12:04:09,355-[30: DBG : LoRa PHY  ] log 12
+main-DEBUG-  2021-08-06 12:04:09,356-[30: DBG : LoRa PHY  ] log 13
+main-DEBUG-  2021-08-06 12:04:09,357-[30: DBG : LoRa PHY  ] log 19
+main-DEBUG-  2021-08-06 12:04:09,358-[30: DBG : LoRa PHY  ] log 20
+main-DEBUG-  2021-08-06 12:04:09,358-[30: DBG : LoRa PHY  ] will call write UART
+main-DEBUG-  2021-08-06 12:04:09,376-[30: INFO: LoRa PHY  ] PHY TX:radio set wdt 3000
+main-DEBUG-  2021-08-06 12:04:09,376-[30: DBG : LoRa PHY  ] phy tx done
+main-DEBUG-  2021-08-06 12:04:09,377-[30: DBG : LoRa PHY  ] write uart call ended
+main-DEBUG-  2021-08-06 12:04:09,377-[30: DBG : LoRa PHY  ] UART response:ok
+main-DEBUG-  2021-08-06 12:04:09,377-[30: DBG : LoRa PHY  ] compare response with:ok
+main-DEBUG-  2021-08-06 12:04:09,397-[30: DBG : LoRa PHY  ]  expected !
+main-DEBUG-  2021-08-06 12:04:09,398-[30: DBG : LoRa PHY  ] wait can send
+main-DEBUG-  2021-08-06 12:04:09,399-[30: DBG : LoRa PHY  ] can send !
+main-DEBUG-  2021-08-06 12:04:09,399-[30: DBG : LoRa PHY  ] log 1
+main-DEBUG-  2021-08-06 12:04:09,399-[30: DBG : LoRa PHY  ] log 2
+main-DEBUG-  2021-08-06 12:04:09,400-[30: DBG : LoRa PHY  ] log 4
+main-DEBUG-  2021-08-06 12:04:09,401-[30: DBG : LoRa PHY  ] log 5
+main-DEBUG-  2021-08-06 12:04:09,402-[30: DBG : LoRa PHY  ] log 6
+main-DEBUG-  2021-08-06 12:04:09,420-[30: DBG : LoRa PHY  ] log 7
+main-DEBUG-  2021-08-06 12:04:09,420-[30: DBG : LoRa PHY  ] log 8
+main-DEBUG-  2021-08-06 12:04:09,421-[30: DBG : LoRa PHY  ] log 9
+main-DEBUG-  2021-08-06 12:04:09,421-[30: DBG : LoRa PHY  ] log 10
+main-DEBUG-  2021-08-06 12:04:09,421-[30: DBG : LoRa PHY  ] log 11
+main-DEBUG-  2021-08-06 12:04:09,422-[30: DBG : LoRa PHY  ] log 11
+main-DEBUG-  2021-08-06 12:04:09,422-[30: DBG : LoRa PHY  ] log 12
+main-DEBUG-  2021-08-06 12:04:09,423-[30: DBG : LoRa PHY  ] log 13
+main-DEBUG-  2021-08-06 12:04:09,443-[30: DBG : LoRa PHY  ] log 14
+main-DEBUG-  2021-08-06 12:04:09,443-[30: DBG : LoRa PHY  ] log 15
+main-DEBUG-  2021-08-06 12:04:09,444-[30: DBG : LoRa PHY  ] will call write UART
+main-DEBUG-  2021-08-06 12:04:09,445-[30: INFO: LoRa PHY  ] PHY TX:radio rx 0
+main-DEBUG-  2021-08-06 12:04:09,446-[30: DBG : LoRa PHY  ] phy tx done
+main-DEBUG-  2021-08-06 12:04:09,454-[30: DBG : LoRa PHY  ] write u[30: DBG : LoRa PHY  ] UART response:ok
+main-DEBUG-  2021-08-06 12:04:09,454-[30: DBG : LoRa PHY  ] compare response with:radio_err
+main-DEBUG-  2021-08-06 12:04:09,455-[30: DBG : LoRa PHY  ] compare response with:radio_rx
+main-DEBUG-  2021-08-06 12:04:09,455-
+rt call ended
+lora_phy-INFO-  2021-08-06 12:04:10,330-PHY TX:radio rx 0
+main-DEBUG-  2021-08-06 12:04:10,385-[31: DBG : LoRa PHY  ] UART response:radio_rx  01000002611B0302
+main-DEBUG-  2021-08-06 12:04:10,390-[31: DBG : LoRa PHY  ] compare response with:radio_err
+main-DEBUG-  2021-08-06 12:04:10,391-[31: DBG : LoRa PHY  ] compare response with:radio_rx
+main-DEBUG-  2021-08-06 12:04:10,391-[31: DBG : LoRa PHY  ] created frame a LoRa frame
+main-DEBUG-  2021-08-06 12:04:10,407-[31: INFO: LoRa PHY  ] PHY RX:01000002611B0302
+main-DEBUG-  2021-08-06 12:04:10,407-[31: INFO: LoRa MAC  ] RX LoRa frame: {src:1:0 dest:2:24859 k:0 seq:2 next:0 cmd:3 data:
+main-DEBUG-  2021-08-06 12:04:10,408-[31: INFO: LoRa MAC  ] ACK!
+main-DEBUG-  2021-08-06 12:04:10,410-[31: DBG : LoRa MAC  ] STOP retransmit timer thanks to correct ACK
+main-DEBUG-  2021-08-06 12:04:10,429-[31: DBG : LoRa PHY  ]  expected !
+main-DEBUG-  2021-08-06 12:04:10,434-[31: DBG : LoRa MAC  ] state is READY
+main-DEBUG-  2021-08-06 12:04:10,434-[31: WARN: LoRa MAC  ] buf not empty: 0
+main-DEBUG-  2021-08-06 12:04:10,436-[31: DBG : LoRa PHY  ] wait can send
+main-DEBUG-  2021-08-06 12:04:10,438-[31: DBG : LoRa PHY  ] can send !
+main-DEBUG-  2021-08-06 12:04:10,440-[31: DBG : LoRa PHY  ] log 1
+main-DEBUG-  2021-08-06 12:04:10,442-[31: DBG : LoRa PHY  ] log 2
+main-DEBUG-  2021-08-06 12:04:10,444-[31: DBG : LoRa PHY  ] log 3
+main-DEBUG-  2021-08-06 12:04:11,169-[32: INFO: RPL       ] received a multicast-DIO from fe80::212:4b00:60d:b1f8, instance_id 0, DAG ID fd00::200:212:4b00:60d:611b, version 240, dtsn 240, rank 281
+main-DEBUG-  2021-08-06 12:04:11,170-[32: INFO: RPL       ] sending a multicast-DIO with rank 128 to ff02::1a
+main-DEBUG-  2021-08-06 12:04:20,385-[41: INFO: LoRa MAC  ] Query timeout !
+main-DEBUG-  2021-08-06 12:04:20,386-[41: DBG : LoRa MAC  ] STOP query timer thanks to query_timeout
+main-DEBUG-  2021-08-06 12:04:20,386-[41: DBG : LoRa MAC  ] query frame built
+main-DEBUG-  2021-08-06 12:04:20,407-[41: DBG : LoRa MAC  ] Enter enqueue_packet with frame: {src:2:24859 dest:1:0 k:0 seq:3 next:0 cmd:6 data:
+main-DEBUG-  2021-08-06 12:04:20,408-[41: INFO: LoRa MAC  ] YOOOOOO 1
+main-DEBUG-  2021-08-06 12:04:20,408-[41: INFO: LoRa MAC  ] YOOOOOO 2
+main-DEBUG-  2021-08-06 12:04:20,409-[41: DBG : LoRa MAC  ] append to buffer
+main-DEBUG-  2021-08-06 12:04:20,411-[41: INFO: LoRa MAC  ] YOOOOOO 3
+main-DEBUG-  2021-08-06 12:04:20,413-[41: DBG : LoRa MAC  ] post new_tx_frame_event to TX_PROCESS
+main-DEBUG-  2021-08-06 12:04:20,429-[41: INFO: LoRa MAC  ] YOOOOOO 4
+main-DEBUG-  2021-08-06 12:04:20,430-[41: DBG : LoRa MAC  ] frame from buffer: {src:2:24859 dest:1:0 k:0 seq:3 next:0 cmd:6 data:
+main-DEBUG-  2021-08-06 12:04:20,430-[41: DBG : LoRa MAC  ] buffer size: 0
+main-DEBUG-  2021-08-06 12:04:20,431-[41: DBG : LoRa PHY  ] enter UART_TX
+main-DEBUG-  2021-08-06 12:04:20,451-[41: DBG : LoRa PHY  ] append { cmd:radio set wdt  resp: [ok, none] }[41: DBG : LoRa PHY  ]  to UART TX buffer
+main-DEBUG-  2021-08-06 12:04:20,452-[41: DBG : LoRa PHY  ] enter UART_TX
+main-DEBUG-  2021-08-06 12:04:20,454-[41: DBG : LoRa PHY  ] with lora frame: {src:2:24859 dest:1:0 k:0 seq:3 next:0 cmd:6 data:
+main-DEBUG-  2021-08-06 12:04:20,474-[41: DBG : LoRa PHY  ] append { cmd:radio tx  resp: [radio_tx_ok, radio_err] }[41: DBG : LoRa PHY  ]  to UART TX buffer
+main-DEBUG-  2021-08-06 12:04:20,477-[41: DBG : LoRa MAC  ] frame sended to PHY layer
+main-DEBUG-  2021-08-06 12:04:20,478-[41: DBG : LoRa MAC  ] START retransmit timer in mac_tx process
+main-DEBUG-  2021-08-06 12:04:20,482-[41: DBG : LoRa MAC  ] Listen during 3 s
+main-DEBUG-  2021-08-06 12:04:20,485-[41: DBG : LoRa PHY  ] enter UART_TX
+main-DEBUG-  2021-08-06 12:04:20,496-[41: DBG : LoRa PHY  ] append { cmd:radio set wdt  resp: [ok, none] }[41: DBG : LoRa PHY  ]  to UART TX buffer
+main-DEBUG-  2021-08-06 12:04:20,497-[41: DBG : LoRa PHY  ] enter UART_TX
+main-DEBUG-  2021-08-06 12:04:20,518-[41: DBG : LoRa PHY  ] append { cmd:radio rx  resp: [radio_err, radio_rx] }[41: DBG : LoRa PHY  ]  to UART TX buffer
+main-DEBUG-  2021-08-06 12:04:20,518-[41: DBG : LoRa MAC  ] wait state change to READY
+main-DEBUG-  2021-08-06 12:04:20,519-[41: DBG : LoRa PHY  ] log 4
+main-DEBUG-  2021-08-06 12:04:20,522-[41: DBG : LoRa PHY  ] log 5
+main-DEBUG-  2021-08-06 12:04:20,522-[41: DBG : LoRa PHY  ] log 6
+main-DEBUG-  2021-08-06 12:04:20,523-[41: DBG : LoRa PHY  ] log 7
+main-DEBUG-  2021-08-06 12:04:20,523-[41: DBG : LoRa PHY  ] log 8
+main-DEBUG-  2021-08-06 12:04:20,524-[41: DBG : LoRa PHY  ] log 9
+main-DEBUG-  2021-08-06 12:04:20,540-[41: DBG : LoRa PHY  ] log 10
+main-DEBUG-  2021-08-06 12:04:20,542-[41: DBG : LoRa PHY  ] log 11
+main-DEBUG-  2021-08-06 12:04:20,543-[41: DBG : LoRa PHY  ] log 11
+main-DEBUG-  2021-08-06 12:04:20,545-[41: DBG : LoRa PHY  ] log 12
+main-DEBUG-  2021-08-06 12:04:20,546-[41: DBG : LoRa PHY  ] log 13
+main-DEBUG-  2021-08-06 12:04:20,547-[41: DBG : LoRa PHY  ] log 19
+main-DEBUG-  2021-08-06 12:04:20,548-[41: DBG : LoRa PHY  ] log 20
+main-DEBUG-  2021-08-06 12:04:20,562-[41: DBG : LoRa PHY  ] will call write UART
+main-DEBUG-  2021-08-06 12:04:20,563-[41: INFO: LoRa PHY  ] PHY TX:radio set wdt 0
+main-DEBUG-  2021-08-06 12:04:20,563-[41: DBG : LoRa PHY  ] phy tx done
+main-DEBUG-  2021-08-06 12:04:20,564-[41: DBG : LoRa PHY  ] writ[41: DBG : LoRa PHY  ] UART response:ok
+main-DEBUG-  2021-08-06 12:04:20,565-[41: DBG : LoRa PHY  ] compare response with:ok
+main-DEBUG-  2021-08-06 12:04:20,585-[41: DBG : LoRa PHY  ]  expected !
+main-DEBUG-  2021-08-06 12:04:20,585-
+ uart call ended
+main-DEBUG-  2021-08-06 12:04:20,586-[41: DBG : LoRa PHY  ] wait can send
+main-DEBUG-  2021-08-06 12:04:20,587-[41: DBG : LoRa PHY  ] wait can send
+main-DEBUG-  2021-08-06 12:04:20,587-[41: DBG : LoRa PHY  ] wait can send
+main-DEBUG-  2021-08-06 12:04:20,588-[41: DBG : LoRa PHY  ] wait can send
+main-DEBUG-  2021-08-06 12:04:20,589-[41: DBG : LoRa PHY  ] can send !
+main-DEBUG-  2021-08-06 12:04:20,589-[41: DBG : LoRa PHY  ] log 1
+main-DEBUG-  2021-08-06 12:04:20,607-[41: DBG : LoRa PHY  ] log 2
+main-DEBUG-  2021-08-06 12:04:20,607-[41: DBG : LoRa PHY  ] log 4
+main-DEBUG-  2021-08-06 12:04:20,608-[41: DBG : LoRa PHY  ] log 5
+main-DEBUG-  2021-08-06 12:04:20,608-[41: DBG : LoRa PHY  ] log 6
+main-DEBUG-  2021-08-06 12:04:20,609-[41: DBG : LoRa PHY  ] log 7
+main-DEBUG-  2021-08-06 12:04:20,610-[41: DBG : LoRa PHY  ] log 8
+main-DEBUG-  2021-08-06 12:04:20,610-[41: DBG : LoRa PHY  ] log 9
+main-DEBUG-  2021-08-06 12:04:20,610-[41: DBG : LoRa PHY  ] log 10
+main-DEBUG-  2021-08-06 12:04:20,629-[41: DBG : LoRa PHY  ] log 11
+main-DEBUG-  2021-08-06 12:04:20,630-[41: DBG : LoRa PHY  ] log 11
+main-DEBUG-  2021-08-06 12:04:20,630-[41: DBG : LoRa PHY  ] log 12
+main-DEBUG-  2021-08-06 12:04:20,630-[41: DBG : LoRa PHY  ] log 13
+main-DEBUG-  2021-08-06 12:04:20,631-[41: DBG : LoRa PHY  ] log 16
+main-DEBUG-  2021-08-06 12:04:20,631-[41: DBG : LoRa PHY  ] log 17 with lora frame:
+main-DEBUG-  2021-08-06 12:04:20,651-{src:2:24859 dest:1:0 k:0 seq:3 next:0 cmd:6 data:
+main-DEBUG-  2021-08-06 12:04:20,652-[42: DBG : LoRa PHY  ] to frame receive: {src:2:24859 dest:1:0 k:0 seq:3 next:0 cmd:6 data:
+main-DEBUG-  2021-08-06 12:04:20,653-[42: DBG : LoRa PHY  ]
+main-DEBUG-  2021-08-06 12:04:20,654-[42: DBG : LoRa PHY  ] src.prefix: 2
+main-DEBUG-  2021-08-06 12:04:20,655-[42: DBG : LoRa PHY  ] src addr: 02611B
+main-DEBUG-  2021-08-06 12:04:20,674-[42: DBG : LoRa PHY  ] dest addr: 010000
+main-DEBUG-  2021-08-06 12:04:20,675-[42: DBG : LoRa PHY  ] flags and command:06
+main-DEBUG-  2021-08-06 12:04:20,675-[42: DBG : LoRa PHY  ] SN:03
+main-DEBUG-  2021-08-06 12:04:20,676-[42: DBG : LoRa PHY  ] TO HEX frame: 02611B0100000603
+main-DEBUG-  2021-08-06 12:04:20,676-[42: DBG : LoRa PHY  ] log 18
+main-DEBUG-  2021-08-06 12:04:20,677-[42: DBG : LoRa PHY  ] will call write UART
+main-DEBUG-  2021-08-06 12:04:20,677-[42: INFO: LoRa PHY  ] PHY TX:radio tx 02611B0100000603
+main-DEBUG-  2021-08-06 12:04:20,697-[42: DBG : LoRa PHY  ] phy tx done
+main-DEBUG-  2021-08-06 12:04:20,698-[42: DBG : LoRa PHY  ] write uart call ended
+main-DEBUG-  2021-08-06 12:04:20,699-[42: DBG : LoRa PHY  ] UART response:ok
+main-DEBUG-  2021-08-06 12:04:20,702-[42: DBG : LoRa PHY  ] compare response with:radio_tx_ok
+main-DEBUG-  2021-08-06 12:04:20,702-[42: DBG : LoRa PHY  ] compare response with:radio_err
+main-DEBUG-  2021-08-06 12:04:21,701-[43: DBG : LoRa PHY  ] UART response:radio_tx_ok
+main-DEBUG-  2021-08-06 12:04:21,703-[43: DBG : LoRa PHY  ] compare response with:radio_tx_ok
+main-DEBUG-  2021-08-06 12:04:21,705-[43: DBG : LoRa PHY  ]  expected !
+main-DEBUG-  2021-08-06 12:04:21,706-[43: DBG : LoRa PHY  ] wait can send
+main-DEBUG-  2021-08-06 12:04:21,707-[43: DBG : LoRa PHY  ] can send !
+lora_phy-INFO-  2021-08-06 12:04:21,709-PHY RX:02611B0100000603
+lora_mac-DEBUG-  2021-08-06 12:04:21,710-RX process receive
+lora_mac-DEBUG-  2021-08-06 12:04:21,710-RX process set is_listen=False
+lora_mac-DEBUG-  2021-08-06 12:04:21,710-RX process: call mac_rx
+lora_mac-DEBUG-  2021-08-06 12:04:21,710-MAC RX: LoraFrame(src_addr=LoraAddr(prefix=2, node_id=24859), dest_addr=LoraAddr(prefix=1, node_id=0), command=<MacCommand.QUERY: 6>, payload='', seq=3, k=False, has_next=False)
+lora_mac-DEBUG-  2021-08-06 12:04:21,711-look child with prefix: 2
+lora_mac-DEBUG-  2021-08-06 12:04:21,711-child is: Child(2:24859)
+lora_mac-DEBUG-  2021-08-06 12:04:21,711-In _on_query
+lora_mac-DEBUG-  2021-08-06 12:04:21,711-child buffer empty -> send ack
+lora_phy-INFO-  2021-08-06 12:04:21,711-MAC send:LoraFrame(src_addr=LoraAddr(prefix=1, node_id=0), dest_addr=LoraAddr(prefix=2, node_id=24859), command=<MacCommand.ACK: 3>, payload='', seq=3, k=False, has_next=False)
+lora_mac-DEBUG-  2021-08-06 12:04:21,711-RX process: mac_rx end
+lora_mac-DEBUG-  2021-08-06 12:04:21,711-RX process acquire lock for can_listen
+lora_mac-DEBUG-  2021-08-06 12:04:21,711-can listen: True
+lora_mac-DEBUG-  2021-08-06 12:04:21,712-is_listen: False
+lora_phy-INFO-  2021-08-06 12:04:21,712-PHY TX:radio tx 01000002611B0303
+main-DEBUG-  2021-08-06 12:04:21,722-[43: DBG : LoRa PHY  ] log 1
+main-DEBUG-  2021-08-06 12:04:21,722-[43: DBG : LoRa PHY  ] log 2
+main-DEBUG-  2021-08-06 12:04:21,723-[43: DBG : LoRa PHY  ] log 4
+main-DEBUG-  2021-08-06 12:04:21,723-[43: DBG : LoRa PHY  ] log 5
+main-DEBUG-  2021-08-06 12:04:21,725-[43: DBG : LoRa PHY  ] log 6
+main-DEBUG-  2021-08-06 12:04:21,725-[43: DBG : LoRa PHY  ] log 7
+main-DEBUG-  2021-08-06 12:04:21,726-[43: DBG : LoRa PHY  ] log 8
+main-DEBUG-  2021-08-06 12:04:21,727-[43: DBG : LoRa PHY  ] log 9
+main-DEBUG-  2021-08-06 12:04:21,744-[43: DBG : LoRa PHY  ] log 10
+main-DEBUG-  2021-08-06 12:04:21,745-[43: DBG : LoRa PHY  ] log 11
+main-DEBUG-  2021-08-06 12:04:21,746-[43: DBG : LoRa PHY  ] log 11
+main-DEBUG-  2021-08-06 12:04:21,746-[43: DBG : LoRa PHY  ] log 12
+main-DEBUG-  2021-08-06 12:04:21,747-[43: DBG : LoRa PHY  ] log 13
+main-DEBUG-  2021-08-06 12:04:21,748-[43: DBG : LoRa PHY  ] log 19
+main-DEBUG-  2021-08-06 12:04:21,750-[43: DBG : LoRa PHY  ] log 20
+main-DEBUG-  2021-08-06 12:04:21,752-[43: DBG : LoRa PHY  ] will call write UART
+main-DEBUG-  2021-08-06 12:04:21,767-[43: INFO: LoRa PHY  ] PHY TX:radio set wdt 3000
+main-DEBUG-  2021-08-06 12:04:21,769-[43: DBG : LoRa PHY  ] phy tx done
+main-DEBUG-  2021-08-06 12:04:21,771-[43: DBG : LoRa PHY  ] write uart call ended
+main-DEBUG-  2021-08-06 12:04:21,772-[43: DBG : LoRa PHY  ] UART response:ok
+main-DEBUG-  2021-08-06 12:04:21,773-[43: DBG : LoRa PHY  ] compare response with:ok
+main-DEBUG-  2021-08-06 12:04:21,789-[43: DBG : LoRa PHY  ]  expected !
+main-DEBUG-  2021-08-06 12:04:21,789-[43: DBG : LoRa PHY  ] wait can send
+main-DEBUG-  2021-08-06 12:04:21,790-[43: DBG : LoRa PHY  ] can send !
+main-DEBUG-  2021-08-06 12:04:21,790-[43: DBG : LoRa PHY  ] log 1
+main-DEBUG-  2021-08-06 12:04:21,791-[43: DBG : LoRa PHY  ] log 2
+main-DEBUG-  2021-08-06 12:04:21,791-[43: DBG : LoRa PHY  ] log 4
+main-DEBUG-  2021-08-06 12:04:21,792-[43: DBG : LoRa PHY  ] log 5
+main-DEBUG-  2021-08-06 12:04:21,792-[43: DBG : LoRa PHY  ] log 6
+main-DEBUG-  2021-08-06 12:04:21,811-[43: DBG : LoRa PHY  ] log 7
+main-DEBUG-  2021-08-06 12:04:21,812-[43: DBG : LoRa PHY  ] log 8
+main-DEBUG-  2021-08-06 12:04:21,812-[43: DBG : LoRa PHY  ] log 9
+main-DEBUG-  2021-08-06 12:04:21,813-[43: DBG : LoRa PHY  ] log 10
+main-DEBUG-  2021-08-06 12:04:21,814-[43: DBG : LoRa PHY  ] log 11
+main-DEBUG-  2021-08-06 12:04:21,815-[43: DBG : LoRa PHY  ] log 11
+main-DEBUG-  2021-08-06 12:04:21,816-[43: DBG : LoRa PHY  ] log 12
+main-DEBUG-  2021-08-06 12:04:21,817-[43: DBG : LoRa PHY  ] log 13
+main-DEBUG-  2021-08-06 12:04:21,833-[43: DBG : LoRa PHY  ] log 14
+main-DEBUG-  2021-08-06 12:04:21,834-[43: DBG : LoRa PHY  ] log 15
+main-DEBUG-  2021-08-06 12:04:21,834-[43: DBG : LoRa PHY  ] will call write UART
+main-DEBUG-  2021-08-06 12:04:21,835-[43: INFO: LoRa PHY  ] PHY TX:radio rx 0
+main-DEBUG-  2021-08-06 12:04:21,835-[43: DBG : LoRa PHY  ] phy tx done
+main-DEBUG-  2021-08-06 12:04:21,855-[43: DBG : LoRa PHY  ] write u[43: DBG : LoRa PHY  ] UART response:ok
+main-DEBUG-  2021-08-06 12:04:21,855-[43: DBG : LoRa PHY  ] compare response with:radio_err
+main-DEBUG-  2021-08-06 12:04:21,856-[43: DBG : LoRa PHY  ] compare response with:radio_rx
+main-DEBUG-  2021-08-06 12:04:21,856-
+rt call ended
+main-DEBUG-  2021-08-06 12:04:21,859-[43: INFO: RPL       ] received a multicast-DIO from fe80::212:4b00:60d:b1f8, instance_id 0, DAG ID fd00::200:212:4b00:60d:611b, version 240, dtsn 240, rank 281
+lora_phy-INFO-  2021-08-06 12:04:22,716-PHY TX:radio rx 0
+main-DEBUG-  2021-08-06 12:04:22,770-[44: DBG : LoRa PHY  ] UART response:radio_rx  01000002611B0303
+main-DEBUG-  2021-08-06 12:04:22,771-[44: DBG : LoRa PHY  ] compare response with:radio_err
+main-DEBUG-  2021-08-06 12:04:22,772-[44: DBG : LoRa PHY  ] compare response with:radio_rx
+main-DEBUG-  2021-08-06 12:04:22,776-[44: DBG : LoRa PHY  ] created frame a LoRa frame
+main-DEBUG-  2021-08-06 12:04:22,792-[44: INFO: LoRa PHY  ] PHY RX:01000002611B0303
+main-DEBUG-  2021-08-06 12:04:22,793-[44: INFO: LoRa MAC  ] RX LoRa frame: {src:1:0 dest:2:24859 k:0 seq:3 next:0 cmd:3 data:
+main-DEBUG-  2021-08-06 12:04:22,793-[44: INFO: LoRa MAC  ] ACK!
+main-DEBUG-  2021-08-06 12:04:22,795-[44: DBG : LoRa MAC  ] STOP retransmit timer thanks to correct ACK
+main-DEBUG-  2021-08-06 12:04:22,815-[44: DBG : LoRa PHY  ]  expected !
+main-DEBUG-  2021-08-06 12:04:22,815-[44: DBG : LoRa MAC  ] state is READY
+main-DEBUG-  2021-08-06 12:04:22,816-[44: WARN: LoRa MAC  ] buf not empty: 0
+main-DEBUG-  2021-08-06 12:04:22,816-[44: DBG : LoRa PHY  ] wait can send
+main-DEBUG-  2021-08-06 12:04:22,816-[44: DBG : LoRa PHY  ] can send !
+main-DEBUG-  2021-08-06 12:04:22,817-[44: DBG : LoRa PHY  ] log 1
+main-DEBUG-  2021-08-06 12:04:22,817-[44: DBG : LoRa PHY  ] log 2
+main-DEBUG-  2021-08-06 12:04:22,818-[44: DBG : LoRa PHY  ] log 3
+main-DEBUG-  2021-08-06 12:04:24,739-[46: INFO: RPL       ] ext hdr: packet from fd00::200:212:4b00:60d:b1f8 to 5f:756d:6f6e:735f:6172:6e61:7564:: going up, sender closer 0 (281 < 128), rank error 0, loop detected 0
+main-DEBUG-  2021-08-06 12:04:24,753-[46: INFO: RPL       ] SRH creating source routing header with destination 5f:756d:6f6e:735f:6172:6e61:7564::
+main-DEBUG-  2021-08-06 12:04:24,754-[46: INFO: RPL       ] SRH destination not in our DAG, skip SRH insertion
+main-DEBUG-  2021-08-06 12:04:24,755-[46: INFO: Interface ] Receive data for loramac whouhouuuuuu
+main-DEBUG-  2021-08-06 12:04:24,829-[46: DBG : LoRa MAC  ] Enter enqueue_packet with frame: {src:2:63665 dest:1:0 k:1 seq:0 next:0 cmd:2 data:60000000000F113F223D162E000FB18768656C6C6F20308768656C6C6F203000060D611B040E00080C00040000800001001E003C081E4040FFFFFFFFFFFFFFFF00000000FD00000000000200000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000
+main-DEBUG-  2021-08-06 12:04:24,829-[46: INFO: LoRa MAC  ] YOOOOOO 1
+main-DEBUG-  2021-08-06 12:04:24,830-[46: INFO: LoRa MAC  ] YOOOOOO 2
+main-DEBUG-  2021-08-06 12:04:24,830-[46: DBG : LoRa MAC  ] append to buffer
+main-DEBUG-  2021-08-06 12:04:24,830-[46: INFO: LoRa MAC  ] YOOOOOO 3
+main-DEBUG-  2021-08-06 12:04:24,850-[46: DBG : LoRa MAC  ] post new_tx_frame_event to TX_PROCESS
+main-DEBUG-  2021-08-06 12:04:24,851-[46: INFO: LoRa MAC  ] YOOOOOO 4
+main-DEBUG-  2021-08-06 12:04:24,895-[46: DBG : LoRa MAC  ] frame from buffer: {src:2:63665 dest:1:0 k:1 seq:0 next:0 cmd:2 data:              60000000000F113F223D162E000FB18768656C6C6F20308768656C6C6F203000060D611B040E00080C00040000800001001E003C081E4040FFFFFFFFFFFFFFFF00000000FD00000000000200000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000
+main-DEBUG-  2021-08-06 12:04:24,895-[46: DBG : LoRa MAC  ] buffer size: 0
+main-DEBUG-  2021-08-06 12:04:24,896-[46: DBG : LoRa PHY  ] enter UART_TX
+main-DEBUG-  2021-08-06 12:04:24,919-[46: DBG : LoRa PHY  ] append { cmd:radio set wdt  resp: [ok, none] }[46: DBG : LoRa PHY  ]  to UART TX buffer
+main-DEBUG-  2021-08-06 12:04:24,920-[46: DBG : LoRa PHY  ] enter UART_TX
+main-DEBUG-  2021-08-06 12:04:24,961-[46: DBG : LoRa PHY  ] with lora frame: {src:2:63665 dest:1:0 k:1 seq:4 next:0 cmd:2 data:60000000000F113F223D162E000FB18768656C6C6F20308768656C6C6F203000060D611B040E00080C00040000800001001E003C081E4040FFFFFFFFFFFFFFFF00000000FD00000000000200000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000
+main-DEBUG-  2021-08-06 12:04:24,962-[46: DBG : LoRa PHY  ] append { cmd:radio tx  resp: [radio_tx_ok, radio_err] }[46: DBG : LoRa PHY  ]  to UART TX buffer
+main-DEBUG-  2021-08-06 12:04:24,963-[46: DBG : LoRa MAC  ] frame sended to PHY layer
+main-DEBUG-  2021-08-06 12:04:24,983-[46: DBG : LoRa MAC  ] START retransmit timer in mac_tx process
+main-DEBUG-  2021-08-06 12:04:24,984-[46: DBG : LoRa MAC  ] Listen during 3 s
+main-DEBUG-  2021-08-06 12:04:24,985-[46: DBG : LoRa PHY  ] enter UART_TX
+main-DEBUG-  2021-08-06 12:04:24,987-[46: DBG : LoRa PHY  ] append { cmd:radio set wdt  resp: [ok, none] }[46: DBG : LoRa PHY  ]  to UART TX buffer
+main-DEBUG-  2021-08-06 12:04:25,006-[46: DBG : LoRa PHY  ] enter UART_TX
+main-DEBUG-  2021-08-06 12:04:25,007-[46: DBG : LoRa PHY  ] append { cmd:radio rx  resp: [radio_err, radio_rx] }[46: DBG : LoRa PHY  ]  to UART TX buffer
+main-DEBUG-  2021-08-06 12:04:25,008-[46: DBG : LoRa MAC  ] wait state change to READY
+main-DEBUG-  2021-08-06 12:04:25,008-[46: DBG : LoRa PHY  ] log 4
+main-DEBUG-  2021-08-06 12:04:25,008-[46: DBG : LoRa PHY  ] log 5
+main-DEBUG-  2021-08-06 12:04:25,028-[46: DBG : LoRa PHY  ] log 6
+main-DEBUG-  2021-08-06 12:04:25,029-[46: DBG : LoRa PHY  ] log 7
+main-DEBUG-  2021-08-06 12:04:25,029-[46: DBG : LoRa PHY  ] log 8
+main-DEBUG-  2021-08-06 12:04:25,030-[46: DBG : LoRa PHY  ] log 9
+main-DEBUG-  2021-08-06 12:04:25,030-[46: DBG : LoRa PHY  ] log 10
+main-DEBUG-  2021-08-06 12:04:25,030-[46: DBG : LoRa PHY  ] log 11
+main-DEBUG-  2021-08-06 12:04:25,031-[46: DBG : LoRa PHY  ] log 11
+main-DEBUG-  2021-08-06 12:04:25,031-[46: DBG : LoRa PHY  ] log 12
+main-DEBUG-  2021-08-06 12:04:25,050-[46: DBG : LoRa PHY  ] log 13
+main-DEBUG-  2021-08-06 12:04:25,051-[46: DBG : LoRa PHY  ] log 19
+main-DEBUG-  2021-08-06 12:04:25,051-[46: DBG : LoRa PHY  ] log 20
+main-DEBUG-  2021-08-06 12:04:25,051-[46: DBG : LoRa PHY  ] will call write UART
+main-DEBUG-  2021-08-06 12:04:25,053-[46: INFO: LoRa PHY  ] PHY TX:radio set wdt 0
+main-DEBUG-  2021-08-06 12:04:25,053-[46: DBG : LoRa PHY  ] phy tx done
+main-DEBUG-  2021-08-06 12:04:25,072-[46: DBG : LoRa PHY  ] wri[46: DBG : LoRa PHY  ] UART response:ok
+main-DEBUG-  2021-08-06 12:04:25,073-[46: DBG : LoRa PHY  ] compare response with:ok
+main-DEBUG-  2021-08-06 12:04:25,074-[46: DBG : LoRa PHY  ]  expected !
+main-DEBUG-  2021-08-06 12:04:25,074-
+e uart call ended
+main-DEBUG-  2021-08-06 12:04:25,075-[46: DBG : LoRa PHY  ] wait can send
+main-DEBUG-  2021-08-06 12:04:25,078-[46: DBG : LoRa PHY  ] wait can send
+main-DEBUG-  2021-08-06 12:04:25,095-[46: DBG : LoRa PHY  ] wait can send
+main-DEBUG-  2021-08-06 12:04:25,096-[46: DBG : LoRa PHY  ] wait can send
+main-DEBUG-  2021-08-06 12:04:25,096-[46: DBG : LoRa PHY  ] can send !
+main-DEBUG-  2021-08-06 12:04:25,097-[46: DBG : LoRa PHY  ] log 1
+main-DEBUG-  2021-08-06 12:04:25,098-[46: DBG : LoRa PHY  ] log 2
+main-DEBUG-  2021-08-06 12:04:25,098-[46: DBG : LoRa PHY  ] log 4
+main-DEBUG-  2021-08-06 12:04:25,099-[46: DBG : LoRa PHY  ] log 5
+main-DEBUG-  2021-08-06 12:04:25,100-[46: DBG : LoRa PHY  ] log 6
+main-DEBUG-  2021-08-06 12:04:25,117-[46: DBG : LoRa PHY  ] log 7
+main-DEBUG-  2021-08-06 12:04:25,119-[46: DBG : LoRa PHY  ] log 8
+main-DEBUG-  2021-08-06 12:04:25,120-[46: DBG : LoRa PHY  ] log 9
+main-DEBUG-  2021-08-06 12:04:25,121-[46: DBG : LoRa PHY  ] log 10
+main-DEBUG-  2021-08-06 12:04:25,122-[46: DBG : LoRa PHY  ] log 11
+main-DEBUG-  2021-08-06 12:04:25,123-[46: DBG : LoRa PHY  ] log 11
+main-DEBUG-  2021-08-06 12:04:25,126-[46: DBG : LoRa PHY  ] log 12
+main-DEBUG-  2021-08-06 12:04:25,127-[46: DBG : LoRa PHY  ] log 13
+main-DEBUG-  2021-08-06 12:04:25,139-[46: DBG : LoRa PHY  ] log 16
+main-DEBUG-  2021-08-06 12:04:25,145-[46: DBG : LoRa PHY  ] log 17 with lora frame:
+main-DEBUG-  2021-08-06 12:04:25,147-{src:2:63665 dest:1:0 k:1 seq:4 next:0 cmd:2 data:66366200000F p
+main-DEBUG-  2021-08-06 12:04:25,168-[46: DBG : LoRa PHY  ] to frame receive: {src:2:63665 dest:1:0 k:1 seq:4 next:0 cmd:2 data:66366200000F p
+main-DEBUG-  2021-08-06 12:04:25,171-[46: DBG : LoRa PHY  ]
+main-DEBUG-  2021-08-06 12:04:25,172-[46: DBG : LoRa PHY  ] src.prefix: 2
+main-DEBUG-  2021-08-06 12:04:25,172-[46: DBG : LoRa PHY  ] src addr: 02F8B1
+main-DEBUG-  2021-08-06 12:04:25,173-[46: DBG : LoRa PHY  ] dest addr: 010000
+main-DEBUG-  2021-08-06 12:04:25,173-[46: DBG : LoRa PHY  ] flags and command:82
+main-DEBUG-  2021-08-06 12:04:25,176-[46: DBG : LoRa PHY  ] SN:04
+main-DEBUG-  2021-08-06 12:04:25,177-[46: DBG : LoRa PHY  ] TO HEX frame: 02F8B10100008204
+main-DEBUG-  2021-08-06 12:04:25,179-[46: DBG : LoRa PHY  ] log 18
+main-DEBUG-  2021-08-06 12:04:25,180-[46: DBG : LoRa PHY  ] will call write UART
+main-DEBUG-  2021-08-06 12:04:25,186-[46: INFO: LoRa PHY  ] PHY TX:radio tx 02F8B10100008204
+main-DEBUG-  2021-08-06 12:04:25,198-[46: DBG : LoRa PHY  ] phy tx done
+main-DEBUG-  2021-08-06 12:04:25,199-[46: DBG : LoRa PHY  ] write uart call ended
+main-DEBUG-  2021-08-06 12:04:25,199-[46: DBG : LoRa PHY  ] UART response:ok
+main-DEBUG-  2021-08-06 12:04:25,201-[46: DBG : LoRa PHY  ] compare response with:radio_tx_ok
+main-DEBUG-  2021-08-06 12:04:25,203-[46: DBG : LoRa PHY  ] compare response with:radio_err
+main-DEBUG-  2021-08-06 12:04:26,201-[47: DBG : LoRa PHY  ] UART response:radio_tx_ok
+main-DEBUG-  2021-08-06 12:04:26,203-[47: DBG : LoRa PHY  ] compare response with:radio_tx_ok
+main-DEBUG-  2021-08-06 12:04:26,204-[47: DBG : LoRa PHY  ]  expected !
+main-DEBUG-  2021-08-06 12:04:26,205-[47: DBG : LoRa PHY  ] wait can send
+main-DEBUG-  2021-08-06 12:04:26,207-[47: DBG : LoRa PHY  ] can send !
+lora_phy-INFO-  2021-08-06 12:04:26,210-PHY RX:02F8B10100008204
+lora_mac-DEBUG-  2021-08-06 12:04:26,211-RX process receive
+lora_mac-DEBUG-  2021-08-06 12:04:26,211-RX process set is_listen=False
+lora_mac-DEBUG-  2021-08-06 12:04:26,211-RX process: call mac_rx
+lora_mac-DEBUG-  2021-08-06 12:04:26,211-MAC RX: LoraFrame(src_addr=LoraAddr(prefix=2, node_id=63665), dest_addr=LoraAddr(prefix=1, node_id=0), command=<MacCommand.DATA: 2>, payload='', seq=4, k=True, has_next=False)
+lora_mac-DEBUG-  2021-08-06 12:04:26,211-look child with prefix: 2
+lora_mac-DEBUG-  2021-08-06 12:04:26,212-child is: Child(2:24859)
+lora_mac-DEBUG-  2021-08-06 12:04:26,212-Data ! 
+lora_mac-DEBUG-  2021-08-06 12:04:26,212-expected sn: 4
+lora_mac-DEBUG-  2021-08-06 12:04:26,212-frame want ack -> send ack
+lora_phy-INFO-  2021-08-06 12:04:26,212-MAC send:LoraFrame(src_addr=LoraAddr(prefix=1, node_id=0), dest_addr=LoraAddr(prefix=2, node_id=63665), command=<MacCommand.ACK: 3>, payload='', seq=4, k=False, has_next=False)
+lora_mac-DEBUG-  2021-08-06 12:04:26,212-RX process: mac_rx end
+lora_phy-INFO-  2021-08-06 12:04:26,212-PHY TX:radio tx 01000002F8B10304
+lora_mac-DEBUG-  2021-08-06 12:04:26,212-RX process acquire lock for can_listen
+lora_mac-DEBUG-  2021-08-06 12:04:26,212-can listen: True
+lora_mac-DEBUG-  2021-08-06 12:04:26,213-is_listen: False
+main-DEBUG-  2021-08-06 12:04:26,224-[47: DBG : LoRa PHY  ] log 1
+main-DEBUG-  2021-08-06 12:04:26,227-[47: DBG : LoRa PHY  ] log 2
+main-DEBUG-  2021-08-06 12:04:26,227-[47: DBG : LoRa PHY  ] log 4
+main-DEBUG-  2021-08-06 12:04:26,228-[47: DBG : LoRa PHY  ] log 5
+main-DEBUG-  2021-08-06 12:04:26,230-[47: DBG : LoRa PHY  ] log 6
+main-DEBUG-  2021-08-06 12:04:26,231-[47: DBG : LoRa PHY  ] log 7
+main-DEBUG-  2021-08-06 12:04:26,231-[47: DBG : LoRa PHY  ] log 8
+main-DEBUG-  2021-08-06 12:04:26,233-[47: DBG : LoRa PHY  ] log 9
+main-DEBUG-  2021-08-06 12:04:26,245-[47: DBG : LoRa PHY  ] log 10
+main-DEBUG-  2021-08-06 12:04:26,246-[47: DBG : LoRa PHY  ] log 11
+main-DEBUG-  2021-08-06 12:04:26,249-[47: DBG : LoRa PHY  ] log 11
+main-DEBUG-  2021-08-06 12:04:26,252-[47: DBG : LoRa PHY  ] log 12
+main-DEBUG-  2021-08-06 12:04:26,253-[47: DBG : LoRa PHY  ] log 13
+main-DEBUG-  2021-08-06 12:04:26,254-[47: DBG : LoRa PHY  ] log 19
+main-DEBUG-  2021-08-06 12:04:26,255-[47: DBG : LoRa PHY  ] log 20
+main-DEBUG-  2021-08-06 12:04:26,257-[47: DBG : LoRa PHY  ] will call write UART
+main-DEBUG-  2021-08-06 12:04:26,267-[47: INFO: LoRa PHY  ] PHY TX:radio set wdt 3000
+main-DEBUG-  2021-08-06 12:04:26,268-[47: DBG : LoRa PHY  ] phy tx done
+main-DEBUG-  2021-08-06 12:04:26,270-[47: DBG : LoRa PHY  ] write uart call ended
+main-DEBUG-  2021-08-06 12:04:26,276-[47: DBG : LoRa PHY  ] UART response:ok
+main-DEBUG-  2021-08-06 12:04:26,278-[47: DBG : LoRa PHY  ] compare response with:ok
+main-DEBUG-  2021-08-06 12:04:26,289-[47: DBG : LoRa PHY  ]  expected !
+main-DEBUG-  2021-08-06 12:04:26,290-[47: DBG : LoRa PHY  ] wait can send
+main-DEBUG-  2021-08-06 12:04:26,291-[47: DBG : LoRa PHY  ] can send !
+main-DEBUG-  2021-08-06 12:04:26,292-[47: DBG : LoRa PHY  ] log 1
+main-DEBUG-  2021-08-06 12:04:26,292-[47: DBG : LoRa PHY  ] log 2
+main-DEBUG-  2021-08-06 12:04:26,293-[47: DBG : LoRa PHY  ] log 4
+main-DEBUG-  2021-08-06 12:04:26,294-[47: DBG : LoRa PHY  ] log 5
+main-DEBUG-  2021-08-06 12:04:26,296-[47: DBG : LoRa PHY  ] log 6
+main-DEBUG-  2021-08-06 12:04:26,312-[47: DBG : LoRa PHY  ] log 7
+main-DEBUG-  2021-08-06 12:04:26,313-[47: DBG : LoRa PHY  ] log 8
+main-DEBUG-  2021-08-06 12:04:26,314-[47: DBG : LoRa PHY  ] log 9
+main-DEBUG-  2021-08-06 12:04:26,315-[47: DBG : LoRa PHY  ] log 10
+main-DEBUG-  2021-08-06 12:04:26,316-[47: DBG : LoRa PHY  ] log 11
+main-DEBUG-  2021-08-06 12:04:26,317-[47: DBG : LoRa PHY  ] log 11
+main-DEBUG-  2021-08-06 12:04:26,318-[47: DBG : LoRa PHY  ] log 12
+main-DEBUG-  2021-08-06 12:04:26,319-[47: DBG : LoRa PHY  ] log 13
+main-DEBUG-  2021-08-06 12:04:26,334-[47: DBG : LoRa PHY  ] log 14
+main-DEBUG-  2021-08-06 12:04:26,335-[47: DBG : LoRa PHY  ] log 15
+main-DEBUG-  2021-08-06 12:04:26,336-[47: DBG : LoRa PHY  ] will call write UART
+main-DEBUG-  2021-08-06 12:04:26,338-[47: INFO: LoRa PHY  ] PHY TX:radio rx 0
+main-DEBUG-  2021-08-06 12:04:26,340-[47: DBG : LoRa PHY  ] phy tx done
+main-DEBUG-  2021-08-06 12:04:26,345-[47: DBG : LoRa PHY  ] write u[47: DBG : LoRa PHY  ] UART response:ok
+main-DEBUG-  2021-08-06 12:04:26,347-[47: DBG : LoRa PHY  ] compare response with:radio_err
+main-DEBUG-  2021-08-06 12:04:26,349-[47: DBG : LoRa PHY  ] compare response with:radio_rx
+main-DEBUG-  2021-08-06 12:04:26,351-
+rt call ended
+lora_phy-INFO-  2021-08-06 12:04:27,217-PHY TX:radio rx 0
+main-DEBUG-  2021-08-06 12:04:27,271-[48: DBG : LoRa PHY  ] UART response:radio_rx  01000002F8B10304
+main-DEBUG-  2021-08-06 12:04:27,272-[48: DBG : LoRa PHY  ] compare response with:radio_err
+main-DEBUG-  2021-08-06 12:04:27,274-[48: DBG : LoRa PHY  ] compare response with:radio_rx
+main-DEBUG-  2021-08-06 12:04:27,274-[48: DBG : LoRa PHY  ] created frame a LoRa frame
+main-DEBUG-  2021-08-06 12:04:27,293-[48: INFO: LoRa PHY  ] PHY RX:01000002F8B10304
+main-DEBUG-  2021-08-06 12:04:27,294-[48: INFO: LoRa MAC  ] RX LoRa frame: {src:1:0 dest:2:63665 k:0 seq:4 next:0 cmd:3 data:
+main-DEBUG-  2021-08-06 12:04:27,295-[48: INFO: LoRa MAC  ] ACK!
+main-DEBUG-  2021-08-06 12:04:27,295-[48: DBG : LoRa MAC  ] STOP retransmit timer thanks to correct ACK
+main-DEBUG-  2021-08-06 12:04:27,316-[48: DBG : LoRa PHY  ]  expected !
+main-DEBUG-  2021-08-06 12:04:27,316-[48: DBG : LoRa MAC  ] state is READY
+main-DEBUG-  2021-08-06 12:04:27,317-[48: WARN: LoRa MAC  ] buf not empty: 0
+main-DEBUG-  2021-08-06 12:04:27,318-[48: DBG : LoRa PHY  ] wait can send
+main-DEBUG-  2021-08-06 12:04:27,318-[48: DBG : LoRa PHY  ] can send !
+main-DEBUG-  2021-08-06 12:04:27,319-[48: DBG : LoRa PHY  ] log 1
+main-DEBUG-  2021-08-06 12:04:27,319-[48: DBG : LoRa PHY  ] log 2
+main-DEBUG-  2021-08-06 12:04:27,320-[48: DBG : LoRa PHY  ] log 3
+main-DEBUG-  2021-08-06 12:04:32,768-[54: INFO: LoRa MAC  ] Query timeout !
+main-DEBUG-  2021-08-06 12:04:32,770-[54: DBG : LoRa MAC  ] STOP query timer thanks to query_timeout
+main-DEBUG-  2021-08-06 12:04:32,771-[54: DBG : LoRa MAC  ] query frame built
+main-DEBUG-  2021-08-06 12:04:32,790-[54: DBG : LoRa MAC  ] Enter enqueue_packet with frame: {src:2:24859 dest:1:0 k:0 seq:5 next:0 cmd:6 data:
+main-DEBUG-  2021-08-06 12:04:32,791-[54: INFO: LoRa MAC  ] YOOOOOO 1
+main-DEBUG-  2021-08-06 12:04:32,791-[54: INFO: LoRa MAC  ] YOOOOOO 2
+main-DEBUG-  2021-08-06 12:04:32,792-[54: DBG : LoRa MAC  ] append to buffer
+main-DEBUG-  2021-08-06 12:04:32,792-[54: INFO: LoRa MAC  ] YOOOOOO 3
+main-DEBUG-  2021-08-06 12:04:32,793-[54: DBG : LoRa MAC  ] post new_tx_frame_event to TX_PROCESS
+main-DEBUG-  2021-08-06 12:04:32,812-[54: INFO: LoRa MAC  ] YOOOOOO 4
+main-DEBUG-  2021-08-06 12:04:32,813-[54: DBG : LoRa MAC  ] frame from buffer: {src:2:24859 dest:1:0 k:0 seq:5 next:0 cmd:6 data:
+main-DEBUG-  2021-08-06 12:04:32,814-[54: DBG : LoRa MAC  ] buffer size: 0
+main-DEBUG-  2021-08-06 12:04:32,814-[54: DBG : LoRa PHY  ] enter UART_TX
+main-DEBUG-  2021-08-06 12:04:32,834-[54: DBG : LoRa PHY  ] append { cmd:radio set wdt  resp: [ok, none] }[54: DBG : LoRa PHY  ]  to UART TX buffer
+main-DEBUG-  2021-08-06 12:04:32,835-[54: DBG : LoRa PHY  ] enter UART_TX
+main-DEBUG-  2021-08-06 12:04:32,836-[54: DBG : LoRa PHY  ] with lora frame: {src:2:24859 dest:1:0 k:0 seq:5 next:0 cmd:6 data:
+main-DEBUG-  2021-08-06 12:04:32,856-[54: DBG : LoRa PHY  ] append { cmd:radio tx  resp: [radio_tx_ok, radio_err] }[54: DBG : LoRa PHY  ]  to UART TX buffer
+main-DEBUG-  2021-08-06 12:04:32,857-[54: DBG : LoRa MAC  ] frame sended to PHY layer
+main-DEBUG-  2021-08-06 12:04:32,857-[54: DBG : LoRa MAC  ] START retransmit timer in mac_tx process
+main-DEBUG-  2021-08-06 12:04:32,858-[54: DBG : LoRa MAC  ] Listen during 3 s
+main-DEBUG-  2021-08-06 12:04:32,858-[54: DBG : LoRa PHY  ] enter UART_TX
+main-DEBUG-  2021-08-06 12:04:32,880-[54: DBG : LoRa PHY  ] append { cmd:radio set wdt  resp: [ok, none] }[54: DBG : LoRa PHY  ]  to UART TX buffer
+main-DEBUG-  2021-08-06 12:04:32,880-[54: DBG : LoRa PHY  ] enter UART_TX
+main-DEBUG-  2021-08-06 12:04:32,901-[54: DBG : LoRa PHY  ] append { cmd:radio rx  resp: [radio_err, radio_rx] }[54: DBG : LoRa PHY  ]  to UART TX buffer
+main-DEBUG-  2021-08-06 12:04:32,903-[54: DBG : LoRa MAC  ] wait state change to READY
+main-DEBUG-  2021-08-06 12:04:32,905-[54: DBG : LoRa PHY  ] log 4
+main-DEBUG-  2021-08-06 12:04:32,905-[54: DBG : LoRa PHY  ] log 5
+main-DEBUG-  2021-08-06 12:04:32,905-[54: DBG : LoRa PHY  ] log 6
+main-DEBUG-  2021-08-06 12:04:32,906-[54: DBG : LoRa PHY  ] log 7
+main-DEBUG-  2021-08-06 12:04:32,909-[54: DBG : LoRa PHY  ] log 8
+main-DEBUG-  2021-08-06 12:04:32,910-[54: DBG : LoRa PHY  ] log 9
+main-DEBUG-  2021-08-06 12:04:32,923-[54: DBG : LoRa PHY  ] log 10
+main-DEBUG-  2021-08-06 12:04:32,926-[54: DBG : LoRa PHY  ] log 11
+main-DEBUG-  2021-08-06 12:04:32,928-[54: DBG : LoRa PHY  ] log 11
+main-DEBUG-  2021-08-06 12:04:32,930-[54: DBG : LoRa PHY  ] log 12
+main-DEBUG-  2021-08-06 12:04:32,932-[54: DBG : LoRa PHY  ] log 13
+main-DEBUG-  2021-08-06 12:04:32,932-[54: DBG : LoRa PHY  ] log 19
+main-DEBUG-  2021-08-06 12:04:32,935-[54: DBG : LoRa PHY  ] log 20
+main-DEBUG-  2021-08-06 12:04:32,945-[54: DBG : LoRa PHY  ] will call write UART
+main-DEBUG-  2021-08-06 12:04:32,946-[54: INFO: LoRa PHY  ] PHY TX:radio set wdt 0
+main-DEBUG-  2021-08-06 12:04:32,947-[54: DBG : LoRa PHY  ] phy tx done
+main-DEBUG-  2021-08-06 12:04:32,948-[54: DBG : LoRa PHY  ] wri[54: DBG : LoRa PHY  ] UART response:ok
+main-DEBUG-  2021-08-06 12:04:32,950-[54: DBG : LoRa PHY  ] compare response with:ok
+main-DEBUG-  2021-08-06 12:04:32,967-[54: DBG : LoRa PHY  ]  expected !
+main-DEBUG-  2021-08-06 12:04:32,969-
+e uart call ended
+main-DEBUG-  2021-08-06 12:04:32,970-[54: DBG : LoRa PHY  ] wait can send
+main-DEBUG-  2021-08-06 12:04:32,970-[54: DBG : LoRa PHY  ] wait can send
+main-DEBUG-  2021-08-06 12:04:32,971-[54: DBG : LoRa PHY  ] wait can send
+main-DEBUG-  2021-08-06 12:04:32,973-[54: DBG : LoRa PHY  ] wait can send
+main-DEBUG-  2021-08-06 12:04:32,974-[54: DBG : LoRa PHY  ] can send !
+main-DEBUG-  2021-08-06 12:04:32,976-[54: DBG : LoRa PHY  ] log 1
+main-DEBUG-  2021-08-06 12:04:32,990-[54: DBG : LoRa PHY  ] log 2
+main-DEBUG-  2021-08-06 12:04:32,991-[54: DBG : LoRa PHY  ] log 4
+main-DEBUG-  2021-08-06 12:04:32,991-[54: DBG : LoRa PHY  ] log 5
+main-DEBUG-  2021-08-06 12:04:32,992-[54: DBG : LoRa PHY  ] log 6
+main-DEBUG-  2021-08-06 12:04:32,993-[54: DBG : LoRa PHY  ] log 7
+main-DEBUG-  2021-08-06 12:04:32,994-[54: DBG : LoRa PHY  ] log 8
+main-DEBUG-  2021-08-06 12:04:32,995-[54: DBG : LoRa PHY  ] log 9
+main-DEBUG-  2021-08-06 12:04:32,997-[54: DBG : LoRa PHY  ] log 10
+main-DEBUG-  2021-08-06 12:04:33,014-[54: DBG : LoRa PHY  ] log 11
+main-DEBUG-  2021-08-06 12:04:33,014-[54: DBG : LoRa PHY  ] log 11
+main-DEBUG-  2021-08-06 12:04:33,016-[54: DBG : LoRa PHY  ] log 12
+main-DEBUG-  2021-08-06 12:04:33,018-[54: DBG : LoRa PHY  ] log 13
+main-DEBUG-  2021-08-06 12:04:33,020-[54: DBG : LoRa PHY  ] log 16
+main-DEBUG-  2021-08-06 12:04:33,022-[54: DBG : LoRa PHY  ] log 17 with lora frame:
+main-DEBUG-  2021-08-06 12:04:33,046-{src:2:24859 dest:1:0 k:0 seq:5 next:0 cmd:6 data:
+main-DEBUG-  2021-08-06 12:04:33,047-[54: DBG : LoRa PHY  ] to frame receive: {src:2:24859 dest:1:0 k:0 seq:5 next:0 cmd:6 data:
+main-DEBUG-  2021-08-06 12:04:33,047-[54: DBG : LoRa PHY  ]
+main-DEBUG-  2021-08-06 12:04:33,047-[54: DBG : LoRa PHY  ] src.prefix: 2
+main-DEBUG-  2021-08-06 12:04:33,048-[54: DBG : LoRa PHY  ] src addr: 02611B
+main-DEBUG-  2021-08-06 12:04:33,058-[54: DBG : LoRa PHY  ] dest addr: 010000
+main-DEBUG-  2021-08-06 12:04:33,060-[54: DBG : LoRa PHY  ] flags and command:06
+main-DEBUG-  2021-08-06 12:04:33,065-[54: DBG : LoRa PHY  ] SN:05
+main-DEBUG-  2021-08-06 12:04:33,070-[54: DBG : LoRa PHY  ] TO HEX frame: 02611B0100000605
+main-DEBUG-  2021-08-06 12:04:33,072-[54: DBG : LoRa PHY  ] log 18
+main-DEBUG-  2021-08-06 12:04:33,074-[54: DBG : LoRa PHY  ] will call write UART
+main-DEBUG-  2021-08-06 12:04:33,078-[54: INFO: LoRa PHY  ] PHY TX:radio tx 02611B0100000605
+main-DEBUG-  2021-08-06 12:04:33,080-[54: DBG : LoRa PHY  ] phy tx done
+main-DEBUG-  2021-08-06 12:04:33,082-[54: DBG : LoRa PHY  ] write uart call ended
+main-DEBUG-  2021-08-06 12:04:33,083-[54: DBG : LoRa PHY  ] UART response:ok
+main-DEBUG-  2021-08-06 12:04:33,089-[54: DBG : LoRa PHY  ] compare response with:radio_tx_ok
+main-DEBUG-  2021-08-06 12:04:33,091-[54: DBG : LoRa PHY  ] compare response with:radio_err
+main-DEBUG-  2021-08-06 12:04:34,083-[55: DBG : LoRa PHY  ] UART response:radio_tx_ok
+main-DEBUG-  2021-08-06 12:04:34,085-[55: DBG : LoRa PHY  ] compare response with:radio_tx_ok
+main-DEBUG-  2021-08-06 12:04:34,086-[55: DBG : LoRa PHY  ]  expected !
+main-DEBUG-  2021-08-06 12:04:34,088-[55: DBG : LoRa PHY  ] wait can send
+main-DEBUG-  2021-08-06 12:04:34,088-[55: DBG : LoRa PHY  ] can send !
+lora_phy-INFO-  2021-08-06 12:04:34,096-PHY RX:02611B0100000605
+lora_mac-DEBUG-  2021-08-06 12:04:34,096-RX process receive
+lora_mac-DEBUG-  2021-08-06 12:04:34,096-RX process set is_listen=False
+lora_mac-DEBUG-  2021-08-06 12:04:34,097-RX process: call mac_rx
+lora_mac-DEBUG-  2021-08-06 12:04:34,097-MAC RX: LoraFrame(src_addr=LoraAddr(prefix=2, node_id=24859), dest_addr=LoraAddr(prefix=1, node_id=0), command=<MacCommand.QUERY: 6>, payload='', seq=5, k=False, has_next=False)
+lora_mac-DEBUG-  2021-08-06 12:04:34,097-look child with prefix: 2
+lora_mac-DEBUG-  2021-08-06 12:04:34,097-child is: Child(2:24859)
+lora_mac-DEBUG-  2021-08-06 12:04:34,097-In _on_query
+lora_mac-DEBUG-  2021-08-06 12:04:34,097-child buffer empty -> send ack
+lora_phy-INFO-  2021-08-06 12:04:34,097-MAC send:LoraFrame(src_addr=LoraAddr(prefix=1, node_id=0), dest_addr=LoraAddr(prefix=2, node_id=24859), command=<MacCommand.ACK: 3>, payload='', seq=5, k=False, has_next=False)
+lora_mac-DEBUG-  2021-08-06 12:04:34,097-RX process: mac_rx end
+lora_mac-DEBUG-  2021-08-06 12:04:34,098-RX process acquire lock for can_listen
+lora_mac-DEBUG-  2021-08-06 12:04:34,098-can listen: True
+lora_mac-DEBUG-  2021-08-06 12:04:34,098-is_listen: False
+lora_phy-INFO-  2021-08-06 12:04:34,098-PHY TX:radio tx 01000002611B0305
+main-DEBUG-  2021-08-06 12:04:34,105-[55: DBG : LoRa PHY  ] log 1
+main-DEBUG-  2021-08-06 12:04:34,106-[55: DBG : LoRa PHY  ] log 2
+main-DEBUG-  2021-08-06 12:04:34,106-[55: DBG : LoRa PHY  ] log 4
+main-DEBUG-  2021-08-06 12:04:34,107-[55: DBG : LoRa PHY  ] log 5
+main-DEBUG-  2021-08-06 12:04:34,107-[55: DBG : LoRa PHY  ] log 6
+main-DEBUG-  2021-08-06 12:04:34,108-[55: DBG : LoRa PHY  ] log 7
+main-DEBUG-  2021-08-06 12:04:34,109-[55: DBG : LoRa PHY  ] log 8
+main-DEBUG-  2021-08-06 12:04:34,110-[55: DBG : LoRa PHY  ] log 9
+main-DEBUG-  2021-08-06 12:04:34,127-[55: DBG : LoRa PHY  ] log 10
+main-DEBUG-  2021-08-06 12:04:34,128-[55: DBG : LoRa PHY  ] log 11
+main-DEBUG-  2021-08-06 12:04:34,128-[55: DBG : LoRa PHY  ] log 11
+main-DEBUG-  2021-08-06 12:04:34,129-[55: DBG : LoRa PHY  ] log 12
+main-DEBUG-  2021-08-06 12:04:34,129-[55: DBG : LoRa PHY  ] log 13
+main-DEBUG-  2021-08-06 12:04:34,130-[55: DBG : LoRa PHY  ] log 19
+main-DEBUG-  2021-08-06 12:04:34,130-[55: DBG : LoRa PHY  ] log 20
+main-DEBUG-  2021-08-06 12:04:34,131-[55: DBG : LoRa PHY  ] will call write UART
+main-DEBUG-  2021-08-06 12:04:34,150-[55: INFO: LoRa PHY  ] PHY TX:radio set wdt 3000
+main-DEBUG-  2021-08-06 12:04:34,150-[55: DBG : LoRa PHY  ] phy tx done
+main-DEBUG-  2021-08-06 12:04:34,151-[55: DBG : LoRa PHY  ] write uart call ended
+main-DEBUG-  2021-08-06 12:04:34,151-[55: DBG : LoRa PHY  ] UART response:ok
+main-DEBUG-  2021-08-06 12:04:34,152-[55: DBG : LoRa PHY  ] compare response with:ok
+main-DEBUG-  2021-08-06 12:04:34,171-[55: DBG : LoRa PHY  ]  expected !
+main-DEBUG-  2021-08-06 12:04:34,172-[55: DBG : LoRa PHY  ] wait can send
+main-DEBUG-  2021-08-06 12:04:34,172-[55: DBG : LoRa PHY  ] can send !
+main-DEBUG-  2021-08-06 12:04:34,173-[55: DBG : LoRa PHY  ] log 1
+main-DEBUG-  2021-08-06 12:04:34,173-[55: DBG : LoRa PHY  ] log 2
+main-DEBUG-  2021-08-06 12:04:34,173-[55: DBG : LoRa PHY  ] log 4
+main-DEBUG-  2021-08-06 12:04:34,175-[55: DBG : LoRa PHY  ] log 5
+main-DEBUG-  2021-08-06 12:04:34,175-[55: DBG : LoRa PHY  ] log 6
+main-DEBUG-  2021-08-06 12:04:34,194-[55: DBG : LoRa PHY  ] log 7
+main-DEBUG-  2021-08-06 12:04:34,195-[55: DBG : LoRa PHY  ] log 8
+main-DEBUG-  2021-08-06 12:04:34,195-[55: DBG : LoRa PHY  ] log 9
+main-DEBUG-  2021-08-06 12:04:34,196-[55: DBG : LoRa PHY  ] log 10
+main-DEBUG-  2021-08-06 12:04:34,197-[55: DBG : LoRa PHY  ] log 11
+main-DEBUG-  2021-08-06 12:04:34,198-[55: DBG : LoRa PHY  ] log 11
+main-DEBUG-  2021-08-06 12:04:34,198-[55: DBG : LoRa PHY  ] log 12
+main-DEBUG-  2021-08-06 12:04:34,199-[55: DBG : LoRa PHY  ] log 13
+main-DEBUG-  2021-08-06 12:04:34,216-[55: DBG : LoRa PHY  ] log 14
+main-DEBUG-  2021-08-06 12:04:34,217-[55: DBG : LoRa PHY  ] log 15
+main-DEBUG-  2021-08-06 12:04:34,218-[55: DBG : LoRa PHY  ] will call write UART
+main-DEBUG-  2021-08-06 12:04:34,218-[55: INFO: LoRa PHY  ] PHY TX:radio rx 0
+main-DEBUG-  2021-08-06 12:04:34,219-[55: DBG : LoRa PHY  ] phy tx done
+main-DEBUG-  2021-08-06 12:04:34,228-[55: DBG : LoRa PHY  ] write u[55: DBG : LoRa PHY  ] UART response:ok
+main-DEBUG-  2021-08-06 12:04:34,229-[55: DBG : LoRa PHY  ] compare response with:radio_err
+main-DEBUG-  2021-08-06 12:04:34,231-[55: DBG : LoRa PHY  ] compare response with:radio_rx
+main-DEBUG-  2021-08-06 12:04:34,233-
+rt call ended

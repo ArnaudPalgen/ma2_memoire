@@ -1,6 +1,6 @@
 import logging
 import sys
-from py_lora_mac import network_stack
+from py_lora_mac import NETWORK_STACK
 import time
 from threading import Thread
 import serial
@@ -37,13 +37,13 @@ def send_data_test():
         time.sleep(7)
         print("YOOOOO 3")
         logger.debug("send data ! HELLO")
-        network_stack.send_to("2:24859", "hello"+str(count))
+        NETWORK_STACK.send_to("2:24859", "hello"+str(count))
         count+=1
 
 def main():
     logger.info("Welcome to LoRaMAC LOGGER")
     sys.excepthook = exception_handler
-    network_stack.init()
+    NETWORK_STACK.init()
 
     serial_logger1 = Thread(target=serial_log, args=(PORT_1, ZOLERTIA_BAUDRATE, logging.getLogger("RPL ROOT")))
     serial_logger1.start()

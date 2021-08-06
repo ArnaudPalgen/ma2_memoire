@@ -101,7 +101,7 @@ class LoraMac:
         self.can_listen = True
         self.is_listen = False  # tell if listen
         self.listen_lock = Lock()  # lock for can_listen and listen
-        self.listener = None
+        self.upper_layer = None
         #self.done = False
 
 
@@ -124,7 +124,7 @@ class LoraMac:
             log.error("Destination %s unreachable", dest)
 
     def register_listener(self, listener):
-        self.listener = listener
+        self.upper_layer = listener
 
     def _on_query(self, frame: LoraFrame, child: LoraChild):
         """Process a query frame
@@ -247,10 +247,13 @@ class LoraMac:
                 pass
             child.retransmit_count += 1
             return
-        elif frame.seq > child.expected_sn:
+        
+        if frame.seq >= child.expected_sn:
             log.debug("frame seq > expected")
             log.warn("lost %d frames", (frame.seq - child.expected_sn))
-            child.expected_sn = frame.seq + 1
+        
+        child.expected_sn = frame.seq + 1
+        
         if frame.k:
             log.debug("frame want ack -> send ack")
             ack = LoraFrame(
@@ -264,7 +267,7 @@ class LoraMac:
                 )
             self.phy_layer.phy_tx(ack)
             child.last_send_frame = ack
-        #todo deliver data to upper layer
+            self.upper_layer(frame.src_addr, frame.payload) #deliver data to upper layer
 
     def _on_ack(self, frame: LoraFrame, child: LoraChild):
         """Process an ack frame
