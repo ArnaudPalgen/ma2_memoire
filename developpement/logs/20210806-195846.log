@@ -1,0 +1,135 @@
+lora_ip-INFO-  2021-08-06 19:58:46,786-Init IP layer
+lora_mac-INFO-  2021-08-06 19:58:46,787-Init MAC
+lora_phy-INFO-  2021-08-06 19:58:46,787-Init PHY
+lora_phy-INFO-  2021-08-06 19:58:46,799-PHY TX:mac pause
+lora_ip-DEBUG-  2021-08-06 19:58:46,799-listener registered !
+lora_phy-INFO-  2021-08-06 19:58:46,812-PHY TX:radio set freq 868100000
+lora_phy-INFO-  2021-08-06 19:58:46,826-PHY TX:radio set wdt 0
+lora_phy-INFO-  2021-08-06 19:58:46,833-PHY TX:radio rx 0
+main-DEBUG-  2021-08-06 19:58:49,683-[4: INFO: Interface ] Button pushed
+main-DEBUG-  2021-08-06 19:58:49,685-[4: INFO: LoRa MAC  ] Start LoRaMAC RPL root
+main-DEBUG-  2021-08-06 19:58:49,687-[4: DBG : LoRa MAC  ] initial state: 0
+main-DEBUG-  2021-08-06 19:58:49,689-[4: INFO: LoRa PHY  ] Init LoRa PHY
+main-DEBUG-  2021-08-06 19:58:49,691-[4: DBG : LoRa MAC  ] SET retransmit timer
+main-DEBUG-  2021-08-06 19:58:49,692-[4: DBG : LoRa MAC  ] initialization complete
+main-DEBUG-  2021-08-06 19:58:49,693-[4: INFO: LoRa PHY  ] PHY TX:mac pause
+main-DEBUG-  2021-08-06 19:58:49,702-[4: INFO: LoRa PHY  ] PHY TX:radio set freq 868100000
+main-DEBUG-  2021-08-06 19:58:49,718-[4: INFO: LoRa PHY  ] PHY TX:radio set wdt 0
+main-DEBUG-  2021-08-06 19:58:49,728-[4: INFO: LoRa PHY  ] PHY TX:radio tx 1B611B0100000000
+main-DEBUG-  2021-08-06 19:58:50,735-[5: INFO: LoRa PHY  ] PHY TX:radio set wdt 3000
+main-DEBUG-  2021-08-06 19:58:50,745-[5: INFO: LoRa PHY  ] PHY TX:radio rx 0
+lora_phy-INFO-  2021-08-06 19:58:50,762-PHY RX:1B611B0100000000
+lora_mac-DEBUG-  2021-08-06 19:58:50,762-RX process receive
+lora_mac-DEBUG-  2021-08-06 19:58:50,762-RX process set is_listen=False
+lora_mac-DEBUG-  2021-08-06 19:58:50,763-RX process: call mac_rx
+lora_mac-DEBUG-  2021-08-06 19:58:50,763-MAC RX: LoraFrame(src_addr=LoraAddr(prefix=27, node_id=24859), dest_addr=LoraAddr(prefix=1, node_id=0), command=<MacCommand.JOIN: 0>, payload='', seq=0, k=False, has_next=False)
+lora_mac-DEBUG-  2021-08-06 19:58:50,763-look child with prefix: 27
+lora_mac-DEBUG-  2021-08-06 19:58:50,764-child is: None
+lora_mac-INFO-  2021-08-06 19:58:50,764-reveive join frame LoraFrame(src_addr=LoraAddr(prefix=27, node_id=24859), dest_addr=LoraAddr(prefix=1, node_id=0), command=<MacCommand.JOIN: 0>, payload='', seq=0, k=False, has_next=False)
+lora_mac-DEBUG-  2021-08-06 19:58:50,765-new child Child(2:24859) created
+lora_mac-DEBUG-  2021-08-06 19:58:50,765-send join response
+lora_phy-INFO-  2021-08-06 19:58:50,768-MAC send:LoraFrame(src_addr=LoraAddr(prefix=1, node_id=0), dest_addr=LoraAddr(prefix=27, node_id=24859), command=<MacCommand.JOIN_RESPONSE: 1>, payload='02', seq=0, k=False, has_next=False)
+lora_mac-DEBUG-  2021-08-06 19:58:50,769-RX process: mac_rx end
+lora_phy-INFO-  2021-08-06 19:58:50,769-PHY TX:radio tx 0100001B611B010002
+lora_mac-DEBUG-  2021-08-06 19:58:50,769-RX process acquire lock for can_listen
+lora_mac-DEBUG-  2021-08-06 19:58:50,770-can listen: True
+lora_mac-DEBUG-  2021-08-06 19:58:50,770-is_listen: False
+lora_phy-INFO-  2021-08-06 19:58:51,774-PHY TX:radio rx 0
+main-DEBUG-  2021-08-06 19:58:51,830-[6: INFO: LoRa PHY  ] PHY RX:0100001B611B010002
+main-DEBUG-  2021-08-06 19:58:51,831-[6: INFO: LoRa MAC  ] RX LoRa frame: {src:1:0 dest:27:24859 k:0 seq:0 next:0 cmd:1 data:02
+main-DEBUG-  2021-08-06 19:58:51,832-[6: DBG : LoRa MAC  ] JOIN RESPONSE
+main-DEBUG-  2021-08-06 19:58:51,833-[6: DBG : LoRa MAC  ] state = READY
+main-DEBUG-  2021-08-06 19:58:51,852-[6: DBG : LoRa MAC  ] STOP retransmit timer
+main-DEBUG-  2021-08-06 19:58:51,852-[6: INFO: LoRa MAC  ] Lora Root joined
+main-DEBUG-  2021-08-06 19:58:51,853-[6: INFO: LoRa MAC  ] Node addr: 2:24859
+main-DEBUG-  2021-08-06 19:58:51,853-[6: DBG : LoRa MAC  ] START TX_PROCESS
+main-DEBUG-  2021-08-06 19:58:51,854-[6: DBG : LoRa MAC  ] MAC_TX process started
+main-DEBUG-  2021-08-06 19:58:51,854-[6: DBG : LoRa MAC  ] SET query timer
+main-DEBUG-  2021-08-06 19:58:51,857-[6: INFO: Interface ] RECEIVE LORAMAC JOINED EVENT !
+main-DEBUG-  2021-08-06 19:58:51,858-[6: INFO: Interface ] PREFIX: 2
+main-DEBUG-  2021-08-06 19:59:01,822-[16: INFO: LoRa MAC  ] Query timeout !
+main-DEBUG-  2021-08-06 19:59:01,825-[16: DBG : LoRa MAC  ] STOP query timer thanks to query_timeout
+main-DEBUG-  2021-08-06 19:59:01,826-[16: DBG : LoRa MAC  ] query frame built
+main-DEBUG-  2021-08-06 19:59:01,845-[16: DBG : LoRa MAC  ] Enter enqueue_packet with frame: {src:2:24859 dest:1:0 k:0 seq:1 next:0 cmd:6 data:
+main-DEBUG-  2021-08-06 19:59:01,845-[16: INFO: LoRa MAC  ] YOOOOOO 1
+main-DEBUG-  2021-08-06 19:59:01,846-[16: INFO: LoRa MAC  ] YOOOOOO 2
+main-DEBUG-  2021-08-06 19:59:01,847-[16: DBG : LoRa MAC  ] append to buffer
+main-DEBUG-  2021-08-06 19:59:01,847-[16: INFO: LoRa MAC  ] YOOOOOO 3
+main-DEBUG-  2021-08-06 19:59:01,848-[16: DBG : LoRa MAC  ] post new_tx_frame_event to TX_PROCESS
+main-DEBUG-  2021-08-06 19:59:01,867-[16: INFO: LoRa MAC  ] YOOOOOO 4
+main-DEBUG-  2021-08-06 19:59:01,868-[16: DBG : LoRa MAC  ] frame from buffer: {src:2:24859 dest:1:0 k:0 seq:1 next:0 cmd:6 data:
+main-DEBUG-  2021-08-06 19:59:01,869-[16: DBG : LoRa MAC  ] buffer size: 0
+main-DEBUG-  2021-08-06 19:59:01,869-[16: DBG : LoRa MAC  ] frame sended to PHY layer
+main-DEBUG-  2021-08-06 19:59:01,879-[16: DBG : LoRa MAC  ] START retransmit timer in mac_tx process
+main-DEBUG-  2021-08-06 19:59:01,880-[16: DBG : LoRa MAC  ] Listen during 3 s
+main-DEBUG-  2021-08-06 19:59:01,881-[16: DBG : LoRa MAC  ] wait state change to READY
+main-DEBUG-  2021-08-06 19:59:01,882-[16: INFO: LoRa PHY  ] PHY TX:radio set wdt 0
+main-DEBUG-  2021-08-06 19:59:01,890-[16: INFO: LoRa PHY  ] PHY TX:radio tx 02611B0100000601
+main-DEBUG-  2021-08-06 19:59:02,897-[17: INFO: LoRa PHY  ] PHY TX:radio set wdt 3000
+main-DEBUG-  2021-08-06 19:59:02,907-[17: INFO: LoRa PHY  ] PHY TX:radio rx 0
+lora_phy-INFO-  2021-08-06 19:59:02,923-PHY RX:02611B0100000601
+lora_mac-DEBUG-  2021-08-06 19:59:02,923-RX process receive
+lora_mac-DEBUG-  2021-08-06 19:59:02,923-RX process set is_listen=False
+lora_mac-DEBUG-  2021-08-06 19:59:02,923-RX process: call mac_rx
+lora_mac-DEBUG-  2021-08-06 19:59:02,924-MAC RX: LoraFrame(src_addr=LoraAddr(prefix=2, node_id=24859), dest_addr=LoraAddr(prefix=1, node_id=0), command=<MacCommand.QUERY: 6>, payload='', seq=1, k=False, has_next=False)
+lora_mac-DEBUG-  2021-08-06 19:59:02,925-look child with prefix: 2
+lora_mac-DEBUG-  2021-08-06 19:59:02,925-child is: Child(2:24859)
+lora_mac-DEBUG-  2021-08-06 19:59:02,925-In _on_query
+lora_mac-DEBUG-  2021-08-06 19:59:02,925-child buffer empty -> send ack
+lora_phy-INFO-  2021-08-06 19:59:02,925-MAC send:LoraFrame(src_addr=LoraAddr(prefix=1, node_id=0), dest_addr=LoraAddr(prefix=2, node_id=24859), command=<MacCommand.ACK: 3>, payload='', seq=1, k=False, has_next=False)
+lora_mac-DEBUG-  2021-08-06 19:59:02,926-RX process: mac_rx end
+lora_mac-DEBUG-  2021-08-06 19:59:02,926-RX process acquire lock for can_listen
+lora_mac-DEBUG-  2021-08-06 19:59:02,926-can listen: True
+lora_phy-INFO-  2021-08-06 19:59:02,926-PHY TX:radio tx 01000002611B0301
+lora_mac-DEBUG-  2021-08-06 19:59:02,926-is_listen: False
+lora_phy-INFO-  2021-08-06 19:59:03,930-PHY TX:radio rx 0
+main-DEBUG-  2021-08-06 19:59:03,985-[18: INFO: LoRa PHY  ] PHY RX:01000002611B0301
+main-DEBUG-  2021-08-06 19:59:03,987-[18: INFO: LoRa MAC  ] RX LoRa frame: {src:1:0 dest:2:24859 k:0 seq:1 next:0 cmd:3 data:
+main-DEBUG-  2021-08-06 19:59:03,988-[18: INFO: LoRa MAC  ] ACK!
+main-DEBUG-  2021-08-06 19:59:03,989-[18: DBG : LoRa MAC  ] STOP retransmit timer thanks to correct ACK
+main-DEBUG-  2021-08-06 19:59:03,991-[18: DBG : LoRa MAC  ] state is READY
+main-DEBUG-  2021-08-06 19:59:03,991-[18: WARN: LoRa MAC  ] buf not empty: 0
+main-DEBUG-  2021-08-06 19:59:09,349-[24: INFO: Interface ] Receive data for loramac whouhouuuuuu
+main-DEBUG-  2021-08-06 19:59:09,354-[24: DBG : LoRa MAC  ] Enter enqueue_packet with frame: {src:0:45560 dest:1:0 k:1 seq:0 next:0 cmd:2 data:60000000000F113F223D162E000FB18768656C6C6F2030
+main-DEBUG-  2021-08-06 19:59:09,355-[24: INFO: LoRa MAC  ] YOOOOOO 1
+main-DEBUG-  2021-08-06 19:59:09,375-[24: INFO: LoRa MAC  ] YOOOOOO 2
+main-DEBUG-  2021-08-06 19:59:09,376-[24: DBG : LoRa MAC  ] append to buffer
+main-DEBUG-  2021-08-06 19:59:09,377-[24: INFO: LoRa MAC  ] YOOOOOO 3
+main-DEBUG-  2021-08-06 19:59:09,379-[24: DBG : LoRa MAC  ] post new_tx_frame_event to TX_PROCESS
+main-DEBUG-  2021-08-06 19:59:09,379-[24: INFO: LoRa MAC  ] YOOOOOO 4
+main-DEBUG-  2021-08-06 19:59:09,393-[24: DBG : LoRa MAC  ] frame from buffer: {src:0:45560 dest:1:0 k:1 seq:0 next:0 cmd:2 data:60000000000F113F223D162E000FB18768656C6C6F2030
+main-DEBUG-  2021-08-06 19:59:09,394-[24: DBG : LoRa MAC  ] buffer size: 0
+main-DEBUG-  2021-08-06 19:59:09,394-[24: DBG : LoRa MAC  ] frame sended to PHY layer
+main-DEBUG-  2021-08-06 19:59:09,405-[24: DBG : LoRa MAC  ] START retransmit timer in mac_tx process
+main-DEBUG-  2021-08-06 19:59:09,406-[24: DBG : LoRa MAC  ] Listen during 3 s
+main-DEBUG-  2021-08-06 19:59:09,406-[24: DBG : LoRa MAC  ] wait state change to READY
+main-DEBUG-  2021-08-06 19:59:09,407-[24: INFO: LoRa PHY  ] PHY TX:radio set wdt 0
+main-DEBUG-  2021-08-06 19:59:09,419-[24: INFO: LoRa PHY  ] PHY TX:radio tx 00B1F8010000820260000000000F113F223D162E000FB18768656C6C6F2030
+main-DEBUG-  2021-08-06 19:59:11,257-[26: INFO: LoRa PHY  ] PHY TX:radio set wdt 3000
+main-DEBUG-  2021-08-06 19:59:11,268-[26: INFO: LoRa PHY  ] PHY TX:radio rx 0
+lora_phy-INFO-  2021-08-06 19:59:11,301-PHY RX:00B1F8010000820260000000000F113F223D162E000FB18768656C6C6F2030
+lora_mac-DEBUG-  2021-08-06 19:59:11,301-RX process receive
+lora_mac-DEBUG-  2021-08-06 19:59:11,301-RX process set is_listen=False
+lora_mac-DEBUG-  2021-08-06 19:59:11,302-RX process: call mac_rx
+lora_mac-DEBUG-  2021-08-06 19:59:11,302-MAC RX: LoraFrame(src_addr=LoraAddr(prefix=0, node_id=45560), dest_addr=LoraAddr(prefix=1, node_id=0), command=<MacCommand.DATA: 2>, payload='60000000000F113F223D162E000FB18768656C6C6F2030', seq=2, k=True, has_next=False)
+lora_mac-DEBUG-  2021-08-06 19:59:11,302-look child with prefix: 0
+lora_mac-DEBUG-  2021-08-06 19:59:11,302-child is: None
+lora_mac-DEBUG-  2021-08-06 19:59:11,302-Data ! 
+main-DEBUG-  2021-08-06 19:59:13,979-[28: INFO: LoRa MAC  ] Query timeout !
+main-DEBUG-  2021-08-06 19:59:13,981-[28: DBG : LoRa MAC  ] STOP query timer thanks to query_timeout
+main-DEBUG-  2021-08-06 19:59:13,983-[28: DBG : LoRa MAC  ] query frame built
+main-DEBUG-  2021-08-06 19:59:14,001-[28: DBG : LoRa MAC  ] Enter enqueue_packet with frame: {src:2:24859 dest:1:0 k:0 seq:3 next:0 cmd:6 data:
+main-DEBUG-  2021-08-06 19:59:14,001-[28: INFO: LoRa MAC  ] YOOOOOO 1
+main-DEBUG-  2021-08-06 19:59:14,004-[28: INFO: LoRa MAC  ] YOOOOOO 2
+main-DEBUG-  2021-08-06 19:59:14,005-[28: DBG : LoRa MAC  ] append to buffer
+main-DEBUG-  2021-08-06 19:59:14,005-[28: INFO: LoRa MAC  ] YOOOOOO 3
+main-DEBUG-  2021-08-06 19:59:14,006-[28: DBG : LoRa MAC  ] post new_tx_frame_event to TX_PROCESS
+main-DEBUG-  2021-08-06 19:59:14,006-[28: INFO: LoRa MAC  ] YOOOOOO 4
+main-DEBUG-  2021-08-06 19:59:14,408-[29: INFO: LoRa MAC  ] retransmit timeout !
+main-DEBUG-  2021-08-06 19:59:14,409-[29: ERR : LoRa MAC  ] STOP retransmit timer thanks to retransmit_timeout
+main-DEBUG-  2021-08-06 19:59:14,420-[29: DBG : LoRa MAC  ] retransmit frame: {src:0:45560 dest:1:0 k:1 seq:2 next:0 cmd:2 data:60000000000F113F223D162E000FB18768656C6C6F2030
+main-DEBUG-  2021-08-06 19:59:14,421-[29: ERR : LoRa MAC  ] RESTART retransmit timer because a frame was retransmit
+main-DEBUG-  2021-08-06 19:59:14,421-[29: INFO: LoRa PHY  ] PHY TX:radio set wdt 0
+main-DEBUG-  2021-08-06 19:59:14,435-[29: INFO: LoRa PHY  ] PHY TX:radio tx 00B1F8010000820260000000000F113F223D162E000FB18768656C6C6F2030
+main-DEBUG-  2021-08-06 19:59:16,271-[31: INFO: LoRa PHY  ] PHY TX:radio set wdt 3000
+main-DEBUG-  2021-08-06 19:59:16,283-[31: INFO: LoRa PHY  ] PHY TX:radio rx 0

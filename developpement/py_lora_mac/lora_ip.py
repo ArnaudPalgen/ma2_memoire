@@ -22,7 +22,7 @@ class LoraIP:
 
     |<-----1----->|<--6-->|<-----1----->|<----------6---------->|<---2--->|
     | IPv6 PREFIX | ZEROS | LORA PREFIX | COMMON_LINK_ADDR_PART | NODE_ID |
-     0           0 1     5 6           6 7                    13 14     15
+     0           0 1     6 7           7 8                    13 14     15
 
     Attributes:
         mac_layer: The mac mayer to use

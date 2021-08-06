@@ -125,6 +125,7 @@ lora_ip-DEBUG-  2021-08-06 18:21:13,507-enter build ip packet with hex_data:6000
 lora_ip-DEBUG-  2021-08-06 18:21:13,507-first part: 60000000000F113F
 lora_ip-DEBUG-  2021-08-06 18:21:13,507-second part: 223D162E000FB18768656C6C6F2030
 lora_ip-DEBUG-  2021-08-06 18:21:13,507-LoraAddr: 2:63665 converted to IPv6: fd00:0000:0000:0002:0212:4b00:060d:f8b1
+########## 2:63665 must be 2:45560
 lora_ip-DEBUG-  2021-08-06 18:21:13,508-LoraAddr: 1:0 converted to IPv6: fd00:0000:0000:0001:0212:4b00:060d:0000
 lora_ip-DEBUG-  2021-08-06 18:21:13,508-hex data for ip packet:b'`\x00\x00\x00\x00\x0f\x11?\xfd\x00\x00\x00\x00\x00\x00\x02\x02\x12K\x00\x06\r\xf8\xb1\xfd\x00\x00\x00\x00\x00\x00\x01\x02\x12K\x00\x06\r\x00\x00"=\x16.\x00\x0f\xb1\x87hello 0'
 lora_ip-DEBUG-  2021-08-06 18:21:13,509-Rebuilt IP packet: 
