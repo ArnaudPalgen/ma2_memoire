@@ -1,0 +1,36 @@
+lora_ip-INFO-  2021-08-06 18:17:10,891-Init IP layer
+lora_mac-INFO-  2021-08-06 18:17:10,891-Init MAC
+lora_phy-INFO-  2021-08-06 18:17:10,891-Init PHY
+lora_phy-INFO-  2021-08-06 18:17:10,902-PHY TX:mac pause
+lora_ip-DEBUG-  2021-08-06 18:17:10,902-listener registered !
+lora_phy-INFO-  2021-08-06 18:17:10,915-PHY TX:radio set freq 868100000
+lora_phy-INFO-  2021-08-06 18:17:10,930-PHY TX:radio set wdt 0
+lora_phy-INFO-  2021-08-06 18:17:10,936-PHY TX:radio rx 0
+main-DEBUG-  2021-08-06 18:17:11,031-[3909: INFO: LoRa MAC  ] retransmit timeout !
+main-DEBUG-  2021-08-06 18:17:11,033-[3909: ERR : LoRa MAC  ] STOP retransmit timer thanks to retransmit_timeout
+main-DEBUG-  2021-08-06 18:17:11,043-[3909: DBG : LoRa MAC  ] retransmit frame: {src:2:63665 dest:1:0 k:1 seq:197 next:0 cmd:2 data:600000000011113F223D162E0011775168656C6C6F20313239
+main-DEBUG-  2021-08-06 18:17:11,044-[3909: ERR : LoRa MAC  ] RESTART retransmit timer because a frame was retransmit
+main-DEBUG-  2021-08-06 18:17:11,045-[3909: INFO: LoRa PHY  ] PHY TX:radio set wdt 0
+main-DEBUG-  2021-08-06 18:17:11,059-[3909: INFO: LoRa PHY  ] PHY TX:radio tx 02F8B101000082C5600000000011113F223D162E0011775168656C6C6F20313239
+main-DEBUG-  2021-08-06 18:17:12,027-[0: INFO: Main      ] Starting Contiki-NG-develop/v4.7-24-gf18a6e752-dirty
+main-DEBUG-  2021-08-06 18:17:12,029-[0: INFO: Main      ] - Routing: RPL Lite
+main-DEBUG-  2021-08-06 18:17:12,030-[0: INFO: Main      ] - Net: sicslowpan
+main-DEBUG-  2021-08-06 18:17:12,032-[0: INFO: Main      ] - MAC: CSMA
+main-DEBUG-  2021-08-06 18:17:12,033-[0: INFO: Main      ] - 802.15.4 PANID: 0xabcd
+main-DEBUG-  2021-08-06 18:17:12,049-[0: INFO: Main      ] - 802.15.4 Default channel: 26
+main-DEBUG-  2021-08-06 18:17:12,049-[0: INFO: Main      ] Node ID: 24859
+main-DEBUG-  2021-08-06 18:17:12,050-[0: INFO: Main      ] Link-layer address: 0012.4b00.060d.611b
+main-DEBUG-  2021-08-06 18:17:12,051-[0: INFO: Interface ] Welcome to LoRaMAC interface !
+main-DEBUG-  2021-08-06 18:17:12,064-[0: INFO: Interface ] Init LoRaMAC Interface
+main-DEBUG-  2021-08-06 18:17:12,064-[0: INFO: Interface ] Welcome !
+main-DEBUG-  2021-08-06 18:17:12,065-[0: INFO: Main      ] Tentative link-local IPv6 address: fe80::212:4b00:60d:611b
+main-DEBUG-  2021-08-06 18:17:12,066-[0: INFO: Zoul      ] Zolertia RE-Mote revision B platform
+main-DEBUG-  2021-08-06 18:17:12,387-[1: INFO: App       ] Welcome server
+lora_phy-INFO-  2021-08-06 18:17:12,943-PHY RX:02F8B101000082C5600000000011113F223D162E0011775168656C6C6F20313239
+lora_mac-DEBUG-  2021-08-06 18:17:12,944-RX process receive
+lora_mac-DEBUG-  2021-08-06 18:17:12,945-RX process set is_listen=False
+lora_mac-DEBUG-  2021-08-06 18:17:12,945-RX process: call mac_rx
+lora_mac-DEBUG-  2021-08-06 18:17:12,945-MAC RX: LoraFrame(src_addr=LoraAddr(prefix=2, node_id=63665), dest_addr=LoraAddr(prefix=1, node_id=0), command=<MacCommand.DATA: 2>, payload='600000000011113F223D162E0011775168656C6C6F20313239', seq=197, k=True, has_next=False)
+lora_mac-DEBUG-  2021-08-06 18:17:12,948-look child with prefix: 2
+lora_mac-DEBUG-  2021-08-06 18:17:12,948-child is: None
+lora_mac-DEBUG-  2021-08-06 18:17:12,949-Data ! 

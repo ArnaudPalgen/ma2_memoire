@@ -40,10 +40,14 @@ def send_data_test():
         NETWORK_STACK.send_to("2:24859", "hello"+str(count))
         count+=1
 
+def on_ip_packet():
+    print("On ip packet !")
+
 def main():
     logger.info("Welcome to LoRaMAC LOGGER")
     sys.excepthook = exception_handler
     NETWORK_STACK.init()
+    NETWORK_STACK.register_listener(on_ip_packet)
 
     serial_logger1 = Thread(target=serial_log, args=(PORT_1, ZOLERTIA_BAUDRATE, logging.getLogger("RPL ROOT")))
     serial_logger1.start()
