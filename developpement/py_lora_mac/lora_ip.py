@@ -39,7 +39,7 @@ class LoraIP:
         self.mac_layer.init()
         self.mac_layer.register_listener(self._on_frame)
 
-    def _on_frame(self, src: LoraAddr, payload: str):#current
+    def _on_frame(self, src: LoraAddr, payload: str):#done
         log.debug("Incomming frame from LoRaMAC")
         if self.upper_layer is None:
             log.warning("Upper layer not defined. Please call `register_listener` before")
