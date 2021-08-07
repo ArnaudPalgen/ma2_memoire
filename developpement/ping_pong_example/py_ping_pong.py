@@ -1,19 +1,21 @@
-# from scapy.all import *
-# from scapy.layers.inet6 import IPv6
-from py_lora_mac import NETWORK_STACK
 import time
 from threading import Thread, Lock
 
+import sys
+sys.path.insert(1, '..')
+
+from py_lora_mac import *
 
 dest_addr = None
 
-UDP_CLIENT_PORT = 8765
-UDP_SERVER_PORT = 5678
+UDP_CLIENT_PORT = 2102
+UDP_SERVER_PORT = 2511
 
 
 def sender(max_iter=10):
     count = 0
     while count < max_iter:
+        print("wait PING packet...")
         lock.acquire()
 
         # Build IPv6 response
@@ -52,3 +54,4 @@ def init():
 
 if __name__ == "__main__":
     lock = Lock()
+    init()

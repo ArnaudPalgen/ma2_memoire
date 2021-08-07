@@ -1,4 +1,5 @@
 from py_lora_mac.lora_ip import *
+from py_lora_mac.lora_mac import *
 
 
 class NetworkStack:

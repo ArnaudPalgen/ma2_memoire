@@ -3,6 +3,9 @@
  */
 
 #include "contiki.h"
+#include "net/routing/routing.h"
+#include "net/netstack.h"
+#include "net/ipv6/simple-udp.h"
 #include "sys/log.h"
 /*-------------------------------------------------------------------------------------*/
 #define LOG_MODULE "APP"
@@ -13,7 +16,8 @@
 
 #define TEST_INTERVAL 3
 
-static struct simple_udp_connection udp_con;
+static struct simple_udp_connection udp_conn;
+static uint16_t count=0;
 
 PROCESS(udp_process, "UDP process");
 AUTOSTART_PROCESSES(&udp_process);
@@ -27,18 +31,19 @@ udp_rx(struct simple_udp_connection *c,
          const uint8_t *data,
          uint16_t datalen)
 {
+    static char payload[16];
     LOG_INFO("Received PONG %s from ", (char *) data);
     LOG_INFO_6ADDR(sender_addr);
     LOG_INFO_("\n");
+    snprintf(payload, sizeof(payload), "PING %d", count);
 
     LOG_INFO("Send PING\n");
-    simple_udp_sendto(&udp_conn, #data, #datalen, sender_addr);
+    simple_udp_sendto(&udp_conn, payload, strlen(payload), sender_addr);
 
 }
 /*-------------------------------------------------------------------------------------*/
 PROCESS_THREAD(udp_process, ev, data)
 {
-    static uint16_t count=0;
     static char payload[16];
     static uip_ipaddr_t dest_ipaddr;
     static struct etimer timer;
@@ -60,14 +65,14 @@ PROCESS_THREAD(udp_process, ev, data)
         if(NETSTACK_ROUTING.node_is_reachable()) {
             /* network  joined so send the first PING */
             network_joined = true;
-            snprintf(payload, sizeof(str), "PING %d", count);
+            snprintf(payload, sizeof(payload), "PING %d", count);
             LOG_INFO("Send PING\n");
             simple_udp_sendto(&udp_conn, payload, strlen(payload), &dest_ipaddr);
             count ++;
         }else{
             LOG_INFO("Network not joined\n");
             /* RPL network not joined wait before try again */
-            timer_set(&timer, (TEST_INTERVAL*CLOCK_SECOND));
+            etimer_set(&timer, (TEST_INTERVAL*CLOCK_SECOND));
             PROCESS_WAIT_EVENT_UNTIL(etimer_expired(&timer));
         }
     }

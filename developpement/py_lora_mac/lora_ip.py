@@ -47,7 +47,7 @@ class LoraIP:
             ip_packet = self.build_ip_packet(payload, src, self.mac_layer.addr)
             packet_info = ip_packet.show(dump=True)
             log.debug("Rebuilt IP packet: \n%s\n", packet_info)
-            self.upper_layer()
+            self.upper_layer(ip_packet)
 
     def register_listener(self, listener: Callable[[IPv6], None]):#done
         log.debug("listener registered !")
@@ -73,9 +73,9 @@ class LoraIP:
         return result
 
     @staticmethod
-    def ipv6_to_lora(addr: IPv6Address) -> LoraAddr:#review
+    def ipv6_to_lora(addr: IPv6Address) -> LoraAddr:#DONE
         addr_binary = addr.packed
-        prefix = addr_binary[6]
+        prefix = addr_binary[7]
         node_id = (addr_binary[14] << 8) + addr_binary[15]
         result = LoraAddr(prefix, node_id)
         log.debug(
@@ -99,7 +99,7 @@ class LoraIP:
         payload = f1 + f2
 
         src_addr = LoraIP.ipv6_to_lora(IPv6Address(ip_packet.src))
-        dest_addr = LoraIP.ipv6_to_lora(IPv6Address(ip_packet.dest))
+        dest_addr = LoraIP.ipv6_to_lora(IPv6Address(ip_packet.dst))
         return (payload, src_addr, dest_addr)
 
     @staticmethod
