@@ -8,8 +8,8 @@ from py_lora_mac import *
 
 dest_addr = None
 
-UDP_CLIENT_PORT = 2102
-UDP_SERVER_PORT = 2511
+UDP_CLIENT_PORT = 8765
+UDP_SERVER_PORT = 5678
 
 
 def sender(max_iter=10):
