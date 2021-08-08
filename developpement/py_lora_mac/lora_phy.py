@@ -228,7 +228,11 @@ class LoraPhy:
         """
         # set serial connection, call send_phy for mac pause et radio set freq
         log.info("Init PHY")
-        self._con = serial.Serial(port=self._port, baudrate=self._baudrate)
+        try:
+            self._con = serial.Serial(port=self._port, baudrate=self._baudrate)
+        except serial.serialutil.SerialException as e:
+            log.error(str(e))
+            exit()
         tx_thread = threading.Thread(target=self._uart_tx)
         rx_thread = threading.Thread(target=self._uart_rx)
         self._send_phy(UartFrame([UartResponse.U_INT], "", UartCommand.MAC_PAUSE))
