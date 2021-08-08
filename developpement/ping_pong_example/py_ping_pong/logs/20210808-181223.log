@@ -1,0 +1,9 @@
+lora_ip-INFO-  2021-08-08 18:12:23,739-Init IP layer
+lora_mac-INFO-  2021-08-08 18:12:23,739-Init MAC
+lora_phy-INFO-  2021-08-08 18:12:23,739-Init PHY
+lora_phy-INFO-  2021-08-08 18:12:23,742-PHY TX:mac pause
+lora_phy-INFO-  2021-08-08 18:12:23,742-MAC set watchdog timer to 0 ms
+lora_phy-INFO-  2021-08-08 18:12:23,742-MAC switch to reception mode
+lora_phy-INFO-  2021-08-08 18:12:23,756-PHY TX:radio set freq 868100000
+lora_phy-INFO-  2021-08-08 18:12:23,771-PHY TX:radio set wdt 0
+lora_phy-INFO-  2021-08-08 18:12:23,778-PHY TX:radio rx 0

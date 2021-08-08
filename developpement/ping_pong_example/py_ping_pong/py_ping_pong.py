@@ -18,7 +18,7 @@ from py_lora_mac import *
 ###### logger configuration ######
 if not os.path.exists("./logs/"):
     os.makedirs("./logs/")
-logging.config.fileConfig("./py_lora_mac/logging.conf")
+logging.config.fileConfig("./logging.conf")
 
 
 ###### PING-PONG APP ######
@@ -75,5 +75,10 @@ def init():
 
 
 if __name__ == "__main__":
-    lock = Lock()
-    init()
+    try:
+        lock = Lock()
+        init()
+    except KeyboardInterrupt:
+        print("\nGoodbye ...")
+        os._exit(0)
+
