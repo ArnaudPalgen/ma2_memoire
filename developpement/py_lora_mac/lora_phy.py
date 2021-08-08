@@ -22,7 +22,7 @@ class MacCommand(Enum):
     JOIN_RESPONSE = 1
     DATA = 2
     ACK = 3
-    QUERY = 6
+    QUERY = 4
 
 
 @unique
