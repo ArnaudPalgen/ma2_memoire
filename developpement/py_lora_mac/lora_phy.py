@@ -8,7 +8,7 @@ import logging
 
 log = logging.getLogger("LoRa_ROOT.PHY")
 
-HEADER_SIZE = 14
+HEADER_SIZE = 16 #NUmber of hexadecimal character in the header
 
 K_FLAG_SHIFT = 7
 NEXT_FLAG_SHIFT = 6
@@ -51,7 +51,7 @@ class UartResponse(Enum):
     RADIO_RX = "radio_rx"
     BUSY = "busy"
     RADIO_TX_OK = "radio_tx_ok"
-    U_INT = "4294967245"
+    U_INT = "4294967245" # The response to MAC PAUSE
     NONE = "none"
 
 
@@ -125,7 +125,8 @@ class LoraFrame:
 
         # check that the size of the payload is even
         if len(self.payload) % 2 != 0:
-            # The size must be even because one character is 4 bits and we can't send a half a byte
+            # The size must be even because one character is 4 bits and we
+            # can't send a half a byte
             # if not even add a zero
             self.payload = "0" + self.payload
 
@@ -146,7 +147,6 @@ class LoraFrame:
 
         """
 
-        log.debug("build frame receive data: %s", data)
         if len(data) < HEADER_SIZE:
             return None
 
@@ -220,7 +220,7 @@ class LoraPhy:
         self._last_sended = None  # the last sended frame
         self._tx_lock = threading.Lock()  # lock used for phy_tx()
 
-    def phy_init(self):
+    def init(self):
         """Init the PHY layer.
 
         - Set the serial connection
@@ -239,10 +239,10 @@ class LoraPhy:
         with self._can_send_cond:
             self._can_send_cond.notify_all()
 
-    def phy_tx(self, loraFrame: LoraFrame):
+    def phy_send(self, loraFrame: LoraFrame):
         """Method to use to send LoraFrame.
 
-        Prepare the UART paquet from the lora frame.
+        Prepare the UART paquet from the LoRa frame.
 
         Args:
             loraFrame (LoraFrame): The frame to sent.
@@ -266,18 +266,21 @@ class LoraPhy:
         Args:
             timeout (int): The timeout (in milliseconds)
         """
+
+        log.info("MAC set watchdog timer to %d ms", timeout)
         f = UartFrame([UartResponse.OK], str(timeout), UartCommand.SET_WDT)
         self._send_phy(f)
 
     def phy_rx(self):
         """Set the radio the reception mode"""
 
+        log.info("MAC switch to reception mode")
         f = UartFrame(
             [UartResponse.RADIO_ERR, UartResponse.RADIO_RX], "0", UartCommand.RX
         )
         self._send_phy(f)
 
-    def _send_phy(self, data: UartFrame) -> bool:  # append data to buffer
+    def _send_phy(self, data: UartFrame) -> bool:
         """Append data to the TX buffer.
 
         Args:
@@ -297,7 +300,7 @@ class LoraPhy:
             log.debug("append %s to tx_buf", str(data))
             self._buffer.put(data, block=False)
         except queue.Full:
-            log.warning("buffer full")
+            log.warning("TX buffer full")
             return False
 
         return True
@@ -324,7 +327,7 @@ class LoraPhy:
                             LoraFrame.build(decode_data[10:].strip()), block=False
                         )
                     except queue.Full:
-                        log.warning("receive buffer full")
+                        log.warning("RX buffer full")
 
                 return True
         log.debug("unexpected response")
@@ -345,7 +348,10 @@ class LoraPhy:
         """Method used as Thread to read data from the serial connection."""
         while True:
             data = self._con.readline()
+            log.debug("UART response: %s", data)
             if self._process_response(data.strip()):
+                # It is the expected response
+                # Notify threads waiting for the response
                 with self._can_send_cond:
                     self._can_send = True
                     self._can_send_cond.notify_all()

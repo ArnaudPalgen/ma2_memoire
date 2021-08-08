@@ -1,10 +1,6 @@
+from py_lora_mac.lora_mac import *
 from ipaddress import IPv6Address, AddressValueError
-from py_lora_mac.lora_phy import LoraAddr
-from py_lora_mac.lora_mac import LoraMac
-from typing import Union, Callable, Type
-import logging
 from scapy.all import *
-from scapy.layers.inet6 import IPv6
 
 log = logging.getLogger("LoRa_ROOT.IP")
 

@@ -1,10 +1,7 @@
-import queue
+from py_lora_mac.lora_phy import *
 from threading import Timer, Event, Thread, Lock
-from py_lora_mac.lora_phy import LoraAddr, LoraFrame, LoraPhy, MacCommand
-from dataclasses import dataclass
-from enum import Enum, auto, unique
+from typing import Union, Callable, Type
 from operator import add, sub
-import logging
 import sys
 import time
 
@@ -14,17 +11,13 @@ log = logging.getLogger("LoRa_ROOT.MAC")
 MAX_PREFIX = 0xFC  # 252
 MIN_PREFIX = 2
 
+#LoRaMAC root address
 ROOT_PREFIX = 1
 ROOT_ID = 0
 
-RETRANSMIT_TIMEOUT = 5  # sec
 MAX_RETRANSMIT = 3
-LOST_CHILD_THRESHOLD = 3
-
-RX_TIME = 3000  # 3 sec
 
 CHILD_TX_BUF_SIZE = 5
-CHILD_QUEUE_SIZE = 10
 
 MIN_WAIT_TIME = 1  # sec
 
@@ -56,7 +49,7 @@ class LoraChild:
     def clear_transmit_count(self):
         self.transmit_count = 1
 
-    def get_sn(self):
+    def get_sn(self)->int:
         """Return the sequence number (SN) to use
         and increment it
 
@@ -67,7 +60,13 @@ class LoraChild:
         self._next_sn += 1
         return sn
 
-    def is_transmit(self):
+    def is_transmit(self)->bool:
+        """ Specifies if the child is transmitting. i.e. if there is a
+        TX process for the child and this process is alive.
+
+        Returns:
+            bool: True if a TX process exist and is alive. False otherwise
+        """
         return self.tx_process is not None and self.tx_process.is_alive()
 
     def __str__(self):
@@ -102,13 +101,15 @@ class LoraMac:
         self.is_listen = False  # tell if listen
         self.listen_lock = Lock()  # lock for can_listen and listen
         self.upper_layer = None
-        #self.done = False
-
 
     def init(self):
-        print("Init MAC")
+        """Init the MAC layer.
+        
+        - Init the PHY layer
+        - Listen
+        """
         log.info("Init MAC")
-        self.phy_layer.phy_init()
+        self.phy_layer.init()
         self.phy_layer.phy_timeout(0)
         self.phy_layer.phy_rx()
         self.is_listen = True
@@ -117,21 +118,35 @@ class LoraMac:
         tx_thread.start()
 
     def mac_send(self, dest:LoraAddr, payload:str, k=False):
+        """Send a payload to the destination dest.
+
+        Args:
+            dest (LoraAddr): The destination address.
+            payload (str): The data to be sent.
+            k (bool, optional): Set to true to request an ack. Defaults to False.
+        """
+        log.info("IP send %s to: %s", payload, str(dest))
         try:
             child = self.childs[dest.prefix]
             child.tx_buf.put(LoraFrame(self.addr, dest, MacCommand.DATA, payload))
         except KeyError:
-            log.error("Destination %s unreachable", dest)
+            log.error("Destination %s unreachable.", dest)
 
-    def register_listener(self, listener):
+    def register_listener(self, listener: Callable[[LoraAddr, str], None]):
+        """Register a listener that will be called when data is available
+        for upper layer.
+
+        Args:
+            listener (Callable[[LoraAddr, str], None]): The listener.
+        """
         self.upper_layer = listener
 
     def _on_query(self, frame: LoraFrame, child: LoraChild):
-        """Process a query frame
+        """Process a query frame.
 
         Args:
-            frame (LoraFrame): The LoRa frame to process
-            child (LoraChild): The child that send the frame
+            frame (LoraFrame): The LoRa frame to process.
+            child (LoraChild): The child that send the frame.
         """
         log.debug("In _on_query")
         if child is None:
@@ -140,12 +155,12 @@ class LoraMac:
         if frame.seq >= child.expected_sn:
             child.expected_sn = frame.seq + 1
         else:  # frame.seq < child.expected_sn -> retransmit
-            self.phy_layer.phy_tx(child.last_send_frame)
+            self.phy_layer.phy_send(child.last_send_frame)
             return
 
         if child.tx_buf.empty():  # no data for this child -> send an ack
             log.debug("child buffer empty -> send ack")
-            self.phy_layer.phy_tx(
+            self.phy_layer.phy_send(
                 LoraFrame(
                     self.addr,
                     frame.src_addr,
@@ -157,31 +172,31 @@ class LoraMac:
                 )
             )
         else:
-            # start a tx thread if y'en a pas en cours
-            # can listen à faux
+            # data available for this child
+            # start a tx thread if there is no other running
+            # set can_listen to False
             if (child.tx_process is None) or (not child.tx_process.is_alive()):
                 child.tx_process = Thread(
                     target=self._tx_process, kwargs={"child": child}
                 )
+                log.debug("start tx process for this child")
                 self.listen_lock.acquire()
                 self.can_listen = False
                 self.listen_lock.release()
                 child.tx_process.start()
 
 
-    def _tx_process(self, *args, **kwargs):  # send all data for a child
+    def _tx_process(self, *args, **kwargs):
         """Process that sends alls the LoRaFrame in a child buffer
-        The child must pas in the **kwargs parameters
+        The child must pas in the **kwargs parameters with the key "child"
         """
 
         child: LoraChild = kwargs["child"]  # get the child
         while not child.tx_buf.empty():
-            log.debug("look for next frame")
-            log.debug("queue sizeA:%d", child.tx_buf.qsize())
             try:
                 next_frame = child.tx_buf.get_nowait()  # get the next frame to send
-                log.debug("next is: %s", str(next_frame))
-                log.debug("queue sizeB:%d", child.tx_buf.qsize())
+                log.debug("next frame to send is: %s", str(next_frame))
+                log.debug("tx buffer size:%d", child.tx_buf.qsize())
             except queue.Empty:
                 log.warning("no next frame")
                 break
@@ -194,7 +209,7 @@ class LoraMac:
             next_frame.seq = child.get_sn()
             next_frame.has_next = not child.tx_buf.empty()
             log.debug("send next frame")
-            self.phy_layer.phy_tx(next_frame)  # send the frame
+            self.phy_layer.phy_send(next_frame)  # send the frame
             child.last_send_frame = next_frame  # set the frame as last frame
 
             if next_frame.k:  # if frame need an ack
@@ -217,7 +232,8 @@ class LoraMac:
                 while has_retransmit:
                     log.debug("wait for a possible retransmission query from the child")
                     # wait MIN_WAIT_TIME.
-                    # If during there is a retrasmission, wait MIN_WAIT_TIME again
+                    # If during there is a retrasmission (requested by the child),
+                    # wait MIN_WAIT_TIME again
                     log.debug("WAIT retransmit")
                     has_retransmit = child.retransmit_event.wait(MIN_WAIT_TIME)
                     log.debug("has retransmit: %s", str(has_retransmit))
@@ -236,21 +252,28 @@ class LoraMac:
         self.listen_lock.release()
 
     def _on_data(self, frame: LoraFrame, child: LoraChild):
-        log.debug("Data ! ")
+        """Process a data frame.
+
+        Args:
+            frame (LoraFrame): The LoRa frame to process
+            child (LoraChild): The child that send the frame
+        """
+        log.debug("In _on_data ")
         log.debug("expected sn: %d", child.expected_sn)
         if frame.seq < child.expected_sn:
             log.debug("frame.seq < expected seq")
             if child.retransmit_count <= MAX_RETRANSMIT:
-                log.debug("retransmit")
-                self.phy_layer.phy_tx(child.last_send_frame.seq)
-            else:#todo
-                pass
+                log.info("Frame SN < expected SN -> retransmit")
+                self.phy_layer.phy_send(child.last_send_frame)
+            
             child.retransmit_count += 1
+            if child.is_transmit():
+                child.retransmit_event.set()
             return
         
-        if frame.seq >= child.expected_sn:
+        if frame.seq > child.expected_sn:
             log.debug("frame seq > expected")
-            log.warn("lost %d frames", (frame.seq - child.expected_sn))
+            log.warn("Loss of %d frames", (frame.seq - child.expected_sn))
         
         child.expected_sn = frame.seq + 1
         
@@ -265,9 +288,9 @@ class LoraMac:
                     False,
                     False,
                 )
-            self.phy_layer.phy_tx(ack)
+            self.phy_layer.phy_send(ack)
             child.last_send_frame = ack
-            self.upper_layer(frame.src_addr, frame.payload) #deliver data to upper layer
+        self.upper_layer(frame.src_addr, frame.payload) #deliver data to upper layer
 
     def _on_ack(self, frame: LoraFrame, child: LoraChild):
         """Process an ack frame
@@ -276,16 +299,16 @@ class LoraMac:
             frame (LoraFrame): The LoRa frame to process
             child (LoraChild): The child that send the frame
         """
-        log.info("receive ack %s", str(frame))
+        log.debug("receive ack %s", str(frame))
 
         if frame.seq == child.last_send_frame.seq:
             log.debug("correct ack number")
 
             if child.ack_lock.locked():  # the child wait an ack
-                # unblock the tx process of the child by release his listen
+                # unblock the tx process of the child by release his listen lock
                 log.debug("child wait an ack")
                 self.listen_lock.acquire()
-                self.can_listen = False
+                self.can_listen = False #can't listen because the child will send a frame
                 self.listen_lock.release()
                 child.ack_lock.release()
             else:
@@ -293,13 +316,13 @@ class LoraMac:
 
         elif frame.seq < child.last_send_frame.seq:  # child ask retransmission
             if child.retransmit_count <= MAX_RETRANSMIT:
-                self.phy_layer.phy_tx(child.last_send_frame.seq)
+                self.phy_layer.phy_send(child.last_send_frame)
             child.retransmit_count += 1
             if child.is_transmit():
                 child.retransmit_event.set()
 
         else:
-            log.warn("incorrect sn. expected: %d", child.last_send_frame.seq)
+            log.warn("Incorrect SN. Expected: %d", child.last_send_frame.seq)
 
     def _on_join(self, frame: LoraFrame, child: LoraChild):
         """Process a join frame.
@@ -314,29 +337,31 @@ class LoraMac:
             child (LoraChild): The child that send the frame
 
         """
-        log.info("reveive join frame %s", str(frame))
+        log.debug("Receive join frame %s", str(frame))
 
         if frame.seq != 0:
-            log.warn("incorrect sn")
+            log.warn("Incorrect SN. Expected: 0")
             return
 
         if child is not None:
-            # it's a node that have already fully joined the network -> nothing to do
-            log.warn("node has already fully joined the network")
+            # it's a node that have already fully joined the network
+            # i.e. has send a frame after the joining sequence
+            # -> nothing to do
+            log.warn("Node has already fully joined the network.")
             return
 
         # perhaps that it's a node that retransmits the JOIN frame
         child = self.not_joined_childs.get(frame.src_addr.prefix, None)
 
         if child is not None:  # it is a retransmission
-            log.info("Child %s already exist-> ask retransmission", str(child))
+            log.info("Child %s already exist i.e. ask retransmission.", str(child))
 
             if child.retransmit_count < MAX_RETRANSMIT:
-                log.info("retransmit join response")
-                self.phy_layer.phy_tx(child.last_send_frame)
+                log.info("Retransmit JOIN_RESPONSE to %s.", child.last_send_frame.dest_addr)
+                self.phy_layer.phy_send(child.last_send_frame)
                 child.retransmit_count += 1
             else:  # we can no longer retransmit
-                log.info("max retransmit for join request -> remove child")
+                log.info("Max retransmission for JOIN reached -> remove child.")
                 child.clear_transmit_count()
                 r1 = self.not_joined_childs.pop(child.addr.node_id & 255, None)
                 if r1 is None:
@@ -357,11 +382,11 @@ class LoraMac:
                     new_prefix = None
             if new_prefix is None:
                 # can't accept new child
-                log.warning("can't accept new child")
+                log.warning("Can't accept new child")
                 return
-
-        new_prefix = self.next_prefix
-        self.next_prefix += 1
+        else:
+            new_prefix = self.next_prefix
+            self.next_prefix += 1
 
         # create the child
         new_child = LoraChild(LoraAddr(new_prefix, frame.src_addr.node_id))
@@ -371,7 +396,7 @@ class LoraMac:
 
         # send the join response
         log.debug("send join response")
-        self.phy_layer.phy_tx(
+        self.phy_layer.phy_send(
             LoraFrame(
                 self.addr,
                 frame.src_addr,
@@ -393,37 +418,36 @@ class LoraMac:
         Args:
             frame (LoraFrame): The frame frome the PHY layer
         """
-        log.debug("MAC RX: %s", str(frame))
+        log.info("MAC RX: %s", str(frame))
 
+        # feature: use self.prefix instead of self.addr
+        #          and use the id part of the LoRaAddr to map to an external Ipv6 addr
         if frame.dest_addr != self.addr:
             log.debug("frame not for me")
             return
 
         log.debug("look child with prefix: %d", frame.src_addr.prefix)
-        child: LoraChild = self.childs.get(frame.src_addr.prefix, None)
+        child = self.childs.get(frame.src_addr.prefix, None)
         log.debug("child is: %s", str(child))
         if frame.seq == 1 and child is not None:
             # receive the first frame from this child
             # i.e. the join procedure is completed
-            #if not self.done:
-            #    child.tx_buf.put(LoraFrame(self.addr, child.addr, MacCommand.DATA, "ABC", k = True))
-            #    child.tx_buf.put(LoraFrame(self.addr, child.addr, MacCommand.DATA, "DEF", k = True))
-            #    self.done = True
             self.not_joined_childs.pop(child.addr.node_id & 255, None)
 
             # resets retransmit_count if there have been retransmissions
             child.clear_transmit_count()
 
-        if (
-            child is not None
-            and child.ack_lock.locked()
-            and frame.command != MacCommand.ACK
-        ):
+        if (child is not None and child.ack_lock.locked() and frame.command != MacCommand.ACK):
             # the child wait an ack and this frame is not an ack
             # -> retransmit last frame
-            self.phy_layer.phy_tx(child.last_send_frame)
+            if child.retransmit_count <= MAX_RETRANSMIT:
+                log.info("Retransmit %s to %s", str(child.last_send_frame), str(child.addr))
+                self.phy_layer.phy_send(child.last_send_frame)
+            child.retransmit_count += 1
+            if child.is_transmit():
+                child.retransmit_event.set()
             return
-
+        #todo stop here
         fun = self.action_matcher.get(frame.command, None)
         if fun is not None:
             fun(frame, child)
