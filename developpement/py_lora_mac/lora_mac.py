@@ -1,6 +1,6 @@
 from py_lora_mac.lora_phy import *
 from threading import Timer, Event, Thread, Lock
-from typing import Union, Callable, Type
+from typing import Union, Callable, Type, Tuple
 from operator import add, sub
 import sys
 import time
@@ -447,18 +447,25 @@ class LoraMac:
             if child.is_transmit():
                 child.retransmit_event.set()
             return
-        #todo stop here
+
         fun = self.action_matcher.get(frame.command, None)
         if fun is not None:
             fun(frame, child)
         else:
-            log.warning("unknown MAC command")
+            log.warning("Unknown MAC command.")
 
     def _rx_process(self):
-
+        """Thread that fetches the frames received by the PHY layer.
+            - Fetch a frame from the PHY layer
+            - Update of if listen
+            - If possible, listen
+            - Send the frame to _mac_rx
+        """
         while True:
+            # the frame received by the PHY layer
+            # this call block until a frame is available
             frame = self.phy_layer.getFrame()
-            log.debug("RX process receive")
+            log.debug("RX process receive a frame")
             self.listen_lock.acquire()
             self.is_listen = False
             log.debug("RX process set is_listen=False")

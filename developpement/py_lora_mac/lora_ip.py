@@ -7,13 +7,14 @@ log = logging.getLogger("LoRa_ROOT.IP")
 
 # Unique Local IPv6 Unicast Addresses (FC00::/7) with to L bit to 1 (c.f. RFC 4193)
 IPv6_PREFIX = "FD00"
+
 COMMON_LINK_ADDR_PART = "0212:4B00:060D"
 
 
 class LoraIP:
     """Network layer for the LoRaMac protocol.
 
-    This class contains also two functions to convert Ipv6 <-> LoraAddr.
+    This class contains also functions to convert Ipv6 addr <-> LoraAddr.
     The conversion use the following format:
 
     |<-----1----->|<--6-->|<-----1----->|<----------6---------->|<---2--->|
@@ -21,42 +22,76 @@ class LoraIP:
      0           0 1     6 7           7 8                    13 14     15
 
     Attributes:
-        mac_layer: The mac mayer to use
+        mac_layer: The MAC layer to use
         upper_layer: The Callable used to send incoming packet to the upper layer
 
     """
 
-    def __init__(self, mac_layer: LoraMac):#done
+    def __init__(self, mac_layer: LoraMac):
         self.mac_layer = mac_layer
         self.upper_layer = None
 
-    def init(self):#done
+    def init(self):
+        """Init the IP layer.
+            - Init the MAC layer
+            - Register as listener to the MAC layer
+        """
+
         log.info("Init IP layer")
         self.mac_layer.init()
         self.mac_layer.register_listener(self._on_frame)
 
-    def _on_frame(self, src: LoraAddr, payload: str):#done
-        log.debug("Incomming frame from LoRaMAC")
+    def _on_frame(self, src: LoraAddr, payload: str):
+        """Process a frame from the MAC layer and deliver it to the upper layer.
+
+        Args:
+            src (LoraAddr): The source address of the frame.
+            payload (str): The data of the frame.
+        """
+
+        log.info("IP RX: %s from: %s", payload, str(src))
         if self.upper_layer is None:
-            log.warning("Upper layer not defined. Please call `register_listener` before")
+            log.warning("Upper layer not defined. Please call `register_listener` before.")
         else:
             ip_packet = self.build_ip_packet(payload, src, self.mac_layer.addr)
             packet_info = ip_packet.show(dump=True)
             log.debug("Rebuilt IP packet: \n%s\n", packet_info)
             self.upper_layer(ip_packet)
 
-    def register_listener(self, listener: Callable[[IPv6], None]):#done
+    def register_listener(self, listener: Callable[[IPv6], None]):
+        """Register the listener for the upper layer.
+
+        Args:
+            listener (Callable[[IPv6], None]): The listener.
+        """
+
         log.debug("listener registered !")
         self.upper_layer = listener
 
-    def send(self, ip_packet: IPv6):#review
+    def send(self, ip_packet: IPv6):
+        """Send the IPv6 packet.
+                - Prepare to IPv6 packet for the MAC layer.
+                - Send it to the MAC layer.
+        Args:
+            ip_packet (IPv6): The packet to send
+        """
+
         log.debug("Send %s", ip_packet.show())
         payload, _, dest_addr = self.serialize_ip_packet(ip_packet)
         log.debug("Send to RPL ROOT: " + str(dest_addr))
         self.mac_layer.mac_send(dest=dest_addr, payload=payload, k=False)
 
     @staticmethod
-    def lora_to_ipv6(addr: LoraAddr) -> IPv6Address:#DONE
+    def lora_to_ipv6(addr: LoraAddr) -> IPv6Address:
+        """Convert a LoRaMAC address to an IPv6 address.
+
+        Args:
+            addr (LoraAddr): The address to convert.
+
+        Returns:
+            IPv6Address: The converted address.
+        """
+
         result = IPv6Address(
             IPv6_PREFIX
             + "::"
@@ -69,7 +104,16 @@ class LoraIP:
         return result
 
     @staticmethod
-    def ipv6_to_lora(addr: IPv6Address) -> LoraAddr:#DONE
+    def ipv6_to_lora(addr: IPv6Address) -> LoraAddr:
+        """Convert an IPv6 address to a LoRaMAC address.
+
+        Args:
+            addr (IPv6Address): The address to convert.
+
+        Returns:
+            LoraAddr: The converted address.
+        """
+
         addr_binary = addr.packed
         prefix = addr_binary[7]
         node_id = (addr_binary[14] << 8) + addr_binary[15]
@@ -80,7 +124,18 @@ class LoraIP:
         return result
 
     @staticmethod
-    def serialize_ip_packet(ip_packet: IPv6):#review
+    def serialize_ip_packet(ip_packet: IPv6)->Tuple[str, LoraAddr, LoraAddr]:
+        """Serialize an IPv6 packet that will be sent to the LoRaMAC layer.
+
+        Args:
+            ip_packet (IPv6): The IPv6 packet to serialize
+
+        Returns:
+            tuple: A tuple containing the payload (str) and the source and
+                   destination LoraAddr.
+
+        """
+
         hex_packet = (
             chexdump(ip_packet, dump=True)
             .replace("0x", "")
@@ -99,12 +154,23 @@ class LoraIP:
         return (payload, src_addr, dest_addr)
 
     @staticmethod
-    def build_ip_packet(hex_data: str, src_addr: LoraAddr, dest_addr: LoraAddr):#done
+    def build_ip_packet(hex_data: str, src_addr: LoraAddr, dest_addr: LoraAddr)->IPv6:
+        """Build an IPv6 packet from data extracted from a LoRaMAC frame.
+
+        Args:
+            hex_data (str): The payload of the LoRaMAC frame.
+            src_addr (LoraAddr): The LoRaMAC source address.
+            dest_addr (LoraAddr): The LoRaMAC destination address.
+
+        Returns:
+            IPv6: The IPv6 packet built.
+        """
+
         log.debug("enter build ip packet with hex_data:%s | lora_src: %s | lora_dest: %s", hex_data, str(src_addr), str(dest_addr))
         """
         Split the data in two parts:
-            - first_part: The first part of 8 bytes from the IPv6 header that contains: VER, TC, FL, LEN, NH, HL
-            - second_part: The rest of the IPv6 packet after the src and dest address (that are not carried in a loramac frame)
+            - first_part: The first part of 8 bytes from the IPv6 header that contains the VER, TC, FL, LEN, NH and HL fields.
+            - second_part: The rest of the IPv6 packet after the src and dest address (that are not carried in a loramac frame).
         """
         first_part = hex_data[0:16]
         second_part = hex_data[16:]
