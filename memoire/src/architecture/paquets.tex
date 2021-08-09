@@ -18,7 +18,7 @@
         \item \textbf{command}: la commande MAC (4 bits).\\
         Les 5 commandes disponibles ainsi que leurs valeurs sont reprises dans la table~\ref{tb:archi-loramac-command}. Il est possible d'ajouter 10 commandes supplémentaires pour des usages futurs.
         \item \textbf{SN}: le numéro de séquence de la trame (8 bits)
-        \item \textbf{Payload}: la payload ayant une taille maximale de 247 octets. Cette limitation provient de la radio LoRa utilisée (le RN2483 c.f. \todo{ref}) qui limite les transmissions à 255 octets, valeur de laquelle est soustrait les 8 octets des champs précédents.
+        \item \textbf{Payload}: la payload ayant une taille maximale de 247 octets. Cette limitation provient de la radio LoRa utilisée, le RN2483, qui limite les transmissions à 255 octets, valeur de laquelle est soustrait les 8 octets des champs précédents.
         \begin{table}[H]
             \centering
             \makebox[\textwidth]{%

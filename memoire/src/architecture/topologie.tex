@@ -15,7 +15,7 @@ Cette section décrit et motive la topologie et les types de noeuds du réseau d
 \subsection*{Topologie}
 Comme l'illustre la figure~\ref{fig:archi-topologie} la topologie choisie est une topologie mixte.
 
-On a d'abord un ensemble de réseaux RPL possèdant chacun un préfixe de sous-réseau IP attribué par la racine LoRa (par exemple $0x02$ ou $0x04$ sur la figure~\ref{fig:archi-topologie}), dans lesquels les communications se font par IEEE 802.15.4.
+D'abord un ensemble de réseaux RPL possèdant chacun un préfixe de sous-réseau IP attribué par la racine LoRa (par exemple $0x02$ ou $0x04$ sur la figure~\ref{fig:archi-topologie}), dans lesquels les communications se font par IEEE 802.15.4.
 Comme RPL est utilisé, chaque réseau forme un DODAG.
 
 Ensuite, chaque réseau RPL est connecté à la racine LoRa via sa racine RPL. Les liens entre les racines RPL et la racine LoRa forment une topologie en étoile.
@@ -26,13 +26,13 @@ Ce choix de topologie a comme avantage de simplifier l'administration du réseau
 
 L'inconvéninent de cette topologie est que la racine LoRa constitue un seul point de défaillance. Une solution plus robuste qui a été envisagée, est un réseau maillé pour les communications LoRa. Cependant, une telle architecture est difficile à mettre en oeuvre car le protocole MAC a établir pour les liens LoRa est plus complexe et nécessite un protocole de routage.
 
+L'essentiel du travail consite donc à définir et mettre en place un protocole MAC utilisant LoRa pour les communications entre les racines RPL et la racine LoRa ainsi que les mécanismes permettant de passer d'un réseau à un autre. Le routage est le transfert des paquets dans les réseaux RPL est quand à lui assuré par RPL et IPv6. Les sections suivantes décrivent le protocole MAC mis en place pour les communications LoRa.
+
 \begin{figure}[H]
     \centering
-    \includegraphics[scale=0.7]{res/pictures/loramac-topologie.drawio.png}
+    \includegraphics[scale=0.5]{res/pictures/loramac-topologie.drawio.png}
     \caption{Topologie du réseau hybride.}
     \label{fig:archi-topologie}
 \end{figure}
 
 %Ainsi, l'objectif de cette topologie est de transmettre les paquets IP à destination de la racine %LoRa.
-
-L'essentiel du travail consite donc à définir et mettre en place un protocole MAC utilisant LoRa pour les communications entre les racines RPL et la racine LoRa ainsi que les mécanismes permettant de passer d'un réseau à un autre. Le routage est le transfert des paquets dans les réseaux RPL est quand à lui assuré par RPL et IPv6. Les sections suivantes décrivent le protocole MAC mis en place pour les communications LoRa.
