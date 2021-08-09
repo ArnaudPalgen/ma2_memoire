@@ -12,15 +12,16 @@ que l'efficacité énergétique sont significativement améliorés.
 
 
 Cependant d'autres acrhitectures de réseaux LoRa sont possibles, comme un réseau multi-sauts
-fonctionnant sur une adaptation de TSCH\ref{subsec:etat_art-802.15.4.tsch} proposée par Maite Bezunartea et ses co-auteurs dans leur article~\cite{8847137}. Leur solution, implémentée dans Contiki-NG\ref{subsec:etat_art:rtos:contiki}, permet d'utiliser le protocole de routage RPL\ref{sec:state-rpl} avec un \textit{spreading factor} fixe. Les mécanismes de sauts de canaux et de division du temps en slots permettent d'obtenir des transmissions de données réussies tout en restant efficace en terme d'énergie. 
+fonctionnant sur une adaptation de TSCH\ref{subsec:etat_art-802.15.4.tsch} proposée par Maite Bezunartea et ses co-auteurs dans leur article~\cite{8847137}. Leur solution, implémentée dans Contiki-NG\ref{subsec:etat_art:rtos:contiki}, permet d'utiliser le protocole de routage RPL\ref{sec:state-rpl} avec le \textit{spreading factor} de LoRa fixe (c.f.~\ref{sec:etat_art-lora}). Les mécanismes de sauts de canaux et de division du temps en slots permettent d'obtenir des transmissions de données réussies tout en restant efficace en terme d'énergie.
 
+Pour obtenir un \textit{spreading factor} adapté à chaque lien LoRa, B.Satori et ses co-auteurs proposent dans leur article~\cite{8115756} un protocole MAC nommé RLMAC qui permet de sélectionner le \textit{spreading factor} optimal pour chaque lien et également une adaptation de la fonction objectif OF0~\ref{subsec:etat_art:rpl:Of0} permettant de sélectionner un chemin qui minimise le temps de transmission ce qui permet de diminuer la consommation en énergie.
 
-sartori2017 propose aussi d'utiliser RPL mais avec adaptation du SF
+%sartori2017 propose aussi d'utiliser RPL mais avec adaptation du SF
 
 % 
 %lora/bezunartea2019.pdf done
 %lora/chu2012.pdf done
-%lora/sartori2017.pdf
+%lora/sartori2017.pdf done
 %lora/sensors-20-06893-v2 (1).pdf
 %lora/WF-IoT.pdf
 %LoRa_and_802.15.4/icii19.pdf

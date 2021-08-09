@@ -36,7 +36,7 @@ Le rang augmente strictement dans le sens descendant et diminue strictement dans
 
 Les fonctions objectif OF0 et MRHOF, implémentées dans Contiki, sont décrites sur base du RFC 6552~\cite{rfc:of0} et du RFC 6719 ~\cite{rfc:mrhof}.
 
-    \subsubsection*{OF0}
+    \subsubsection*{OF0}\label{subsec:etat_art:rpl:Of0}
         \textit{Objective Function Zero} est une fonction dont l'objectif est de choisir un parent qui permettra à un noeud d'être le plus proche possible la racine du DODAG.
         Le calcul du rang d'un noeud $N$, $R(N)$, est décrit par l'équation~\ref{eq:state-rankOF0}. Il est calculé pour chaque parent potentiel. Le parent préféré choisi sera alors le parent potentiel qui implique le plus petit $R(N)$.\par
 
