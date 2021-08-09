@@ -1,16 +1,25 @@
 \section{Projets similaires}\label{sec:etat_art-related-work}
 \renewcommand{\rightmark}{Projet similaires}
 
-% le truc principal du projet est de concevoir un protocol mac pour orchester les communications LoRa. Le protocole décrit en ...(archi) s'inspire du protocole AloHa. Cela peut entrainer des collisions. Pour minimiser ces collisions, Yi Chu, Paul D. Mitchell et David Grace proposent dans leur article lora/chu2012.pdf un ptorocole MAC nommé  ALOHA-QIR. Ce protocole combine Slotted ALOHA et le Q-Learning qui est une méthode d'apprentissage par renforcement. D'après les auteurs de l'article, les simulations réalisées indiquent que leur protocole atteint plus du double du débit de slotted Aloha et que le débit de bout en bout ainsi que l'efficacité énergétique sont significativement améliorés.
+Une grande partie du travail de ce mémoire consiste en l'élaboration d'un protocole MAC pour
+orchester les communications LoRa. Le protocole décrit au \autoref{chap:archi} s'inspire du
+protocole AloHa qui peut entrainer des collisions. Pour les minimiser, Yi Chu, Paul D. Mitchell et
+David Grace proposent dans leur article~\cite{6328420} un protocole MAC nommé ALOHA-QIR. Ce
+protocole combine Slotted ALOHA et le Q-Learning qui est une méthode d'apprentissage par
+renforcement. D'après les auteurs de l'article, les simulations réalisées indiquent que leur
+protocole atteint plus du double du débit de slotted Aloha et que le débit de bout en bout ainsi
+que l'efficacité énergétique sont significativement améliorés.
 
-%Cependant, d'autres acrhitectures pour l'orechestration des communications sont possibles, comme l'utilisation d'un réseau MESH (todo décrire) rendue possible via l'adaptation pour LoRa du protocole MAC TSCH
+
+Cependant d'autres acrhitectures de réseaux LoRa sont possibles, comme un réseau multi-sauts
+fonctionnant sur une adaptation de TSCH\ref{subsec:etat_art-802.15.4.tsch} proposée par Maite Bezunartea et ses co-auteurs dans leur article~\cite{8847137}. Leur solution, implémentée dans Contiki-NG\ref{subsec:etat_art:rtos:contiki}, permet d'utiliser le protocole de routage RPL\ref{sec:state-rpl} avec un \textit{spreading factor} fixe. Les mécanismes de sauts de canaux et de division du temps en slots permettent d'obtenir des transmissions de données réussies tout en restant efficace en terme d'énergie. 
 
 
-
+sartori2017 propose aussi d'utiliser RPL mais avec adaptation du SF
 
 % 
 %lora/bezunartea2019.pdf done
-%lora/chu2012.pdf
+%lora/chu2012.pdf done
 %lora/sartori2017.pdf
 %lora/sensors-20-06893-v2 (1).pdf
 %lora/WF-IoT.pdf
