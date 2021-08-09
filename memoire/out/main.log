@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.20 (TeX Live 2019/Debian) (preloaded format=pdflatex 2020.9.15)  23 JUL 2021 08:12
+This is pdfTeX, Version 3.14159265-2.6-1.40.20 (TeX Live 2019/Debian) (preloaded format=pdflatex 2020.9.15)  9 AUG 2021 09:18
 entering extended mode
  \write18 enabled.
  file:line:error style messages enabled.
@@ -1115,18 +1115,18 @@ Underfull \hbox (badness 8151) in paragraph at lines 136--140
  []
 
 ) [33]
-Package atveryend Info: Empty hook `BeforeClearDocument' on input line 136.
-Package atveryend Info: Empty hook `AfterLastShipout' on input line 136.
+Package atveryend Info: Empty hook `BeforeClearDocument' on input line 134.
+Package atveryend Info: Empty hook `AfterLastShipout' on input line 134.
  (/home/arnaud/Documents/cours/universite/cours2020-2021/memoire/ma2_memoire/memoire/out/main.aux)
-Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 136.
-Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 136.
+Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 134.
+Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 134.
 Package rerunfilecheck Info: File `main.out' has not changed.
 (rerunfilecheck)             Checksum: <no file>.
  ) 
 Here is how much of TeX's memory you used:
  28463 strings out of 481239
  537066 string characters out of 5920377
- 837793 words of memory out of 5000000
+ 837794 words of memory out of 5000000
  42877 multiletter control sequences out of 15000+600000
  604674 words of font info for 59 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
