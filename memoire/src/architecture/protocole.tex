@@ -4,7 +4,7 @@
     Cette section décris le protocole MAC mis en place pour les communications LoRa. Ce protocole est donc utilisé pour les communications entre la racine LoRa et les racines RPL. Ces dernières étant contraintes en énergie, leur radio LoRa n'est pas tout le temps allumée. Le protocole prend donc en compte cette contrainte.
 
 \subsection*{Etats d'une Racine RPL}
-    Les racines RPL utilisent 4 états illustrés dans le diagramme d'état de la figure~\ref{fig:archi-state}. A l'initiation du réseau, une racine RPL se trouve dans l'état \textit{alone}. Elle demande ensuite son préfixe à la racine LoRa. Si la transmission échoue trop de fois, elle entre dans l'état \textit{sleep} jusqu'à ce que l'évènement \textit{wake up} soit déclenché pour retourner dans l'état \textit{alone}. Si la transmission est réussie, et donc que le préfixe est reçu, la racine RPL se trouve dans l'état \textit{ready}. Quand une racine RPL envoie une trame qui nécessite un acquittement, tant que celui-ci n'est pas reçu elle se trouvera dans l'état \textit{wait\_response}. Une fois l'acquittement reçu, elle retournera dans l'état \textit{ready}.
+    Les racines RPL utilisent 4 états illustrés dans le diagramme d'état de la figure~\ref{fig:archi-state}. A l'initiation du réseau, une racine RPL se trouve dans l'état \textit{alone}. Elle demande ensuite son préfixe à la racine LoRa. Si la transmission échoue trop de fois, elle entre dans l'état \textit{sleep} dans lequel ses radios sont éteintes, jusqu'à ce que l'évènement \textit{wake up} soit déclenché pour retourner dans l'état \textit{alone}. Si la transmission est réussie, et donc que le préfixe est reçu, la racine RPL se trouve dans l'état \textit{ready}. Quand une racine RPL envoie une trame qui nécessite un acquittement, tant que celui-ci n'est pas reçu elle se trouvera dans l'état \textit{wait\_response}. Une fois l'acquittement reçu, elle retournera dans l'état \textit{ready}.
     
     Les trames qui doivent être envoyées le seront en fonction de l'état dans lequel se trouve une racine RPL. Dans l'état \textit{ready}, les trames de données peuvent être envoyées, mais ce n'est pas le cas dans les états \textit{alone} et \textit{wait\_response}. En effet dans le premier la racine RPL ne peut pas envoyer de données car elle n'a pas encore rejoint le réseau et dans le second, elle attend une réponse.
     \begin{figure}[H]
@@ -12,6 +12,18 @@
         \includegraphics[scale=0.5]{res/pictures/loramac-state.drawio.png}
         \caption{Diagramme d'état des racines RPL.}
         \label{fig:archi-state}
+    \end{figure}
+
+\subsection*{Etats de la racine LoRa}
+    Le diagramme d'état de la racine LoRa pour chaque racine RPL qui a rejoint le réseau est illustré à la figure~\ref{fig:archi-state-lora}. Une fois que la racine RPL (enfant de la racine LoRa) a rejoint le réseau, l'état est READY. Cela signifie que la racine LoRa est prête à recevoir des données de cet enfant. Si elle reçoit une trame DATA, les données sont transmises à la couche supérieure. Elle peut donc rester dans le même état. Elle reste aussi dans l'état ready si elle reçoit une QUERY et qu'il n'y a aucune données disponible pour cet enfant. En revanche, si des données sont disponibles, la racine LoRa entre dans l'état TRANSMIT pour éviter que l'état d'un autre enfant bascule dans READY ou WAIT ACK ce qui mettrait la radio en mode écoute alors qu'elle essaye de transmettre des paquets pour cet enfant. Cela bloquerait donc les transmissions pour cet enfant. Une fois dans l'état TRANSMIT, si la trame n'as pas besoin d'acquittement en retour, la racine LoRa bascule dans l'état WAIT TIMER dans lequel elle attend une possible demande de retransmission de son enfant.
+    %todo continue here
+    %todo rajouter une boucle à wait timer pour retransmission
+
+    \begin{figure}[H]
+        \centering
+        \includegraphics[scale=0.5]{res/pictures/loramac-loraroot-state.drawio.png}
+        \caption{Diagramme d'état de la racine LoRa.}
+        \label{fig:archi-state-lora}
     \end{figure}
 
 \subsection*{Construction du réseau}
