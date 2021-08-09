@@ -1,7 +1,12 @@
 \section{LoRa}\label{sec:etat_art-lora}
 \renewcommand{\rightmark}{LoRa}
 
-LoRa (Long Range)~\cite{sx1276:datasheet}\cite{paper:lora-reverse-engineering} est une technologie radio  fonctionnant sur une modulation propriétaire détenue par Semtech et basée sur \textit{chirp spread spectrum (CSS)}. Cette modulation consiste en un signal d'une amplitude constante pour lequel la fréquence diminue ou augmente au cours du temps. Ces variations qui sont pour LoRa linéaires, sont respectivement appelées \textit{downchirp} et \textit{upchirp}. Cette modulation permet d'obtenir des communications longues portées et basses énergie.
+LoRa (Long Range)~\cite{sx1276:datasheet}\cite{paper:lora-reverse-engineering} est une technologie 
+radio  fonctionnant sur une modulation propriétaire détenue par Semtech et basée sur \textit{chirp 
+spread spectrum (CSS)}. \textit{chirp spread spectrum} consiste en un signal d'une amplitude 
+constante pour lequel la fréquence diminue ou augmente au cours du temps. Ces variations qui sont 
+pour LoRa linéaires, sont respectivement appelées \textit{downchirp} et \textit{upchirp}. Cette 
+modulation permet d'obtenir des communications longues portées et basses énergie.
 
 %\begin{wrapfigure}{r}{0.3\textwidth}
 %    \includegraphics[scale=0.25]{res/pictures/lora-sf.png}
@@ -16,7 +21,7 @@ Une communication LoRa dépend des paramètres suivants:
     
     \item \textbf{Bandwidth (BW)} détermine la largeur de la bande passante. Une bande passante plus large augmente la qualité du signal. Pour LoRa, en Europe, les valeurs de BW sont limitées à 125 KHz et 250KHz~\cite{lora-frequencyplan}.
     
-    \item \textbf{Coding rate (CR)} détermine la quantité de bits redondants ajoutés par le codage d'erreur cylique utilisé par LoRa pour la détection et la correction d'erreurs. Cette méthode de correction d'erreur permet au signal de supporter de courtes interférences. Ainsi il possible de coder des données de 4 bits avec des redondances de 5, 6, 7 ou 8 bits. La valeur du CR se note donc 4/5, 4/6, 4/5 ou 4/8.
+    \item \textbf{Coding rate (CR)} détermine la quantité de bits redondants ajoutés par le codage d'erreur cylique utilisé par LoRa pour la détection et la correction d'erreurs. Cette méthode de correction d'erreur permet au signal de supporter de courtes interférences. Ainsi il possible de coder des données de 4 bits avec des redondances de 5, 6, 7 ou 8 bits. La valeur du CR se note donc 4/5, 4/6, 4/7 ou 4/8.
     
 \end{itemize}
 
@@ -35,7 +40,7 @@ Une communication LoRa dépend des paramètres suivants:
 
 \vspace{1cm}
 Le format des paquets LoRa (Fig.~\ref{fig:state-lora-frame-format}) peut être explicite ou implicite.
-Dans le mode implicite, le header n'est pas inclus dans le paquet. Pour cela, la taille de la payload, le coding rate et la présence de la Payload CRC doivent être configurés.
+Dans le mode implicite, le header n'est pas inclus dans le paquet. Pour cela, la taille de la payload, le coding rate et la présence de la Payload CRC (Cyclic Redundancy Check) doivent être configurés.
 Ce mode permet de réduire la taille du paquet et donc du temps de transmission.
 
 \begin{figure}[H]
@@ -72,8 +77,18 @@ Où $T_{sym} = \frac{1}{R_s}$, $n_{preamble}$ et $n_{payload}$ sont le nombre de
 où:
 \begin{itemize}
     \item $PL$ est le nombre d'octets de la payload (1 à 255)
+    \item $SF$ est le spreading factor
+    \item $CRC=1$ si une CRC est présente $CRC=0$ sinon
     \item $IH=0$ si le header est présent, $IH=1$ sinon
     \item $DE=1$ si $LowDataRateOptimize=1$, $DE=0$ sinon.\\
     $LowDataRateOptimize$ permet d'optimiser la robustesse d'une transmission quand celle-ci est longue.
     \item $CR$ prend la valeur 1 pour $4/5$, 2 pour $4/6$, etc
+\end{itemize}
+\vspace{0.5cm}
+Cette dernière équation permet les déductions suivantes:
+\begin{itemize}
+    \item Il y a toujours au minimum 8 symboles
+    \item Le numérateur de la fraction quantifie un nombre de bits car PL est multiplié par 8
+    \item La CRC a une taille de 16 bits
+    \item Le header a une taille de 20 bits
 \end{itemize}

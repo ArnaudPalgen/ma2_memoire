@@ -6,18 +6,18 @@ orchester les communications LoRa. Le protocole décrit au \autoref{chap:archi} 
 protocole AloHa qui peut entrainer des collisions. Pour les minimiser, Yi Chu, Paul D. Mitchell et
 David Grace proposent dans leur article~\cite{6328420} un protocole MAC nommé ALOHA-QIR. Ce
 protocole combine Slotted ALOHA et le Q-Learning qui est une méthode d'apprentissage par
-renforcement. D'après les auteurs de l'article, les simulations réalisées indiquent que leur
+renforcement qui permet aux noeuds d'utiliser les slots de temps de manière plus intelligente, ce qui diminue la probabilité d'avoir des collisions. D'après les auteurs de l'article, les simulations réalisées indiquent que leur
 protocole atteint plus du double du débit de slotted Aloha et que le débit de bout en bout ainsi
 que l'efficacité énergétique sont significativement améliorés.
 
 
-Cependant d'autres acrhitectures sont possibles, comme les réseaux multi-sauts.
-Juan José López Escobar, Felipe Gil-Castiñeira et Rebeca P. Díaz Redondo présentent dans leur article~\cite{s20236893} un protocole multi-sauts pour LoRa nommé JMAC. Ce protocole a été réalisé pour la récolte de donnée et utilise une topologie en arbre. Il supporte deux types de noeuds, la gateway et des capteurs qui collecte des données qui ont leur radio active peridiquement. Pour que les communications puissent s'effectuer, un noeud doit prédire le moment auquel la radio du prochain saut sera active. Pour cela, chaque capteur annonce la période durant laquelle sa radio est active.
+Cependant, d'autres acrhitectures sont possibles, comme les réseaux multi-sauts.
+Juan José López Escobar, Felipe Gil-Castiñeira et Rebeca P. Díaz Redondo présentent dans leur article~\cite{s20236893} un protocole multi-sauts pour LoRa nommé JMAC. Ce protocole a été réalisé pour la récolte de données et utilise une topologie en arbre. Il supporte deux types de noeuds, la gateway et les capteurs qui collecte des données. Ces derniers ont leur radio active periodiquement ce qui leur permet d'économiser de l'énergie. Pour que les communications puissent s'effectuer, un noeud doit prédire le moment auquel la radio du prochain saut sera active. Pour cela, chaque capteur annonce la période durant laquelle sa radio est active.
 
 
-Maite Bezunartea et ses co-auteurs proposent dans leur article~\cite{8847137}, un protocole MAC pour LoRa qui est une adaptation de TSCH~\ref{subsec:etat_art-802.15.4.tsch}. Leur solution, implémentée dans Contiki-NG~\ref{subsec:etat_art:rtos:contiki}, permet d'utiliser le protocole de routage RPL~\ref{sec:state-rpl} avec le \textit{spreading factor} de LoRa fixé (c.f.~\ref{sec:etat_art-lora}). Les mécanismes de sauts de canaux et de division du temps en slots permettent d'obtenir des transmissions de données réussies tout en restant efficace en terme d'énergie.
+Maite Bezunartea et ses co-auteurs proposent dans leur article~\cite{8847137}, un protocole MAC pour LoRa qui est une adaptation de TSCH~\ref{subsec:etat_art-802.15.4.tsch}. Leur solution, implémentée dans Contiki-NG~\ref{subsec:etat_art:rtos:contiki}, permet d'utiliser le protocole de routage RPL~\ref{sec:state-rpl}. Elle fonctionne avec un \textit{spreading factor} fixe (c.f.~\ref{sec:etat_art-lora}). Les mécanismes de sauts de canaux et de division du temps en slots permettent d'obtenir des transmissions de données réussies tout en restant efficace en terme d'énergie.
 
-Pour obtenir un \textit{spreading factor} adapté à chaque lien LoRa, B.Satori et ses co-auteurs proposent dans leur article~\cite{8115756} un protocole MAC nommé RLMAC qui permet de sélectionner le \textit{spreading factor} optimal pour chaque lien et également une adaptation de la fonction objectif OF0~\ref{subsec:etat_art:rpl:Of0} permettant de sélectionner un chemin qui minimise le temps de transmission ce qui permet de diminuer la consommation en énergie.
+Pour obtenir un \textit{spreading factor} adapté à chaque lien LoRa, B.Satori et ses co-auteurs proposent dans leur article~\cite{8115756}, un protocole MAC nommé RLMAC qui permet de sélectionner le \textit{spreading factor} optimal pour chaque lien et également une adaptation de la fonction objectif OF0~\ref{subsec:etat_art:rpl:Of0} permettant de sélectionner un chemin qui minimise le temps de transmission, ce qui permet de diminuer la consommation en énergie.
 
 
 % 

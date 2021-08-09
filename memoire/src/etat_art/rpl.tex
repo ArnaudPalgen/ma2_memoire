@@ -1,12 +1,10 @@
-\newpage
 \section{RPL}\label{sec:state-rpl}
 \renewcommand{\rightmark}{RPL}
-%TODO tour des protocoles de routages ??
 
 Routing Protocol for Low-Power and Lossy Networks~\cite{rfc:rpl} est un protocole de routage IPv6 destiné aux réseaux dont les noeuds sont contraints en énergie et dont les liens sont soumis à des pertes importantes de paquets (Low-power and Lossy Networks, LLNs).
 
 D'après l'article de Tripathi, Oliveira et Vasseur~\cite{paper:rpl-study}, après avoir été étudiés par le groupe de travail IETF roll (Routing Over Low power and Lossy networks), il s'est avéré que les protocoles tel que OSPF, AODV ou OLSR ne satisfont pas toutes les exigences des LLNs. C'est pour cette raison que ce groupe de travail a introduit RPL.
-Ce protocole à vecteur de distance est un protocole proactif, c'est à dire que les routes sont établies avant qu'elles ne soient nécessaires.
+Il s'agit d'un protocole à vecteur de distance. De plus, RPL est un protocole proactif, c'est à dire que les routes sont établies avant qu'elles ne soient nécessaires.
 
 RPL sépare le traitement et la transmission des paquets de contrôle de l'optimisation de l'objectif de routage. Cela permet de l'adapter à un large éventail d'applications des LLNs comme la domotique, l'automatisation industriel ou encore la récolte de données dans divers environnements.
 
@@ -95,7 +93,7 @@ Les fonctions objectif OF0 et MRHOF, implémentées dans Contiki, sont décrites
             Le RFC 6719 recommande 192 comme valeur pour \textsl{\textsc{parent\_switch\_treshold}} si la métrique utilisée est ETX.
 
 \subsection*{Messages RPL}
-    RPL défini quatre types de mesages de contrôles: DIO, DIS, DAO et DAO-ACK. Ces messages de contôles sont des messages ICMPv6. Le RFC 6550~\cite{rfc:rpl} indique que ces messages ont la portée d'un lien, à l'exception des DAO/DAO-ACK qui dans le mode de fonctionnement \textit{non-storing} sont envoyés en unicast et donc utilisent des adresse unique-local ou global. Pour tous les autres messages, les adresses sources sont des adresses link-local et les adresses de destination sont soit link-local, soit l'adresse multicast pour tous les noeuds RPL qui est \texttt{ff02::1a}.
+    RPL défini quatre types de mesages de contrôles: DIO, DIS, DAO et DAO-ACK. Ces messages de contôles sont des messages ICMPv6. Le RFC 6550~\cite{rfc:rpl} indique que ces messages ont la portée d'un lien, à l'exception des DAO/DAO-ACK qui, dans le mode de fonctionnement \textit{non-storing}, sont envoyés en unicast et donc utilisent des adresse unique-local ou global. Pour tous les autres messages, les adresses sources sont des adresses link-local et les adresses de destination sont soit link-local, soit l'adresse multicast pour tous les noeuds RPL qui est \texttt{ff02::1a}.
 
 \subsubsection*{DIO}
     Les DIOs (DODAG Information Object) annoncent des informations sur le DODAG qui permettent aux noeuds de découvrir une instance RPL, de sélectionner un parent ou encore de maintenir le DODAG.
@@ -166,7 +164,7 @@ Les fonctions objectif OF0 et MRHOF, implémentées dans Contiki, sont décrites
 \subsubsection*{Routes Descendantes}
     %rfc: p 19
     Les routes descendantes sont construites et maintenues avec les DAOS.
-    L'échange des DAOs différe selon le mode de fonctionnement (MOP) du réseau. Ces différences sont détaillées en \fullref{subsec:state-mop}.
+    L'échange des DAOs diffère selon le mode de fonctionnement (MOP) du réseau. Ces différences sont détaillées en \fullref{subsec:state-mop}.
 
 \begin{figure}[H]
     \centering

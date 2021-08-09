@@ -1,12 +1,12 @@
 \section{IEEE 802.15.4e}\label{sec:etat_art-802.15.4}
 \renewcommand{\rightmark}{IEEE 802.15.4e}
-    802.15.4 est un protocole défini par IEEE en 2003. Il est destiné aux communications à faible débit réalsisées par des dispositifs ayant une alimentation en énergie limitée.
+    802.15.4 est un protocole défini par IEEE en 2003. Il est destiné aux communications à faible débit réalisées par des dispositifs ayant une alimentation en énergie limitée.
     Ce protocole qui est un standard pour les réseaux PANs (Personal Area Networks) couvre la couche physique et MAC du modèle OSI. En 2012, IEEE 802.15.4e a été défini pour palier certains problèmes de IEEE 802.15.4.
 
   \subsection*{Types de noeuds et topologie}
     Cette norme définit deux types de noeuds: les Full Function Devices (FFD) qui peuvent être des coordinateurs de PAN, de simple coordinateurs ou de simple noeuds et les Reduced Function Devices (RFD) qui utilisent une implémentation réduite du protocole et ne peuvent être que de simples noeuds.
 
-    Ces noeuds peuvent former des réseaux suivantes plusieurs topologies
+    Ces noeuds peuvent former des réseaux suivant plusieurs topologies
     comme la topologie en étoile pour laquelle plusieurs RFD sont connectés à un FFD qui
     joue le rôle de coordinateur ou encore la topologie peer-to-peer pour laquelle les FFD sont connectés les uns aux autres.
 
@@ -40,7 +40,8 @@
       \item La fiabilité des communications est limitée par l'utilisation de l'algorithme slotted   CSMA-CA qui offre un taux de transmission faible.
       \item Aucune protection contre les interférences en raison de l'utilisation d'un seul canal et en l'absence de mécanismes de sauts de fréquence (frequency hopping)
     \end{itemize}
-    Ces limitations ont menés à la création de 802.15.4.e en 2012 qui redifinit les protocoles MAC du  standard.
+    \vspace{0.5cm}
+    Ces limitations ont mené à la création de 802.15.4.e en 2012 qui redéfinit les protocoles MAC du  standard.
     Ainsi, 5 modes de fonctionnement de la couche MAC sont introduits:
     \begin{enumerate}
       \item Time Slotted Channel Hopping (TSCH)
@@ -58,7 +59,7 @@
         %ID aux autres noeuds sans avoir été préalablement associés.
     \end{enumerate}
     D'après l'article de Domenico De Guglielmo et ses co-auteurs~\cite{paper:802.15.4e-survey}, le standard ne définit que brièvement AMCA et BLINK.
-    LLDN est destiné aux réseaux à un seul saut et utilisant un seul canal. Il n'est donc pas pertinent pour ce projet. DSME utilise le concept de multi-superframe semblable aux superframes de IEEE 802.15.4 mis à part la CFP qui divise chacun des 7 slots en plusieurs fréquences.
+    LLDN est destiné aux réseaux à un seul saut et utilise un seul canal. Il n'est donc pas pertinent pour ce projet. DSME utilise le concept de multi-superframe semblable aux superframes de IEEE 802.15.4 mis à part la CFP qui divise chacun des 7 slots en plusieurs fréquences.
 
 
 \subsection*{TSCH (Time Slotted Channel Hopping)}\label{subsec:etat_art-802.15.4.tsch}
@@ -67,7 +68,7 @@ Ce mode de fonctionnement de la couche MAC, comme son nom l'indique, supporte à
 
 \subsubsection*{Slotframe}
 Dans ce mode, le concept de superframe de 802.15.4 est remplacé par le concept de slotframe.
-Une slotframe est un intervalle de temps qui est divisé en timeslots et se répète infiniment. Chaque timeslot permet à un noeud d'envoyer une trame et d'éventuellement recevoir son acquitement (ACK).
+Une slotframe est un intervalle de temps qui est divisé en timeslots et se répète indéfiniment. Chaque timeslot permet à un noeud d'envoyer une trame et d'éventuellement recevoir son acquitement (ACK).
 Chaque timeslot possède un identifiant appellé \textit{Absolute Slot Number} (ASN)
 et un identifiant au sein de la slotframe appelé \textit{Time Slot Number} (TSN).
 
