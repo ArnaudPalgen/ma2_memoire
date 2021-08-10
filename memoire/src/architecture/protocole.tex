@@ -15,9 +15,20 @@
     \end{figure}
 
 \subsection*{Etats de la racine LoRa}
-    Le diagramme d'état de la racine LoRa pour chaque racine RPL qui a rejoint le réseau est illustré à la figure~\ref{fig:archi-state-lora}. Une fois que la racine RPL (enfant de la racine LoRa) a rejoint le réseau, l'état est READY. Cela signifie que la racine LoRa est prête à recevoir des données de cet enfant. Si elle reçoit une trame DATA, les données sont transmises à la couche supérieure. Elle peut donc rester dans le même état. Elle reste aussi dans l'état ready si elle reçoit une QUERY et qu'il n'y a aucune données disponible pour cet enfant. En revanche, si des données sont disponibles, la racine LoRa entre dans l'état TRANSMIT pour éviter que l'état d'un autre enfant bascule dans READY ou WAIT ACK ce qui mettrait la radio en mode écoute alors qu'elle essaye de transmettre des paquets pour cet enfant. Cela bloquerait donc les transmissions pour cet enfant. Une fois dans l'état TRANSMIT, si la trame n'as pas besoin d'acquittement en retour, la racine LoRa bascule dans l'état WAIT TIMER dans lequel elle attend une possible demande de retransmission de son enfant.
-    %todo continue here
-    %todo rajouter une boucle à wait timer pour retransmission
+    Le diagramme d'état de la racine LoRa pour chaque racine RPL qui a rejoint le réseau est 
+    illustré à la figure~\ref{fig:archi-state-lora}. Une fois que la racine RPL (enfant de la 
+    racine LoRa) a rejoint le réseau, l'état est READY. Cela signifie que la racine LoRa est prête 
+    à recevoir des données de cet enfant. Si elle reçoit une trame DATA, les données sont 
+    transmises à la couche supérieure. Elle peut donc rester dans le même état. Elle reste aussi 
+    dans l'état READY si elle reçoit une QUERY et qu'il n'y a aucune données disponible pour cet 
+    enfant. En revanche, si des données sont disponibles, la racine LoRa entre dans l'état TRANSMIT 
+    dans lequel elle va envoyer tous les paquets disponibles pour cet enfant. Une fois dans l'état 
+    TRANSMIT la racine LoRa envoie un paquet et bascule dans l'état WAIT TIMER dans lequel elle 
+    attend une possible demande de retransmission de son enfant. Si une retransmission est 
+    demandée, le timer est réinitialisé. Une fois le timer expiré, elle retourne dans l'état 
+    TRANSMIT. S'il n'y a plus de données pour cet enfant, elle retourne dans l'état READY.
+
+    %Cela permet également d'éviter que l'état d'un autre enfant bascule dans READY ce qui mettrait la radio en mode écoute alors qu'elle essaye de transmettre des paquets pour cet enfant. Cela bloquerait donc les transmissions pour cet enfant.
 
     \begin{figure}[H]
         \centering
@@ -27,9 +38,15 @@
     \end{figure}
 
 \subsection*{Construction du réseau}
-    A l'initialisation du réseau, une racine RPL doit envoyer une trame avec la commande JOIN. Une fois reçue par la racine LoRa, celle-ci va répondre avec une trame JOIN\_RESPONSE qui fait office d'acquittement de la trame JOIN et dont la payload est le préfixe IP que la racine RPL doit diffuser dans son réseau.
+    A l'initialisation du réseau, une racine RPL doit envoyer une trame avec la commande JOIN. Une fois reçue par la racine LoRa, celle-ci va répondre avec une trame JOIN\_RESPONSE qui fait office d'acquittement de la trame JOIN et dont la payload est le préfixe du réseau de la racine RPL qu'elle doit diffuser dans son réseau.
 
-    Si la trame JOIN ou la trame JOIN\_RESPONSE ne sont pas reçues, la racine RPL retransmettra la trame JOIN à l'expiration d'un timer \textit{retransmit\_timer} déclenché à l'envoi de la trame JOIN. Cette retransmission se répète au maximum \textsc{max\_attempt} fois. Ensuite la racine RPL attend \textsc{sleep\_time} secondes avant de répéter le processus.
+    Si la trame JOIN ou la trame JOIN\_RESPONSE ne sont pas reçues, la racine RPL retransmettra la trame JOIN à l'expiration d'un timer \textit{retransmit\_timer} déclenché à l'envoi de la trame JOIN. Cette retransmission se répète au maximum \textsc{max\_attempt} fois. Si ce seuil est dépassé, la communication est considirée comme échouée. Dans ce cas, la racine attend $w$ secondes avant de répéter le processus. Où $w$ est défini par l'équation~\ref{eq:archi-wait}.
+    \begin{equation}\label{eq:archi-wait}
+        w=(retransmit\_timeout+(random(0,65535) \% retransmit\_timeout)\%60
+    \end{equation}
+    %todo continue here
+    
+    Ensuite la racine RPL attend \textsc{sleep\_time} secondes avant de répéter le processus.
 
     Une fois le préfixe reçu, la racine RPL peut initialiser le réseau RPL et y diffuser le préfixe.
 
