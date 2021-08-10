@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.20 (TeX Live 2019/Debian) (preloaded format=pdflatex 2020.9.15)  10 AUG 2021 15:38
+This is pdfTeX, Version 3.14159265-2.6-1.40.20 (TeX Live 2019/Debian) (preloaded format=pdflatex 2020.9.15)  10 AUG 2021 17:28
 entering extended mode
  \write18 enabled.
  file:line:error style messages enabled.
@@ -1080,30 +1080,30 @@ File: res/pictures/loramac-sequence-DOWNWARD.drawio.png Graphic file (type png)
 Package pdftex.def Info: res/pictures/loramac-sequence-DOWNWARD.drawio.png  used on input line 105.
 (pdftex.def)             Requested size: 362.5573pt x 224.64098pt.
  [28 <./res/pictures/loramac-sequence-UPWARD.drawio.png>]) (./src/architecture/hardware.tex [29 <./res/pictures/loramac-sequence-DOWNWARD.drawio.png>]
-<res/pictures/monted_rn2483.png, id=457, 2465.21pt x 2465.21pt>
+<res/pictures/monted_rn2483.png, id=458, 2465.21pt x 2465.21pt>
 File: res/pictures/monted_rn2483.png Graphic file (type png)
 <use res/pictures/monted_rn2483.png>
-Package pdftex.def Info: res/pictures/monted_rn2483.png  used on input line 14.
+Package pdftex.def Info: res/pictures/monted_rn2483.png  used on input line 18.
 (pdftex.def)             Requested size: 172.58234pt x 172.58234pt.
-<res/pictures/rn2483-block-diagram.png, id=459, 976.64874pt x 791.95876pt>
+<res/pictures/rn2483-block-diagram.png, id=460, 976.64874pt x 791.95876pt>
 File: res/pictures/rn2483-block-diagram.png Graphic file (type png)
 <use res/pictures/rn2483-block-diagram.png>
-Package pdftex.def Info: res/pictures/rn2483-block-diagram.png  used on input line 22.
+Package pdftex.def Info: res/pictures/rn2483-block-diagram.png  used on input line 26.
 (pdftex.def)             Requested size: 292.99689pt x 237.58946pt.
  [30 <./res/pictures/monted_rn2483.png>]
-LaTeX Font Info:    Trying to load font information for TS1+lmr on input line 52.
+LaTeX Font Info:    Trying to load font information for TS1+lmr on input line 56.
  (/usr/share/texmf/tex/latex/lm/ts1lmr.fd
 File: ts1lmr.fd 2009/10/30 v1.6 Font defs for Latin Modern
 ) [31 <./res/pictures/rn2483-block-diagram.png>]
-<res/pictures/raspberrypi3b+.png, id=485, 602.25pt x 401.5pt>
+<res/pictures/raspberrypi3b+.png, id=486, 602.25pt x 401.5pt>
 File: res/pictures/raspberrypi3b+.png Graphic file (type png)
 <use res/pictures/raspberrypi3b+.png>
-Package pdftex.def Info: res/pictures/raspberrypi3b+.png  used on input line 66.
+Package pdftex.def Info: res/pictures/raspberrypi3b+.png  used on input line 70.
 (pdftex.def)             Requested size: 210.79065pt x 140.5271pt.
-<res/pictures/remote-zolertia.jpg, id=492, 501.875pt x 501.875pt>
+<res/pictures/remote-zolertia.jpg, id=493, 501.875pt x 501.875pt>
 File: res/pictures/remote-zolertia.jpg Graphic file (type jpg)
 <use res/pictures/remote-zolertia.jpg>
-Package pdftex.def Info: res/pictures/remote-zolertia.jpg  used on input line 102.
+Package pdftex.def Info: res/pictures/remote-zolertia.jpg  used on input line 106.
 (pdftex.def)             Requested size: 150.56366pt x 150.56366pt.
  [32 <./res/pictures/raspberrypi3b+.png>])) (/home/arnaud/Documents/cours/universite/cours2020-2021/memoire/ma2_memoire/memoire/out/main.bbl [33 <./res/pictures/remote-zolertia.jpg>] [34
 
@@ -1170,10 +1170,10 @@ pdfTeX warning (dest): name{cite.paper\\penalty\040\\@M\040\040:lora-reverse-eng
 pdfTeX warning (dest): name{cite.sx1276\\penalty\040\\@M\040\040:datasheet} has been referenced but does not exist, replaced by a fixed one
 
 {/usr/share/texmf/fonts/enc/dvips/lm/lm-ts1.enc}{/usr/share/texmf/fonts/enc/dvips/lm/lm-ec.enc}{/usr/share/texmf/fonts/enc/dvips/lm/lm-mathex.enc}{/usr/share/texmf/fonts/enc/dvips/lm/lm-mathit.enc}{/usr/share/texmf/fonts/enc/dvips/lm/lm-rm.enc}{/usr/share/texmf/fonts/enc/dvips/lm/lm-mathsy.enc}</usr/share/texmf/fonts/type1/public/lm/lmbx12.pfb></usr/share/texmf/fonts/type1/public/lm/lmbxi10.pfb></usr/share/texmf/fonts/type1/public/lm/lmcsc10.pfb></usr/share/texmf/fonts/type1/public/lm/lmcsco10.pfb></usr/share/texmf/fonts/type1/public/lm/lmex10.pfb></usr/share/texmf/fonts/type1/public/lm/lmmi12.pfb></usr/share/texmf/fonts/type1/public/lm/lmmi6.pfb></usr/share/texmf/fonts/type1/public/lm/lmmi8.pfb></usr/share/texmf/fonts/type1/public/lm/lmr10.pfb></usr/share/texmf/fonts/type1/public/lm/lmr12.pfb></usr/share/texmf/fonts/type1/public/lm/lmr6.pfb></usr/share/texmf/fonts/type1/public/lm/lmr8.pfb></usr/share/texmf/fonts/type1/public/lm/lmri12.pfb></usr/share/texmf/fonts/type1/public/lm/lmro12.pfb></usr/share/texmf/fonts/type1/public/lm/lmsy10.pfb></usr/share/texmf/fonts/type1/public/lm/lmtt12.pfb></usr/share/texlive/texmf-dist/fonts/type1/urw/times/utmb8a.pfb></usr/share/texlive/texmf-dist/fonts/type1/urw/times/utmr8a.pfb>
-Output written on /home/arnaud/Documents/cours/universite/cours2020-2021/memoire/ma2_memoire/memoire/out/main.pdf (39 pages, 8593374 bytes).
+Output written on /home/arnaud/Documents/cours/universite/cours2020-2021/memoire/ma2_memoire/memoire/out/main.pdf (39 pages, 8593353 bytes).
 PDF statistics:
- 669 PDF objects out of 1000 (max. 8388607)
- 548 compressed objects within 6 object streams
+ 670 PDF objects out of 1000 (max. 8388607)
+ 549 compressed objects within 6 object streams
  189 named destinations out of 1000 (max. 500000)
  244 words of extra memory for PDF output out of 10000 (max. 10000000)
 
