@@ -37,46 +37,84 @@
         \label{fig:archi-state-lora}
     \end{figure}
 
-\subsection*{Construction du réseau}
-    A l'initialisation du réseau, une racine RPL doit envoyer une trame avec la commande JOIN. Une fois reçue par la racine LoRa, celle-ci va répondre avec une trame JOIN\_RESPONSE qui fait office d'acquittement de la trame JOIN et dont la payload est le préfixe du réseau de la racine RPL qu'elle doit diffuser dans son réseau.
+\subsection*{Construction du réseau}%done
+    A l'initialisation du réseau, une racine RPL doit envoyer une trame avec la commande JOIN. Une 
+    fois reçue par la racine LoRa, celle-ci va répondre avec une trame JOIN\_RESPONSE qui fait 
+    office d'acquittement de la trame JOIN et dont la payload est le préfixe du réseau de la racine 
+    RPL qu'elle doit diffuser dans son réseau.
 
-    Si la trame JOIN ou la trame JOIN\_RESPONSE ne sont pas reçues, la racine RPL retransmettra la trame JOIN à l'expiration d'un timer \textit{retransmit\_timer} déclenché à l'envoi de la trame JOIN. Cette retransmission se répète au maximum \textsc{max\_attempt} fois. Si ce seuil est dépassé, la communication est considirée comme échouée. Dans ce cas, la racine attend $w$ secondes avant de répéter le processus. Où $w$ est défini par l'équation~\ref{eq:archi-wait}.
+    Si la trame JOIN ou la trame JOIN\_RESPONSE ne sont pas reçues, la racine RPL retransmettra la 
+    trame JOIN à l'expiration d'un timer \textit{retransmit\_timer} déclenché à l'envoi de la trame 
+    JOIN. Cette retransmission se répète au maximum \textsc{max\_attempt} fois. Si ce seuil est 
+    dépassé, la communication est considirée comme échouée. Dans ce cas, la racine attend $w$ 
+    secondes avant de répéter le processus. $w$ est défini par l'équation~\ref{eq:archi-wait}, 
+    dans laquelle, $r$ est le temps ajouté au $retransmit\_timeout$ qui est le temps après lequel 
+    le timer \textit{retransmit\_timer} expire. $r$ est le modulo $retransmit\_timeout$ d'un nombre 
+    $rand$ qui doit être choisi aléatoirement.
     \begin{equation}\label{eq:archi-wait}
-        w=(retransmit\_timeout+(random(0,65535) \% retransmit\_timeout)\%60
+        \begin{split}
+            r = rand \% retransmit\_timeout \\
+            w = (retransmit\_timeout + r) \% 60
+        \end{split}
     \end{equation}
-    %todo continue here
     
-    Ensuite la racine RPL attend \textsc{sleep\_time} secondes avant de répéter le processus.
-
     Une fois le préfixe reçu, la racine RPL peut initialiser le réseau RPL et y diffuser le préfixe.
 
-\subsection*{Communications montantes}
-    Lorsq'un paquet est destiné à la racine LoRa, il va remonter jusqu'à la racine RPL. Ensuite celle-ci va l'envoyer à la racine LoRa.
-    %Cette dernière a toujours sa radio allumée car elle n'est pas contrainte en énergie.
+    Le diagramme de séquence de la figure~\ref{fig:proto-seq-join} illustre le processus de construction du réseau.
+    \begin{figure}[H]
+        \centering
+        \includegraphics[scale=0.6]{res/pictures/loramac-sequence-JOIN.drawio.png}
+        \caption{Diagramme de séquence de la construction du réseau.}
+        \label{fig:proto-seq-join}
+    \end{figure}
 
-    Si la trame LoRaMAC envoyée à la racine LoRa nécessite un acquittement, la racine RPL n'enverra pas d'autres trames tant que l'acquittement n'a pas été reçu (état \textit{wait\_response}).
-    A l'envoi de cette trame, le timer \textit{retransmit\_timer} est déclenché. S'il expire avant que l'acquittement ne soit reçu, la trame sera retransmise pour un maximum de 3 fois. Si la transmission échoue après ces trois tentatives, la racine RPL va faire une pause de \textsc{sleep\_time} secondes avant de réessayer. Si la communications échoue toujours, la racine RPL retourne dans l'état initiale et va recommencer la procédure pour rejoindre le réseau.
+\subsection*{Communications montantes}%done
+    Lorsq'un paquet est destiné à une adresse IPv6 externe au réseau d'une racine RPL, il va remonter jusqu'à celle-ci, qui va ensuite l'envoyer à la racine LoRa.
 
+    Si la trame envoyée à la racine LoRa nécessite un acquittement, la racine RPL n'enverra pas d'autres trames tant que l'acquittement n'a pas été reçu (état \textit{wait\_response}).
+    A l'envoi de cette trame, le timer \textit{retransmit\_timer} est déclenché. S'il expire avant que l'acquittement ne soit reçu, la trame sera retransmise pour un maximum de 3 fois.
+    Arpès 3 transmissions qui n'ont pas réussi, la racine RPL retourne dans l'état READY et le paquet est perdu.
 
-    Si la trame LoRaMAC envoyée à la racine LoRa ne nécessite pas d'acquittement, la récéption ne cette trame n'est pas garantie et la racine RPL peut directement envoyer d'autres trames.
+    Si la trame envoyée à la racine LoRa ne nécessite pas d'acquittement, la réception ne cette trame n'est pas garantie et la racine RPL peut directement transmettre les trames suivantes s'il y en a.
 
-\subsection*{Communications Descendantes}
+    Le diagramme de séquence de la figure~\ref{fig:proto-seq-upward} illustre le déroulement des communications montantes.
+    \begin{figure}[H]
+        \centering
+        \includegraphics[scale=0.6]{res/pictures/loramac-sequence-UPWARD.drawio.png}
+        \caption{Diagramme de séquence du trafique montant.}
+        \label{fig:proto-seq-upward}
+    \end{figure}    
+
+\subsection*{Communications Descendantes}%done
     La racine LoRa possède un buffer pour chaque réseau RPL dans lequel elle accumule les paquets destinés à ce réseau. Pour chaque racine RPL, lors de l'expiration, à intervalle régulier, du timer \textit{query\_timer}, une trame avec la commande QUERY est transmise à la racine LoRa.
 
-    La réponse à cette trame doit être un acquittement, si la racine LoRa n'a pas de paquets pour cette racine RPL, ou une trame avec la commande DATA.
+    La réponse à cette trame doit être un acquittement, si la racine LoRa n'a pas de paquets pour le réseau de cette racine RPL, ou une trame avec la commande DATA si un ou plusieurs paquets sont disponibles.
 
-    Si la racine LoRa possède plusieurs paquets à destination du même réseau RPL, la valeur du flag \textit{next} doit être à 1 pour toutes les trames envoyées expecté la dernière.
+    Si la racine LoRa possède plusieurs paquets à destination du même réseau RPL, la valeur du flag \textit{next} doit être à 1 pour toutes les trames envoyées à l'exception de la dernière.
 
     Comme pour les communications montantes, les retransmissions sont initiées par les racines RPL.
-    Le timer \textit{retransmit\_timer} est activé lorsque la QUERY est envoyée et lorsqu'une trame DATA a le flag \textit{next} à 1.
+    Le timer \textit{retransmit\_timer} est activé lorsque la QUERY est envoyée ou lorsqu'une trame DATA avec le flag \textit{next} à 1 est reçue.
 
-    Si une trame nécessite un acquittement et que l'acquittement n'est pas reçu, la racine LoRa n'envoie pas le paquet suivant. Dans ce cas deux situations sont possibles:
-    \begin{itemize}
-        \item La trame avait le flag \textit{next} à 1:\\
-            La racine RPL s'attend à une autre trame. L'acquittement va donc être retransmis à l'expiration du \textit{retransmit\_timer}. Il y a maximum 3 retransmissions.
-        \item La trame avait le flag \textit{next} à 0 ou l'acquittement a déja été retransmis trois fois:\\
-            La racine LoRa retransmettra le paquet concerné lors de la réception d'une QUERY.
-    \end{itemize}
+    Les acquittements ne sont pas nécessaire pour les communications descendantes, car quand la racine LoRa envoi une trame, cela signifie qu'une racine RPL attend cette trame. Si elle n'est pas reçue, la racine RPL demandera une retransmission via l'envoi de la dernière trame envoyée, c'est à dire la trame avec la commande QUERY.
+
+    Après 3 retransmissions, le paquet est perdu et le prochain sera transmis lors de la réception d'une QUERY.
+
+    Le diagramme de séquence de la figure~\ref{fig:proto-seq-downward} illustre le déroulement des communications descendantes.
+    \begin{figure}[H]
+        \centering
+        \includegraphics[scale=0.6]{res/pictures/loramac-sequence-DOWNWARD.drawio.png}
+        \caption{Diagramme de séquence du trafique descendant.}
+        \label{fig:proto-seq-downward}
+    \end{figure}
+
+
+    %Si une trame nécessite un acquittement et que l'acquittement n'est pas reçu, la racine LoRa %n'envoie pas le paquet suivant. Dans ce cas deux situations sont possibles:
+    %\begin{itemize}
+    %    \item La trame avait le flag \textit{next} à 1:\\
+    %        La racine RPL s'attend à une autre trame. L'acquittement va donc être retransmis à %l'expiration du \textit{retransmit\_timer} avec un maximum 3 retransmissions.
+    %    \item La trame avait le flag \textit{next} à 0:\\
+    %        La racine LoRa retransmettra le paquet concerné lors de la réception d'une QUERY.
+    %\end{itemize}
 
 \subsection*{Gestion des numéros de séquence}
     Les racines RPL et la racine LoRa possèdent deux compteurs: \textit{expected\_sn} et \textit{next\_sn}.
@@ -85,20 +123,25 @@
 
     La valeur du compteur \textit{next\_sn} est le numéro de séquence de la prochaine trame. Il est incrémenté de 1 lorsqu'une trame a été envoyée.
 
-\subsubsection*{Exemple de communications}
-    Les figures~\ref{fig:archi-sequence1} et~\ref{fig:archi-sequence2} ci-dessous, illustrent le protocole LoRaMAC qui vient d'être décrit dans cette section. La première illustre les échanges de messages sans retransmissions et la deuxième avec retransmissions. Les détails des timers ne sont pas présents sur ces figures pour plus de clarté.
-    \begin{figure}[H]
-        \centering
-        \includegraphics[scale=0.6]{res/pictures/loramac-sequence1.drawio.png}
-        \caption{Diagramme de séquence LoRaMAC.}
-        \label{fig:archi-sequence1}
-    \end{figure}
-    \begin{figure}[H]
-        \centering
-        \includegraphics[scale=0.6]{res/pictures/loramac-sequence2.drawio.png}
-        \caption{Diagramme de séquence LoRaMAC avec retransmissions.}
-        \label{fig:archi-sequence2}
-    \end{figure}
+    Les deux compteurs sont initialisés à zéro.
+
+%\subsubsection*{Exemple de communications}
+%    Les figures~\ref{fig:archi-sequence1} et~\ref{fig:archi-sequence2} ci-dessous, illustrent le 
+%    protocole LoRaMAC qui vient d'être décrit dans cette section. La première illustre les échanges 
+%    de messages sans retransmissions et la deuxième avec retransmissions. Les détails des timers ne 
+%    sont pas présents sur ces figures pour plus de clarté.
+%    \begin{figure}[H]
+%        \centering
+%        \includegraphics[scale=0.6]{res/pictures/loramac-sequence1.drawio.png}
+%        \caption{Diagramme de séquence LoRaMAC.}
+%        \label{fig:archi-sequence1}
+%    \end{figure}
+%    \begin{figure}[H]
+%        \centering
+%        \includegraphics[scale=0.6]{res/pictures/loramac-sequence2.drawio.png}
+%        \caption{Diagramme de séquence LoRaMAC avec retransmissions.}
+%        \label{fig:archi-sequence2}
+%    \end{figure}
 
 %\subsection{Evitement de collision}
 %    L'envoi des trames est réalisé avec l'algorithme CSMA/CA pour les racines RPL. 
