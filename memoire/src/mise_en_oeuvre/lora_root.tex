@@ -1,48 +1,86 @@
 \section{Racine LoRa}\label{sec:work-lora-root}
 \renewcommand{\rightmark}{Trames LoRaMac}
 
-    Cette section décrit l'implémentation de l'architecture pour la racine LoRa.
-    L'implémentation se présente sous forme d'un package python qui donne accès à une variable NETWORK\_STACK qui fait référence à un objet NetworkStack qui permet d'accèder aux trois différentes couches, l'adresse LoRaMAC du noeud, son adresse IPv6 issue de la conversion de son adresse LoRaMAC ainsi que trois fonctions: init, send et register\_listener qui sont des fonctions de l'interface IP et permettent respectivement d'initialiser la pile réseau, d'envoyer des paquets IPv6 et d'enregister une fonction callback qui sera appelée lorsqu'un paquet IPv6 reçu est disponible. L'usage et l'implémentation de ses fonctions sont détaillées dans la description de la \nameref{subsec:work-loraroot:iplayer}.
+    Le RN2483 est interfacé à l'ordinateur de développement via un bridge USB-UART.
+
+    L'implémentation se présente sous forme d'un package python qui donne accès à une variable 
+    \texttt{NETWORK\_STACK} qui fait référence à une instance de la classe \texttt{NetworkStack} et permet d'accèder aux trois 
+    différentes couches, l'adresse LoRaMAC du noeud, son adresse IPv6 issue de la conversion de son 
+    adresse LoRaMAC ainsi que trois fonctions: \texttt{init}, \texttt{send} et \texttt{register\_listener} qui sont des 
+    fonctions de l'interface IP et permettent respectivement d'initialiser la pile réseau, 
+    d'envoyer des paquets IPv6 et d'enregister une fonction callback qui sera appelée lorsqu'un 
+    paquet IPv6 reçu est disponible. L'usage et l'implémentation de ses fonctions sont détaillées 
+    dans la description de la \nameref{subsec:work-loraroot:iplayer}.
 
 \subsection*{Couche physique}
-    La couche physique définit le format des adresses et trames LoRaMAC, ainsique que le driver 
+    La couche physique définit le format des adresses et trames LoRaMAC, ainsi que que le driver 
     permettant de simplifier l'utilisation du RN2483 par l'abstraction des communications UART.
 
-    La classe LoraAddr qui définit les adresses LoRaMAC, possède deux attributs entier qui sont le préfixe de l'adresse et le node-id. Cette classe possède également une fonction toHex() qui permet de sérialiser une adresse. C'est à dire de la convertir en une chaine de caractères hexadecimal qui est le format de donnée demandé par le RN2483.
+    La classe \texttt{LoraAddr} qui définit les adresses LoRaMAC et possède deux attributs entier 
+    qui sont le préfixe de l'adresse et le \textit{node-id}. Cette classe possède également une 
+    fonction \texttt{toHex()} qui permet de sérialiser une adresse. C'est à dire de la convertir en 
+    une chaine de caractères hexadecimal qui est le format de donnée demandé par le RN2483.
 
-    La classe LoraFrame qui définit une trame LoRaMAC possède comme attributs tous les champs d'une trame LoRaMAC. C'est à dire, les adresses source et destination, la commande MAC dont le type choisi est une énumération, la payload, le numéro de séquence et deux booléens pour les flags k et has\_next. COmme la classe LoraAddr, elle possède une fonction toHex mais également une fonction build(data: str) qui retourne une instance d'une LoraFrame construite sur base d'une chaine de caractères hexadécimal.
+    La classe \texttt{LoraFrame} qui définit une trame LoRaMAC possède comme attributs tous les 
+    champs d'une trame LoRaMAC. C'est à dire, les adresses source et destination, la commande MAC 
+    dont le type choisi est une énumération, la payload, le numéro de séquence et deux booléens 
+    pour les flags \textit{k} et \textit{has\_next}. Comme la classe \texttt{LoraAddr}, elle 
+    possède une fonction \texttt{toHex()} mais également une fonction \texttt{build(data: str)} qui 
+    retourne une instance d'une \texttt{LoraFrame} construite sur base d'une chaine de caractères hexadécimal.
 
-    Ces deux classes utilisent l'annotation @dataclass qui génère des fonctions spéciales comme \_\_init\_\_() et \_\_repr\_\_() automatiquement à partir d'une suite d'attributs en utilisant les annotations de type. Pour la classe LoraAddr, le paramètre de l'annotation frozen est mis à True pour rendre cette classe immuable.
+    Ces deux classes utilisent l'annotation \texttt{@dataclass} qui génère des fonctions spéciales 
+    comme \texttt{\_\_init\_\_()} et \texttt{\_\_repr\_\_()} automatiquement à partir d'une suite 
+    d'attributs en utilisant les annotations de type. Pour la classe \texttt{LoraAddr}, le 
+    paramètre de l'annotation, \texttt{frozen} est mis à \textit{True} pour rendre cette classe 
+    immuable.
 
-    Le driver du RN2483 est implémenté par la classe LoraPhy qui ne possède que des attributs destinés à un usage interne. Son constructeur nécéssite néanmoins deux paramètres, le baudrate et le port de la connection série.
+    Le driver du RN2483 est implémenté par la classe \texttt{LoraPhy} qui ne possède que des 
+    attributs destinés à un usage interne. Son constructeur nécéssite néanmoins deux paramètres: le 
+    baudrate et le port de la connection série.
 
-    La première fonction qui doit être appellée avant tout interraction avec le RN2483 est la fonction init(). Cette fonction ouvre la connexion série en instanciant un objet Serial de la librairie python pyserial version 3.4, démarre deux Threads utilisés pour les communications entrantes et sortantes et envoi les deux premières trames UART permettant de désactiver le protocole MAC, LoRaWAN, présent sur le RN2483 et de définir la fréquence radio utilisée.
+    La première fonction qui doit être appellée avant tout interraction avec le RN2483 est la 
+    fonction \texttt{init()}. Cette fonction ouvre la connexion série en instanciant un la classe 
+    \texttt{Serial} de la librairie python \textit{pyserial} (version 3.4), démarre deux Threads 
+    utilisés pour les communications entrantes et sortantes et envoi les deux premières trames UART 
+    permettant de désactiver le protocole MAC, LoRaWAN, présent sur le RN2483 et de définir la 
+    fréquence radio utilisée.
 
-    L'envoi des deux premières trames UART se fait via une fonction interne \_send\_phy(data: UartFrame). Cette fonction ajoute la trame UART passée en paramètre dans un buffer d'envoi s'il n'est pas complètement rempli. 
-    Une trame UART est définie par la classe UartFrame, également une dataclass, qui possède trois attributs:
+    L'envoi d'une trame UART se fait par la fonction interne \texttt{\_send\_phy(data)}. Cette fonction ajoute la trame UART passée en paramètre dans un buffer d'envoi s'il n'est pas complètement rempli. 
+    Une trame UART est définie par la classe \texttt{UartFrame}, également avec l'annotation \texttt{@dataclass}, et possède trois attributs:
     \begin{itemize}
-        \item expected\_response est de liste de réponses attendues en retour de l'envoi de cette trame. Les réponses possibles du RN2483 sont repris dans une énumération. 
-        \item cmd est la command UART qui est également une énumération. Une commande UART est par exemple, "mac pause" pour désactiver LoRaWAN ou encore "radio tx" pour transmettre des données.
-        \item data qui est une chain de caractères représentant les données suivant la commande UART. Cette chaîne de craractère peut être vide pour certaines commandes comme "mac pause".
-        L'assemblage de cmd et data donne une trame UART. Par exemple pour transmettre les données "AB16FD", la command UART est radio tx AB16FD"
+        \item \texttt{expected\_response} est de liste de réponses attendues en retour de l'envoi de cette trame. Les réponses possibles du RN2483 sont reprises dans une énumération. 
+        \item \texttt{cmd} est la command UART qui est également une énumération. Une commande UART est par exemple, \textit{"mac pause"} pour désactiver LoRaWAN ou encore \textit{"radio tx"} pour transmettre des données.
+        \item \texttt{data} qui est une chaîne de caractères représentant les données suivant la commande UART. Cette chaîne de craractère peut être vide pour certaines commandes comme \textit{"mac pause"}.
+        L'assemblage de \texttt{cmd} et \texttt{data} donne une trame UART. Par exemple pour transmettre les données \textit{"AB16FD"}, la command UART est \textit{radio tx AB16FD"}
     \end{itemize}
+    \vspace{0.5cm}
 
-    Une fois qu'une trame a été ajoutée au buffer d'envoi, le Thread \_uart\_tx va se charger de 
-    son envoi. Le buffer d'envoi (comme le buffer de réception) est une Queue FIFO de la librairie 
-    python queue.
+    Une fois qu'une trame a été ajoutée au buffer d'envoi, le Thread \texttt{\_uart\_tx} va se charger de 
+    son envoi. Le buffer d'envoi (comme le buffer de réception) est une \texttt{Queue} FIFO de la librairie python \texttt{queue}.
     
     Pour récupérer une trame, il faut que une réponse correcte de la trame précédente ai été reçue ou que la trame a envoyée soit la première.
-    Pour déterminer si une trame peut être envoyée le Thread vérifie que la connection série existe et que l'attribut du driver, \_can\_send, est vrai. Dans le cas contraire, le Thread est bloqué par une variable conditionelle \_can\_send\_cond également attribu du driver.
-    La trame à envoyée est récupérée via une fonction get dont le paramètre block est 
-    mis à True, ce qui bloque le Thread quand aucune donnée n'est disponible dans le buffer et évite donc de consommer des ressources. Une fois la trame envoyée, un attribut du driver, \_can\_send est mis à False.
+    Pour déterminer si une trame peut être envoyée le Thread vérifie que la connexion série existe 
+    et que la valeur l'attribut du driver, \texttt{\_can\_send} soit \textit{True}. Dans le cas 
+    contraire, le Thread est bloqué par une variable conditionelle \texttt{\_can\_send\_cond} également attribu du driver.
+    La trame à envoyée est récupérée via une fonction \texttt{get} dont le paramètre \texttt{block} est 
+    mis à \textit{True}, ce qui bloque le Thread quand aucune donnée n'est disponible dans le buffer et évite donc de consommer des ressources. Une fois la trame envoyée, un attribut du driver, \texttt{\_can\_send} est mis à \textit{False}.
 
-    Le Thread \_uart\_rx lis les données de la connexion série via la fonction readline() de la classe Serial. Cette méthode bloque le Thread jusqu'au moment où une ligne peut être lue sur la connexion série. Une fois la ligne reçue, celle 
+    Le Thread \texttt{\_uart\_rx} lis les données de la connexion série via la fonction
+    \texttt{readline()} de la classe \texttt{Serial}. Cette méthode bloque le Thread jusqu'au 
+    moment où une ligne peut être lue sur la connexion série. Une fois la ligne reçue, la fonction 
+    \texttt{\_process\_response} retourne \textit{True} si la réponse fait partie de celles 
+    attendues et \textit{False} si ce n'est pas le cas. Cette fonction s'occupe égalemet d'ajouter 
+    au buffer de réception une trame LoRaMAC si la réponse UART commence par \textit{"radio\_rx"}. 
+    Si \texttt{\_process\_response} retourne 
+    \textit{True}, le Thread met la valeur de \texttt{\_can\_send} à \textit{True} et lui notifie que la valeur de cette variable a changée via la variable conditionelle \texttt{\_can\_send\_cond}. Le Thread \texttt{\_uart\_tx} peut ainsi envoyer la prochaine trame UART s'il y en a une.
 
-
-
-
-
-
+    Les fonctions destinées à un usage externe sont les suivantes:
+    \begin{itemize}
+        \item \texttt{phy\_send(loraFrame: LoraFrame)}: Permet d'envoyer une trame LoRaMAC
+        \item \texttt{phy\_timeout(timeout: int)}: Permet de définir le temps d'expiration du watchdog timer qui est activé pour chaque transmission ou réception. Pour le désactiver, la valeur qui doit être utilisée est zéro.
+        \item \texttt{phy\_rx()}: Permet de mettre le RN2483 en mode réception
+        \item \texttt{getFrame()}: Permet d'obtenir la prochaine trame du biffer de réception. Si le buffer est vide, la fonction est bloquante.
+    \end{itemize}
 
 \subsection*{Couche MAC}
 

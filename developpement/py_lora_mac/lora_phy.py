@@ -284,6 +284,17 @@ class LoraPhy:
         )
         self._send_phy(f)
 
+    def getFrame(self) -> LoraFrame:
+        """Get the next received frame.
+
+        This method block until a frame is available.
+
+        Returns:
+            LoraFrame: A received frame.
+        """
+        frame = self._rx_buffer.get()
+        return frame
+
     def _send_phy(self, data: UartFrame) -> bool:
         """Append data to the TX buffer.
 
@@ -336,17 +347,6 @@ class LoraPhy:
                 return True
         log.debug("unexpected response")
         return False
-
-    def getFrame(self) -> LoraFrame:
-        """Get the next received frame.
-
-        This method block until a frame is available.
-
-        Returns:
-            LoraFrame: A received frame.
-        """
-        frame = self._rx_buffer.get()
-        return frame
 
     def _uart_rx(self):
         """Method used as Thread to read data from the serial connection."""
