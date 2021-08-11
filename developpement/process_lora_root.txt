@@ -22,7 +22,7 @@
 
     * seq > expected
         > lost (expected - seq) frames
-        > deliver data to upper layer
+        > deliver data to upper layerCo
 
 - ON_JOIN -> done
     * seq == 0

@@ -23,7 +23,7 @@ MIN_WAIT_TIME = 1  # sec
 
 
 @unique
-class ChildState(Enum):
+class ChildState(Enum):#todo remove
     NEW = auto()
     READY = auto()
     WAIT_RESPONSE = auto()
@@ -412,6 +412,7 @@ class LoraMac:
                 if r2 is None:
                     log.warning("child not in childs list")
                 self.available_prefix.put_nowait(child.addr.prefix)
+                #todo supprimer le fait que on met les préfixe dans une liste
             return
 
         new_prefix = None

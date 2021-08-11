@@ -39,5 +39,51 @@
     Mise à part la fonction \texttt{getFrame()}, toutes les autres fonctions publiques alimentent le buffer d'envoi avec la trame UART appropriée.
 
 \subsection*{Couche MAC}
+    L'implémentation du protocole LoRaMAC utilise deux classes: LoraChild et LoraMac. La première sert à conserver toutes les informations utiles d'une racine RPL (enfant) comme son adresse, ses compteurs de numéros de séquence ou encore la dernière trame envoyée.
+    La deuxième est l'implémentation du protocole LoRaMAC.%todo reformuler
 
+    Les trames LoRaMAC sont récupérées du buffer de la couche physique par un Thread. Une fois qu'une trame est récupérée, une première fonction vérifie que la trame LoRaMAC est bien destinée à la racine du réseau, récupère l'enfant s'il existe dans la liste des enfants. Si le numéro de séquence de la trame est 1, l'enfant est marqué comme ayant rejoint le réseau. Cette fonction envoi ensuite la trame vers la fonction de traitement appropriée selon sa commande MAC.
+
+    Pour la suite du mémoire, $sf$ est défini comme le numéro de séquence d'une trame reçue et $se$ le numéro de séquence attendu.
+
+    
+    \subsubsection*{Réception d'une trame JOIN}
+    Lorsque la trame est reçue, si le numéro de séquence est égal à zéro, une trame 
+    JOIN\_RESPONSE est envoyée avec le préfixe comme payload. Sinon, la trame est ignorée est 
+    aucune action n'est réalisée. Une instance de LoraMac possède un compteur qui sert à attribuer 
+    les préfixes et qui est incrémenté à chaque JOIN\_RESPONSE envoyée. Si tous les préfixes sont pris, la racine LoRa ne répond pas à la trame JOIN.
+
+    \subsubsection*{Réception d'une trame QUERY}
+    Lorsqu'une trame QUERY est reçue, si $sf < se$ la dernière trame envoyée est retransmise. Si
+    $sf > se$ cela signifie que $sf-se$ trames ont été perdues. Enfin si $sf \geq se$, la racine LoRa va instancie un nouveau Thread pour l'enfant, s'il n'en possède pas déja un actif. Ce Thread a pour rôle d'envoyer toutes les trames LoRaMAC à destination de cet enfant.
+    Tant que le buffer de l'enfant n'est pas vide, ce Thread procède comme suit:
+    \begin{enumerate}
+        \item Il récupère une trame dans le buffer est l'envoie
+        \item Il attend maximum MIN\_WAIT\_TIME secondes
+        \item Si aucune retransmission n'a eu lieu pendant l'attente, il envoie la prochaine trame
+        \item Si une retransmission a eu lieu, il stoppe cette attente et retourne au point 2
+    \end{enumerate}
+
+    Si le nombre de retransmissions a atteint MAX\_RETRANSMIT, le trame est perdu et la prochaine sera envoyée lors de la réception de la prochaine QUERY.
+
+    \subsubsection*{Réception d'une trame DATA}
+        Comme lors de la réception d'une QUERY, si $sf < se$ la dernière trame envoyée est retransmise. Si $sf > se$ cela signifie que $sf-se$ trames ont été perdues. Par contre si $sf \geq se$, la racine les adresses source, destination et la payload sont envoyée à la couche supérieure. Si la trame reçue nécéssite un acquittement, celui-ci est envoyé.
+
+
+    \subsection*{Fonctions publiques de la couche MAC}
+        La couche MAC possède trois fonctions publiques pour qu'une couche supérieure puisse l'utiliser.
+        \begin{itemize}
+            \item \textbf{\texttt{register\_listener(listener: Callable[[LoraAddr, str], None])}}:\\
+                Permet à une couche supérieure d'enregistrer une fonction callback qui sera appelée lorsque un paquet est disponible.
+            \item \textbf{\texttt{mac\_send(dest:LoraAddr, payload:str)}}:\\
+                Permet d'envoyer une trame LoRaMAC.
+            \item \textbf{\texttt{init()}}:\\
+                Initialise la couche MAC. C'est a dire, initialise la couche physique,
+                désactive le watchdog timer, met le RN2483 en mode écoute et démarre le Thread de réception.
+        \end{itemize}
+        
 \subsection*{Couche IP}\label{subsec:work-loraroot:iplayer}
+        %todo
+
+\subsection*{Discussion}
+        %todo
