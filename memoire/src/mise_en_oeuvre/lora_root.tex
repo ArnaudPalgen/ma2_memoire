@@ -73,17 +73,37 @@
     \subsection*{Fonctions publiques de la couche MAC}
         La couche MAC possède trois fonctions publiques pour qu'une couche supérieure puisse l'utiliser.
         \begin{itemize}
-            \item \textbf{\texttt{register\_listener(listener: Callable[[LoraAddr, str], None])}}:\\
+            \item \textbf{\texttt{register\_listener(listener: Callable[[LoraAddr, str], None])}}\\
                 Permet à une couche supérieure d'enregistrer une fonction callback qui sera appelée lorsque un paquet est disponible.
-            \item \textbf{\texttt{mac\_send(dest:LoraAddr, payload:str)}}:\\
+            \item \textbf{\texttt{mac\_send(dest:LoraAddr, payload:str)}}\\
                 Permet d'envoyer une trame LoRaMAC.
-            \item \textbf{\texttt{init()}}:\\
+            \item \textbf{\texttt{init()}}\\
                 Initialise la couche MAC. C'est a dire, initialise la couche physique,
                 désactive le watchdog timer, met le RN2483 en mode écoute et démarre le Thread de réception.
         \end{itemize}
         
 \subsection*{Couche IP}\label{subsec:work-loraroot:iplayer}
-        %todo
+        La couche IP est une interface permettant d'envoyer et de recevoir des paquets IPv6 via le protocole LoRaMAC. Pour la représentation et la manipulation des adresses IPv6, la librairie ipaddress version 1.0 est utilisée. Pour la manipulation des paquets IPv6, la librairie scapy version 2.4.5 est utilisée.
+
+        Lorsqu'une trame de la couche MAC est reçue, le paquet IPv6 est reconstruit comme suit:
+        \begin{enumerate}
+            \item Les premiers octets de la payload sont extraits
+            \item Les adresses source et destination sont converties en adresses IPv6 et ajoutées à la suite des 8 premiers octets
+            \item Le reste de la trame IPv6 est ajoutée à la suite des adresses
+        \end{enumerate}
+        
+        Une fois le paquet IPv6 construit, il est envoyé à la couche supérieure.
+        Pour les paquets IPv6 devant être envoyés, les adresses IPv6 sont extraites du paquet et l'adresse de destination est conveertie en adresse LoRaMAC. Le reste du paquet est la payload de la trame LoRaMAC.
+
+        Les fonctions publiques de la couche d'inteface IP sont les suivantes:
+        \begin{itemize}
+            \item \textbf{\texttt{init()}}\\Initialise la couche d'interface IP. C'est à dire, initialise la couche MAC et enregistre sa fonction callback de réception de trame LoRaMAC auprès de celle-ci.
+            \item \textbf{\texttt{register\_listener(listener: Callable[[IPv6], None])}}\\
+            Permet à une couche supérieure d'enregistrer une fonction callback qui sera appelée lorsque un paquet est disponible.
+            \item \textbf{\texttt{send(ip\_packet: IPv6)}}\\
+            Permet d'envoyer un paquet IPv6.
+        \end{itemize}
+
 
 \subsection*{Discussion}
         %todo
