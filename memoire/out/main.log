@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.20 (TeX Live 2019/Debian) (preloaded format=pdflatex 2020.9.15)  10 AUG 2021 17:28
+This is pdfTeX, Version 3.14159265-2.6-1.40.20 (TeX Live 2019/Debian) (preloaded format=pdflatex 2020.9.15)  11 AUG 2021 11:59
 entering extended mode
  \write18 enabled.
  file:line:error style messages enabled.
@@ -840,7 +840,7 @@ LaTeX Info: Redefining \nameref on input line 79.
  ABD: EveryShipout initializing macros
 Package caption Info: Begin \AtBeginDocument code.
 Package caption Info: End \AtBeginDocument code.
-<page_garde/page_garde.pdf, id=55, 597.50829pt x 845.0471pt>
+<page_garde/page_garde.pdf, id=63, 597.50829pt x 845.0471pt>
 File: page_garde/page_garde.pdf Graphic file (type pdf)
 <use page_garde/page_garde.pdf>
 Package pdftex.def Info: page_garde/page_garde.pdf  used on input line 82.
@@ -849,7 +849,7 @@ File: page_garde/page_garde.pdf Graphic file (type pdf)
 <use page_garde/page_garde.pdf>
 Package pdftex.def Info: page_garde/page_garde.pdf  used on input line 82.
 (pdftex.def)             Requested size: 597.50682pt x 845.04504pt.
-<page_garde/page_garde.pdf, id=58, page=1, 597.50829pt x 845.0471pt>
+<page_garde/page_garde.pdf, id=66, page=1, 597.50829pt x 845.0471pt>
 File: page_garde/page_garde.pdf Graphic file (type pdf)
 <use page_garde/page_garde.pdf, page 1>
 Package pdftex.def Info: page_garde/page_garde.pdf , page1 used on input line 82.
@@ -916,20 +916,49 @@ LaTeX Font Info:    External font `lmex10' loaded for size
 
 ] (./src/etat_art/etat_art.tex
 Chapitre 1.
-(./src/etat_art/related_work.texpdfTeX warning (ext4): destination with the same identifier (name{page.1}) has been already used, duplicate ignored
+(./src/etat_art/related_work.tex
+
+LaTeX Warning: Citation `6328420' on page 1 undefined on input line 7.
+
+
+LaTeX Warning: Citation `s20236893' on page 1 undefined on input line 15.
+
+
+LaTeX Warning: Citation `8847137' on page 1 undefined on input line 18.
+
+pdfTeX warning (ext4): destination with the same identifier (name{page.1}) has been already used, duplicate ignored
 <to be read again> 
                    \relax 
 l.19 
       [1
 
-]) (./src/etat_art/lora.tex
+]
+
+LaTeX Warning: Citation `8115756' on page 2 undefined on input line 20.
+
+) (./src/etat_art/lora.tex
+
+LaTeX Warning: Citation `sx1276:datasheet' on page 2 undefined on input line 4.
+
+
+LaTeX Warning: Citation `paper:lora-reverse-engineering' on page 2 undefined on input line 4.
+
+
+LaTeX Warning: Citation `lora-frequencyplan' on page 2 undefined on input line 22.
+
 <res/pictures/lora-sf.png, id=123, 1305.87875pt x 691.58376pt>
 File: res/pictures/lora-sf.png Graphic file (type png)
 <use res/pictures/lora-sf.png>
 Package pdftex.def Info: res/pictures/lora-sf.png  used on input line 30.
 (pdftex.def)             Requested size: 326.46889pt x 172.89551pt.
- [2]
-<res/pictures/lora-frame-format.drawio.png, id=140, 596.2275pt x 168.63pt>
+
+LaTeX Warning: Citation `ghoslya' on page 2 undefined on input line 31.
+
+
+LaTeX Warning: Citation `ghoslya' on page 2 undefined on input line 31.
+
+[2]
+<res/pictures/lora-frame-format.drawio.png, id=134, 596.2275pt x 168.63pt>
 File: res/pictures/lora-frame-format.drawio.png Graphic file (type png)
 <use res/pictures/lora-frame-format.drawio.png>
 Package pdftex.def Info: res/pictures/lora-frame-format.drawio.png  used on input line 48.
@@ -945,84 +974,158 @@ Overfull \hbox (8.30757pt too wide) in paragraph at lines 83--85
  []
 
 ) (./src/etat_art/802.15.4.tex [4]
-<res/pictures/superframe.png, id=172, 558.45pt x 162.79pt>
+<res/pictures/superframe.png, id=165, 558.45pt x 162.79pt>
 File: res/pictures/superframe.png Graphic file (type png)
 <use res/pictures/superframe.png>
 Package pdftex.def Info: res/pictures/superframe.png  used on input line 27.
 (pdftex.def)             Requested size: 446.76059pt x 130.23215pt.
- [5 <./res/pictures/superframe.png>] [6]
+
+
+LaTeX Warning: Citation `paper:802.15.4e-survey' on page 5 undefined on input line 35.
+
+[5 <./res/pictures/superframe.png>]
+
+LaTeX Warning: Citation `paper:802.15.4e-survey' on page 6 undefined on input line 61.
+
+[6]
 Overfull \hbox (4.31013pt too wide) in paragraph at lines 75--78
 \T1/lmr/m/n/12 mes-lots par-ta-gés plu-sieurs noeuds peuvent com-mu-ni-quer. Dans ce cas, CSMA/
  []
 
-<res/pictures/sloframe.png, id=196, 411.71138pt x 108.97406pt>
+<res/pictures/sloframe.png, id=186, 411.71138pt x 108.97406pt>
 File: res/pictures/sloframe.png Graphic file (type png)
 <use res/pictures/sloframe.png>
 Package pdftex.def Info: res/pictures/sloframe.png  used on input line 81.
 (pdftex.def)             Requested size: 288.19598pt x 76.28131pt.
-<res/pictures/tsch.drawio.png, id=198, 430.60875pt x 258.9675pt>
+<res/pictures/tsch.drawio.png, id=188, 430.60875pt x 258.9675pt>
 File: res/pictures/tsch.drawio.png Graphic file (type png)
 <use res/pictures/tsch.drawio.png>
 Package pdftex.def Info: res/pictures/tsch.drawio.png  used on input line 98.
 (pdftex.def)             Requested size: 215.30383pt x 129.48341pt.
 [7 <./res/pictures/sloframe.png>]) (./src/etat_art/rpl.tex
+
+LaTeX Warning: Citation `rfc:rpl' on page 8 undefined on input line 4.
+
+
+LaTeX Warning: Citation `paper:rpl-study' on page 8 undefined on input line 6.
+
+
+LaTeX Warning: Citation `rfc:rpl' on page 8 undefined on input line 13.
+
+
 Overfull \hbox (12.92256pt too wide) in paragraph at lines 17--22
 []\T1/lmr/m/n/12 RPL construit un DO-DAG (Des-ti-na-tion Orien-ted Di-rec-ted Acy-clic Graph)
  []
 
-<res/pictures/dodag.drawio.png, id=211, 666.49pt x 474.77374pt>
+<res/pictures/dodag.drawio.png, id=198, 666.49pt x 474.77374pt>
 File: res/pictures/dodag.drawio.png Graphic file (type png)
 <use res/pictures/dodag.drawio.png>
 Package pdftex.def Info: res/pictures/dodag.drawio.png  used on input line 25.
 (pdftex.def)             Requested size: 299.91772pt x 213.64621pt.
-[8 <./res/pictures/tsch.drawio.png>] [9 <./res/pictures/dodag.drawio.png>] [10]
+[8 <./res/pictures/tsch.drawio.png>]
+
+LaTeX Warning: Citation `rfc:of0' on page 9 undefined on input line 35.
+
+
+LaTeX Warning: Citation `rfc:mrhof' on page 9 undefined on input line 35.
+
+
+LaTeX Warning: Citation `paper:etx' on page 9 undefined on input line 45.
+
+[9 <./res/pictures/dodag.drawio.png>]
+
+LaTeX Warning: Citation `rfc:rpl' on page 10 undefined on input line 55.
+
+
+LaTeX Warning: Citation `rfc:mrhof' on page 10 undefined on input line 89.
+
+[10]
 Overfull \hbox (21.41135pt too wide) in paragraph at lines 92--94
 \T1/lmr/m/n/12 Le RFC 6719 re-com-mande 192 comme va-leur pour \T1/lmr/m/scsl/12 pa-rent_switch_treshold
  []
+
+
+LaTeX Warning: Citation `rfc:rpl' on page 11 undefined on input line 96.
 
 LaTeX Font Info:    Trying to load font information for T1+lmtt on input line 96.
 (/usr/share/texmf/tex/latex/lm/t1lmtt.fd
 File: t1lmtt.fd 2009/10/30 v1.6 Font defs for Latin Modern
 )
-<res/pictures/dio.drawio.png, id=248, 656.4525pt x 325.215pt>
+<res/pictures/dio.drawio.png, id=224, 656.4525pt x 325.215pt>
 File: res/pictures/dio.drawio.png Graphic file (type png)
 <use res/pictures/dio.drawio.png>
 Package pdftex.def Info: res/pictures/dio.drawio.png  used on input line 116.
 (pdftex.def)             Requested size: 328.22545pt x 162.6071pt.
  [11]
-<res/pictures/dao.drawio.png, id=264, 647.41875pt x 285.065pt>
+
+LaTeX Warning: Citation `rfc:trickle' on page 12 undefined on input line 121.
+
+<res/pictures/dao.drawio.png, id=239, 647.41875pt x 285.065pt>
 File: res/pictures/dao.drawio.png Graphic file (type png)
 <use res/pictures/dao.drawio.png>
 Package pdftex.def Info: res/pictures/dao.drawio.png  used on input line 138.
 (pdftex.def)             Requested size: 323.70857pt x 142.53215pt.
- [12 <./res/pictures/dio.drawio.png>] [13 <./res/pictures/dao.drawio.png>]
-<res/pictures/dao-dio.drawio.png, id=289, 686.565pt x 494.84875pt>
+[12 <./res/pictures/dio.drawio.png>] [13 <./res/pictures/dao.drawio.png>]
+<res/pictures/dao-dio.drawio.png, id=263, 686.565pt x 494.84875pt>
 File: res/pictures/dao-dio.drawio.png Graphic file (type png)
 <use res/pictures/dao-dio.drawio.png>
 Package pdftex.def Info: res/pictures/dao-dio.drawio.png  used on input line 171.
 (pdftex.def)             Requested size: 343.28166pt x 247.42377pt.
- [14 <./res/pictures/dao-dio.drawio.png>]
-<res/pictures/rpl-nonstoring.drawio.png, id=300, 352.31625pt x 364.36125pt>
+
+
+LaTeX Warning: Citation `rfc:rpl-routing-header' on page 14 undefined on input line 190.
+
+
+LaTeX Warning: Citation `rfc:ipv6' on page 14 undefined on input line 190.
+
+[14 <./res/pictures/dao-dio.drawio.png>]
+<res/pictures/rpl-nonstoring.drawio.png, id=272, 352.31625pt x 364.36125pt>
 File: res/pictures/rpl-nonstoring.drawio.png Graphic file (type png)
 <use res/pictures/rpl-nonstoring.drawio.png>
 Package pdftex.def Info: res/pictures/rpl-nonstoring.drawio.png  used on input line 208.
 (pdftex.def)             Requested size: 140.924pt x 145.74191pt.
-<res/pictures/rpl-storing.drawio.png, id=301, 352.31625pt x 364.36125pt>
+<res/pictures/rpl-storing.drawio.png, id=273, 352.31625pt x 364.36125pt>
 File: res/pictures/rpl-storing.drawio.png Graphic file (type png)
 <use res/pictures/rpl-storing.drawio.png>
 Package pdftex.def Info: res/pictures/rpl-storing.drawio.png  used on input line 214.
 (pdftex.def)             Requested size: 140.924pt x 145.74191pt.
 ) (./src/etat_art/rtos.tex [15 <./res/pictures/rpl-nonstoring.drawio.png> <./res/pictures/rpl-storing.drawio.png>]
-Overfull \hbox (8.76889pt too wide) in paragraph at lines 20--22
+
+LaTeX Warning: Citation `paper:contiki' on page 16 undefined on input line 18.
+
+
+LaTeX Warning: Citation `contiki-repo:old' on page 16 undefined on input line 18.
+
+
+LaTeX Warning: Citation `contiki-repo:ng' on page 16 undefined on input line 18.
+
+
+LaTeX Warning: Citation `paper:protothreads' on page 16 undefined on input line 20.
+
+
+Overfull \hbox (3.39392pt too wide) in paragraph at lines 20--22
 []\T1/lmr/m/n/12 L'implémentation des pro-ces-sus est ba-sée sur la li-brai-rie Pro-to-threads [[]]
  []
 
-[16] [17])) (./src/architecture/architecture.tex [18]
+[16]
+
+LaTeX Warning: Citation `freertos' on page 17 undefined on input line 32.
+
+
+LaTeX Warning: Citation `freertos:repo' on page 17 undefined on input line 33.
+
+
+LaTeX Warning: Citation `riotos' on page 17 undefined on input line 48.
+
+
+LaTeX Warning: Citation `openwsn' on page 17 undefined on input line 54.
+
+[17])) (./src/architecture/architecture.tex [18]
 Chapitre 2.
 (./src/architecture/topologie.tex [19
 
 ]
-<res/pictures/loramac-topologie.drawio.png, id=359, 613.29124pt x 422.57875pt>
+<res/pictures/loramac-topologie.drawio.png, id=313, 613.29124pt x 422.57875pt>
 File: res/pictures/loramac-topologie.drawio.png Graphic file (type png)
 <use res/pictures/loramac-topologie.drawio.png>
 Package pdftex.def Info: res/pictures/loramac-topologie.drawio.png  used on input line 33.
@@ -1038,142 +1141,167 @@ Underfull \hbox (badness 10000) in paragraph at lines 19--21
  []
 
 [21]
-<res/pictures/loraaddr-ipv6.drawio.png, id=376, 327.2225pt x 113.42375pt>
+<res/pictures/loraaddr-ipv6.drawio.png, id=330, 327.2225pt x 113.42375pt>
 File: res/pictures/loraaddr-ipv6.drawio.png Graphic file (type png)
 <use res/pictures/loraaddr-ipv6.drawio.png>
 Package pdftex.def Info: res/pictures/loraaddr-ipv6.drawio.png  used on input line 52.
 (pdftex.def)             Requested size: 196.335pt x 68.05476pt.
- [22 <./res/pictures/loraaddr-ipv6.drawio.png>]) (./src/architecture/paquets.tex
-<res/pictures/loramac-frame.drawio.png, id=389, 488.82625pt x 245.91875pt>
+
+
+LaTeX Warning: Citation `rfc4193' on page 22 undefined on input line 57.
+
+[22 <./res/pictures/loraaddr-ipv6.drawio.png>]) (./src/architecture/paquets.tex
+<res/pictures/loramac-frame.drawio.png, id=341, 488.82625pt x 245.91875pt>
 File: res/pictures/loramac-frame.drawio.png Graphic file (type png)
 <use res/pictures/loramac-frame.drawio.png>
 Package pdftex.def Info: res/pictures/loramac-frame.drawio.png  used on input line 7.
 (pdftex.def)             Requested size: 244.41252pt x 122.95906pt.
  [23 <./res/pictures/loramac-frame.drawio.png>]) (./src/architecture/protocole.tex
-<res/pictures/loramac-state.drawio.png, id=399, 686.565pt x 423.5825pt>
+<res/pictures/loramac-state.drawio.png, id=351, 686.565pt x 423.5825pt>
 File: res/pictures/loramac-state.drawio.png Graphic file (type png)
 <use res/pictures/loramac-state.drawio.png>
 Package pdftex.def Info: res/pictures/loramac-state.drawio.png  used on input line 12.
 (pdftex.def)             Requested size: 343.28166pt x 211.79073pt.
  [24]
-<res/pictures/loramac-loraroot-state.drawio.png, id=407, 416.55624pt x 251.94125pt>
+<res/pictures/loramac-loraroot-state.drawio.png, id=359, 416.55624pt x 251.94125pt>
 File: res/pictures/loramac-loraroot-state.drawio.png Graphic file (type png)
 <use res/pictures/loramac-loraroot-state.drawio.png>
 Package pdftex.def Info: res/pictures/loramac-loraroot-state.drawio.png  used on input line 35.
 (pdftex.def)             Requested size: 208.2776pt x 125.9703pt.
  [25 <./res/pictures/loramac-state.drawio.png>]
-<res/pictures/loramac-sequence-JOIN.drawio.png, id=417, 606.265pt x 262.9825pt>
+<res/pictures/loramac-sequence-JOIN.drawio.png, id=369, 606.265pt x 262.9825pt>
 File: res/pictures/loramac-sequence-JOIN.drawio.png Graphic file (type png)
 <use res/pictures/loramac-sequence-JOIN.drawio.png>
 Package pdftex.def Info: res/pictures/loramac-sequence-JOIN.drawio.png  used on input line 66.
 (pdftex.def)             Requested size: 363.76181pt x 157.7907pt.
  [26 <./res/pictures/loramac-loraroot-state.drawio.png>]
-<res/pictures/loramac-sequence-UPWARD.drawio.png, id=427, 606.265pt x 323.2075pt>
+<res/pictures/loramac-sequence-UPWARD.drawio.png, id=379, 606.265pt x 323.2075pt>
 File: res/pictures/loramac-sequence-UPWARD.drawio.png Graphic file (type png)
 <use res/pictures/loramac-sequence-UPWARD.drawio.png>
 Package pdftex.def Info: res/pictures/loramac-sequence-UPWARD.drawio.png  used on input line 83.
 (pdftex.def)             Requested size: 363.76181pt x 193.926pt.
  [27 <./res/pictures/loramac-sequence-JOIN.drawio.png>]
-<res/pictures/loramac-sequence-DOWNWARD.drawio.png, id=436, 604.2575pt x 374.39874pt>
+<res/pictures/loramac-sequence-DOWNWARD.drawio.png, id=388, 604.2575pt x 374.39874pt>
 File: res/pictures/loramac-sequence-DOWNWARD.drawio.png Graphic file (type png)
 <use res/pictures/loramac-sequence-DOWNWARD.drawio.png>
 Package pdftex.def Info: res/pictures/loramac-sequence-DOWNWARD.drawio.png  used on input line 105.
 (pdftex.def)             Requested size: 362.5573pt x 224.64098pt.
- [28 <./res/pictures/loramac-sequence-UPWARD.drawio.png>]) (./src/architecture/hardware.tex [29 <./res/pictures/loramac-sequence-DOWNWARD.drawio.png>]
-<res/pictures/monted_rn2483.png, id=458, 2465.21pt x 2465.21pt>
+ [28 <./res/pictures/loramac-sequence-UPWARD.drawio.png>]) (./src/architecture/hardware.tex
+
+LaTeX Warning: Citation `ayuso_2015' on page 29 undefined on input line 10.
+
+
+LaTeX Warning: Citation `sx1276:datasheet' on page 29 undefined on input line 10.
+
+
+LaTeX Warning: Citation `rn2483:datasheet' on page 29 undefined on input line 13.
+
+[29 <./res/pictures/loramac-sequence-DOWNWARD.drawio.png>]
+<res/pictures/monted_rn2483.png, id=406, 2465.21pt x 2465.21pt>
 File: res/pictures/monted_rn2483.png Graphic file (type png)
 <use res/pictures/monted_rn2483.png>
 Package pdftex.def Info: res/pictures/monted_rn2483.png  used on input line 18.
 (pdftex.def)             Requested size: 172.58234pt x 172.58234pt.
-<res/pictures/rn2483-block-diagram.png, id=460, 976.64874pt x 791.95876pt>
+<res/pictures/rn2483-block-diagram.png, id=408, 976.64874pt x 791.95876pt>
 File: res/pictures/rn2483-block-diagram.png Graphic file (type png)
 <use res/pictures/rn2483-block-diagram.png>
 Package pdftex.def Info: res/pictures/rn2483-block-diagram.png  used on input line 26.
 (pdftex.def)             Requested size: 292.99689pt x 237.58946pt.
- [30 <./res/pictures/monted_rn2483.png>]
+
+
+LaTeX Warning: Citation `rn2483:datasheet' on page 30 undefined on input line 27.
+
+
+LaTeX Warning: Citation `rn2483:datasheet' on page 30 undefined on input line 27.
+
+[30 <./res/pictures/monted_rn2483.png>]
 LaTeX Font Info:    Trying to load font information for TS1+lmr on input line 56.
  (/usr/share/texmf/tex/latex/lm/ts1lmr.fd
 File: ts1lmr.fd 2009/10/30 v1.6 Font defs for Latin Modern
-) [31 <./res/pictures/rn2483-block-diagram.png>]
-<res/pictures/raspberrypi3b+.png, id=486, 602.25pt x 401.5pt>
+)
+
+LaTeX Warning: Citation `rn2483:datasheet' on page 31 undefined on input line 56.
+
+
+LaTeX Warning: Citation `rn2483:datasheet' on page 31 undefined on input line 56.
+
+[31 <./res/pictures/rn2483-block-diagram.png>]
+<res/pictures/raspberrypi3b+.png, id=428, 602.25pt x 401.5pt>
 File: res/pictures/raspberrypi3b+.png Graphic file (type png)
 <use res/pictures/raspberrypi3b+.png>
 Package pdftex.def Info: res/pictures/raspberrypi3b+.png  used on input line 70.
 (pdftex.def)             Requested size: 210.79065pt x 140.5271pt.
-<res/pictures/remote-zolertia.jpg, id=493, 501.875pt x 501.875pt>
+
+
+LaTeX Warning: Citation `raspberry:shop' on page 32 undefined on input line 71.
+
+
+LaTeX Warning: Citation `raspberry:shop' on page 32 undefined on input line 71.
+
+
+LaTeX Warning: Citation `raspberry:shop' on page 32 undefined on input line 91.
+
+
+LaTeX Warning: Citation `raspberry:shop' on page 32 undefined on input line 91.
+
+
+LaTeX Warning: Citation `zolertia-remote:shop' on page 32 undefined on input line 102.
+
+<res/pictures/remote-zolertia.jpg, id=430, 501.875pt x 501.875pt>
 File: res/pictures/remote-zolertia.jpg Graphic file (type jpg)
 <use res/pictures/remote-zolertia.jpg>
 Package pdftex.def Info: res/pictures/remote-zolertia.jpg  used on input line 106.
 (pdftex.def)             Requested size: 150.56366pt x 150.56366pt.
- [32 <./res/pictures/raspberrypi3b+.png>])) (/home/arnaud/Documents/cours/universite/cours2020-2021/memoire/ma2_memoire/memoire/out/main.bbl [33 <./res/pictures/remote-zolertia.jpg>] [34
 
-]
-Underfull \hbox (badness 8151) in paragraph at lines 140--144
-[]\T1/lmr/m/n/12 OpenWSN.  []$\T1/lmtt/m/n/12 https : / / openwsn . atlassian . net / wiki / spaces / OW /
+LaTeX Warning: Citation `zolertia-remote:shop' on page 32 undefined on input line 107.
+
+
+LaTeX Warning: Citation `zolertia-remote:shop' on page 32 undefined on input line 107.
+
+[32 <./res/pictures/raspberrypi3b+.png>]
+
+LaTeX Warning: Citation `zolertia-remote:datasheet' on page 33 undefined on input line 131.
+
+
+LaTeX Warning: Citation `zolertia-remote:datasheet' on page 33 undefined on input line 131.
+
+)) (./src/mise_en_oeuvre/mise_en_oeuvre.tex [33 <./res/pictures/remote-zolertia.jpg>]
+Chapitre 3.
+(./src/mise_en_oeuvre/lora_root.tex [34
+
+] [35]
+Overfull \hbox (7.3246pt too wide) in paragraph at lines 30--33
+[]\T1/lmr/m/n/12 Une fois qu'une trame a été ajou-tée au buf-fer d'en-voi, le Thread _uart_tx
  []
 
-[35]) [36]
-Package atveryend Info: Empty hook `BeforeClearDocument' on input line 134.
-Package atveryend Info: Empty hook `AfterLastShipout' on input line 134.
+))
+No file main.bbl.
+[36]
+Package atveryend Info: Empty hook `BeforeClearDocument' on input line 135.
+Package atveryend Info: Empty hook `AfterLastShipout' on input line 135.
  (/home/arnaud/Documents/cours/universite/cours2020-2021/memoire/ma2_memoire/memoire/out/main.aux)
-Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 134.
-Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 134.
+Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 135.
+Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 135.
 Package rerunfilecheck Info: File `main.out' has not changed.
 (rerunfilecheck)             Checksum: <no file>.
+
+
+LaTeX Warning: There were undefined references.
+
  ) 
 Here is how much of TeX's memory you used:
- 28495 strings out of 481239
- 538019 string characters out of 5920377
- 838276 words of memory out of 5000000
- 42900 multiletter control sequences out of 15000+600000
- 604674 words of font info for 59 fonts, out of 8000000 for 9000
+ 28427 strings out of 481239
+ 536263 string characters out of 5920377
+ 837287 words of memory out of 5000000
+ 42875 multiletter control sequences out of 15000+600000
+ 604259 words of font info for 58 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
  60i,18n,96p,1115b,579s stack positions out of 5000i,500n,10000p,200000b,80000s
-pdfTeX warning (dest): name{cite.zolertia-remote\\penalty\040\\@M\040\040:datasheet} has been referenced but does not exist, replaced by a fixed one
-
-pdfTeX warning (dest): name{cite.zolertia-remote\\penalty\040\\@M\040\040:shop} has been referenced but does not exist, replaced by a fixed one
-
-pdfTeX warning (dest): name{cite.raspberry\\penalty\040\\@M\040\040:shop} has been referenced but does not exist, replaced by a fixed one
-
-pdfTeX warning (dest): name{cite.rn2483\\penalty\040\\@M\040\040:datasheet} has been referenced but does not exist, replaced by a fixed one
-
-pdfTeX warning (dest): name{cite.freertos\\penalty\040\\@M\040\040:repo} has been referenced but does not exist, replaced by a fixed one
-
-pdfTeX warning (dest): name{cite.paper\\penalty\040\\@M\040\040:protothreads} has been referenced but does not exist, replaced by a fixed one
-
-pdfTeX warning (dest): name{cite.contiki-repo\\penalty\040\\@M\040\040:ng} has been referenced but does not exist, replaced by a fixed one
-
-pdfTeX warning (dest): name{cite.contiki-repo\\penalty\040\\@M\040\040:old} has been referenced but does not exist, replaced by a fixed one
-
-pdfTeX warning (dest): name{cite.paper\\penalty\040\\@M\040\040:contiki} has been referenced but does not exist, replaced by a fixed one
-
-pdfTeX warning (dest): name{cite.rfc\\penalty\040\\@M\040\040:ipv6} has been referenced but does not exist, replaced by a fixed one
-
-pdfTeX warning (dest): name{cite.rfc\\penalty\040\\@M\040\040:rpl-routing-header} has been referenced but does not exist, replaced by a fixed one
-
-pdfTeX warning (dest): name{cite.rfc\\penalty\040\\@M\040\040:trickle} has been referenced but does not exist, replaced by a fixed one
-
-pdfTeX warning (dest): name{cite.paper\\penalty\040\\@M\040\040:etx} has been referenced but does not exist, replaced by a fixed one
-
-pdfTeX warning (dest): name{cite.rfc\\penalty\040\\@M\040\040:mrhof} has been referenced but does not exist, replaced by a fixed one
-
-pdfTeX warning (dest): name{cite.rfc\\penalty\040\\@M\040\040:of0} has been referenced but does not exist, replaced by a fixed one
-
-pdfTeX warning (dest): name{cite.paper\\penalty\040\\@M\040\040:rpl-study} has been referenced but does not exist, replaced by a fixed one
-
-pdfTeX warning (dest): name{cite.rfc\\penalty\040\\@M\040\040:rpl} has been referenced but does not exist, replaced by a fixed one
-
-pdfTeX warning (dest): name{cite.paper\\penalty\040\\@M\040\040:802.15.4e-survey} has been referenced but does not exist, replaced by a fixed one
-
-pdfTeX warning (dest): name{cite.paper\\penalty\040\\@M\040\040:lora-reverse-engineering} has been referenced but does not exist, replaced by a fixed one
-
-pdfTeX warning (dest): name{cite.sx1276\\penalty\040\\@M\040\040:datasheet} has been referenced but does not exist, replaced by a fixed one
-
 {/usr/share/texmf/fonts/enc/dvips/lm/lm-ts1.enc}{/usr/share/texmf/fonts/enc/dvips/lm/lm-ec.enc}{/usr/share/texmf/fonts/enc/dvips/lm/lm-mathex.enc}{/usr/share/texmf/fonts/enc/dvips/lm/lm-mathit.enc}{/usr/share/texmf/fonts/enc/dvips/lm/lm-rm.enc}{/usr/share/texmf/fonts/enc/dvips/lm/lm-mathsy.enc}</usr/share/texmf/fonts/type1/public/lm/lmbx12.pfb></usr/share/texmf/fonts/type1/public/lm/lmbxi10.pfb></usr/share/texmf/fonts/type1/public/lm/lmcsc10.pfb></usr/share/texmf/fonts/type1/public/lm/lmcsco10.pfb></usr/share/texmf/fonts/type1/public/lm/lmex10.pfb></usr/share/texmf/fonts/type1/public/lm/lmmi12.pfb></usr/share/texmf/fonts/type1/public/lm/lmmi6.pfb></usr/share/texmf/fonts/type1/public/lm/lmmi8.pfb></usr/share/texmf/fonts/type1/public/lm/lmr10.pfb></usr/share/texmf/fonts/type1/public/lm/lmr12.pfb></usr/share/texmf/fonts/type1/public/lm/lmr6.pfb></usr/share/texmf/fonts/type1/public/lm/lmr8.pfb></usr/share/texmf/fonts/type1/public/lm/lmri12.pfb></usr/share/texmf/fonts/type1/public/lm/lmro12.pfb></usr/share/texmf/fonts/type1/public/lm/lmsy10.pfb></usr/share/texmf/fonts/type1/public/lm/lmtt12.pfb></usr/share/texlive/texmf-dist/fonts/type1/urw/times/utmb8a.pfb></usr/share/texlive/texmf-dist/fonts/type1/urw/times/utmr8a.pfb>
-Output written on /home/arnaud/Documents/cours/universite/cours2020-2021/memoire/ma2_memoire/memoire/out/main.pdf (39 pages, 8593353 bytes).
+Output written on /home/arnaud/Documents/cours/universite/cours2020-2021/memoire/ma2_memoire/memoire/out/main.pdf (39 pages, 8583131 bytes).
 PDF statistics:
- 670 PDF objects out of 1000 (max. 8388607)
- 549 compressed objects within 6 object streams
- 189 named destinations out of 1000 (max. 500000)
- 244 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 561 PDF objects out of 1000 (max. 8388607)
+ 448 compressed objects within 5 object streams
+ 142 named destinations out of 1000 (max. 500000)
+ 260 words of extra memory for PDF output out of 10000 (max. 10000000)
 

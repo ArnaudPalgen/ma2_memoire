@@ -14,12 +14,12 @@
         > ignore
 
 - ON_JOIN-RESPONSE -> done
-    * seq == 1
+    * seq == 0
         > valid
         > state = ready
         > join network
 
-    * seq != 1
+    * seq != 0
         > invalid
         > ignore
 
