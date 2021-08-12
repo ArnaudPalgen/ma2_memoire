@@ -1,0 +1,25 @@
+\section{Racine RPL}\label{sec:work-rpl-root}
+\renewcommand{\rightmark}{Racine RPL}
+
+    Dans la topologie choisie en ..., une racine RPL est la plateforme de développement Zolertia RE-Mote Rev.B à laquelle la carte d'interface du RN2483 a été raccordée par des câbles de prototypage. La figure ... illustre le raccordement entre le RN2483 et le Zolertia.
+    %todo fig
+
+    Comme l'indique la table ... de description des pins, les pins PC2 et PC3 utilisés pour la connexion ne sont pas ceux défini pour l'usage d'une connexion UART. Ces pins sont choisis pour la connexion UART car ils sont accessibles à l'exterieur du boitier de la plateforme par un connecteur.
+    
+    Pour que la connexion UART avec le RN2483 soit possible via les pins choisis, des modifications 
+    dans Contiki du fichier de configuration de la plateforme sont nécéssaires.
+    Ainsi, les valeurs des macros suivantes ont été modifiées dans le fichier \texttt{arch/cpu/cc2538/cc2538-conf.h}:
+    \begin{itemize}
+        \item \texttt{UART1\_CONF\_BAUD\_RATE} est définie à $57600$ qui est le baudrate par défaut du RN2483
+        \item \texttt{UART1\_RX\_PIN} est définie à $2$
+        \item \texttt{UART1\_TX\_PIN} est définie à $3$
+    \end{itemize}
+
+    Comme pour l'implémentation de la racine LoRa, celle de la racine RPL est réalisée en 3 couches.
+
+\subsection*{Couche physique}
+    %todo
+\subsection*{Couche MAC}
+    %todo
+\subsection*{Couche IP}
+    %todo

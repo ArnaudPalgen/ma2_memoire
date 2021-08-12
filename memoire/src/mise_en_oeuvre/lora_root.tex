@@ -1,5 +1,5 @@
 \section{Racine LoRa}\label{sec:work-lora-root}
-\renewcommand{\rightmark}{Trames LoRaMac}
+\renewcommand{\rightmark}{Racine LoRa}
 
     Le RN2483 est interfacé à l'ordinateur de développement via un bridge USB-UART.
 
@@ -70,7 +70,7 @@
         Comme lors de la réception d'une QUERY, si $sf < se$ la dernière trame envoyée est retransmise. Si $sf > se$ cela signifie que $sf-se$ trames ont été perdues. Par contre si $sf \geq se$, la racine les adresses source, destination et la payload sont envoyée à la couche supérieure. Si la trame reçue nécéssite un acquittement, celui-ci est envoyé.
 
 
-    \subsection*{Fonctions publiques de la couche MAC}
+    \subsubsection*{Fonctions publiques de la couche MAC}
         La couche MAC possède trois fonctions publiques pour qu'une couche supérieure puisse l'utiliser.
         \begin{itemize}
             \item \textbf{\texttt{register\_listener(listener: Callable[[LoraAddr, str], None])}}\\
@@ -106,4 +106,5 @@
 
 
 \subsection*{Discussion}
-        %todo
+    \todo{todo}    
+    %todo
