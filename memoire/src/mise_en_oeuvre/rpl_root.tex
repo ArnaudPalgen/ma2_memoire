@@ -6,7 +6,7 @@
     \begin{figure}[H]
         \centering
         \includegraphics[scale=0.35]{res/pictures/montage.png}
-        \caption{Schéma du raccordement du RN2483 au Re-Mote}
+        \caption{Schéma du raccordement du RN2483 au Re-Mote.}
         \label{fig:work-montage}
     \end{figure}
 
@@ -99,7 +99,52 @@ PROCESS_THREAD(ph_rx, ev, data){
     Toues ces fonctions créent une trame UART qu'elle ajoute au buffer d'envoi.
 
 \subsection*{Couche MAC}
-    %todo
+    La couche MAC définit 3 états: \textsc{alone}, \textsc{ready} et \textsc{wait\_response}.
+    Ces états correspondent à ceux défini dans ... , mis à part l'état \textsc{sleep} qui n'a pas 
+    besoin d'être défini explicitement, car le noeud attend, et donc rien d'autre ne peut se 
+    passer. En effet, comme le noeud ne peut basculer dans cet état que si le transmission d'une 
+    trame JOIN a échouée (i.e.après trois retransmissions), aucune trame LoRaMAC ne peut être reçue 
+    et aucune trame ne peut être envoyée, car tant que le noeud n'a pas rejoint le réseau LoRaMAC, 
+    la radio 802.15.4 et le protocole de routage RPL ne sont pas actifs.
+    Le premier état est l'état initiale, le second est utilisé quand la racine RPL est prête à 
+    envoyer une trame et le dernier est utilisé quand elle attend une réponse à une trame envoyée.
+
+    Cette implémentation utilise un processus qui envoi les trames disponibles dans un buffer. 
+    Comme pour la couche physique, ce processus peut être bloqué si le buffer est vide ou s'il 
+    attend une réponse. Il peut être débloqué respectivement par les évènements
+    \texttt{new\_tx\_frame\_event} et \texttt{state\_change\_event}. Ce process démarre également un timer, \texttt{retransmit\_timer} lorsq'une trame attend une réponse en retour. C'est à dire lorsqu'il envoie une trame QUERY ou une trame avec le flag k à \textit{true}.
+    
+    Comme pour l'implémentation de la racine LoRa, une fois que la fonction qui la réceptionne a vérifié par l'adresse de destination, que la trame est destinée à un noeud de son réseau RPL ou à elle même, elle va envoyer cette trame vers la fonction appropriée.
+
+    \subsubsection*{Réception d'une trame JOIN\_RESPONSE}
+        La trame est considérée comme valide si les conditions suivantes sont vérifiées:
+        \begin{itemize}
+            \item L'état MAC est \textsc{alone}
+            \item L'adresse de destination est celle de la racine RPL
+            \item La taille du payload est 2 ( taille de la chaîne de caractères hexadecimal du préfixe d'un octet)
+            \item le numéro de séquence de la trame est 0
+        \end{itemize}
+
+        Si la trame n'est pas valide elle est ignorée. En revanche si elle est valide, l'état est changé à \textsc{ready}, la racine RPL met également à jour son adresse. En effet, pour l'envoi de la trame JOIN la racine RPL n'ayant pas encore de préfixe, son préfixe est les huit bits de poids fort de son \textit{node-id}. EN plus de ces actions, un timer
+        \texttt{query\_timer} servant à envoyer periodiquement une trame QUERY est démarré, et l'évènement \texttt{loramac\_network\_joined} est envoyé à tous les processus.
+
+
+    \subsubsection*{Réception d'une trame ACK}
+        Si le numéro de séquence de la trame est également à celui de la dernière trame envoyée
+        les actions suivantes sont éffectuées:
+        \begin{itemize}
+            \item le timer \texttt{retransmit\_timer} est stoppé
+            \item si la dernière trame envoyée était une QUERY, le timer \texttt{query\_timer} est redémarré
+            \item l'état est changé à READY, et le processus d'envoi est prévenu du changement d'état
+        \end{itemize}
+        Sinon, la trame est ignorée.
+
+    \subsubsection*{Réception d'une trame DATA}
+        Si $sf<se$, la trame est ignorée. Sinon elle est traitée. Si $sf > se$, cela signifie que $sf - se$ trames ont été perdues. Ensuite la trame est envoyée à la couche supérieure.
+
+        Si la flag \textit{next} est à \textit{true}, cela signifie que d'autres trames vont être reçues. Donc, la racine RPL se met en mode écoute et redémarre le timer \texttt{retransmit\_timer}. Sinon, le timer \texttt{query\_timer} est redémarré, l'état est changé à \textsc{ready} et le processus d'envoi est prévenu de ce changement.
+
+
 \subsection*{Couche IP}
     %todo
 % Please add the following required packages to your document preamble:
