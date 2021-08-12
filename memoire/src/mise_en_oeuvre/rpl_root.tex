@@ -2,6 +2,7 @@
 \renewcommand{\rightmark}{Racine RPL}
 
     Dans la topologie choisie à la section \ref{sec:archi-topologie}, une racine RPL est la plateforme de développement Zolertia RE-Mote Rev.B à laquelle la carte d'interface du RN2483 a été raccordée par des câbles de prototypage. La figure~\ref{fig:work-montage} illustre le raccordement entre le RN2483 et le Zolertia.
+    %todo dire que c'est mis dans service
     
     \begin{figure}[H]
         \centering
@@ -146,8 +147,93 @@ PROCESS_THREAD(ph_rx, ev, data){
 
 
 \subsection*{Couche IP}
-    %todo
-% Please add the following required packages to your document preamble:
+    Ce qui est appelé la couche IP est une interface entre le protocole LoRaMAC et la stack TCP/IP de Contiki. Les paquets destinés à une adresse externe au réseau RPL sont récupérer par une interface définie comme suit dans le fichier \texttt{os/net/ipv6/uip.h}.
+    \begin{minted}[linenos]{c}
+struct uip_fallback_interface {
+  void (*init)(void);
+  /**
+   * \retval >=0
+   *         in case of success
+   * \retval <0
+   *         in case of failure
+   */
+  int (*output)(void);
+};
+    \end{minted}
+    Cette interface doit être la valeur d'une macro \texttt{UIP\_FALLBACK\_INTERFACE} qui pour ce projet est définie dans \texttt{module-macros.h} présent dans le service \texttt{loramac}.
+    Ainsi, quand un paquet IPv6 est destiné à une adresse pour laquelle aucune route n'est trouvée, la fonction  \texttt{output()} de l'interface est appelée.
+
+    Contiki possède un buffer qui est utilisé pour stocker les paquets entrants et sortants.
+    L'accès à ce buffer se fait via la macro \texttt{uip\_buf} définie dans le même fichier que la structure \texttt{uip\_fallback\_interface}. Une autre macro de Contiki utilisée dans l'interface est la macro \texttt{uip\_len} qui est la longueur d'un paquet disponible dans le buffer. Enfin, Contiki fourni des macros faciliant l'accès au buffer uIP comme la macro \texttt{UIP\_IP\_BUF} qui permet d'accèder directement au header IPv6. Le header Ipv6 est défini comme suit:
+    \begin{minted}[linenos]{c}
+struct uip_ip_hdr {
+  /* IPV6 header */
+  uint8_t vtc;
+  uint8_t tcflow;
+  uint16_t flow;
+  uint8_t len[2];
+  uint8_t proto, ttl;
+  uip_ip6addr_t srcipaddr, destipaddr;
+};
+    \end{minted}
+
+    Le code suivant est celui de la fonction \texttt{output} de l'interface avec LoRaMAC.
+
+    \begin{minted}[linenos]{c}
+static int output(void){ 
+  static char data[(UIP_CONF_BUFFER_SIZE-32)*2];
+  int uip_index = 0;
+  int data_index = 0;
+  
+  while(uip_index<uip_len){
+    if(uip_index==8){
+      // skip src and dest ipv6 addr
+      uip_index= UIP_IPH_LEN; // UIP_IPH_LEN is the ipv6 header size
+    }
+
+    sprintf(data+data_index, "%02X", uip_buf[uip_index]);
+    data_index+=2;
+    uip_index++;
+  }
+
+  lora_addr_t src_addr;
+  ipv62lora(&(UIP_IP_BUF->srcipaddr), &src_addr);//convert src address
+  mac_send_packet(src_addr, true, &data);
+  return 0;
+}
+    \end{minted}
+    A la ligne 1, le tableau de caractère contenant la payload de la trame LoRaMAC est défini. Sa 
+    taille est \texttt{UIP\_CONF\_BUFFER\_SIZE-32)*2}. La macro \texttt{UIP\_CONF\_BUFFER} défini 
+    la taille du buffer uIP. Cette macro est définie dans \texttt{contiki-default-conf.h}. Pour ce 
+    projet, sa valeur initiale de 1280 a été modifiée à 279. Cette taille est 247, qui est la 
+    taille de la payload d'une trame LoRaMAC à laquelle on a ajouté 32 octets qui est la taille des 
+    adresses Ipv6 source et destination car celles-ci ne se retouvent pas dans une trame LoRaMAC.
+    A la taille du buffer uIP, la taille des deux adresses IPv6 est soustraite car elles ne se 
+    trouvent pas dans la payload de la trame LoRaMAC. Ensuite cette taille est mutlipliée par deux 
+    car il faut deux caractères hexadecimal pour représenter un octet.
+
+    Ensuite la boucle de la ligne 6 parcourt le buffer uIP et convertit chaque octet en hexadecimal.
+    A la fin de cette boucle l'adresse source est convertie en adresse LoRaMAC comme défini dans
+    ... . Enfin, l'adresse source et la payload sont envoyées à la couche LoRaMAC.
+
+    Lorsqu'une trame LoRaMAC est reçue la fonctione callback enregistre après de la couche LoRaMAC 
+    convertit les adresses LoRaMAC source et destination en adresses IPv6, écrit les 8 premiers 
+    octets du header dans le buffer uIP, écrit les adresses converties dans ce buffer avant 
+    d'écrire la payload de la trame LoRaMAC.
+
+    La fonction \texttt{init} de l'interface démarre un processus. Ce processus désactive la radio, 
+    initialise la couche MAC et attend l'évènement \texttt{loramac\_network\_joined}. Une fois cet 
+    évènement reçu, ce process défini le préfixe IPv6 qui sera diffusé dans le réseau RPL, alumme 
+    la radio et démarre le protocole de routage.
+
+\subsection*{Discussion}
+\todo{todo}
+%premiere idée: implémenter niveau app
+%pourquoi les buffers
+%moyen de les supprimer
+
+
+    % Please add the following required packages to your document preamble:
 % \usepackage{graphicx}
 % \usepackage[table,xcdraw]{xcolor}
 % If you use beamer only pass "xcolor=table" option, i.e. \documentclass[xcolor=table]{beamer}
