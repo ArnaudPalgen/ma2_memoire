@@ -163,6 +163,21 @@ PROCESS_THREAD(ph_rx, ev, data){
         {ready} sauf si la trame qui n'a pas pu être envoyée est trame JOIN. Dans ce cas, le temps 
         d'expiration du timer est allongé comme décrit par l'équation~\ref{eq:archi-wait}.
 
+    \subsubsection*{Fonctions publiques}
+        Les fonctions publiques utilisable par les autres couches sont les suivantes:
+        \begin{itemize}
+            \item \textbf{\texttt{void mac\_root\_start()}}\\
+                Initialise le protocole LoRaMAC. C'est à dire, défini l'adresse du noeud, l'état 
+                initiale, crée les évènements, initialise la couche physique, envoie une trame 
+                JOIN, met la radio en mode réception et active le \texttt{retransmit\_timer}.
+
+            \item \textbf{\texttt{int mac\_send\_packet(lora\_addr\_t src\_addr, bool need\_ack, void* data)}}\\
+                Permet d'envoyer un paquet à l'adresse de destination. Si le paramètre \texttt{need\_ack} est à \textit{true}, un aquitement sera demandé pour la trame envoyée.
+
+            \item \textbf{\texttt{void loramac\_set\_input\_callback(void (* listener)(lora\_addr\_t *src, lora\_addr\_t *dest, char* data))}}\\
+                Permet d'enregistrer une fonction callback qui sera appelée quand un paquet est disponible.
+        \end{itemize}
+
 \subsection*{Couche IP}
     Ce qui est appelé la couche IP est une interface entre le protocole LoRaMAC et la stack TCP/IP de Contiki. Les paquets destinés à une adresse pour lesquels aucune route n'est trouvée sont récupérer par une interface définie comme suit dans le fichier \texttt{os/net/ipv6/uip.h}.
     \begin{minted}[linenos]{c}
