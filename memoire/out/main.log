@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.20 (TeX Live 2019/Debian) (preloaded format=pdflatex 2020.9.15)  12 AUG 2021 20:38
+This is pdfTeX, Version 3.14159265-2.6-1.40.20 (TeX Live 2019/Debian) (preloaded format=pdflatex 2020.9.15)  13 AUG 2021 10:50
 entering extended mode
  \write18 enabled.
  file:line:error style messages enabled.
@@ -1212,35 +1212,35 @@ Overfull \hbox (6.03186pt too wide) in paragraph at lines 9--1
  []
 
 
-Overfull \hbox (1.16817pt too wide) in paragraph at lines 6--14
+Overfull \hbox (1.16817pt too wide) in paragraph at lines 10--20
 []\T1/lmr/m/n/12 L'implémentation se pré-sente sous forme d'un pa-ckage py-thon qui donne
  []
 
 
-Overfull \hbox (9.48326pt too wide) in paragraph at lines 6--14
+Overfull \hbox (9.48326pt too wide) in paragraph at lines 10--20
 \T1/lmr/m/n/12 adresse Lo-Ra-MAC ainsi que trois fonc-tions : \T1/lmtt/m/n/12 init\T1/lmr/m/n/12 , \T1/lmtt/m/n/12 send \T1/lmr/m/n/12 et \T1/lmtt/m/n/12 register_listener
  []
 
 [34
 
 ]
-Overfull \hbox (9.0056pt too wide) in paragraph at lines 19--23
+Overfull \hbox (9.0056pt too wide) in paragraph at lines 25--28
 []\T1/lmr/m/n/12 Les classes \T1/lmtt/m/n/12 LoraAddr \T1/lmr/m/n/12 et \T1/lmtt/m/n/12 LoraFrame \T1/lmr/m/n/12 dé-fi-nissent res-pec-ti-ve-ment les adresses
  []
 
 [35] [36]
 LaTeX Font Info:    Font shape `T1/lmtt/bx/n' in size <12> not available
-(Font)              Font shape `T1/lmtt/b/n' tried instead on input line 76.
+(Font)              Font shape `T1/lmtt/b/n' tried instead on input line 92.
 
-Overfull \hbox (34.07695pt too wide) in paragraph at lines 76--78
+Overfull \hbox (34.07695pt too wide) in paragraph at lines 92--94
 []\T1/lmtt/b/n/12 register_listener(listener: Callable[[LoraAddr, str], None]) 
  []
 
 [37]) (./src/mise_en_oeuvre/rpl_root.tex
-<res/pictures/montage.png, id=567, 892.83563pt x 527.72156pt>
+<res/pictures/montage.png, id=568, 892.83563pt x 527.72156pt>
 File: res/pictures/montage.png Graphic file (type png)
 <use res/pictures/montage.png>
-Package pdftex.def Info: res/pictures/montage.png  used on input line 9.
+Package pdftex.def Info: res/pictures/montage.png  used on input line 8.
 (pdftex.def)             Requested size: 312.49715pt x 184.7053pt.
  [38 <./res/pictures/montage.png>] [39]
 \openout4 = `main.pyg'.
@@ -1249,17 +1249,12 @@ Package pdftex.def Info: res/pictures/montage.png  used on input line 9.
 \openout4 = `main.pyg'.
 
  (./out/_minted-main/9E75C5358C694BACB773B04FCD7BC6C83B08455686E835957B16E3EC223C8AB9.pygtex) [40]
-Overfull \hbox (1.87785pt too wide) in paragraph at lines 88--90
-[]\T1/lmtt/m/n/12 void phy_register_listener(int (* listener)(lora_frame_t
- []
-
-
-Overfull \hbox (11.6171pt too wide) in paragraph at lines 113--117
-\T1/lmr/m/n/12 pec-ti-ve-ment par les évè-ne-ments \T1/lmtt/m/n/12 new_tx_frame_event \T1/lmr/m/n/12 et \T1/lmtt/m/n/12 state_change_event\T1/lmr/m/n/12 .
+Overfull \hbox (8.877pt too wide) in paragraph at lines 102--104
+[]\T1/lmtt/b/n/12 void phy_register_listener(int (* listener)(lora_frame_t
  []
 
 [41]
-Overfull \hbox (0.83119pt too wide) in paragraph at lines 138--139
+Overfull \hbox (0.83119pt too wide) in paragraph at lines 150--151
 []\T1/lmr/m/n/12 si la der-nière trame en-voyée était une QUERY, le ti-mer \T1/lmtt/m/n/12 query_timer
  []
 
@@ -1269,15 +1264,10 @@ Overfull \hbox (0.83119pt too wide) in paragraph at lines 138--139
  (./out/_minted-main/F0972657A4768CF01E38AC87B209D0C23B08455686E835957B16E3EC223C8AB9.pygtex)
 \openout4 = `main.pyg'.
 
- (./out/_minted-main/9F32FEF7A4117BB6A20AF912B07154E53B08455686E835957B16E3EC223C8AB9.pygtex)
+ (./out/_minted-main/9F32FEF7A4117BB6A20AF912B07154E53B08455686E835957B16E3EC223C8AB9.pygtex [43])
 \openout4 = `main.pyg'.
 
- (./out/_minted-main/925C8FDCEF269A7CC62987178476EDBD3B08455686E835957B16E3EC223C8AB9.pygtex [43]) [44]
-Overfull \hbox (77.9089pt too wide) in paragraph at lines 224--228
-\T1/lmr/m/n/12 désac-tive la ra-dio, ini-tia-lise la couche MAC et at-tend l'évè-ne-ment \T1/lmtt/m/n/12 loramac_network_joined\T1/lmr/m/n/12 .
- []
-
-)) (/home/arnaud/Documents/cours/universite/cours2020-2021/memoire/ma2_memoire/memoire/out/main.bbl [45] [46
+ (./out/_minted-main/925C8FDCEF269A7CC62987178476EDBD3B08455686E835957B16E3EC223C8AB9.pygtex) [44])) (/home/arnaud/Documents/cours/universite/cours2020-2021/memoire/ma2_memoire/memoire/out/main.bbl [45] [46
 
 ]
 Underfull \hbox (badness 8151) in paragraph at lines 140--144
@@ -1296,8 +1286,8 @@ runsystem(rm out//main.pyg)...executed.
 
  ) 
 Here is how much of TeX's memory you used:
- 31354 strings out of 481239
- 600333 string characters out of 5920377
+ 31353 strings out of 481239
+ 600322 string characters out of 5920377
  939319 words of memory out of 5000000
  45630 multiletter control sequences out of 15000+600000
  605311 words of font info for 61 fonts, out of 8000000 for 9000
@@ -1344,10 +1334,10 @@ pdfTeX warning (dest): name{cite.paper\\penalty\040\\@M\040\040:lora-reverse-eng
 pdfTeX warning (dest): name{cite.sx1276\\penalty\040\\@M\040\040:datasheet} has been referenced but does not exist, replaced by a fixed one
 
 {/usr/share/texmf/fonts/enc/dvips/lm/lm-ts1.enc}{/usr/share/texmf/fonts/enc/dvips/lm/lm-ec.enc}{/usr/share/texmf/fonts/enc/dvips/lm/lm-mathex.enc}{/usr/share/texmf/fonts/enc/dvips/lm/lm-mathit.enc}{/usr/share/texmf/fonts/enc/dvips/lm/lm-rm.enc}{/usr/share/texmf/fonts/enc/dvips/lm/lm-mathsy.enc}</usr/share/texmf/fonts/type1/public/lm/lmbx12.pfb></usr/share/texmf/fonts/type1/public/lm/lmbxi10.pfb></usr/share/texmf/fonts/type1/public/lm/lmcsc10.pfb></usr/share/texmf/fonts/type1/public/lm/lmcsco10.pfb></usr/share/texmf/fonts/type1/public/lm/lmex10.pfb></usr/share/texmf/fonts/type1/public/lm/lmmi12.pfb></usr/share/texmf/fonts/type1/public/lm/lmmi6.pfb></usr/share/texmf/fonts/type1/public/lm/lmmi8.pfb></usr/share/texmf/fonts/type1/public/lm/lmr10.pfb></usr/share/texmf/fonts/type1/public/lm/lmr12.pfb></usr/share/texmf/fonts/type1/public/lm/lmr6.pfb></usr/share/texmf/fonts/type1/public/lm/lmr8.pfb></usr/share/texmf/fonts/type1/public/lm/lmri12.pfb></usr/share/texmf/fonts/type1/public/lm/lmro12.pfb></usr/share/texmf/fonts/type1/public/lm/lmsy10.pfb></usr/share/texmf/fonts/type1/public/lm/lmtk10.pfb></usr/share/texmf/fonts/type1/public/lm/lmtt12.pfb></usr/share/texmf/fonts/type1/public/lm/lmtti10.pfb></usr/share/texlive/texmf-dist/fonts/type1/urw/times/utmb8a.pfb></usr/share/texlive/texmf-dist/fonts/type1/urw/times/utmr8a.pfb>
-Output written on /home/arnaud/Documents/cours/universite/cours2020-2021/memoire/ma2_memoire/memoire/out/main.pdf (51 pages, 8817382 bytes).
+Output written on /home/arnaud/Documents/cours/universite/cours2020-2021/memoire/ma2_memoire/memoire/out/main.pdf (51 pages, 8819624 bytes).
 PDF statistics:
- 789 PDF objects out of 1000 (max. 8388607)
- 650 compressed objects within 7 object streams
- 228 named destinations out of 1000 (max. 500000)
+ 793 PDF objects out of 1000 (max. 8388607)
+ 654 compressed objects within 7 object streams
+ 227 named destinations out of 1000 (max. 500000)
  273 words of extra memory for PDF output out of 10000 (max. 10000000)
 

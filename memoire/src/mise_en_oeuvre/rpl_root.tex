@@ -2,7 +2,6 @@
 \renewcommand{\rightmark}{Racine RPL}
 
     Dans la topologie choisie à la section \ref{sec:archi-topologie}, une racine RPL est la plateforme de développement Zolertia RE-Mote Rev.B à laquelle la carte d'interface du RN2483 a été raccordée par des câbles de prototypage. La figure~\ref{fig:work-montage} illustre le raccordement entre le RN2483 et le Zolertia.
-    %todo dire que c'est mis dans service
     
     \begin{figure}[H]
         \centering
@@ -23,6 +22,7 @@
     \end{itemize}
 
     Comme pour l'implémentation de la racine LoRa, celle de la racine RPL est réalisée en 3 couches.
+    qui sont intégrées dans Contiki comme un service. C'est à dire que le code des 3 couches se trouve dans le répertoire suivant: \texttt{os/services/loramac}.
     
     \begin{table}[H]
         \centering
@@ -49,9 +49,12 @@
         \end{table}
 \newpage
 \subsection*{Couche physique}
-    Comme pour la racine LoRa, la couche physique définit les trame et les adresses LoRaMAC et sert de driver pour le RN2483. La réception et l'envoi de trames UART est réalisée par deux processus.
+    Comme pour la racine LoRa, la couche physique définit les trame et les adresses LoRaMAC et sert 
+    de driver pour le RN2483. La réception et l'envoi de trames UART est réalisée par deux 
+    processus.
 
-    Le processus de récéption permet d'éviter que le reste du code soit interrompu par une trame UART entrante. Le code suivant illustre la déclaration de processus dans contiki.  
+    Le processus de récéption permet d'éviter que le reste du code soit interrompu par une trame 
+    UART entrante. Le code suivant illustre la déclaration de processus dans contiki.  
 
     \begin{minted}[linenos]{c}
 PROCESS_THREAD(ph_rx, ev, data){
@@ -62,14 +65,23 @@ PROCESS_THREAD(ph_rx, ev, data){
     PROCESS_END();
 }
     \end{minted}
-    Tout ce qui se trouve entre les instructions des lignes 2 et 6 dépend du processus. Ainsi, la fonction, \texttt{uart\_rx} qui traite les trames UART entrantes dépend bien de ce processus.
-    Le rôle de cette fonction est d'accumuler tous les caractères d'une trame UART pour ensuite appeler une fonctione qui traîte cette trame. Elle supprime également les caractères ayant comme valeur entier 254, 248, 192 et 240. Ces caractèrent apparaissent lors de certaines réponses UART et perturbe la reconstruction de la trame UART. La cause de l'apparition de ces caractères n'est pas identifiée.
+    Tout ce qui se trouve entre les instructions des lignes 2 et 6 dépend du processus. Ainsi, la 
+    fonction, \texttt{uart\_rx} qui traite les trames UART entrantes dépend bien de ce processus.
+    Le rôle de cette fonction est d'accumuler tous les caractères d'une trame UART pour ensuite 
+    appeler une fonction qui traîte cette trame. Elle supprime également les caractères ayant comme 
+    valeur entière 254, 248, 192 et 240. Ces caractèrent apparaissent lors de certaines réponses 
+    UART et perturbe la reconstruction de la trame. La cause de l'apparition de ces caractères 
+    n'est pas identifiée.
 
-    Une fois la trame UART assemblée, une fonction suivante vérifie si la réponse UART est la réponse attendue à la précédente trame envoyée. Si c'est le cas, elle envoie un évènement qu'attend le processus d'envoi pour envoyer la prochaine trame UART. Si la trame UART reçue contient la commande \textit{"radio\_rx"}, la fonction construit une trame LoRaMAC et l'envoie à la couche supérieure.
+    Une fois la trame UART assemblée, une fonction suivante vérifie si cette réponse est une 
+    réponse attendue pour la trame précédemment envoyée. Si c'est le cas, elle envoie un évènement 
+    qu'attend le processus d'envoi pour envoyer la prochaine trame UART. Si la trame UART reçue 
+    contient la commande \textit{"radio\_rx"}, la fonction construit une trame LoRaMAC et l'envoie 
+    à la couche supérieure.
 
     Le processus d'envoi apour rôle d'envoyer toutes les trames UART présentes dans le buffer 
     d'envoi. Il peut être bloqué si le buffer d'envoi est vide ou s'il attend une réponse à la 
-    dernière trame envoyée. Si le buffer est d'envoi est vide, le processus sera débloqué par la 
+    dernière trame envoyée. Si le buffer d'envoi est vide, le processus sera débloqué par la 
     réception de l'évènement \texttt{new\_tx\_frame\_event}, et s'il attend une réponse, il sera 
     débloqué par la réception de l'évènement \texttt{can\_send\_event}.
 
@@ -83,39 +95,40 @@ PROCESS_THREAD(ph_rx, ev, data){
 
     Les fonctions publiques de la couche physique sont les suivantes:
     \begin{itemize}
-        \item \texttt{void phy\_init()}\\
-            Initialise la couche physique. C'est à dire, alloue les évènements, démarre les processus et envoie les trames UART permettant de mettre en pause LoRaWAN et de définir la fréquence.
-        \item \texttt{void phy\_register\_listener(int (* listener)(lora\_frame\_t frame))}\\
+        \item \textbf{\texttt{void phy\_init()}}\\
+            Initialise la couche physique. C'est à dire, alloue les évènements, démarre les 
+            processus et envoie les trames UART permettant de mettre en pause LoRaWAN et de définir 
+            les paramètres de la radio.
+        \item \textbf{\texttt{void phy\_register\_listener(int (* listener)(lora\_frame\_t frame)})}\\
             Enregistre la fonction callback qui sera appelée lorsqu'une trame LoRaMAC est reçue.
-        \item \texttt{int phy\_tx(lora\_frame\_t frame)}\\
+        \item \textbf{\texttt{int phy\_tx(lora\_frame\_t frame)}}\\
             Envoie une trame LoRaMAC.
-        \item \texttt{int phy\_timeout(int timeout)}\\
+        \item \textbf{\texttt{int phy\_timeout(int timeout)}}\\
             Définis le temps d'expiration du watchdog timer.
-        \item \texttt{int phy\_sleep(int duration)}\\
+        \item \textbf{\texttt{int phy\_sleep(int duration)}}\\
             Met le RN2483 en mode sommeil.
-        \item \texttt{int phy\_rx()}\\
-            Met le RN2483 en mode sommeil.
+        \item \textbf{\texttt{int phy\_rx()}}\\
+            Met le RN2483 en mode réception.
     \end{itemize}
 
     Toues ces fonctions créent une trame UART qu'elle ajoute au buffer d'envoi.
 
 \subsection*{Couche MAC}
     La couche MAC définit 3 états: \textsc{alone}, \textsc{ready} et \textsc{wait\_response}.
-    Ces états correspondent à ceux défini dans ... , mis à part l'état \textsc{sleep} qui n'a pas 
-    besoin d'être défini explicitement, car le noeud attend, et donc rien d'autre ne peut se 
+    Ces états correspondent à ceux défini dans la section~\ref{sec:archi-loramac:proto}, mis à part l'état \textsc{sleep} qui n'a pas 
+    besoin d'être défini explicitement, car dans cet état, le noeud attend, et donc rien d'autre ne peut se 
     passer. En effet, comme le noeud ne peut basculer dans cet état que si le transmission d'une 
-    trame JOIN a échouée (i.e.après trois retransmissions), aucune trame LoRaMAC ne peut être reçue 
-    et aucune trame ne peut être envoyée, car tant que le noeud n'a pas rejoint le réseau LoRaMAC, 
+    trame JOIN a échouée (i.e. après trois retransmissions), et qu'aucune trame LoRaMAC ne peut être reçue il impossible qu'il bascule dans cet état.
+    De plus, aucune trame ne peut être envoyée, car tant que le noeud n'a pas rejoint le réseau LoRaMAC, 
     la radio 802.15.4 et le protocole de routage RPL ne sont pas actifs.
     Le premier état est l'état initiale, le second est utilisé quand la racine RPL est prête à 
     envoyer une trame et le dernier est utilisé quand elle attend une réponse à une trame envoyée.
 
     Cette implémentation utilise un processus qui envoi les trames disponibles dans un buffer. 
-    Comme pour la couche physique, ce processus peut être bloqué si le buffer est vide ou s'il 
-    attend une réponse. Il peut être débloqué respectivement par les évènements
-    \texttt{new\_tx\_frame\_event} et \texttt{state\_change\_event}. Ce process démarre également un timer, \texttt{retransmit\_timer} lorsq'une trame attend une réponse en retour. C'est à dire lorsqu'il envoie une trame QUERY ou une trame avec le flag k à \textit{true}.
+    Ce processus peut être bloqué si le buffer est vide ou si l'état est différent de \textsc{ready}. Il peut être débloqué respectivement par les évènements
+    \texttt{new\_tx\_frame\_event} et \texttt{state\_change\_event}. Ce processus démarre également un timer, \texttt{retransmit\_timer} lorsqu'une trame attend une réponse en retour. C'est à dire, lorsqu'il envoie une trame QUERY ou une trame avec le flag k à \textit{true}.
     
-    Comme pour l'implémentation de la racine LoRa, une fois que la fonction qui la réceptionne a vérifié par l'adresse de destination, que la trame est destinée à un noeud de son réseau RPL ou à elle même, elle va envoyer cette trame vers la fonction appropriée.
+    Comme pour l'implémentation de la racine LoRa, une fois que la fonction qui réceptionne une trame a vérifié par l'adresse de destination, que la trame est destinée à un noeud de son réseau RPL ou à elle même, elle va envoyer cette trame vers la fonction appropriée.
 
     \subsubsection*{Réception d'une trame JOIN\_RESPONSE}
         La trame est considérée comme valide si les conditions suivantes sont vérifiées:
@@ -126,28 +139,32 @@ PROCESS_THREAD(ph_rx, ev, data){
             \item le numéro de séquence de la trame est 0
         \end{itemize}
 
-        Si la trame n'est pas valide elle est ignorée. En revanche si elle est valide, l'état est changé à \textsc{ready}, la racine RPL met également à jour son adresse. En effet, pour l'envoi de la trame JOIN la racine RPL n'ayant pas encore de préfixe, son préfixe est les huit bits de poids fort de son \textit{node-id}. EN plus de ces actions, un timer
+        Si la trame n'est pas valide elle est ignorée. En revanche, si elle est valide, l'état est changé à \textsc{ready}, la processus d'envoi est démarré et la racine RPL met à jour son adresse. En effet, pour l'envoi de la trame JOIN la racine RPL n'ayant pas encore de préfixe, son préfixe était les huit bits de poids fort de son \textit{node-id}. En plus de ces actions, un timer
         \texttt{query\_timer} servant à envoyer periodiquement une trame QUERY est démarré, et l'évènement \texttt{loramac\_network\_joined} est envoyé à tous les processus.
 
 
     \subsubsection*{Réception d'une trame ACK}
-        Si le numéro de séquence de la trame est également à celui de la dernière trame envoyée
-        les actions suivantes sont éffectuées:
+        Si le numéro de séquence de la trame est différent à celui de la dernière trame envoyée, elle est ignorée. Sinon, les actions suivantes sont éffectuées:
         \begin{itemize}
             \item le timer \texttt{retransmit\_timer} est stoppé
             \item si la dernière trame envoyée était une QUERY, le timer \texttt{query\_timer} est redémarré
-            \item l'état est changé à READY, et le processus d'envoi est prévenu du changement d'état
+            \item l'état est changé à READY et le processus d'envoi est prévenu du changement d'état
         \end{itemize}
-        Sinon, la trame est ignorée.
 
     \subsubsection*{Réception d'une trame DATA}
         Si $sf<se$, la trame est ignorée. Sinon elle est traitée. Si $sf > se$, cela signifie que $sf - se$ trames ont été perdues. Ensuite la trame est envoyée à la couche supérieure.
 
         Si la flag \textit{next} est à \textit{true}, cela signifie que d'autres trames vont être reçues. Donc, la racine RPL se met en mode écoute et redémarre le timer \texttt{retransmit\_timer}. Sinon, le timer \texttt{query\_timer} est redémarré, l'état est changé à \textsc{ready} et le processus d'envoi est prévenu de ce changement.
 
+    \subsubsection*{Expiration du timer \texttt{retransmit\_timer}}
+        A l'expiration de ce timer, si le nombre de retransmissions n'a pas atteint son maximum 
+        défini par la macro \texttt{MAX\_RETRANSMIT}, la dernière trame envoyée est retransmissions.
+        Sinon l'envoi de la dernière trame est considéré comme échoué et l'état est changé à \textsc
+        {ready} sauf si la trame qui n'a pas pu être envoyée est trame JOIN. Dans ce cas, le temps 
+        d'expiration du timer est allongé comme décrit par l'équation~\ref{eq:archi-wait}.
 
 \subsection*{Couche IP}
-    Ce qui est appelé la couche IP est une interface entre le protocole LoRaMAC et la stack TCP/IP de Contiki. Les paquets destinés à une adresse externe au réseau RPL sont récupérer par une interface définie comme suit dans le fichier \texttt{os/net/ipv6/uip.h}.
+    Ce qui est appelé la couche IP est une interface entre le protocole LoRaMAC et la stack TCP/IP de Contiki. Les paquets destinés à une adresse pour lesquels aucune route n'est trouvée sont récupérer par une interface définie comme suit dans le fichier \texttt{os/net/ipv6/uip.h}.
     \begin{minted}[linenos]{c}
 struct uip_fallback_interface {
   void (*init)(void);
@@ -163,7 +180,9 @@ struct uip_fallback_interface {
     Cette interface doit être la valeur d'une macro \texttt{UIP\_FALLBACK\_INTERFACE} qui pour ce projet est définie dans \texttt{module-macros.h} présent dans le service \texttt{loramac}.
     Ainsi, quand un paquet IPv6 est destiné à une adresse pour laquelle aucune route n'est trouvée, la fonction  \texttt{output()} de l'interface est appelée.
 
-    Contiki possède un buffer qui est utilisé pour stocker les paquets entrants et sortants.
+    L'utilisation de cette interface a été choisie car il n'estactuellement pas possible d'utiliser deux interfaces réseaux dans Contiki. C'est donc le seul moyen trouvé pour récupérer les paquets destinés à une adresses externe au réseau RPL.
+
+    Contiki possède un buffer, le buffer uIP, qui est utilisé pour stocker les paquets entrants et sortants.
     L'accès à ce buffer se fait via la macro \texttt{uip\_buf} définie dans le même fichier que la structure \texttt{uip\_fallback\_interface}. Une autre macro de Contiki utilisée dans l'interface est la macro \texttt{uip\_len} qui est la longueur d'un paquet disponible dans le buffer. Enfin, Contiki fourni des macros faciliant l'accès au buffer uIP comme la macro \texttt{UIP\_IP\_BUF} qui permet d'accèder directement au header IPv6. Le header Ipv6 est défini comme suit:
     \begin{minted}[linenos]{c}
 struct uip_ip_hdr {
@@ -177,7 +196,7 @@ struct uip_ip_hdr {
 };
     \end{minted}
 
-    Le code suivant est celui de la fonction \texttt{output} de l'interface avec LoRaMAC.
+    Le code suivant est celui de la fonction \texttt{output} de l'interface.
 
     \begin{minted}[linenos]{c}
 static int output(void){ 
@@ -203,31 +222,29 @@ static int output(void){
 }
     \end{minted}
     A la ligne 1, le tableau de caractère contenant la payload de la trame LoRaMAC est défini. Sa 
-    taille est \texttt{UIP\_CONF\_BUFFER\_SIZE-32)*2}. La macro \texttt{UIP\_CONF\_BUFFER} défini 
+    taille est \texttt{(UIP\_CONF\_BUFFER\_SIZE-32)*2}. La macro \texttt{UIP\_CONF\_BUFFER} défini 
     la taille du buffer uIP. Cette macro est définie dans \texttt{contiki-default-conf.h}. Pour ce 
-    projet, sa valeur initiale de 1280 a été modifiée à 279. Cette taille est 247, qui est la 
+    projet, sa valeur initiale de 1280 a été modifiée à 279. Cette taille est 247, la 
     taille de la payload d'une trame LoRaMAC à laquelle on a ajouté 32 octets qui est la taille des 
-    adresses Ipv6 source et destination car celles-ci ne se retouvent pas dans une trame LoRaMAC.
+    deux adresses Ipv6 (source et destination) car celles-ci ne se retrouvent pas dans une trame LoRaMAC.
     A la taille du buffer uIP, la taille des deux adresses IPv6 est soustraite car elles ne se 
     trouvent pas dans la payload de la trame LoRaMAC. Ensuite cette taille est mutlipliée par deux 
     car il faut deux caractères hexadecimal pour représenter un octet.
 
     Ensuite la boucle de la ligne 6 parcourt le buffer uIP et convertit chaque octet en hexadecimal.
-    A la fin de cette boucle l'adresse source est convertie en adresse LoRaMAC comme défini dans
-    ... . Enfin, l'adresse source et la payload sont envoyées à la couche LoRaMAC.
+    A la fin de cette boucle l'adresse source est convertie en adresse LoRaMAC comme défini dans la solution retenue de la section~\ref{sec:archi-adresses}. Enfin, l'adresse source et la payload sont envoyées à la couche LoRaMAC.
 
-    Lorsqu'une trame LoRaMAC est reçue la fonctione callback enregistre après de la couche LoRaMAC 
-    convertit les adresses LoRaMAC source et destination en adresses IPv6, écrit les 8 premiers 
-    octets du header dans le buffer uIP, écrit les adresses converties dans ce buffer avant 
-    d'écrire la payload de la trame LoRaMAC.
+    Lorsqu'une trame LoRaMAC est reçue la fonction callback enregistré auprès de la couche LoRaMAC 
+    convertit les adresses LoRaMAC source et destination en adresses IPv6, écrit les 8 
+    octets de poids fort du header dans le buffer uIP et écrit les adresses converties dans ce buffer avant d'écrire la payload de la trame LoRaMAC.
 
     La fonction \texttt{init} de l'interface démarre un processus. Ce processus désactive la radio, 
-    initialise la couche MAC et attend l'évènement \texttt{loramac\_network\_joined}. Une fois cet 
-    évènement reçu, ce process défini le préfixe IPv6 qui sera diffusé dans le réseau RPL, alumme 
+    initialise la couche MAC et attend l'évènement\\ \texttt{loramac\_network\_joined}. Une fois cet 
+    évènement reçu, ce process défini le préfixe IPv6 qui sera diffusé dans le réseau RPL, allume 
     la radio et démarre le protocole de routage.
 
-\subsection*{Discussion}
-\todo{todo}
+%\subsection*{Discussion}
+%\todo{todo}
 %premiere idée: implémenter niveau app
 %pourquoi les buffers
 %moyen de les supprimer
