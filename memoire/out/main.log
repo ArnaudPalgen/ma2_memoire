@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.20 (TeX Live 2019/Debian) (preloaded format=pdflatex 2020.9.15)  13 AUG 2021 10:50
+This is pdfTeX, Version 3.14159265-2.6-1.40.20 (TeX Live 2019/Debian) (preloaded format=pdflatex 2020.9.15)  13 AUG 2021 11:42
 entering extended mode
  \write18 enabled.
  file:line:error style messages enabled.
@@ -1018,28 +1018,28 @@ Chapitre 1.
 (./src/etat_art/related_work.texpdfTeX warning (ext4): destination with the same identifier (name{page.1}) has been already used, duplicate ignored
 <to be read again> 
                    \relax 
-l.19 
+l.25 
       [1
 
 ]) (./src/etat_art/lora.tex
-<res/pictures/lora-sf.png, id=138, 1305.87875pt x 691.58376pt>
+<res/pictures/lora-sf.png, id=139, 1305.87875pt x 691.58376pt>
 File: res/pictures/lora-sf.png Graphic file (type png)
 <use res/pictures/lora-sf.png>
-Package pdftex.def Info: res/pictures/lora-sf.png  used on input line 30.
+Package pdftex.def Info: res/pictures/lora-sf.png  used on input line 34.
 (pdftex.def)             Requested size: 326.46889pt x 172.89551pt.
  [2]
 <res/pictures/lora-frame-format.drawio.png, id=155, 596.2275pt x 168.63pt>
 File: res/pictures/lora-frame-format.drawio.png Graphic file (type png)
 <use res/pictures/lora-frame-format.drawio.png>
-Package pdftex.def Info: res/pictures/lora-frame-format.drawio.png  used on input line 48.
+Package pdftex.def Info: res/pictures/lora-frame-format.drawio.png  used on input line 52.
 (pdftex.def)             Requested size: 357.73926pt x 101.17877pt.
  [3 <./res/pictures/lora-sf.png> <./res/pictures/lora-frame-format.drawio.png>]
-Overfull \hbox (2.8179pt too wide) detected at line 75
+Overfull \hbox (2.8179pt too wide) detected at line 79
 []
  []
 
 
-Overfull \hbox (8.30757pt too wide) in paragraph at lines 83--85
+Overfull \hbox (8.30757pt too wide) in paragraph at lines 87--89
 \OML/lmm/m/it/12 LowDataRateOptimize$ \T1/lmr/m/n/12 per-met d'op-ti-mi-ser la ro-bus-tesse d'une trans-
  []
 
@@ -1137,11 +1137,11 @@ Underfull \hbox (badness 10000) in paragraph at lines 19--21
  []
 
 [21]
-<res/pictures/loraaddr-ipv6.drawio.png, id=391, 327.2225pt x 113.42375pt>
+<res/pictures/loraaddr-ipv6.drawio.png, id=391, 649.42625pt x 204.765pt>
 File: res/pictures/loraaddr-ipv6.drawio.png Graphic file (type png)
 <use res/pictures/loraaddr-ipv6.drawio.png>
 Package pdftex.def Info: res/pictures/loraaddr-ipv6.drawio.png  used on input line 52.
-(pdftex.def)             Requested size: 196.335pt x 68.05476pt.
+(pdftex.def)             Requested size: 259.7659pt x 81.90454pt.
  [22 <./res/pictures/loraaddr-ipv6.drawio.png>]) (./src/architecture/paquets.tex
 <res/pictures/loramac-frame.drawio.png, id=404, 488.82625pt x 245.91875pt>
 File: res/pictures/loramac-frame.drawio.png Graphic file (type png)
@@ -1288,7 +1288,7 @@ runsystem(rm out//main.pyg)...executed.
 Here is how much of TeX's memory you used:
  31353 strings out of 481239
  600322 string characters out of 5920377
- 939319 words of memory out of 5000000
+ 939317 words of memory out of 5000000
  45630 multiletter control sequences out of 15000+600000
  605311 words of font info for 61 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
@@ -1334,7 +1334,7 @@ pdfTeX warning (dest): name{cite.paper\\penalty\040\\@M\040\040:lora-reverse-eng
 pdfTeX warning (dest): name{cite.sx1276\\penalty\040\\@M\040\040:datasheet} has been referenced but does not exist, replaced by a fixed one
 
 {/usr/share/texmf/fonts/enc/dvips/lm/lm-ts1.enc}{/usr/share/texmf/fonts/enc/dvips/lm/lm-ec.enc}{/usr/share/texmf/fonts/enc/dvips/lm/lm-mathex.enc}{/usr/share/texmf/fonts/enc/dvips/lm/lm-mathit.enc}{/usr/share/texmf/fonts/enc/dvips/lm/lm-rm.enc}{/usr/share/texmf/fonts/enc/dvips/lm/lm-mathsy.enc}</usr/share/texmf/fonts/type1/public/lm/lmbx12.pfb></usr/share/texmf/fonts/type1/public/lm/lmbxi10.pfb></usr/share/texmf/fonts/type1/public/lm/lmcsc10.pfb></usr/share/texmf/fonts/type1/public/lm/lmcsco10.pfb></usr/share/texmf/fonts/type1/public/lm/lmex10.pfb></usr/share/texmf/fonts/type1/public/lm/lmmi12.pfb></usr/share/texmf/fonts/type1/public/lm/lmmi6.pfb></usr/share/texmf/fonts/type1/public/lm/lmmi8.pfb></usr/share/texmf/fonts/type1/public/lm/lmr10.pfb></usr/share/texmf/fonts/type1/public/lm/lmr12.pfb></usr/share/texmf/fonts/type1/public/lm/lmr6.pfb></usr/share/texmf/fonts/type1/public/lm/lmr8.pfb></usr/share/texmf/fonts/type1/public/lm/lmri12.pfb></usr/share/texmf/fonts/type1/public/lm/lmro12.pfb></usr/share/texmf/fonts/type1/public/lm/lmsy10.pfb></usr/share/texmf/fonts/type1/public/lm/lmtk10.pfb></usr/share/texmf/fonts/type1/public/lm/lmtt12.pfb></usr/share/texmf/fonts/type1/public/lm/lmtti10.pfb></usr/share/texlive/texmf-dist/fonts/type1/urw/times/utmb8a.pfb></usr/share/texlive/texmf-dist/fonts/type1/urw/times/utmr8a.pfb>
-Output written on /home/arnaud/Documents/cours/universite/cours2020-2021/memoire/ma2_memoire/memoire/out/main.pdf (51 pages, 8819624 bytes).
+Output written on /home/arnaud/Documents/cours/universite/cours2020-2021/memoire/ma2_memoire/memoire/out/main.pdf (51 pages, 8821312 bytes).
 PDF statistics:
  793 PDF objects out of 1000 (max. 8388607)
  654 compressed objects within 7 object streams

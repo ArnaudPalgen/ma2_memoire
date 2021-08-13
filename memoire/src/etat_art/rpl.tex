@@ -6,7 +6,7 @@ Routing Protocol for Low-Power and Lossy Networks~\cite{rfc:rpl} est un protocol
 D'après l'article de Tripathi, Oliveira et Vasseur~\cite{paper:rpl-study}, après avoir été étudiés par le groupe de travail IETF roll (Routing Over Low power and Lossy networks), il s'est avéré que les protocoles tel que OSPF, AODV ou OLSR ne satisfont pas toutes les exigences des LLNs. C'est pour cette raison que ce groupe de travail a introduit RPL.
 Il s'agit d'un protocole à vecteur de distance. De plus, RPL est un protocole proactif, c'est à dire que les routes sont établies avant qu'elles ne soient nécessaires.
 
-RPL sépare le traitement et la transmission des paquets de contrôle de l'optimisation de l'objectif de routage. Cela permet de l'adapter à un large éventail d'applications des LLNs comme la domotique, l'automatisation industriel ou encore la récolte de données dans divers environnements.
+RPL sépare le traitement et la transmission des paquets de contrôle de l'optimisation de l'objectif de routage. Cela permet de l'adapter à un large éventail d'applications des LLNs comme la domotique, l'automatisation industrielle ou encore la récolte de données dans divers environnements.
 
 %De plus, de part sa topologie et son fonctionnement, RPL est optimisé pour la collecte de données %ce qui est l'utilisation principale pour ce mémoire.
 
@@ -15,8 +15,8 @@ Cette section décrit le fonctionnement de RPL. Cette description est basée sur
 
 \subsection*{Topologie}
     RPL construit un DODAG (Destination Oriented Directed Acyclic Graph) qui est un graphe dirigé 
-    acyclique (DAG) ayant une seule racine (Fig.~\ref{fig:state-dodag}). De par cette architecture 
-    RPL est adapté aux applications de collecte de données ce qui est le principale objectif de ce 
+    acyclique (DAG) ayant une seule racine (Fig.~\ref{fig:state-dodag}). De par cette architecture, 
+    RPL est adapté aux applications de collecte de données ce qui est le principal objectif de ce 
     projet. En effet, la route d'un noeud à la racine est facilement établie car tous les noeuds du 
     chemins envoient les données à leur parent.
 
@@ -79,7 +79,7 @@ Les fonctions objectif OF0 et MRHOF, implémentées dans Contiki, sont décrites
                 
     \subsubsection*{MRHOF}%rfc6719
             \textit{Minimum Rank with Hysteresis Objective Function} est une fonction dont l'objectif est de sélectionner les routes qui minimisent une métrique additive en utilisant l'hystérésis
-            pour réduire les changements de parents en réponse a de petites variations de la métrique.
+            pour réduire les changements de parents en réponse à de petites variations de la métrique.
             
             Pour cela, un noeud va calculer le coût des chemins avec chaque candidat parent. Ce coût sera la somme de deux éléments:
             \begin{itemize}
@@ -93,7 +93,7 @@ Les fonctions objectif OF0 et MRHOF, implémentées dans Contiki, sont décrites
             Le RFC 6719 recommande 192 comme valeur pour \textsl{\textsc{parent\_switch\_treshold}} si la métrique utilisée est ETX.
 
 \subsection*{Messages RPL}
-    RPL défini quatre types de mesages de contrôles: DIO, DIS, DAO et DAO-ACK. Ces messages de contôles sont des messages ICMPv6. Le RFC 6550~\cite{rfc:rpl} indique que ces messages ont la portée d'un lien, à l'exception des DAO/DAO-ACK qui, dans le mode de fonctionnement \textit{non-storing}, sont envoyés en unicast et donc utilisent des adresse unique-local ou global. Pour tous les autres messages, les adresses sources sont des adresses link-local et les adresses de destination sont soit link-local, soit l'adresse multicast pour tous les noeuds RPL qui est \texttt{ff02::1a}.
+    RPL défini quatre types de mesages de contrôles: DIO, DIS, DAO et DAO-ACK. Ces messages de contôles sont des messages ICMPv6. Le RFC 6550~\cite{rfc:rpl} indique que ces messages ont la portée d'un lien, à l'exception des DAO/DAO-ACK qui, dans le mode de fonctionnement \textit{non-storing}, sont envoyés en unicast et donc utilisent des adresses unique-local ou global. Pour tous les autres messages, les adresses sources sont des adresses link-local et les adresses de destination sont soit link-local, soit l'adresse multicast pour tous les noeuds RPL qui est \texttt{ff02::1a}.
 
 \subsubsection*{DIO}
     Les DIOs (DODAG Information Object) annoncent des informations sur le DODAG qui permettent aux noeuds de découvrir une instance RPL, de sélectionner un parent ou encore de maintenir le DODAG.
@@ -121,7 +121,7 @@ Les fonctions objectif OF0 et MRHOF, implémentées dans Contiki, sont décrites
     Les DIOs sont transmis en utilisant l'algorithme Trickle~\cite{rfc:trickle}. Cet algorithme permet de réduire la quantité de messages envoyés en réduisant les transmissions quand les conditions sont stables et en les augmentant lorsque qu'un changement est observé dans le réseau.
 
 \subsubsection*{DIS}
-    Les DODAG Information Solicitation (DIS) sont utilisés pour soliciter un DIO d'un noeud RPL.
+    Les DODAG Information Solicitation (DIS) sont utilisés pour solliciter un DIO d'un noeud RPL.
 
 \subsubsection*{DAO}%p42
     Les DAOs (Destination Advertisement Object) sont utilisés pour établir les routes descendantes.
@@ -157,9 +157,9 @@ Les fonctions objectif OF0 et MRHOF, implémentées dans Contiki, sont décrites
         \item Une fois qu'un noeud a rejoint le DODAG, il diffuse à son tour des DIOs pour que d'autres noeuds puissent rejoindre le DODAG.
     \end{enumerate}
 
-    Les noeuds qui opèrent comme feuille peuvent émettre des DIOs mais le rang contenu dans le DIO doit être l'infini. De cette manière une feuille ne sera pas choisie comme parent.
+    Les noeuds qui opèrent comme feuille peuvent émettre des DIOs mais le rang contenu dans le DIO doit être l'infini. De cette manière, une feuille ne sera pas choisie comme parent.
 
-    Si une adresse de destination n'appartient pas au DODAG, la racine du DODAG peut transférer les paquets à l'exterieur de ce réseau, ou, si elle n'en est pas capable, les ignorer.     
+    Si une adresse de destination n'appartient pas au DODAG, la racine du DODAG peut transférer les paquets à l'extérieur de ce réseau, ou, si elle n'en est pas capable, les ignorer.     
 
 \subsubsection*{Routes Descendantes}
     %rfc: p 19
@@ -178,7 +178,7 @@ Les fonctions objectif OF0 et MRHOF, implémentées dans Contiki, sont décrites
 
 \subsection*{Modes de fonctionnements}\label{subsec:state-mop}
     %RFC p 19,20,41,77,78
-    Le mode de fonctionnement d'une instance RPL, est défini administrativement et est annoncé par la racine. Les modes suivants sont disponibles:
+    Le mode de fonctionnement d'une instance RPL est défini administrativement et est annoncé par la racine. Les modes suivants sont disponibles:
     \begin{itemize}
         \item \textbf{Pas de routes descendantes}\\
             RPL ne maintient pas de routes descendantes. Dans ce MOP, les DAOs ne sont pas émis par les noeuds d'un DODAG, et les noeuds ignorent les DAOs.
@@ -187,16 +187,16 @@ Les fonctions objectif OF0 et MRHOF, implémentées dans Contiki, sont décrites
             Les noeuds ne stockent pas de routes descendantes.
             
             %--new
-            L'envoi des paquets le long de ces routes se fait donc par source-routing. Cela signifie qu'une en-tête de routage est ajoutée aux datagrammes par la racine. Le RFC 6554~\cite{rfc:rpl-routing-header} défini les mécanismes liés à ce type d'en-tête ainsi que son format qui est similaire à celui de l'en-tête de routage IPv6~\cite{rfc:ipv6} (de Type 0). Toutefois, il introduit en plus un mécanisme qui permet de compresser les adresses quand elles ont toutes le même préfixe.
+            L'envoi des paquets le long de ces routes se fait donc par source-routing. Cela signifie qu'un en-tête de routage est ajouté aux datagrammes par la racine. Le RFC 6554~\cite{rfc:rpl-routing-header} défini les mécanismes liés à ce type d'en-tête ainsi que son format qui est similaire à celui de l'en-tête de routage IPv6~\cite{rfc:ipv6} (de Type 0). Toutefois, il introduit en plus un mécanisme qui permet de compresser les adresses quand elles ont toutes le même préfixe.
 
-            Dans ce mode, les paquets remontent donc jusqu'à la racine, qui rajoute l'en-tête de routage pour ensuite redescendre jusqu'au noeud de destination (Fig.~\ref{fig:state-path-nonstoring}).
+            Dans ce mode, les paquets remontent donc jusqu'à la racine, qui ajoute l'en-tête de routage pour ensuite redescendre jusqu'au noeud de destination (Fig.~\ref{fig:state-path-nonstoring}).
             %--old
             %Donc les routes sont établies par source routing. C'est à dire que les paquets %remontent jusqu'à la racine du DODAG qui place dans les paquets tous les sauts de la %route pour ensuite redescendre (Fig.~\ref{fig:state-path-nonstoring}).
             %source/dest DAO unique-local ou global
             %--
         \item \textbf{Storing mode}\\
             Le storing mode peut être utilisé avec ou sans multicast.
-            Dans ce mode, les DAOs sont envoyées en unicast par les noeuds à leur parent.
+            Dans ce mode, les DAOs sont envoyés en unicast par les noeuds à leur parent.
             Les paquets remontent jusqu'à un ancêtre commun avec la destination avant de redescendre vers celle-ci (Fig.~\ref{fig:state-path-storing}).
             Les noeuds stockent les routes de leur sous DODAG. Ainsi, chaque saut dans un chemin examine sa table de routage pour choisir le saut suivant.
             %source et destination des DAO: link-local
@@ -229,7 +229,7 @@ Les fonctions objectif OF0 et MRHOF, implémentées dans Contiki, sont décrites
 %
 %    De plus, de part sa topologie et son fonctionnement, RPL est optimisé pour la collecte de %données ce qui est l'utilisation principale pour ce mémoire.
 
-    %todo article qui regroupe plusieurs etudes: implémentation pas idéale dans COntiki mais article de 2017 -> corrigé depuis ??
+    % article qui regroupe plusieurs etudes: implémentation pas idéale dans COntiki mais article de 2017 -> corrigé depuis ??
 
 
 %p9: peut bind un subnet

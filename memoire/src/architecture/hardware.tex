@@ -1,10 +1,10 @@
 \section{Plateformes de développement}\label{hardware}
 \renewcommand{\rightmark}{Plateformes de développement}
-    Cette section décrit le matériel utilisée pour mettre en oeuvre la topologie décrite en
+    Cette section décrit le matériel utilisé pour mettre en oeuvre la topologie décrite en
     \autoref{sec:archi-topologie}. Pour les racines RPL, la plateforme de développement Zolertia 
-    RE-Mote revision B est utilisée, et,  pour la racine LoRa, un Raspberry pi 3B+ est utilisé. 
-    Leur interface LoRa est un RN2483. Les noeuds des réseau RPL sont également la plateforme de 
-    développement Zolertia RE-Mote revision B.
+    RE-Mote Rev.B est utilisée, et, pour la racine LoRa, un Raspberry pi 3B+ est utilisé. 
+    Leur interface LoRa est un RN2483. Les noeuds des réseaux RPL sont également la plateforme de 
+    développement Zolertia RE-Mote Rev.B.
 
 \subsection*{RN2483}\label{hardware:rn2483}
     Le RN2483 (Fig.~\ref{fig:state-rn2483}) est un modem LoRa compatible LoRaWAN$^{TM}$ basse énergie. D'après Nestor Ayuso~\cite{ayuso_2015}, il intègre un transceiver Semtech SX1276~\cite{sx1276:datasheet} et un microcontrôleur Microchip PIC18LF46K22.
@@ -20,7 +20,7 @@
         \label{fig:state-rn2483}
     \end{figure}
 
-    La figure \ref{fig:state-rn2484-block} reprend le schéma-bloc du RN2483. Il contient notemment l'interface UART, les antennes 433 MHz et 868Mhz ainsi que les GPIOs et la stack LoRaWan.
+    La figure \ref{fig:state-rn2484-block} reprend le schéma-bloc du RN2483. Il contient notamment l'interface UART, les antennes 433 MHz et 868Mhz ainsi que les GPIOs et la stack LoRaWan.
     \begin{figure}[H]
         \centering
         \includegraphics[scale=0.3]{res/pictures/rn2483-block-diagram.png}
@@ -59,7 +59,7 @@
 
 \subsection*{Raspberry Pi}
 
-Le Raspberri Pi est un ordinateur monocarte. Il possède notemment 40 pins GPIO, une interface Wi-Fi, Bluetooth, 4 ports USB 2.0 et un connecteur pour une caméra. Toutes ces caractéristiques en font une passerelle idéale pour ce projet. En effet, ils permettent d'utiliser plusieurs interfaces réseaux et d'y connecter des capteurs et actuateurs.
+Le Raspberri Pi est un ordinateur monocarte. Il possède notamment 40 pins GPIO, une interface Wi-Fi, Bluetooth, 4 ports USB 2.0 et un connecteur pour une caméra. Toutes ces caractéristiques en font une passerelle idéale pour ce projet. En effet, ils permettent d'utiliser plusieurs interfaces réseaux et d'y connecter des capteurs et actuateurs.
 
 Le modèle utilisé pour ce projet est un Raspberry Pi 3 modèle B+ (Fig.~\ref{fig:state-raspberrypi}). Ce modèle est équipé d'un processeur quadri-coeur Broadcom BCM2837B0, Cortex-A53 64-bit SoC cadencé à 1.4GHz et embarque 1GB de mémoire RAM. 
 
@@ -93,10 +93,10 @@ La table \ref{tb:state-raspberrypi-spec} reprend les principales caractéristiqu
 \end{table}
 
 \subsection*{Zolertia RE-Mote}
-Pour ce mémoire, la plateforme Zolertia RE-Mote revision B (Fig.~\ref{fig:state-zolertia}) est utilisée.
+Pour ce mémoire, la plateforme Zolertia RE-Mote Rev.B (Fig.~\ref{fig:state-zolertia}) est utilisée.
 Cette plateforme, basée sur un system on chip (SoC) CC2538 ARM Cortex-M3, a été conçue par des universités et des industriels dans le but de permettre aux chercheurs et makers de développer des applications IoT et des objets connectés.
 
-Le Zolertia RE-Mote a été choisie car elle est équipée de deux radios compatibles IEEE 802.15.4,
+Le Zolertia RE-Mote a été choisi car il est équipé de deux radios compatibles IEEE 802.15.4,
 permet une consommation électrique faible et possède de nombreux pins de connexion qui peuvent être utilisés pour y connecter des capteurs, actuateurs, radios, etc.
 
 Le prix du constructeur pour cette plateforme est de 93,95€~\cite{zolertia-remote:shop}.
