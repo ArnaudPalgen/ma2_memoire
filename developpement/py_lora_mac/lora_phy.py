@@ -4,7 +4,9 @@ import threading
 from enum import Enum, auto, unique
 from dataclasses import dataclass
 import logging
-
+import time
+import csv
+import random
 
 log = logging.getLogger("LoRa_ROOT.PHY")
 
@@ -13,6 +15,10 @@ HEADER_SIZE = 16 #NUmber of hexadecimal character in the header
 K_FLAG_SHIFT = 7
 NEXT_FLAG_SHIFT = 6
 
+
+ENABLE_STAT = False
+TEST_LOSS = False
+LOSS_PROBABILITY = 0 #in [0, 1]
 
 @unique
 class MacCommand(Enum):
@@ -30,15 +36,58 @@ class UartCommand(Enum):
     """The UART commands used with the RN2383."""
 
     MAC_PAUSE = "mac pause"  # pause mac layer
-    SET_MOD = "radio set mod "  # set radio mode (fsk or lora)
-
-    # set radio freq from 433050000 to 434790000 or
-    # from 863000000 to 870000000, in Hz.
-    SET_FREQ = "radio set freq "
-    SET_WDT = "radio set wdt "  # set watchdog timer
     RX = "radio rx "  # receive mode
     TX = "radio tx "  # transmit data
     SLEEP = "sys sleep "  # system sleep
+
+    """
+    The modulation method.
+    Values can be: lora, fsk.
+    Default: lora
+    """
+    SET_MOD = "radio set mod "  # set radio mode (fsk or lora)
+
+    """
+    The frequency in Hz.
+    From 433050000 to 434790000 or from 863000000 to 870000000
+    Default: 868100000
+    """
+    SET_FREQ = "radio set freq "
+
+    """
+    The operating bandwidth in KHz.
+    Values can be: 125, 250, 500.
+    Default: 125
+    """
+    SET_BW = "radio set bw "
+
+    """
+    The transceiver output power.
+    From -3 to 15.
+    Default: 1
+    """
+    SET_PWR = "radio set pwr "
+
+    """
+    The spreading factor.
+    Values can be: sf7, sf8, sf9, sf10, sf11 or sf12.
+    Default: sf2
+    """
+    SET_SF = "radio set sf "
+
+    """
+    The coding rate.
+    Values can be: 4/5, 4/6, 4/7, 4/8.
+    Default: 4/5
+    """
+    SET_CR = "radio set cr "
+
+    """
+    The time-out length for the Watchdog Timer in milliseconds.
+    From 0 to 4294967295. 0 disable this functionality.
+    Default: 15000
+    """
+    SET_WDT = "radio set wdt "
 
 
 @unique
@@ -200,6 +249,45 @@ class UartFrame:
     expected_response: list
     data: str
     cmd: UartCommand
+    stat_id: int = -1
+
+
+class PhyMeter:
+
+    __instance = None
+
+    def __init__(self, dest_file):
+        self.data_list=[]#(data_hash: (put_time, send_time, data, diff_time))
+        self.counter = -1
+        self.dest_file = dest_file
+
+    def put(self,data):
+        data.stat_id = self._get_id()
+        self.data_list.append([data, time.perf_counter_ns(), -1])
+
+    def send(self,data):
+        r = self.data_list[data.stat_id]
+        r[2] = time.perf_counter_ns()
+        r.append(r[2]-r[1])
+
+    @staticmethod
+    def getMeter(dest_file='stat.txt'):
+        if PhyMeter.__instance == None:
+            PhyMeter(dest_file)
+        return PhyMeter.__instance
+
+    def _get_id(self):
+        self.counter+=1
+        return self.counter
+
+    def export_data(self):
+        with open(self.dest_file, 'w') as f:
+            writer = csv.writer(self.dest_file, 'unix')
+            writer.writerow(['put time', 'send time', 'delta', 'data'])
+            writer.writerow([self.data_list[0][0], self.data_list[-1][1], len(self.data_list), 'general info'])
+            for data in self.data_list:
+                writer.writerow(data[0], data[1], data[3], str(data[2]))
+
 
 
 class LoraPhy:
@@ -209,34 +297,47 @@ class LoraPhy:
 
     """
 
-    def __init__(self, port="/dev/ttyUSB0", baudrate=57600):
+    def __init__(self, **params):
         self._con = None  # The serial conenction
-        self._port = port  # The serial port
-        self._baudrate = baudrate  # The serial baudrate
-        self._buffer = queue.Queue(10)  # The TX buffer
-        self._rx_buffer = queue.Queue(50)  # the RX buffer
+        #self._port = port  # The serial port
+        #self._baudrate = baudrate  # The serial baudrate
+        self._params = params
+        self._buffer = queue.Queue(self._params.get('txBufSize', 10))  # The TX buffer
+        self._rx_buffer = queue.Queue(self._params.get('rxBufSize', 10))  # the RX buffer
         self._can_send = True  # True if the tx process can send, False otherwise
         self._can_send_cond = threading.Condition()  # condition used by the tx_process
         self._last_sended = None  # the last sended frame
         self._tx_lock = threading.Lock()  # lock used for phy_tx()
+        self.listen_lock = threading.Lock()
+        self._is_listen = False
 
     def init(self):
         """Init the PHY layer.
 
         - Set the serial connection
-        - Prepare the RN2483 for communications (mac pause, radio set freq)
+        - Prepare the RN2483 for communications (mac pause, radio set)
         """
         # set serial connection, call send_phy for mac pause et radio set freq
         log.info("Init PHY")
         try:
-            self._con = serial.Serial(port=self._port, baudrate=self._baudrate)
+            self._con = serial.Serial(port=self._params.get('port', "/dev/ttyUSB0"), baudrate=self._params.get('baudrate', 57600))
         except serial.serialutil.SerialException as e:
             log.error(str(e))
             exit()
         tx_thread = threading.Thread(target=self._uart_tx)
         rx_thread = threading.Thread(target=self._uart_rx)
+
+        log.info("Radio configuration: %s", str(self._params))
+
+        # Radio configuration
         self._send_phy(UartFrame([UartResponse.U_INT], "", UartCommand.MAC_PAUSE))
-        self._send_phy(UartFrame([UartResponse.OK], "868100000", UartCommand.SET_FREQ))
+        self._send_phy(UartFrame([UartResponse.OK], self._params.get('mode',"lora"), UartCommand.SET_MOD))
+        self._send_phy(UartFrame([UartResponse.OK], self._params.get('frequence',"868100000"), UartCommand.SET_FREQ))
+        self._send_phy(UartFrame([UartResponse.OK], self._params.get('bandwidth',"125"), UartCommand.SET_BW))
+        self._send_phy(UartFrame([UartResponse.OK], self._params.get('cr',"4/5"), UartCommand.SET_CR))
+        self._send_phy(UartFrame([UartResponse.OK], self._params.get('pwr',"1"), UartCommand.SET_PWR))
+        self._send_phy(UartFrame([UartResponse.OK], self._params.get('sf',"sf2"), UartCommand.SET_SF))
+        
         rx_thread.start()
         tx_thread.start()
 
@@ -254,6 +355,10 @@ class LoraPhy:
 
         log.info("MAC send:%s", str(loraFrame))
         self._tx_lock.acquire()
+        if TEST_LOSS:
+            if not random.random() < LOSS_PROBABILITY:
+                log.warning("LOSS TEST: don't send %s", str(loraFrame))
+                return
         if loraFrame is None:
             return
         f = UartFrame(
@@ -278,11 +383,21 @@ class LoraPhy:
     def phy_rx(self):
         """Set the radio the reception mode"""
 
+        self.listen_lock.acquire()
+        self._is_listen = True
+        self.listen_lock.release()
         log.info("MAC switch to reception mode")
         f = UartFrame(
             [UartResponse.RADIO_ERR, UartResponse.RADIO_RX], "0", UartCommand.RX
         )
         self._send_phy(f)
+
+    def listen(self) -> bool:
+        result = None
+        self.listen_lock.acquire()
+        result = self._is_listen
+        self.listen_lock.release()
+        return result
 
     def getFrame(self) -> LoraFrame:
         """Get the next received frame.
@@ -314,13 +429,15 @@ class LoraPhy:
         try:
             log.debug("append %s to tx_buf", str(data))
             self._buffer.put(data, block=False)
+            if ENABLE_STAT:
+                PhyMeter.getMeter().put(data)
         except queue.Full:
             log.warning("TX buffer full")
             return False
 
         return True
 
-    def _process_response(self, data: str) -> bool:
+    def _process_response(self, decode_data: str) -> bool:
         """Process an UART response.
 
         Args:
@@ -329,7 +446,7 @@ class LoraPhy:
         Returns:
             bool: True if the answer is the one expected, False otherwise.
         """
-        decode_data = data.decode()
+        #decode_data = data
         log.debug("process uart response: " + decode_data)
         for resp in self._last_sended.expected_response:
             if resp is None:
@@ -351,9 +468,14 @@ class LoraPhy:
     def _uart_rx(self):
         """Method used as Thread to read data from the serial connection."""
         while True:
-            data = self._con.readline()
+            data = self._con.readline().strip().decode()
+            if ("radio rx" in data) or ("radio_err" in data):
+                self.listen_lock.acquire()
+                self._is_listen = False
+                self.listen_lock.release()
+
             log.debug("UART response: %s", data)
-            if self._process_response(data.strip()):
+            if self._process_response(data):
                 # It is the expected response
                 # Notify threads waiting for the response
                 with self._can_send_cond:
@@ -368,6 +490,8 @@ class LoraPhy:
                     self._can_send_cond.wait()
             self._last_sended = self._buffer.get(block=True)
             log.info("PHY TX:" + self._last_sended.cmd.value + self._last_sended.data)
+            if ENABLE_STAT:
+                PhyMeter.getMeter().send(self._last_sended)
             self._con.write(
                 (self._last_sended.cmd.value + self._last_sended.data + "\r\n").encode()
             )
