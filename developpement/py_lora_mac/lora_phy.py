@@ -71,7 +71,7 @@ class UartCommand(Enum):
     """
     The spreading factor.
     Values can be: sf7, sf8, sf9, sf10, sf11 or sf12.
-    Default: sf2
+    Default: sf12
     """
     SET_SF = "radio set sf "
 
@@ -469,7 +469,7 @@ class LoraPhy:
         """Method used as Thread to read data from the serial connection."""
         while True:
             data = self._con.readline().strip().decode()
-            if ("radio rx" in data) or ("radio_err" in data):
+            if ("radio_rx" in data) or ("radio_err" in data):
                 self.listen_lock.acquire()
                 self._is_listen = False
                 self.listen_lock.release()

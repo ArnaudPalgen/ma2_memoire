@@ -79,7 +79,7 @@ class LoraIP:
         log.debug("Send %s", ip_packet.show())
         payload, _, dest_addr = self.serialize_ip_packet(ip_packet)
         log.debug("Send to RPL ROOT: " + str(dest_addr))
-        self.mac_layer.mac_send(dest=dest_addr, payload=payload, k=False)
+        self.mac_layer.mac_send(dest=dest_addr, payload=payload)
 
     @staticmethod
     def lora_to_ipv6(addr: LoraAddr) -> IPv6Address:

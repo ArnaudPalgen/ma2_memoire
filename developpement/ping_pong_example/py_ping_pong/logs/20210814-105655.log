@@ -1,0 +1,307 @@
+#### log of the running of the example ####
+# log from py_loramac package
+lora_ip-INFO-  2021-08-14 10:56:55,869-Init IP layer
+lora_mac-INFO-  2021-08-14 10:56:55,869-Init MAC
+lora_phy-INFO-  2021-08-14 10:56:55,869-Init PHY
+lora_phy-INFO-  2021-08-14 10:56:55,871-Radio configuration: {'txBufSize': 10, 'rxBufSize': 10, 'port': '/dev/ttyUSB0', 'baudrate': '57600', 'frequence': '868100000', 'bandwidth': '125', 'cr': '4/5', 'pwr': '1', 'sf': 'sf12'}
+lora_phy-INFO-  2021-08-14 10:56:55,871-PHY TX:mac pause
+lora_phy-INFO-  2021-08-14 10:56:55,871-MAC set watchdog timer to 0 ms
+lora_phy-INFO-  2021-08-14 10:56:55,872-MAC switch to reception mode
+lora_phy-INFO-  2021-08-14 10:56:55,889-PHY TX:radio set mod lora
+lora_phy-INFO-  2021-08-14 10:56:55,895-PHY TX:radio set freq 868100000
+lora_phy-INFO-  2021-08-14 10:56:55,910-PHY TX:radio set bw 125
+lora_phy-INFO-  2021-08-14 10:56:55,915-PHY TX:radio set cr 4/5
+lora_phy-INFO-  2021-08-14 10:56:55,921-PHY TX:radio set pwr 1
+lora_phy-INFO-  2021-08-14 10:56:55,927-PHY TX:radio set sf sf12
+lora_phy-INFO-  2021-08-14 10:56:55,933-PHY TX:radio set wdt 0
+lora_phy-INFO-  2021-08-14 10:56:55,940-PHY TX:radio rx 0
+lora_phy-INFO-  2021-08-14 10:57:13,195-PHY RX:1B611B0100000000
+lora_mac-INFO-  2021-08-14 10:57:13,196-MAC RX: LoraFrame(src_addr=LoraAddr(prefix=27, node_id=24859), dest_addr=LoraAddr(prefix=1, node_id=0), command=<MacCommand.JOIN: 0>, payload='', seq=0, k=False, has_next=False)
+lora_phy-INFO-  2021-08-14 10:57:13,196-MAC send:LoraFrame(src_addr=LoraAddr(prefix=1, node_id=0), dest_addr=LoraAddr(prefix=27, node_id=24859), command=<MacCommand.JOIN_RESPONSE: 1>, payload='02', seq=0, k=False, has_next=False)
+lora_phy-INFO-  2021-08-14 10:57:13,197-MAC switch to reception mode
+lora_phy-INFO-  2021-08-14 10:57:13,197-PHY TX:radio tx 0100001B611B010002
+lora_phy-INFO-  2021-08-14 10:57:14,202-PHY TX:radio rx 0
+lora_phy-INFO-  2021-08-14 10:57:17,373-PHY RX:02611B010000820160000000000E1140223D162E000E4F9C50494E472030
+lora_mac-INFO-  2021-08-14 10:57:17,374-MAC RX: LoraFrame(src_addr=LoraAddr(prefix=2, node_id=24859), dest_addr=LoraAddr(prefix=1, node_id=0), command=<MacCommand.DATA: 2>, payload='60000000000E1140223D162E000E4F9C50494E472030', seq=1, k=True, has_next=False)
+lora_mac-WARNING-  2021-08-14 10:57:17,374-Loss of 1 frames
+lora_phy-INFO-  2021-08-14 10:57:17,374-MAC send:LoraFrame(src_addr=LoraAddr(prefix=1, node_id=0), dest_addr=LoraAddr(prefix=2, node_id=24859), command=<MacCommand.ACK: 3>, payload='', seq=1, k=False, has_next=False)
+lora_ip-INFO-  2021-08-14 10:57:17,374-IP RX: 60000000000E1140223D162E000E4F9C50494E472030 from: 2:24859
+lora_phy-INFO-  2021-08-14 10:57:17,379-PHY TX:radio tx 01000002611B0301
+lora_phy-INFO-  2021-08-14 10:57:17,379-MAC switch to reception mode
+lora_mac-INFO-  2021-08-14 10:57:17,384-IP send 60000000000E1140162E223D000E0742504F4E472030 to: 2:24859
+lora_phy-INFO-  2021-08-14 10:57:18,383-PHY TX:radio rx 0
+lora_phy-INFO-  2021-08-14 10:57:25,286-PHY RX:02611B0100000402
+lora_mac-INFO-  2021-08-14 10:57:25,287-MAC RX: LoraFrame(src_addr=LoraAddr(prefix=2, node_id=24859), dest_addr=LoraAddr(prefix=1, node_id=0), command=<MacCommand.QUERY: 4>, payload='', seq=2, k=False, has_next=False)
+lora_phy-INFO-  2021-08-14 10:57:25,287-MAC send:LoraFrame(src_addr=LoraAddr(prefix=1, node_id=0), dest_addr=LoraAddr(prefix=2, node_id=24859), command=<MacCommand.DATA: 2>, payload='60000000000E1140162E223D000E0742504F4E472030', seq=1, k=False, has_next=False)
+lora_phy-INFO-  2021-08-14 10:57:25,288-MAC switch to reception mode
+lora_phy-INFO-  2021-08-14 10:57:25,288-PHY TX:radio tx 01000002611B020160000000000E1140162E223D000E0742504F4E472030
+lora_phy-INFO-  2021-08-14 10:57:26,959-PHY TX:radio rx 0
+lora_phy-INFO-  2021-08-14 10:57:28,893-PHY RX:02611B010000820360000000000E1140223D162E000E074750494E472031
+lora_mac-INFO-  2021-08-14 10:57:28,894-MAC RX: LoraFrame(src_addr=LoraAddr(prefix=2, node_id=24859), dest_addr=LoraAddr(prefix=1, node_id=0), command=<MacCommand.DATA: 2>, payload='60000000000E1140223D162E000E074750494E472031', seq=3, k=True, has_next=False)
+lora_phy-INFO-  2021-08-14 10:57:28,895-MAC send:LoraFrame(src_addr=LoraAddr(prefix=1, node_id=0), dest_addr=LoraAddr(prefix=2, node_id=24859), command=<MacCommand.ACK: 3>, payload='', seq=3, k=False, has_next=False)
+lora_ip-INFO-  2021-08-14 10:57:28,896-IP RX: 60000000000E1140223D162E000E074750494E472031 from: 2:24859
+lora_phy-INFO-  2021-08-14 10:57:28,896-PHY TX:radio tx 01000002611B0303
+lora_phy-INFO-  2021-08-14 10:57:28,899-MAC switch to reception mode
+lora_mac-INFO-  2021-08-14 10:57:28,903-IP send 60000000000E1140162E223D000E0741504F4E472031 to: 2:24859
+lora_phy-INFO-  2021-08-14 10:57:29,902-PHY TX:radio rx 0
+lora_phy-INFO-  2021-08-14 10:57:38,060-PHY RX:02611B0100000404
+lora_mac-INFO-  2021-08-14 10:57:38,060-MAC RX: LoraFrame(src_addr=LoraAddr(prefix=2, node_id=24859), dest_addr=LoraAddr(prefix=1, node_id=0), command=<MacCommand.QUERY: 4>, payload='', seq=4, k=False, has_next=False)
+lora_phy-INFO-  2021-08-14 10:57:38,061-MAC send:LoraFrame(src_addr=LoraAddr(prefix=1, node_id=0), dest_addr=LoraAddr(prefix=2, node_id=24859), command=<MacCommand.DATA: 2>, payload='60000000000E1140162E223D000E0741504F4E472031', seq=2, k=False, has_next=False)
+lora_phy-INFO-  2021-08-14 10:57:38,061-MAC switch to reception mode
+lora_phy-INFO-  2021-08-14 10:57:38,061-PHY TX:radio tx 01000002611B020260000000000E1140162E223D000E0741504F4E472031
+lora_phy-INFO-  2021-08-14 10:57:39,732-PHY TX:radio rx 0
+lora_phy-INFO-  2021-08-14 10:57:41,666-PHY RX:02611B010000820560000000000E1140223D162E000E074750494E472031
+lora_mac-INFO-  2021-08-14 10:57:41,666-MAC RX: LoraFrame(src_addr=LoraAddr(prefix=2, node_id=24859), dest_addr=LoraAddr(prefix=1, node_id=0), command=<MacCommand.DATA: 2>, payload='60000000000E1140223D162E000E074750494E472031', seq=5, k=True, has_next=False)
+lora_phy-INFO-  2021-08-14 10:57:41,667-MAC send:LoraFrame(src_addr=LoraAddr(prefix=1, node_id=0), dest_addr=LoraAddr(prefix=2, node_id=24859), command=<MacCommand.ACK: 3>, payload='', seq=5, k=False, has_next=False)
+lora_ip-INFO-  2021-08-14 10:57:41,667-IP RX: 60000000000E1140223D162E000E074750494E472031 from: 2:24859
+lora_phy-INFO-  2021-08-14 10:57:41,667-PHY TX:radio tx 01000002611B0305
+lora_phy-INFO-  2021-08-14 10:57:41,669-MAC switch to reception mode
+lora_mac-INFO-  2021-08-14 10:57:41,678-IP send 60000000000E1140162E223D000E0740504F4E472032 to: 2:24859
+lora_phy-INFO-  2021-08-14 10:57:42,678-PHY TX:radio rx 0
+#------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+#------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+# log from py_ping_pong app
+wait PING packet...
+lora_mac-WARNING-  2021-08-14 10:57:17,374-Loss of 1 frames
+Rceive IP packet: 
+###[ IPv6 ]### 
+  version   = 6
+  tc        = 0
+  fl        = 0
+  plen      = 14
+  nh        = UDP
+  hlim      = 64
+  src       = fd00::2:212:4b00:60d:611b
+  dst       = fd00::1:212:4b00:60d:0
+###[ UDP ]### 
+     sport     = 8765
+     dport     = 5678
+     len       = 14
+     chksum    = 0x4f9c
+###[ Raw ]### 
+        load      = 'PING 0'
+
+send PONG to fd00::2:212:4b00:60d:611b
+###[ IPv6 ]### 
+  version   = 6
+  tc        = 0
+  fl        = 0
+  plen      = 14
+  nh        = UDP
+  hlim      = 64
+  src       = fd00::1:212:4b00:60d:0
+  dst       = fd00::2:212:4b00:60d:611b
+###[ UDP ]### 
+     sport     = 5678
+     dport     = 8765
+     len       = 14
+     chksum    = 0x742
+###[ Raw ]### 
+        load      = 'PONG 0'
+
+wait PING packet...
+Rceive IP packet: 
+###[ IPv6 ]### 
+  version   = 6
+  tc        = 0
+  fl        = 0
+  plen      = 14
+  nh        = UDP
+  hlim      = 64
+  src       = fd00::2:212:4b00:60d:611b
+  dst       = fd00::1:212:4b00:60d:0
+###[ UDP ]### 
+     sport     = 8765
+     dport     = 5678
+     len       = 14
+     chksum    = 0x747
+###[ Raw ]### 
+        load      = 'PING 1'
+
+send PONG to fd00::2:212:4b00:60d:611b
+###[ IPv6 ]### 
+  version   = 6
+  tc        = 0
+  fl        = 0
+  plen      = 14
+  nh        = UDP
+  hlim      = 64
+  src       = fd00::1:212:4b00:60d:0
+  dst       = fd00::2:212:4b00:60d:611b
+###[ UDP ]### 
+     sport     = 5678
+     dport     = 8765
+     len       = 14
+     chksum    = 0x741
+###[ Raw ]### 
+        load      = 'PONG 1'
+
+wait PING packet...
+Rceive IP packet: 
+###[ IPv6 ]### 
+  version   = 6
+  tc        = 0
+  fl        = 0
+  plen      = 14
+  nh        = UDP
+  hlim      = 64
+  src       = fd00::2:212:4b00:60d:611b
+  dst       = fd00::1:212:4b00:60d:0
+###[ UDP ]### 
+     sport     = 8765
+     dport     = 5678
+     len       = 14
+     chksum    = 0x747
+###[ Raw ]### 
+        load      = 'PING 1'
+
+send PONG to fd00::2:212:4b00:60d:611b
+###[ IPv6 ]### 
+  version   = 6
+  tc        = 0
+  fl        = 0
+  plen      = 14
+  nh        = UDP
+  hlim      = 64
+  src       = fd00::1:212:4b00:60d:0
+  dst       = fd00::2:212:4b00:60d:611b
+###[ UDP ]### 
+     sport     = 5678
+     dport     = 8765
+     len       = 14
+     chksum    = 0x740
+###[ Raw ]### 
+        load      = 'PONG 2'
+
+#------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+#------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+#------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+# log from RPL root
+[7: INFO: APP       ] Network not joined
+[9: INFO: Interface ] Button pushed
+[9: INFO: LoRa MAC  ] Start LoRaMAC RPL root
+[9: INFO: LoRa PHY  ] Init LoRa PHY
+[9: INFO: LoRa PHY  ] PHY TX:mac pause
+[9: INFO: LoRa PHY  ] PHY TX:radio set mod lora
+[9: INFO: LoRa PHY  ] PHY TX:radio set freq 868100000
+[9: INFO: LoRa PHY  ] PHY TX:radio set bw 125
+[9: INFO: LoRa PHY  ] PHY TX:radio set cr 4/5
+[9: INFO: LoRa PHY  ] PHY TX:radio set pwr 1
+[9: INFO: LoRa PHY  ] PHY TX:radio set sf sf12
+[9: INFO: LoRa PHY  ] PHY TX:radio set wdt 0
+[9: INFO: LoRa PHY  ] PHY TX:radio tx 1B611B0100000000
+[10: INFO: APP       ] Network not joined
+[10: INFO: LoRa PHY  ] PHY TX:radio set wdt 3000
+[10: INFO: LoRa PHY  ] PHY TX:radio rx 0
+[11: INFO: LoRa PHY  ] PHY RX:0100001B611B010002
+[11: INFO: LoRa MAC  ] MAC RX: {src:1:0 dest:27:24859 k:0 seq:0 next:0 cmd:1 data:02
+[11: INFO: LoRa MAC  ] LoRa root joined
+[11: INFO: LoRa MAC  ] Node addr: 2:24859[11: INFO: LoRa MAC  ] 
+[11: INFO: Interface ] RECEIVE LORAMAC JOINED EVENT
+[11: INFO: Interface ] PREFIX: 2
+[11: INFO: RPL       ] IPv6 addresses:
+[11: INFO: RPL       ] -- fd00::2:212:4b00:60d:611b
+[11: INFO: RPL       ] -- fe80::212:4b00:60d:611b
+[11: INFO: RPL       ] reset DIO timer (Init root)
+[11: INFO: RPL       ] created DAG with instance ID 0, DAG ID fd00::2:212:4b00:60d:611b, rank 128
+[11: INFO: RPL       ] created a new RPL DAG
+[13: INFO: APP       ] Send PING
+[13: DBG : IPv6      ] In udp_send
+[13: DBG : IPv6      ] Upper layer checksum len: 14 from: 40
+[13: INFO: IPv6      ] Sending packet with length 54 (14)
+[13: INFO: RPL       ] SRH creating source routing header with destination 5f:756d:6f6e:735f:6c6f:7261:6d61:6300 
+[13: INFO: RPL       ] SRH destination not in our DAG, skip SRH insertion
+[13: INFO: TCP/IP    ] output: processing 54 bytes packet from fd00::2:212:4b00:60d:611b to 5f:756d:6f6e:735f:6c6f:7261:6d61:6300
+[13: INFO: TCP/IP    ] fallback: removing ext hdrs & setting proto 0 34
+[13: INFO: Interface ] Receive data for loramac whouhouuuuuu
+[13: INFO: Interface ] CONVERT SRC ADDR:fd00::2:212:4b00:60d:611b[13: INFO: LoRa MAC  ] MAC TX: {src:2:24859 dest:1:0 k:1 seq:1 next:0 cmd:2 data:60000000000E1140223D162E000E4F9C50494E472030
+[13: INFO: LoRa PHY  ] PHY TX:radio set wdt 0
+[13: INFO: LoRa PHY  ] PHY TX:radio tx 02611B010000820160000000000E1140223D162E000E4F9C50494E472030
+[14: INFO: LoRa PHY  ] PHY TX:radio set wdt 3000
+[14: INFO: LoRa PHY  ] PHY TX:radio rx 0
+[15: INFO: RPL       ] sending a multicast-DIO with rank 128 to ff02::1a
+[15: DBG : IPv6      ] Upper layer checksum len: 76 from: 40
+[15: INFO: ICMPv6    ] Sending ICMPv6 packet to ff02::1a, type 155, code 1, len 72
+[15: INFO: TCP/IP    ] output: sending to (NULL LL addr)
+[15: INFO: LoRa PHY  ] PHY RX:01000002611B0301
+[15: INFO: LoRa MAC  ] MAC RX: {src:1:0 dest:2:24859 k:0 seq:1 next:0 cmd:3 data:
+[21: INFO: LoRa MAC  ] Query timeout
+[21: INFO: LoRa MAC  ] MAC TX: {src:2:24859 dest:1:0 k:0 seq:2 next:0 cmd:4 data:
+[21: INFO: LoRa PHY  ] PHY TX:radio set wdt 0
+[21: INFO: LoRa PHY  ] PHY TX:radio tx 02611B0100000402
+[22: INFO: LoRa PHY  ] PHY TX:radio set wdt 3000
+[22: INFO: LoRa PHY  ] PHY TX:radio rx 0
+[23: INFO: RPL       ] sending a multicast-DIO with rank 128 to ff02::1a
+[23: DBG : IPv6      ] Upper layer checksum len: 76 from: 40
+[23: INFO: ICMPv6    ] Sending ICMPv6 packet to ff02::1a, type 155, code 1, len 72
+[23: INFO: TCP/IP    ] output: sending to (NULL LL addr)
+[24: INFO: LoRa PHY  ] PHY RX:01000002611B020160000000000E1140162E223D000E0742504F4E472030
+[24: INFO: LoRa MAC  ] MAC RX: {src:1:0 dest:2:24859 k:0 seq:1 next:0 cmd:2 data:60000000000E1140162E223D000E0742504F4E472030
+[24: INFO: Interface ] Receive data from LoRaMAC
+[24: DBG : Interface ] decode src and dest IPv6 addr:
+fd00::1:212:4b00:60d:0[24: DBG : Interface ] 
+fd00::2:212:4b00:60d:611b[24: DBG : Interface ] 
+[24: INFO: Interface ] Deliver data to the TCP/IP stack
+[24: INFO: TCP/IP    ] input: received 53 bytes
+[24: INFO: IPv6      ] packet received from fd00::1:212:4b00:60d:0 to fd00::2:212:4b00:60d:611b
+[24: INFO: IPv6      ] Receiving UDP packet
+[24: DBG : IPv6      ] Upper layer checksum len: 14 from: 40
+[24: DBG : IPv6      ] In udp_found
+[24: INFO: APP       ] Received PONG PONG 0 from fd00::1:212:4b00:60d:0
+[24: INFO: APP       ] Send PING
+[24: DBG : IPv6      ] In udp_send
+[24: DBG : IPv6      ] Upper layer checksum len: 14 from: 40
+[24: INFO: IPv6      ] Sending packet with length 54 (14)
+[24: INFO: RPL       ] SRH creating source routing header with destination fd00::1:212:4b00:60d:0 
+[24: INFO: RPL       ] SRH destination not in our DAG, skip SRH insertion
+[24: INFO: TCP/IP    ] output: processing 54 bytes packet from fd00::2:212:4b00:60d:611b to fd00::1:212:4b00:60d:0
+[24: INFO: TCP/IP    ] fallback: removing ext hdrs & setting proto 0 34
+[24: INFO: Interface ] Receive data for loramac whouhouuuuuu
+[24: INFO: Interface ] CONVERT SRC ADDR:fd00::2:212:4b00:60d:611b[24: DBG : IPv6      ] In udp_send
+[24: INFO: LoRa MAC  ] MAC TX: {src:2:24859 dest:1:0 k:1 seq:3 next:0 cmd:2 data:60000000000E1140223D162E000E074750494E472031
+[24: INFO: LoRa PHY  ] PHY TX:radio set wdt 0
+[24: INFO: LoRa PHY  ] PHY TX:radio tx 02611B010000820360000000000E1140223D162E000E074750494E472031
+[26: INFO: LoRa PHY  ] PHY TX:radio set wdt 3000
+[26: INFO: LoRa PHY  ] PHY TX:radio rx 0
+[27: INFO: LoRa PHY  ] PHY RX:01000002611B0303
+[27: INFO: LoRa MAC  ] MAC RX: {src:1:0 dest:2:24859 k:0 seq:3 next:0 cmd:3 data:
+[34: INFO: LoRa MAC  ] Query timeout
+[34: INFO: LoRa MAC  ] MAC TX: {src:2:24859 dest:1:0 k:0 seq:4 next:0 cmd:4 data:
+[34: INFO: LoRa PHY  ] PHY TX:radio set wdt 0
+[34: INFO: LoRa PHY  ] PHY TX:radio tx 02611B0100000404
+[34: INFO: RPL       ] sending a multicast-DIO with rank 128 to ff02::1a
+[34: DBG : IPv6      ] Upper layer checksum len: 76 from: 40
+[34: INFO: ICMPv6    ] Sending ICMPv6 packet to ff02::1a, type 155, code 1, len 72
+[34: INFO: TCP/IP    ] output: sending to (NULL LL addr)
+[35: INFO: LoRa PHY  ] PHY TX:radio set wdt 3000
+[35: INFO: LoRa PHY  ] PHY TX:radio rx 0
+[37: INFO: LoRa PHY  ] PHY RX:01000002611B020260000000000E1140162E223D000E0741504F4E472031
+[37: INFO: LoRa MAC  ] MAC RX: {src:1:0 dest:2:24859 k:0 seq:2 next:0 cmd:2 data:60000000000E1140162E223D000E0741504F4E472031
+[37: INFO: Interface ] Receive data from LoRaMAC
+[37: DBG : Interface ] decode src and dest IPv6 addr:
+fd00::1:212:4b00:60d:0[37: DBG : Interface ] 
+fd00::2:212:4b00:60d:611b[37: DBG : Interface ] 
+[37: INFO: Interface ] Deliver data to the TCP/IP stack
+[37: INFO: TCP/IP    ] input: received 53 bytes
+[37: INFO: IPv6      ] packet received from fd00::1:212:4b00:60d:0 to fd00::2:212:4b00:60d:611b
+[37: INFO: IPv6      ] Receiving UDP packet
+[37: DBG : IPv6      ] Upper layer checksum len: 14 from: 40
+[37: DBG : IPv6      ] In udp_found
+[37: INFO: APP       ] Received PONG PONG 1 from fd00::1:212:4b00:60d:0
+[37: INFO: APP       ] Send PING
+[37: DBG : IPv6      ] In udp_send
+[37: DBG : IPv6      ] Upper layer checksum len: 14 from: 40
+[37: INFO: IPv6      ] Sending packet with length 54 (14)
+[37: INFO: RPL       ] SRH creating source routing header with destination fd00::1:212:4b00:60d:0 
+[37: INFO: RPL       ] SRH destination not in our DAG, skip SRH insertion
+[37: INFO: TCP/IP    ] output: processing 54 bytes packet from fd00::2:212:4b00:60d:611b to fd00::1:212:4b00:60d:0
+[37: INFO: TCP/IP    ] fallback: removing ext hdrs & setting proto 0 34
+[37: INFO: Interface ] Receive data for loramac whouhouuuuuu
+[37: INFO: Interface ] CONVERT SRC ADDR:fd00::2:212:4b00:60d:611b[37: DBG : IPv6      ] In udp_send
+[37: INFO: LoRa MAC  ] MAC TX: {src:2:24859 dest:1:0 k:1 seq:5 next:0 cmd:2 data:60000000000E1140223D162E000E074750494E472031
+[37: INFO: LoRa PHY  ] PHY TX:radio set wdt 0
+[37: INFO: LoRa PHY  ] PHY TX:radio tx 02611B010000820560000000000E1140223D162E000E074750494E472031
+[39: INFO: LoRa PHY  ] PHY TX:radio set wdt 3000
+[39: INFO: LoRa PHY  ] PHY TX:radio rx 0
+[40: INFO: LoRa PHY  ] PHY RX:01000002611B0305
+[40: INFO: LoRa MAC  ] MAC RX: {src:1:0 dest:2:24859 k:0 seq:5 next:0 cmd:3 data:
