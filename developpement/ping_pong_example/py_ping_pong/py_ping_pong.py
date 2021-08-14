@@ -25,7 +25,7 @@ logging.config.fileConfig("./logging.conf")
 
 dest_addr = None # destination address
 
-def sender(max_iter=10):
+def sender(max_iter=100):
     """ Thread that send PONG to the des_addr for max_iter times."""
 
     count = 0
@@ -48,6 +48,7 @@ def sender(max_iter=10):
         print("send PONG to "+dest_addr)
         NETWORK_STACK.send(packet)
         count += 1
+    NETWORK_STACK.phy_meter.export_data()
 
 
 def on_packet(packet: IPv6):

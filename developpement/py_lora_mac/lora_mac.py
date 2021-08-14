@@ -234,6 +234,10 @@ class LoraMac:
             frame (LoraFrame): The LoRa frame to process
             child (LoraChild): The child that send the frame
         """
+
+        if child is None:
+            self._listen()
+            return 
         log.debug("In _on_data ")
         log.debug("expected sn: %d", child.expected_sn)
         if frame.seq < child.expected_sn:
@@ -320,16 +324,10 @@ class LoraMac:
 
         # send the join response
         log.debug("send join response")
-        self.phy_layer.phy_send(
-            LoraFrame(
-                self.addr,
-                frame.src_addr,
-                MacCommand.JOIN_RESPONSE,
-                "%02X" % new_prefix,
-                new_child.get_sn(),
-                False,
-            )
-        )
+        response = LoraFrame(self.addr, frame.src_addr, MacCommand.JOIN_RESPONSE, "%02X" % new_prefix, new_child.get_sn(), False)
+        new_child.last_send_frame = response
+        self.phy_layer.phy_send(response)
+        
         log.debug("ask to listen")
         self._listen()
 

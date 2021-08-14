@@ -1264,13 +1264,19 @@ Discarded input sections
                 0x0000000000000000        0x4 build/zoul/remote-revb/obj/log.o
  .bss.curr_log_level_framer
                 0x0000000000000000        0x4 build/zoul/remote-revb/obj/log.o
+ .bss.curr_log_level_ipv6
+                0x0000000000000000        0x4 build/zoul/remote-revb/obj/log.o
  .bss.curr_log_level_lwm2m
                 0x0000000000000000        0x4 build/zoul/remote-revb/obj/log.o
  .bss.curr_log_level_mac
                 0x0000000000000000        0x4 build/zoul/remote-revb/obj/log.o
  .bss.curr_log_level_nullnet
                 0x0000000000000000        0x4 build/zoul/remote-revb/obj/log.o
+ .bss.curr_log_level_rpl
+                0x0000000000000000        0x4 build/zoul/remote-revb/obj/log.o
  .bss.curr_log_level_snmp
+                0x0000000000000000        0x4 build/zoul/remote-revb/obj/log.o
+ .bss.curr_log_level_tcpip
                 0x0000000000000000        0x4 build/zoul/remote-revb/obj/log.o
  .data.all_modules
                 0x0000000000000000       0x9c build/zoul/remote-revb/obj/log.o
@@ -2209,6 +2215,16 @@ Discarded input sections
  .text          0x0000000000000000        0x0 build/zoul/remote-revb/obj/uip-sr.o
  .data          0x0000000000000000        0x0 build/zoul/remote-revb/obj/uip-sr.o
  .bss           0x0000000000000000        0x0 build/zoul/remote-revb/obj/uip-sr.o
+ .text.uip_sr_num_nodes
+                0x0000000000000000        0xc build/zoul/remote-revb/obj/uip-sr.o
+ .text.uip_sr_node_head
+                0x0000000000000000        0xc build/zoul/remote-revb/obj/uip-sr.o
+ .text.uip_sr_node_next
+                0x0000000000000000        0x4 build/zoul/remote-revb/obj/uip-sr.o
+ .rodata.uip_sr_link_snprint.str1.1
+                0x0000000000000000       0x44 build/zoul/remote-revb/obj/uip-sr.o
+ .text.uip_sr_link_snprint
+                0x0000000000000000       0x8c build/zoul/remote-revb/obj/uip-sr.o
  .text          0x0000000000000000        0x0 build/zoul/remote-revb/obj/uip-ds6.o
  .data          0x0000000000000000        0x0 build/zoul/remote-revb/obj/uip-ds6.o
  .bss           0x0000000000000000        0x0 build/zoul/remote-revb/obj/uip-ds6.o
@@ -2374,10 +2390,8 @@ Discarded input sections
  .bss           0x0000000000000000        0x0 build/zoul/remote-revb/obj/uip6.o
  .text.uip_chksum
                 0x0000000000000000       0x12 build/zoul/remote-revb/obj/uip6.o
- .rodata.uip_ipchksum.str1.1
-                0x0000000000000000       0x1a build/zoul/remote-revb/obj/uip6.o
  .text.uip_ipchksum
-                0x0000000000000000       0x54 build/zoul/remote-revb/obj/uip6.o
+                0x0000000000000000       0x20 build/zoul/remote-revb/obj/uip6.o
  .text.uip_htons
                 0x0000000000000000        0x6 build/zoul/remote-revb/obj/uip6.o
  .text.uip_send
@@ -2470,6 +2484,7 @@ Discarded input sections
  .text          0x0000000000000000        0x0 build/zoul/remote-revb/obj/rpl-of0.o
  .data          0x0000000000000000        0x0 build/zoul/remote-revb/obj/rpl-of0.o
  .bss           0x0000000000000000        0x0 build/zoul/remote-revb/obj/rpl-of0.o
+ .text.reset    0x0000000000000000        0x2 build/zoul/remote-revb/obj/rpl-of0.o
  .text.nbr_has_usable_link
                 0x0000000000000000        0x4 build/zoul/remote-revb/obj/rpl-of0.o
  .text.update_metric_container
@@ -2486,9 +2501,6 @@ Discarded input sections
                 0x0000000000000000       0x2c build/zoul/remote-revb/obj/rpl-of0.o
  .text.best_parent
                 0x0000000000000000       0x6c build/zoul/remote-revb/obj/rpl-of0.o
- .rodata.reset.str1.1
-                0x0000000000000000       0x28 build/zoul/remote-revb/obj/rpl-of0.o
- .text.reset    0x0000000000000000       0x3c build/zoul/remote-revb/obj/rpl-of0.o
  .data.rpl_of0  0x0000000000000000       0x24 build/zoul/remote-revb/obj/rpl-of0.o
  .comment       0x0000000000000000       0x5a build/zoul/remote-revb/obj/rpl-of0.o
  .ARM.attributes
@@ -2496,19 +2508,37 @@ Discarded input sections
  .text          0x0000000000000000        0x0 build/zoul/remote-revb/obj/rpl-neighbor.o
  .data          0x0000000000000000        0x0 build/zoul/remote-revb/obj/rpl-neighbor.o
  .bss           0x0000000000000000        0x0 build/zoul/remote-revb/obj/rpl-neighbor.o
+ .text.rpl_neighbor_count
+                0x0000000000000000       0x2c build/zoul/remote-revb/obj/rpl-neighbor.o
+ .text.rpl_neighbor_is_acceptable_parent
+                0x0000000000000000       0x18 build/zoul/remote-revb/obj/rpl-neighbor.o
+ .text.rpl_neighbor_get_link_metric
+                0x0000000000000000       0x18 build/zoul/remote-revb/obj/rpl-neighbor.o
+ .rodata.rpl_neighbor_snprint.str1.1
+                0x0000000000000000       0x58 build/zoul/remote-revb/obj/rpl-neighbor.o
+ .text.rpl_neighbor_snprint
+                0x0000000000000000      0x180 build/zoul/remote-revb/obj/rpl-neighbor.o
+ .text.rpl_neighbor_print_list
+                0x0000000000000000       0x38 build/zoul/remote-revb/obj/rpl-neighbor.o
  .text.rpl_neighbor_is_parent
                 0x0000000000000000       0x18 build/zoul/remote-revb/obj/rpl-neighbor.o
  .text          0x0000000000000000        0x0 build/zoul/remote-revb/obj/rpl-dag.o
  .data          0x0000000000000000        0x0 build/zoul/remote-revb/obj/rpl-dag.o
  .bss           0x0000000000000000        0x0 build/zoul/remote-revb/obj/rpl-dag.o
+ .rodata.rpl_dag_state_to_str.str1.1
+                0x0000000000000000        0x8 build/zoul/remote-revb/obj/rpl-dag.o
+ .text.rpl_dag_state_to_str
+                0x0000000000000000       0x18 build/zoul/remote-revb/obj/rpl-dag.o
  .text.rpl_get_default_instance
                 0x0000000000000000       0x10 build/zoul/remote-revb/obj/rpl-dag.o
  .text.rpl_get_any_dag
                 0x0000000000000000       0x14 build/zoul/remote-revb/obj/rpl-dag.o
- .rodata.rpl_refresh_routes.str1.1
-                0x0000000000000000       0x3b build/zoul/remote-revb/obj/rpl-dag.o
  .text.rpl_refresh_routes
-                0x0000000000000000       0x6c build/zoul/remote-revb/obj/rpl-dag.o
+                0x0000000000000000       0x20 build/zoul/remote-revb/obj/rpl-dag.o
+ .rodata.str1.1
+                0x0000000000000000       0x27 build/zoul/remote-revb/obj/rpl-dag.o
+ .rodata.CSWTCH.18
+                0x0000000000000000       0x10 build/zoul/remote-revb/obj/rpl-dag.o
  .text          0x0000000000000000        0x0 build/zoul/remote-revb/obj/rpl-timers.o
  .data          0x0000000000000000        0x0 build/zoul/remote-revb/obj/rpl-timers.o
  .bss           0x0000000000000000        0x0 build/zoul/remote-revb/obj/rpl-timers.o
@@ -2531,6 +2561,8 @@ Discarded input sections
  .text          0x0000000000000000        0x0 build/zoul/remote-revb/obj/rpl-dag-root.o
  .data          0x0000000000000000        0x0 build/zoul/remote-revb/obj/rpl-dag-root.o
  .bss           0x0000000000000000        0x0 build/zoul/remote-revb/obj/rpl-dag-root.o
+ .text.rpl_dag_root_print_links
+                0x0000000000000000       0x30 build/zoul/remote-revb/obj/rpl-dag-root.o
  .text          0x0000000000000000        0x0 pingpong.o
  .data          0x0000000000000000        0x0 pingpong.o
  .bss           0x0000000000000000        0x0 pingpong.o
@@ -2941,7 +2973,7 @@ LOAD /usr/lib/gcc/arm-none-eabi/9.2.1/thumb/v7-m/nofp/libgcc.a
 LOAD /usr/lib/gcc/arm-none-eabi/9.2.1/../../../arm-none-eabi/lib/thumb/v7-m/nofp/libc.a
 END GROUP
 
-.text           0x0000000000202000    0x11283
+.text           0x0000000000202000     0xc86a
                 0x0000000000202000                _text = .
  *(SORT_BY_ALIGNMENT(.vectors))
  .vectors       0x0000000000202000      0x28c build/zoul/remote-revb/obj/startup-gcc.o
@@ -3556,1229 +3588,1038 @@ END GROUP
                 0x0000000000207284       0x20 build/zoul/remote-revb/obj/uipbuf.o
                 0x0000000000207284                uipbuf_init
  .text.echo_reply_input
-                0x00000000002072a4       0xdc build/zoul/remote-revb/obj/uip-icmp6.o
+                0x00000000002072a4       0x6c build/zoul/remote-revb/obj/uip-icmp6.o
  .text.echo_request_input
-                0x0000000000207380      0x16c build/zoul/remote-revb/obj/uip-icmp6.o
+                0x0000000000207310       0x9c build/zoul/remote-revb/obj/uip-icmp6.o
  .text.uip_icmp6_input
-                0x00000000002074ec       0x38 build/zoul/remote-revb/obj/uip-icmp6.o
-                0x00000000002074ec                uip_icmp6_input
+                0x00000000002073ac       0x38 build/zoul/remote-revb/obj/uip-icmp6.o
+                0x00000000002073ac                uip_icmp6_input
  .text.uip_icmp6_register_input_handler
-                0x0000000000207524        0xc build/zoul/remote-revb/obj/uip-icmp6.o
-                0x0000000000207524                uip_icmp6_register_input_handler
+                0x00000000002073e4        0xc build/zoul/remote-revb/obj/uip-icmp6.o
+                0x00000000002073e4                uip_icmp6_register_input_handler
  .text.uip_icmp6_error_output
-                0x0000000000207530      0x1e0 build/zoul/remote-revb/obj/uip-icmp6.o
-                0x0000000000207530                uip_icmp6_error_output
+                0x00000000002073f0      0x13c build/zoul/remote-revb/obj/uip-icmp6.o
+                0x00000000002073f0                uip_icmp6_error_output
  .text.uip_icmp6_send
-                0x0000000000207710      0x11c build/zoul/remote-revb/obj/uip-icmp6.o
-                0x0000000000207710                uip_icmp6_send
+                0x000000000020752c       0x80 build/zoul/remote-revb/obj/uip-icmp6.o
+                0x000000000020752c                uip_icmp6_send
  .text.uip_icmp6_init
-                0x000000000020782c       0x1c build/zoul/remote-revb/obj/uip-icmp6.o
-                0x000000000020782c                uip_icmp6_init
+                0x00000000002075ac       0x1c build/zoul/remote-revb/obj/uip-icmp6.o
+                0x00000000002075ac                uip_icmp6_init
  .text.node_matches_address.part.0
-                0x0000000000207848       0x28 build/zoul/remote-revb/obj/uip-sr.o
- .text.uip_sr_num_nodes
-                0x0000000000207870        0xc build/zoul/remote-revb/obj/uip-sr.o
-                0x0000000000207870                uip_sr_num_nodes
+                0x00000000002075c8       0x28 build/zoul/remote-revb/obj/uip-sr.o
  .text.uip_sr_get_node
-                0x000000000020787c       0x38 build/zoul/remote-revb/obj/uip-sr.o
-                0x000000000020787c                uip_sr_get_node
+                0x00000000002075f0       0x38 build/zoul/remote-revb/obj/uip-sr.o
+                0x00000000002075f0                uip_sr_get_node
  .text.uip_sr_is_addr_reachable
-                0x00000000002078b4       0x44 build/zoul/remote-revb/obj/uip-sr.o
-                0x00000000002078b4                uip_sr_is_addr_reachable
+                0x0000000000207628       0x44 build/zoul/remote-revb/obj/uip-sr.o
+                0x0000000000207628                uip_sr_is_addr_reachable
  .text.uip_sr_update_node
-                0x00000000002078f8      0x174 build/zoul/remote-revb/obj/uip-sr.o
-                0x00000000002078f8                uip_sr_update_node
+                0x000000000020766c       0xa4 build/zoul/remote-revb/obj/uip-sr.o
+                0x000000000020766c                uip_sr_update_node
  .text.uip_sr_init
-                0x0000000000207a6c       0x24 build/zoul/remote-revb/obj/uip-sr.o
-                0x0000000000207a6c                uip_sr_init
- .text.uip_sr_node_head
-                0x0000000000207a90        0xc build/zoul/remote-revb/obj/uip-sr.o
-                0x0000000000207a90                uip_sr_node_head
+                0x0000000000207710       0x24 build/zoul/remote-revb/obj/uip-sr.o
+                0x0000000000207710                uip_sr_init
  .text.uip_sr_periodic
-                0x0000000000207a9c       0xdc build/zoul/remote-revb/obj/uip-sr.o
-                0x0000000000207a9c                uip_sr_periodic
+                0x0000000000207734       0x78 build/zoul/remote-revb/obj/uip-sr.o
+                0x0000000000207734                uip_sr_periodic
  .text.uip_sr_free_all
-                0x0000000000207b78       0x48 build/zoul/remote-revb/obj/uip-sr.o
-                0x0000000000207b78                uip_sr_free_all
- .text.uip_sr_link_snprint
-                0x0000000000207bc0       0x8c build/zoul/remote-revb/obj/uip-sr.o
-                0x0000000000207bc0                uip_sr_link_snprint
+                0x00000000002077ac       0x48 build/zoul/remote-revb/obj/uip-sr.o
+                0x00000000002077ac                uip_sr_free_all
  .text.uip_ds6_default_prefix
-                0x0000000000207c4c        0x8 build/zoul/remote-revb/obj/uip-ds6.o
-                0x0000000000207c4c                uip_ds6_default_prefix
+                0x00000000002077f4        0x8 build/zoul/remote-revb/obj/uip-ds6.o
+                0x00000000002077f4                uip_ds6_default_prefix
  .text.uip_ds6_prefix_add
-                0x0000000000207c54       0xe0 build/zoul/remote-revb/obj/uip-ds6.o
-                0x0000000000207c54                uip_ds6_prefix_add
+                0x00000000002077fc       0x60 build/zoul/remote-revb/obj/uip-ds6.o
+                0x00000000002077fc                uip_ds6_prefix_add
  .text.uip_ds6_is_addr_onlink
-                0x0000000000207d34       0x40 build/zoul/remote-revb/obj/uip-ds6.o
-                0x0000000000207d34                uip_ds6_is_addr_onlink
+                0x000000000020785c       0x40 build/zoul/remote-revb/obj/uip-ds6.o
+                0x000000000020785c                uip_ds6_is_addr_onlink
  .text.uip_ds6_addr_lookup
-                0x0000000000207d74       0x2c build/zoul/remote-revb/obj/uip-ds6.o
-                0x0000000000207d74                uip_ds6_addr_lookup
+                0x000000000020789c       0x2c build/zoul/remote-revb/obj/uip-ds6.o
+                0x000000000020789c                uip_ds6_addr_lookup
  .text.uip_ds6_get_link_local
-                0x0000000000207da0       0x3c build/zoul/remote-revb/obj/uip-ds6.o
-                0x0000000000207da0                uip_ds6_get_link_local
+                0x00000000002078c8       0x3c build/zoul/remote-revb/obj/uip-ds6.o
+                0x00000000002078c8                uip_ds6_get_link_local
  .text.uip_ds6_maddr_add
-                0x0000000000207ddc       0x4c build/zoul/remote-revb/obj/uip-ds6.o
-                0x0000000000207ddc                uip_ds6_maddr_add
+                0x0000000000207904       0x4c build/zoul/remote-revb/obj/uip-ds6.o
+                0x0000000000207904                uip_ds6_maddr_add
  .text.uip_ds6_addr_add
-                0x0000000000207e28       0x98 build/zoul/remote-revb/obj/uip-ds6.o
-                0x0000000000207e28                uip_ds6_addr_add
+                0x0000000000207950       0x98 build/zoul/remote-revb/obj/uip-ds6.o
+                0x0000000000207950                uip_ds6_addr_add
  .text.uip_ds6_maddr_lookup
-                0x0000000000207ec0       0x2c build/zoul/remote-revb/obj/uip-ds6.o
-                0x0000000000207ec0                uip_ds6_maddr_lookup
+                0x00000000002079e8       0x2c build/zoul/remote-revb/obj/uip-ds6.o
+                0x00000000002079e8                uip_ds6_maddr_lookup
  .text.uip_ds6_addr_rm
-                0x0000000000207eec       0x44 build/zoul/remote-revb/obj/uip-ds6.o
-                0x0000000000207eec                uip_ds6_addr_rm
+                0x0000000000207a14       0x44 build/zoul/remote-revb/obj/uip-ds6.o
+                0x0000000000207a14                uip_ds6_addr_rm
  .text.uip_ds6_periodic
-                0x0000000000207f30       0x48 build/zoul/remote-revb/obj/uip-ds6.o
-                0x0000000000207f30                uip_ds6_periodic
+                0x0000000000207a58       0x48 build/zoul/remote-revb/obj/uip-ds6.o
+                0x0000000000207a58                uip_ds6_periodic
  .text.uip_ds6_select_src
-                0x0000000000207f78       0x90 build/zoul/remote-revb/obj/uip-ds6.o
-                0x0000000000207f78                uip_ds6_select_src
+                0x0000000000207aa0       0x90 build/zoul/remote-revb/obj/uip-ds6.o
+                0x0000000000207aa0                uip_ds6_select_src
  .text.uip_ds6_compute_reachable_time
-                0x0000000000208008       0x2c build/zoul/remote-revb/obj/uip-ds6.o
-                0x0000000000208008                uip_ds6_compute_reachable_time
+                0x0000000000207b30       0x2c build/zoul/remote-revb/obj/uip-ds6.o
+                0x0000000000207b30                uip_ds6_compute_reachable_time
  .text.uip_ds6_init
-                0x0000000000208034      0x21c build/zoul/remote-revb/obj/uip-ds6.o
-                0x0000000000208034                uip_ds6_init
+                0x0000000000207b5c      0x11c build/zoul/remote-revb/obj/uip-ds6.o
+                0x0000000000207b5c                uip_ds6_init
  .text.uip_udp_packet_send
-                0x0000000000208250       0x34 build/zoul/remote-revb/obj/uip-udp-packet.o
-                0x0000000000208250                uip_udp_packet_send
+                0x0000000000207c78       0x34 build/zoul/remote-revb/obj/uip-udp-packet.o
+                0x0000000000207c78                uip_udp_packet_send
  .text.uip_ds6_route_init
-                0x0000000000208284       0x1c build/zoul/remote-revb/obj/uip-ds6-route.o
-                0x0000000000208284                uip_ds6_route_init
+                0x0000000000207cac       0x1c build/zoul/remote-revb/obj/uip-ds6-route.o
+                0x0000000000207cac                uip_ds6_route_init
  .text.uip_ds6_defrt_rm
-                0x00000000002082a0       0x68 build/zoul/remote-revb/obj/uip-ds6-route.o
-                0x00000000002082a0                uip_ds6_defrt_rm
+                0x0000000000207cc8       0x38 build/zoul/remote-revb/obj/uip-ds6-route.o
+                0x0000000000207cc8                uip_ds6_defrt_rm
  .text.uip_ds6_defrt_lookup
-                0x0000000000208308       0x34 build/zoul/remote-revb/obj/uip-ds6-route.o
-                0x0000000000208308                uip_ds6_defrt_lookup
+                0x0000000000207d00       0x34 build/zoul/remote-revb/obj/uip-ds6-route.o
+                0x0000000000207d00                uip_ds6_defrt_lookup
  .text.uip_ds6_defrt_add
-                0x000000000020833c      0x114 build/zoul/remote-revb/obj/uip-ds6-route.o
-                0x000000000020833c                uip_ds6_defrt_add
+                0x0000000000207d34       0x60 build/zoul/remote-revb/obj/uip-ds6-route.o
+                0x0000000000207d34                uip_ds6_defrt_add
  .text.uip_ds6_defrt_choose
-                0x0000000000208450       0xf0 build/zoul/remote-revb/obj/uip-ds6-route.o
-                0x0000000000208450                uip_ds6_defrt_choose
+                0x0000000000207d94       0x30 build/zoul/remote-revb/obj/uip-ds6-route.o
+                0x0000000000207d94                uip_ds6_defrt_choose
  .text.uip_ds6_defrt_periodic
-                0x0000000000208540       0x70 build/zoul/remote-revb/obj/uip-ds6-route.o
-                0x0000000000208540                uip_ds6_defrt_periodic
+                0x0000000000207dc4       0x3c build/zoul/remote-revb/obj/uip-ds6-route.o
+                0x0000000000207dc4                uip_ds6_defrt_periodic
  .text.tcpip_output
-                0x00000000002085b0       0x2c build/zoul/remote-revb/obj/tcpip.o
-                0x00000000002085b0                tcpip_output
- .text.udp_new  0x00000000002085dc       0x18 build/zoul/remote-revb/obj/tcpip.o
-                0x00000000002085dc                udp_new
+                0x0000000000207e00       0x2c build/zoul/remote-revb/obj/tcpip.o
+                0x0000000000207e00                tcpip_output
+ .text.udp_new  0x0000000000207e2c       0x18 build/zoul/remote-revb/obj/tcpip.o
+                0x0000000000207e2c                udp_new
  .text.tcpip_input
-                0x00000000002085f4       0x24 build/zoul/remote-revb/obj/tcpip.o
-                0x00000000002085f4                tcpip_input
+                0x0000000000207e44       0x24 build/zoul/remote-revb/obj/tcpip.o
+                0x0000000000207e44                tcpip_input
  .text.tcpip_ipv6_output
-                0x0000000000208618      0x3ec build/zoul/remote-revb/obj/tcpip.o
-                0x0000000000208618                tcpip_ipv6_output
- .text.packet_input.part.0
-                0x0000000000208a04       0x50 build/zoul/remote-revb/obj/tcpip.o
+                0x0000000000207e68      0x120 build/zoul/remote-revb/obj/tcpip.o
+                0x0000000000207e68                tcpip_ipv6_output
+ .text.packet_input
+                0x0000000000207f88       0x20 build/zoul/remote-revb/obj/tcpip.o
  .text.process_thread_tcpip_process
-                0x0000000000208a54       0xd4 build/zoul/remote-revb/obj/tcpip.o
+                0x0000000000207fa8       0xc8 build/zoul/remote-revb/obj/tcpip.o
  .text.tcpip_uipcall
-                0x0000000000208b28       0x2c build/zoul/remote-revb/obj/tcpip.o
-                0x0000000000208b28                tcpip_uipcall
+                0x0000000000208070       0x2c build/zoul/remote-revb/obj/tcpip.o
+                0x0000000000208070                tcpip_uipcall
  .text.upper_layer_chksum
-                0x0000000000208b54       0x94 build/zoul/remote-revb/obj/uip6.o
+                0x000000000020809c       0x54 build/zoul/remote-revb/obj/uip6.o
  .text.ext_hdr_options_process
-                0x0000000000208be8      0x170 build/zoul/remote-revb/obj/uip6.o
+                0x00000000002080f0       0x78 build/zoul/remote-revb/obj/uip6.o
  .text.uip_update_ttl
-                0x0000000000208d58       0x24 build/zoul/remote-revb/obj/uip6.o
+                0x0000000000208168       0x24 build/zoul/remote-revb/obj/uip6.o
  .text.uip_init
-                0x0000000000208d7c       0x44 build/zoul/remote-revb/obj/uip6.o
-                0x0000000000208d7c                uip_init
+                0x000000000020818c       0x44 build/zoul/remote-revb/obj/uip6.o
+                0x000000000020818c                uip_init
  .text.uip_remove_ext_hdr
-                0x0000000000208dc0       0xc8 build/zoul/remote-revb/obj/uip6.o
-                0x0000000000208dc0                uip_remove_ext_hdr
+                0x00000000002081d0       0x6c build/zoul/remote-revb/obj/uip6.o
+                0x00000000002081d0                uip_remove_ext_hdr
  .text.uip_udp_new
-                0x0000000000208e88       0x94 build/zoul/remote-revb/obj/uip6.o
-                0x0000000000208e88                uip_udp_new
+                0x000000000020823c       0x94 build/zoul/remote-revb/obj/uip6.o
+                0x000000000020823c                uip_udp_new
  .text.uip_process
-                0x0000000000208f1c      0x86c build/zoul/remote-revb/obj/uip6.o
-                0x0000000000208f1c                uip_process
+                0x00000000002082d0      0x40c build/zoul/remote-revb/obj/uip6.o
+                0x00000000002082d0                uip_process
  .text.uip_htonl
-                0x0000000000209788       0x1c build/zoul/remote-revb/obj/uip6.o
-                0x0000000000209788                uip_htonl
+                0x00000000002086dc       0x1c build/zoul/remote-revb/obj/uip6.o
+                0x00000000002086dc                uip_htonl
  .text.uip_ds6_nbr_rm
-                0x00000000002097a4       0x24 build/zoul/remote-revb/obj/uip-ds6-nbr.o
-                0x00000000002097a4                uip_ds6_nbr_rm
+                0x00000000002086f8       0x24 build/zoul/remote-revb/obj/uip-ds6-nbr.o
+                0x00000000002086f8                uip_ds6_nbr_rm
  .text.uip_ds6_neighbors_init
-                0x00000000002097c8       0x1c build/zoul/remote-revb/obj/uip-ds6-nbr.o
-                0x00000000002097c8                uip_ds6_neighbors_init
+                0x000000000020871c       0x1c build/zoul/remote-revb/obj/uip-ds6-nbr.o
+                0x000000000020871c                uip_ds6_neighbors_init
  .text.uip_ds6_nbr_add
-                0x00000000002097e4      0x110 build/zoul/remote-revb/obj/uip-ds6-nbr.o
-                0x00000000002097e4                uip_ds6_nbr_add
+                0x0000000000208738       0x40 build/zoul/remote-revb/obj/uip-ds6-nbr.o
+                0x0000000000208738                uip_ds6_nbr_add
  .text.uip_ds6_nbr_get_ll
-                0x00000000002098f4        0xc build/zoul/remote-revb/obj/uip-ds6-nbr.o
-                0x00000000002098f4                uip_ds6_nbr_get_ll
+                0x0000000000208778        0xc build/zoul/remote-revb/obj/uip-ds6-nbr.o
+                0x0000000000208778                uip_ds6_nbr_get_ll
  .text.uip_ds6_nbr_head
-                0x0000000000209900        0xc build/zoul/remote-revb/obj/uip-ds6-nbr.o
-                0x0000000000209900                uip_ds6_nbr_head
+                0x0000000000208784        0xc build/zoul/remote-revb/obj/uip-ds6-nbr.o
+                0x0000000000208784                uip_ds6_nbr_head
  .text.uip_ds6_nbr_next
-                0x000000000020990c        0xc build/zoul/remote-revb/obj/uip-ds6-nbr.o
-                0x000000000020990c                uip_ds6_nbr_next
+                0x0000000000208790        0xc build/zoul/remote-revb/obj/uip-ds6-nbr.o
+                0x0000000000208790                uip_ds6_nbr_next
  .text.uip_ds6_nbr_ll_lookup
-                0x0000000000209918        0xc build/zoul/remote-revb/obj/uip-ds6-nbr.o
-                0x0000000000209918                uip_ds6_nbr_ll_lookup
- .text.uip_ds6_nbr_update_ll
-                0x0000000000209924      0x114 build/zoul/remote-revb/obj/uip-ds6-nbr.o
-                0x0000000000209924                uip_ds6_nbr_update_ll
+                0x000000000020879c        0xc build/zoul/remote-revb/obj/uip-ds6-nbr.o
+                0x000000000020879c                uip_ds6_nbr_ll_lookup
  .text.ns_input
-                0x0000000000209a38      0x3d8 build/zoul/remote-revb/obj/uip-nd6.o
+                0x00000000002087a8      0x27c build/zoul/remote-revb/obj/uip-nd6.o
  .text.uip_nd6_init
-                0x0000000000209e10        0xc build/zoul/remote-revb/obj/uip-nd6.o
-                0x0000000000209e10                uip_nd6_init
+                0x0000000000208a24        0xc build/zoul/remote-revb/obj/uip-nd6.o
+                0x0000000000208a24                uip_nd6_init
  .text.process_thread_simple_udp_process
-                0x0000000000209e1c       0xb8 build/zoul/remote-revb/obj/simple-udp.o
+                0x0000000000208a30       0xb8 build/zoul/remote-revb/obj/simple-udp.o
  .text.simple_udp_register
-                0x0000000000209ed4       0x88 build/zoul/remote-revb/obj/simple-udp.o
-                0x0000000000209ed4                simple_udp_register
+                0x0000000000208ae8       0x88 build/zoul/remote-revb/obj/simple-udp.o
+                0x0000000000208ae8                simple_udp_register
  .text.clear_fragments
-                0x0000000000209f5c       0x38 build/zoul/remote-revb/obj/sicslowpan.o
+                0x0000000000208b70       0x38 build/zoul/remote-revb/obj/sicslowpan.o
  .text.sicslowpan_init
-                0x0000000000209f94       0x18 build/zoul/remote-revb/obj/sicslowpan.o
-                0x0000000000209f94                sicslowpan_init
+                0x0000000000208ba8       0x18 build/zoul/remote-revb/obj/sicslowpan.o
+                0x0000000000208ba8                sicslowpan_init
  .text.set_packet_attrs
-                0x0000000000209fac       0x58 build/zoul/remote-revb/obj/sicslowpan.o
+                0x0000000000208bc0       0x58 build/zoul/remote-revb/obj/sicslowpan.o
  .text.compress_addr_64
-                0x000000000020a004       0x90 build/zoul/remote-revb/obj/sicslowpan.o
+                0x0000000000208c18       0x90 build/zoul/remote-revb/obj/sicslowpan.o
  .text.addr_context_lookup_by_prefix
-                0x000000000020a094       0x24 build/zoul/remote-revb/obj/sicslowpan.o
+                0x0000000000208ca8       0x24 build/zoul/remote-revb/obj/sicslowpan.o
  .text.send_packet
-                0x000000000020a0b8       0x24 build/zoul/remote-revb/obj/sicslowpan.o
+                0x0000000000208ccc       0x24 build/zoul/remote-revb/obj/sicslowpan.o
  .text.fragment_copy_payload_and_send
-                0x000000000020a0dc       0x68 build/zoul/remote-revb/obj/sicslowpan.o
- .text.output   0x000000000020a144      0x744 build/zoul/remote-revb/obj/sicslowpan.o
+                0x0000000000208cf0       0x68 build/zoul/remote-revb/obj/sicslowpan.o
+ .text.output   0x0000000000208d58      0x744 build/zoul/remote-revb/obj/sicslowpan.o
  .text.packet_sent
-                0x000000000020a888       0x5c build/zoul/remote-revb/obj/sicslowpan.o
+                0x000000000020949c       0x5c build/zoul/remote-revb/obj/sicslowpan.o
  .text.store_fragment
-                0x000000000020a8e4       0x5c build/zoul/remote-revb/obj/sicslowpan.o
+                0x00000000002094f8       0x5c build/zoul/remote-revb/obj/sicslowpan.o
  .text.uncompress_addr
-                0x000000000020a940       0x70 build/zoul/remote-revb/obj/sicslowpan.o
+                0x0000000000209554       0x70 build/zoul/remote-revb/obj/sicslowpan.o
  .text.add_fragment
-                0x000000000020a9b0      0x14c build/zoul/remote-revb/obj/sicslowpan.o
- .text.input    0x000000000020aafc      0x82c build/zoul/remote-revb/obj/sicslowpan.o
+                0x00000000002095c4      0x14c build/zoul/remote-revb/obj/sicslowpan.o
+ .text.input    0x0000000000209710      0x82c build/zoul/remote-revb/obj/sicslowpan.o
  .text.uiplib_ipaddr_snprint
-                0x000000000020b328       0xfc build/zoul/remote-revb/obj/uiplib.o
-                0x000000000020b328                uiplib_ipaddr_snprint
+                0x0000000000209f3c       0xfc build/zoul/remote-revb/obj/uiplib.o
+                0x0000000000209f3c                uiplib_ipaddr_snprint
  .text.get_rank
-                0x000000000020b424       0x20 build/zoul/remote-revb/obj/rpl-nbr-policy.o
- .text.max_acceptable_rank
-                0x000000000020b444       0x20 build/zoul/remote-revb/obj/rpl-neighbor.o
+                0x000000000020a038       0x20 build/zoul/remote-revb/obj/rpl-nbr-policy.o
  .text.remove_neighbor
-                0x000000000020b464       0x3c build/zoul/remote-revb/obj/rpl-neighbor.o
- .text.rpl_neighbor_count
-                0x000000000020b4a0       0x2c build/zoul/remote-revb/obj/rpl-neighbor.o
-                0x000000000020b4a0                rpl_neighbor_count
+                0x000000000020a058       0x3c build/zoul/remote-revb/obj/rpl-neighbor.o
  .text.rpl_neighbor_get_from_lladdr
-                0x000000000020b4cc       0x10 build/zoul/remote-revb/obj/rpl-neighbor.o
-                0x000000000020b4cc                rpl_neighbor_get_from_lladdr
- .text.rpl_neighbor_is_acceptable_parent
-                0x000000000020b4dc       0x18 build/zoul/remote-revb/obj/rpl-neighbor.o
-                0x000000000020b4dc                rpl_neighbor_is_acceptable_parent
- .text.rpl_neighbor_get_link_metric
-                0x000000000020b4f4       0x18 build/zoul/remote-revb/obj/rpl-neighbor.o
-                0x000000000020b4f4                rpl_neighbor_get_link_metric
+                0x000000000020a094       0x10 build/zoul/remote-revb/obj/rpl-neighbor.o
+                0x000000000020a094                rpl_neighbor_get_from_lladdr
  .text.rpl_neighbor_rank_via_nbr
-                0x000000000020b50c       0x18 build/zoul/remote-revb/obj/rpl-neighbor.o
-                0x000000000020b50c                rpl_neighbor_rank_via_nbr
+                0x000000000020a0a4       0x18 build/zoul/remote-revb/obj/rpl-neighbor.o
+                0x000000000020a0a4                rpl_neighbor_rank_via_nbr
  .text.rpl_neighbor_get_lladdr
-                0x000000000020b524       0x10 build/zoul/remote-revb/obj/rpl-neighbor.o
-                0x000000000020b524                rpl_neighbor_get_lladdr
+                0x000000000020a0bc       0x10 build/zoul/remote-revb/obj/rpl-neighbor.o
+                0x000000000020a0bc                rpl_neighbor_get_lladdr
  .text.best_parent
-                0x000000000020b534       0x80 build/zoul/remote-revb/obj/rpl-neighbor.o
- .text.rpl_neighbor_snprint
-                0x000000000020b5b4      0x170 build/zoul/remote-revb/obj/rpl-neighbor.o
-                0x000000000020b5b4                rpl_neighbor_snprint
- .text.rpl_neighbor_print_list
-                0x000000000020b724      0x114 build/zoul/remote-revb/obj/rpl-neighbor.o
-                0x000000000020b724                rpl_neighbor_print_list
+                0x000000000020a0cc       0x84 build/zoul/remote-revb/obj/rpl-neighbor.o
  .text.rpl_neighbor_set_preferred_parent
-                0x000000000020b838       0xbc build/zoul/remote-revb/obj/rpl-neighbor.o
-                0x000000000020b838                rpl_neighbor_set_preferred_parent
+                0x000000000020a150       0x48 build/zoul/remote-revb/obj/rpl-neighbor.o
+                0x000000000020a150                rpl_neighbor_set_preferred_parent
  .text.rpl_neighbor_remove_all
-                0x000000000020b8f4       0x64 build/zoul/remote-revb/obj/rpl-neighbor.o
-                0x000000000020b8f4                rpl_neighbor_remove_all
+                0x000000000020a198       0x30 build/zoul/remote-revb/obj/rpl-neighbor.o
+                0x000000000020a198                rpl_neighbor_remove_all
  .text.rpl_neighbor_get_from_ipaddr
-                0x000000000020b958       0x1c build/zoul/remote-revb/obj/rpl-neighbor.o
-                0x000000000020b958                rpl_neighbor_get_from_ipaddr
+                0x000000000020a1c8       0x1c build/zoul/remote-revb/obj/rpl-neighbor.o
+                0x000000000020a1c8                rpl_neighbor_get_from_ipaddr
  .text.rpl_neighbor_select_best
-                0x000000000020b974       0xa8 build/zoul/remote-revb/obj/rpl-neighbor.o
-                0x000000000020b974                rpl_neighbor_select_best
+                0x000000000020a1e4       0x54 build/zoul/remote-revb/obj/rpl-neighbor.o
+                0x000000000020a1e4                rpl_neighbor_select_best
  .text.rpl_neighbor_init
-                0x000000000020ba1c       0x14 build/zoul/remote-revb/obj/rpl-neighbor.o
-                0x000000000020ba1c                rpl_neighbor_init
+                0x000000000020a238       0x14 build/zoul/remote-revb/obj/rpl-neighbor.o
+                0x000000000020a238                rpl_neighbor_init
  .text.init_dag
-                0x000000000020ba30       0xd0 build/zoul/remote-revb/obj/rpl-dag.o
+                0x000000000020a24c       0x74 build/zoul/remote-revb/obj/rpl-dag.o
  .text.process_dio_init_dag
-                0x000000000020bb00      0x16c build/zoul/remote-revb/obj/rpl-dag.o
- .text.rpl_dag_state_to_str
-                0x000000000020bc6c       0x18 build/zoul/remote-revb/obj/rpl-dag.o
-                0x000000000020bc6c                rpl_dag_state_to_str
+                0x000000000020a2c0       0x88 build/zoul/remote-revb/obj/rpl-dag.o
  .text.rpl_dag_get_root_ipaddr
-                0x000000000020bc84       0x30 build/zoul/remote-revb/obj/rpl-dag.o
-                0x000000000020bc84                rpl_dag_get_root_ipaddr
+                0x000000000020a348       0x30 build/zoul/remote-revb/obj/rpl-dag.o
+                0x000000000020a348                rpl_dag_get_root_ipaddr
  .text.rpl_dag_leave
-                0x000000000020bcb4       0xa4 build/zoul/remote-revb/obj/rpl-dag.o
-                0x000000000020bcb4                rpl_dag_leave
+                0x000000000020a378       0x50 build/zoul/remote-revb/obj/rpl-dag.o
+                0x000000000020a378                rpl_dag_leave
  .text.rpl_dag_poison_and_leave
-                0x000000000020bd58       0x10 build/zoul/remote-revb/obj/rpl-dag.o
-                0x000000000020bd58                rpl_dag_poison_and_leave
+                0x000000000020a3c8       0x10 build/zoul/remote-revb/obj/rpl-dag.o
+                0x000000000020a3c8                rpl_dag_poison_and_leave
  .text.rpl_dag_periodic
-                0x000000000020bd68       0xa0 build/zoul/remote-revb/obj/rpl-dag.o
-                0x000000000020bd68                rpl_dag_periodic
+                0x000000000020a3d8       0x44 build/zoul/remote-revb/obj/rpl-dag.o
+                0x000000000020a3d8                rpl_dag_periodic
  .text.rpl_is_addr_in_our_dag
-                0x000000000020be08       0x24 build/zoul/remote-revb/obj/rpl-dag.o
-                0x000000000020be08                rpl_is_addr_in_our_dag
+                0x000000000020a41c       0x24 build/zoul/remote-revb/obj/rpl-dag.o
+                0x000000000020a41c                rpl_is_addr_in_our_dag
  .text.rpl_local_repair
-                0x000000000020be2c       0x6c build/zoul/remote-revb/obj/rpl-dag.o
-                0x000000000020be2c                rpl_local_repair
+                0x000000000020a440       0x34 build/zoul/remote-revb/obj/rpl-dag.o
+                0x000000000020a440                rpl_local_repair
  .text.rpl_global_repair
-                0x000000000020be98       0x84 build/zoul/remote-revb/obj/rpl-dag.o
-                0x000000000020be98                rpl_global_repair
+                0x000000000020a474       0x38 build/zoul/remote-revb/obj/rpl-dag.o
+                0x000000000020a474                rpl_global_repair
  .text.rpl_dag_ready_to_advertise
-                0x000000000020bf1c       0x24 build/zoul/remote-revb/obj/rpl-dag.o
-                0x000000000020bf1c                rpl_dag_ready_to_advertise
+                0x000000000020a4ac       0x24 build/zoul/remote-revb/obj/rpl-dag.o
+                0x000000000020a4ac                rpl_dag_ready_to_advertise
  .text.rpl_dag_update_state
-                0x000000000020bf40      0x200 build/zoul/remote-revb/obj/rpl-dag.o
-                0x000000000020bf40                rpl_dag_update_state
+                0x000000000020a4d0      0x12c build/zoul/remote-revb/obj/rpl-dag.o
+                0x000000000020a4d0                rpl_dag_update_state
  .text.rpl_process_dio
-                0x000000000020c140      0x2e0 build/zoul/remote-revb/obj/rpl-dag.o
-                0x000000000020c140                rpl_process_dio
+                0x000000000020a5fc      0x170 build/zoul/remote-revb/obj/rpl-dag.o
+                0x000000000020a5fc                rpl_process_dio
  .text.rpl_process_dis
-                0x000000000020c420       0x5c build/zoul/remote-revb/obj/rpl-dag.o
-                0x000000000020c420                rpl_process_dis
+                0x000000000020a76c       0x2c build/zoul/remote-revb/obj/rpl-dag.o
+                0x000000000020a76c                rpl_process_dis
  .text.rpl_process_dao
-                0x000000000020c47c       0x84 build/zoul/remote-revb/obj/rpl-dag.o
-                0x000000000020c47c                rpl_process_dao
+                0x000000000020a798       0x4c build/zoul/remote-revb/obj/rpl-dag.o
+                0x000000000020a798                rpl_process_dao
  .text.rpl_process_dao_ack
-                0x000000000020c500       0x88 build/zoul/remote-revb/obj/rpl-dag.o
-                0x000000000020c500                rpl_process_dao_ack
+                0x000000000020a7e4       0x50 build/zoul/remote-revb/obj/rpl-dag.o
+                0x000000000020a7e4                rpl_process_dao_ack
  .text.rpl_dag_init_root
-                0x000000000020c588      0x100 build/zoul/remote-revb/obj/rpl-dag.o
-                0x000000000020c588                rpl_dag_init_root
+                0x000000000020a834       0xa0 build/zoul/remote-revb/obj/rpl-dag.o
+                0x000000000020a834                rpl_dag_init_root
  .text.rpl_dag_init
-                0x000000000020c688       0x10 build/zoul/remote-revb/obj/rpl-dag.o
-                0x000000000020c688                rpl_dag_init
+                0x000000000020a8d4       0x10 build/zoul/remote-revb/obj/rpl-dag.o
+                0x000000000020a8d4                rpl_dag_init
  .text.new_dio_interval
-                0x000000000020c698       0x54 build/zoul/remote-revb/obj/rpl-timers.o
+                0x000000000020a8e4       0x54 build/zoul/remote-revb/obj/rpl-timers.o
  .text.schedule_dao_retransmission
-                0x000000000020c6ec       0x30 build/zoul/remote-revb/obj/rpl-timers.o
+                0x000000000020a938       0x30 build/zoul/remote-revb/obj/rpl-timers.o
  .text.handle_unicast_dio_timer
-                0x000000000020c71c       0x1c build/zoul/remote-revb/obj/rpl-timers.o
+                0x000000000020a968       0x1c build/zoul/remote-revb/obj/rpl-timers.o
  .text.send_new_dao
-                0x000000000020c738       0x34 build/zoul/remote-revb/obj/rpl-timers.o
+                0x000000000020a984       0x34 build/zoul/remote-revb/obj/rpl-timers.o
  .text.resend_dao
-                0x000000000020c76c       0x38 build/zoul/remote-revb/obj/rpl-timers.o
+                0x000000000020a9b8       0x38 build/zoul/remote-revb/obj/rpl-timers.o
  .text.handle_dao_ack_timer
-                0x000000000020c7a4       0x14 build/zoul/remote-revb/obj/rpl-timers.o
+                0x000000000020a9f0       0x14 build/zoul/remote-revb/obj/rpl-timers.o
  .text.handle_leaving_timer
-                0x000000000020c7b8       0x10 build/zoul/remote-revb/obj/rpl-timers.o
+                0x000000000020aa04       0x10 build/zoul/remote-revb/obj/rpl-timers.o
  .text.handle_dio_timer
-                0x000000000020c7c8       0x70 build/zoul/remote-revb/obj/rpl-timers.o
+                0x000000000020aa14       0x70 build/zoul/remote-revb/obj/rpl-timers.o
  .text.rpl_timers_schedule_periodic_dis
-                0x000000000020c838       0x38 build/zoul/remote-revb/obj/rpl-timers.o
-                0x000000000020c838                rpl_timers_schedule_periodic_dis
+                0x000000000020aa84       0x38 build/zoul/remote-revb/obj/rpl-timers.o
+                0x000000000020aa84                rpl_timers_schedule_periodic_dis
  .text.handle_dis_timer
-                0x000000000020c870       0x34 build/zoul/remote-revb/obj/rpl-timers.o
+                0x000000000020aabc       0x34 build/zoul/remote-revb/obj/rpl-timers.o
  .text.handle_periodic_timer
-                0x000000000020c8a4       0x64 build/zoul/remote-revb/obj/rpl-timers.o
+                0x000000000020aaf0       0x48 build/zoul/remote-revb/obj/rpl-timers.o
  .text.rpl_timers_dio_reset
-                0x000000000020c908       0x6c build/zoul/remote-revb/obj/rpl-timers.o
-                0x000000000020c908                rpl_timers_dio_reset
+                0x000000000020ab38       0x34 build/zoul/remote-revb/obj/rpl-timers.o
+                0x000000000020ab38                rpl_timers_dio_reset
  .text.rpl_timers_schedule_unicast_dio
-                0x000000000020c974       0x28 build/zoul/remote-revb/obj/rpl-timers.o
-                0x000000000020c974                rpl_timers_schedule_unicast_dio
+                0x000000000020ab6c       0x28 build/zoul/remote-revb/obj/rpl-timers.o
+                0x000000000020ab6c                rpl_timers_schedule_unicast_dio
  .text.rpl_timers_schedule_dao
-                0x000000000020c99c       0x34 build/zoul/remote-revb/obj/rpl-timers.o
-                0x000000000020c99c                rpl_timers_schedule_dao
+                0x000000000020ab94       0x34 build/zoul/remote-revb/obj/rpl-timers.o
+                0x000000000020ab94                rpl_timers_schedule_dao
  .text.rpl_timers_schedule_dao_ack
-                0x000000000020c9d0       0x48 build/zoul/remote-revb/obj/rpl-timers.o
-                0x000000000020c9d0                rpl_timers_schedule_dao_ack
+                0x000000000020abc8       0x48 build/zoul/remote-revb/obj/rpl-timers.o
+                0x000000000020abc8                rpl_timers_schedule_dao_ack
  .text.rpl_timers_notify_dao_ack
-                0x000000000020ca18       0x50 build/zoul/remote-revb/obj/rpl-timers.o
-                0x000000000020ca18                rpl_timers_notify_dao_ack
+                0x000000000020ac10       0x50 build/zoul/remote-revb/obj/rpl-timers.o
+                0x000000000020ac10                rpl_timers_notify_dao_ack
  .text.get_probing_target
-                0x000000000020ca68       0xb0 build/zoul/remote-revb/obj/rpl-timers.o
-                0x000000000020ca68                get_probing_target
+                0x000000000020ac60       0xb0 build/zoul/remote-revb/obj/rpl-timers.o
+                0x000000000020ac60                get_probing_target
  .text.rpl_schedule_probing
-                0x000000000020cb18       0x28 build/zoul/remote-revb/obj/rpl-timers.o
-                0x000000000020cb18                rpl_schedule_probing
- .text.handle_probing_timer
-                0x000000000020cb40       0xcc build/zoul/remote-revb/obj/rpl-timers.o
+                0x000000000020ad10       0x28 build/zoul/remote-revb/obj/rpl-timers.o
+                0x000000000020ad10                rpl_schedule_probing
  .text.rpl_schedule_probing_now
-                0x000000000020cc0c       0x2c build/zoul/remote-revb/obj/rpl-timers.o
-                0x000000000020cc0c                rpl_schedule_probing_now
+                0x000000000020ad38       0x2c build/zoul/remote-revb/obj/rpl-timers.o
+                0x000000000020ad38                rpl_schedule_probing_now
  .text.rpl_timers_unschedule_leaving
-                0x000000000020cc38       0x24 build/zoul/remote-revb/obj/rpl-timers.o
-                0x000000000020cc38                rpl_timers_unschedule_leaving
+                0x000000000020ad64       0x24 build/zoul/remote-revb/obj/rpl-timers.o
+                0x000000000020ad64                rpl_timers_unschedule_leaving
  .text.rpl_timers_schedule_leaving
-                0x000000000020cc5c       0x30 build/zoul/remote-revb/obj/rpl-timers.o
-                0x000000000020cc5c                rpl_timers_schedule_leaving
+                0x000000000020ad88       0x30 build/zoul/remote-revb/obj/rpl-timers.o
+                0x000000000020ad88                rpl_timers_schedule_leaving
  .text.rpl_timers_init
-                0x000000000020cc8c       0x20 build/zoul/remote-revb/obj/rpl-timers.o
-                0x000000000020cc8c                rpl_timers_init
+                0x000000000020adb8       0x20 build/zoul/remote-revb/obj/rpl-timers.o
+                0x000000000020adb8                rpl_timers_init
  .text.rpl_timers_stop_dag_timers
-                0x000000000020ccac       0x44 build/zoul/remote-revb/obj/rpl-timers.o
-                0x000000000020ccac                rpl_timers_stop_dag_timers
+                0x000000000020add8       0x44 build/zoul/remote-revb/obj/rpl-timers.o
+                0x000000000020add8                rpl_timers_stop_dag_timers
  .text.rpl_timers_unschedule_state_update
-                0x000000000020ccf0       0x14 build/zoul/remote-revb/obj/rpl-timers.o
-                0x000000000020ccf0                rpl_timers_unschedule_state_update
+                0x000000000020ae1c       0x14 build/zoul/remote-revb/obj/rpl-timers.o
+                0x000000000020ae1c                rpl_timers_unschedule_state_update
  .text.rpl_timers_schedule_state_update
-                0x000000000020cd04       0x1c build/zoul/remote-revb/obj/rpl-timers.o
-                0x000000000020cd04                rpl_timers_schedule_state_update
+                0x000000000020ae30       0x1c build/zoul/remote-revb/obj/rpl-timers.o
+                0x000000000020ae30                rpl_timers_schedule_state_update
  .text.update_hbh_header
-                0x000000000020cd20       0xac build/zoul/remote-revb/obj/rpl-ext-header.o
+                0x000000000020ae4c       0x54 build/zoul/remote-revb/obj/rpl-ext-header.o
  .text.rpl_ext_header_srh_get_next_hop
-                0x000000000020cdcc       0x84 build/zoul/remote-revb/obj/rpl-ext-header.o
-                0x000000000020cdcc                rpl_ext_header_srh_get_next_hop
+                0x000000000020aea0       0x84 build/zoul/remote-revb/obj/rpl-ext-header.o
+                0x000000000020aea0                rpl_ext_header_srh_get_next_hop
  .text.rpl_ext_header_srh_update
-                0x000000000020ce50      0x1c0 build/zoul/remote-revb/obj/rpl-ext-header.o
-                0x000000000020ce50                rpl_ext_header_srh_update
+                0x000000000020af24       0xb4 build/zoul/remote-revb/obj/rpl-ext-header.o
+                0x000000000020af24                rpl_ext_header_srh_update
  .text.rpl_ext_header_hbh_update
-                0x000000000020d010      0x1b0 build/zoul/remote-revb/obj/rpl-ext-header.o
-                0x000000000020d010                rpl_ext_header_hbh_update
+                0x000000000020afd8       0x84 build/zoul/remote-revb/obj/rpl-ext-header.o
+                0x000000000020afd8                rpl_ext_header_hbh_update
  .text.rpl_ext_header_remove
-                0x000000000020d1c0       0xb0 build/zoul/remote-revb/obj/rpl-ext-header.o
-                0x000000000020d1c0                rpl_ext_header_remove
+                0x000000000020b05c       0xb0 build/zoul/remote-revb/obj/rpl-ext-header.o
+                0x000000000020b05c                rpl_ext_header_remove
  .text.rpl_ext_header_update
-                0x000000000020d270      0x400 build/zoul/remote-revb/obj/rpl-ext-header.o
-                0x000000000020d270                rpl_ext_header_update
+                0x000000000020b10c      0x23c build/zoul/remote-revb/obj/rpl-ext-header.o
+                0x000000000020b10c                rpl_ext_header_update
  .text.rpl_has_joined
-                0x000000000020d670       0x18 build/zoul/remote-revb/obj/rpl.o
-                0x000000000020d670                rpl_has_joined
+                0x000000000020b348       0x18 build/zoul/remote-revb/obj/rpl.o
+                0x000000000020b348                rpl_has_joined
  .text.rpl_is_reachable
-                0x000000000020d688       0x18 build/zoul/remote-revb/obj/rpl.o
-                0x000000000020d688                rpl_is_reachable
+                0x000000000020b360       0x18 build/zoul/remote-revb/obj/rpl.o
+                0x000000000020b360                rpl_is_reachable
  .text.rpl_get_leaf_only
-                0x000000000020d6a0        0xc build/zoul/remote-revb/obj/rpl.o
-                0x000000000020d6a0                rpl_get_leaf_only
+                0x000000000020b378        0xc build/zoul/remote-revb/obj/rpl.o
+                0x000000000020b378                rpl_get_leaf_only
  .text.set_ip_from_prefix
-                0x000000000020d6ac       0x2c build/zoul/remote-revb/obj/rpl.o
- .text.init     0x000000000020d6d8       0x70 build/zoul/remote-revb/obj/rpl.o
+                0x000000000020b384       0x2c build/zoul/remote-revb/obj/rpl.o
+ .text.init     0x000000000020b3b0       0x40 build/zoul/remote-revb/obj/rpl.o
  .text.rpl_link_callback
-                0x000000000020d748       0x94 build/zoul/remote-revb/obj/rpl.o
-                0x000000000020d748                rpl_link_callback
+                0x000000000020b3f0       0x2c build/zoul/remote-revb/obj/rpl.o
+                0x000000000020b3f0                rpl_link_callback
  .text.get_sr_node_ipaddr
-                0x000000000020d7dc       0x2c build/zoul/remote-revb/obj/rpl.o
+                0x000000000020b41c       0x2c build/zoul/remote-revb/obj/rpl.o
  .text.rpl_get_global_address
-                0x000000000020d808       0x68 build/zoul/remote-revb/obj/rpl.o
-                0x000000000020d808                rpl_get_global_address
+                0x000000000020b448       0x68 build/zoul/remote-revb/obj/rpl.o
+                0x000000000020b448                rpl_get_global_address
  .text.rpl_reset_prefix
-                0x000000000020d870       0x7c build/zoul/remote-revb/obj/rpl.o
-                0x000000000020d870                rpl_reset_prefix
+                0x000000000020b4b0       0x28 build/zoul/remote-revb/obj/rpl.o
+                0x000000000020b4b0                rpl_reset_prefix
  .text.rpl_set_prefix_from_addr
-                0x000000000020d8ec       0xdc build/zoul/remote-revb/obj/rpl.o
-                0x000000000020d8ec                rpl_set_prefix_from_addr
+                0x000000000020b4d8       0x68 build/zoul/remote-revb/obj/rpl.o
+                0x000000000020b4d8                rpl_set_prefix_from_addr
  .text.update_metric_container
-                0x000000000020d9c8        0xc build/zoul/remote-revb/obj/rpl-mrhof.o
+                0x000000000020b540        0xc build/zoul/remote-revb/obj/rpl-mrhof.o
  .text.within_hysteresis
-                0x000000000020d9d4       0x3c build/zoul/remote-revb/obj/rpl-mrhof.o
+                0x000000000020b54c       0x3c build/zoul/remote-revb/obj/rpl-mrhof.o
  .text.rank_via_nbr
-                0x000000000020da10       0x30 build/zoul/remote-revb/obj/rpl-mrhof.o
+                0x000000000020b588       0x30 build/zoul/remote-revb/obj/rpl-mrhof.o
  .text.best_parent
-                0x000000000020da40       0x68 build/zoul/remote-revb/obj/rpl-mrhof.o
- .text.reset    0x000000000020daa8       0x3c build/zoul/remote-revb/obj/rpl-mrhof.o
+                0x000000000020b5b8       0x68 build/zoul/remote-revb/obj/rpl-mrhof.o
  .text.dao_ack_input
-                0x000000000020dae4       0xd4 build/zoul/remote-revb/obj/rpl-icmp6.o
+                0x000000000020b620       0x38 build/zoul/remote-revb/obj/rpl-icmp6.o
  .text.dao_input
-                0x000000000020dbb8      0x224 build/zoul/remote-revb/obj/rpl-icmp6.o
+                0x000000000020b658       0xfc build/zoul/remote-revb/obj/rpl-icmp6.o
  .text.dio_input
-                0x000000000020dddc      0x3d4 build/zoul/remote-revb/obj/rpl-icmp6.o
+                0x000000000020b754      0x210 build/zoul/remote-revb/obj/rpl-icmp6.o
  .text.dis_input
-                0x000000000020e1b0       0xa0 build/zoul/remote-revb/obj/rpl-icmp6.o
- .text.rpl_icmp6_update_nbr_table
-                0x000000000020e250       0xa0 build/zoul/remote-revb/obj/rpl-icmp6.o
-                0x000000000020e250                rpl_icmp6_update_nbr_table
+                0x000000000020b964       0x2c build/zoul/remote-revb/obj/rpl-icmp6.o
  .text.rpl_icmp6_dis_output
-                0x000000000020e2f0       0x8c build/zoul/remote-revb/obj/rpl-icmp6.o
-                0x000000000020e2f0                rpl_icmp6_dis_output
+                0x000000000020b990       0x38 build/zoul/remote-revb/obj/rpl-icmp6.o
+                0x000000000020b990                rpl_icmp6_dis_output
  .text.rpl_icmp6_dio_output
-                0x000000000020e37c      0x274 build/zoul/remote-revb/obj/rpl-icmp6.o
-                0x000000000020e37c                rpl_icmp6_dio_output
+                0x000000000020b9c8      0x1c8 build/zoul/remote-revb/obj/rpl-icmp6.o
+                0x000000000020b9c8                rpl_icmp6_dio_output
  .text.rpl_icmp6_dao_output
-                0x000000000020e5f0      0x1f0 build/zoul/remote-revb/obj/rpl-icmp6.o
-                0x000000000020e5f0                rpl_icmp6_dao_output
+                0x000000000020bb90       0xc4 build/zoul/remote-revb/obj/rpl-icmp6.o
+                0x000000000020bb90                rpl_icmp6_dao_output
  .text.rpl_icmp6_dao_ack_output
-                0x000000000020e7e0       0xa8 build/zoul/remote-revb/obj/rpl-icmp6.o
-                0x000000000020e7e0                rpl_icmp6_dao_ack_output
+                0x000000000020bc54       0x40 build/zoul/remote-revb/obj/rpl-icmp6.o
+                0x000000000020bc54                rpl_icmp6_dao_ack_output
  .text.rpl_icmp6_init
-                0x000000000020e888       0x30 build/zoul/remote-revb/obj/rpl-icmp6.o
-                0x000000000020e888                rpl_icmp6_init
+                0x000000000020bc94       0x30 build/zoul/remote-revb/obj/rpl-icmp6.o
+                0x000000000020bc94                rpl_icmp6_init
  .text.rpl_dag_root_set_prefix
-                0x000000000020e8b8      0x10c build/zoul/remote-revb/obj/rpl-dag-root.o
-                0x000000000020e8b8                rpl_dag_root_set_prefix
+                0x000000000020bcc4       0x68 build/zoul/remote-revb/obj/rpl-dag-root.o
+                0x000000000020bcc4                rpl_dag_root_set_prefix
  .text.rpl_dag_root_start
-                0x000000000020e9c4       0xbc build/zoul/remote-revb/obj/rpl-dag-root.o
-                0x000000000020e9c4                rpl_dag_root_start
+                0x000000000020bd2c       0x68 build/zoul/remote-revb/obj/rpl-dag-root.o
+                0x000000000020bd2c                rpl_dag_root_start
  .text.rpl_dag_root_is_root
-                0x000000000020ea80       0x18 build/zoul/remote-revb/obj/rpl-dag-root.o
-                0x000000000020ea80                rpl_dag_root_is_root
- .text.rpl_dag_root_print_links
-                0x000000000020ea98       0xd8 build/zoul/remote-revb/obj/rpl-dag-root.o
-                0x000000000020ea98                rpl_dag_root_print_links
+                0x000000000020bd94       0x18 build/zoul/remote-revb/obj/rpl-dag-root.o
+                0x000000000020bd94                rpl_dag_root_is_root
  .text.process_thread_udp_process
-                0x000000000020eb70      0x104 pingpong.o
- .text.udp_rx   0x000000000020ec74       0x98 pingpong.o
- .text          0x000000000020ed0c       0x30 /usr/lib/gcc/arm-none-eabi/9.2.1/thumb/v7-m/nofp/libgcc.a(_aeabi_uldivmod.o)
-                0x000000000020ed0c                __aeabi_uldivmod
- .text          0x000000000020ed3c      0x2c4 /usr/lib/gcc/arm-none-eabi/9.2.1/thumb/v7-m/nofp/libgcc.a(_udivmoddi4.o)
-                0x000000000020ed3c                __udivmoddi4
- .text          0x000000000020f000        0x4 /usr/lib/gcc/arm-none-eabi/9.2.1/thumb/v7-m/nofp/libgcc.a(_dvmd_tls.o)
-                0x000000000020f000                __aeabi_ldiv0
-                0x000000000020f000                __aeabi_idiv0
- .text          0x000000000020f004       0x60 /usr/lib/gcc/arm-none-eabi/9.2.1/../../../arm-none-eabi/lib/thumb/v7-m/nofp/libc.a(lib_a-memcmp.o)
-                0x000000000020f004                memcmp
- .text          0x000000000020f064       0xec /usr/lib/gcc/arm-none-eabi/9.2.1/../../../arm-none-eabi/lib/thumb/v7-m/nofp/libc.a(lib_a-memcpy.o)
-                0x000000000020f064                memcpy
- .text          0x000000000020f150       0xcc /usr/lib/gcc/arm-none-eabi/9.2.1/../../../arm-none-eabi/lib/thumb/v7-m/nofp/libc.a(lib_a-memmove.o)
-                0x000000000020f150                memmove
- .text          0x000000000020f21c       0xa0 /usr/lib/gcc/arm-none-eabi/9.2.1/../../../arm-none-eabi/lib/thumb/v7-m/nofp/libc.a(lib_a-memset.o)
-                0x000000000020f21c                memset
- .text          0x000000000020f2bc       0x40 /usr/lib/gcc/arm-none-eabi/9.2.1/../../../arm-none-eabi/lib/thumb/v7-m/nofp/libc.a(lib_a-strcat.o)
-                0x000000000020f2bc                strcat
- .text          0x000000000020f2fc       0xbc /usr/lib/gcc/arm-none-eabi/9.2.1/../../../arm-none-eabi/lib/thumb/v7-m/nofp/libc.a(lib_a-strcpy.o)
-                0x000000000020f2fc                strcpy
- .text          0x000000000020f3b8       0x5c /usr/lib/gcc/arm-none-eabi/9.2.1/../../../arm-none-eabi/lib/thumb/v7-m/nofp/libc.a(lib_a-strlen-stub.o)
-                0x000000000020f3b8                strlen
- .text          0x000000000020f414      0x458 /usr/lib/gcc/arm-none-eabi/9.2.1/../../../arm-none-eabi/lib/thumb/v7-m/nofp/libc.a(lib_a-strstr.o)
-                0x000000000020f6ec                strstr
- .text          0x000000000020f86c      0x164 /usr/lib/gcc/arm-none-eabi/9.2.1/../../../arm-none-eabi/lib/thumb/v7-m/nofp/libc.a(lib_a-strtol.o)
-                0x000000000020f9a4                _strtol_r
-                0x000000000020f9a8                strtol_l
-                0x000000000020f9bc                strtol
- .text          0x000000000020f9d0        0xc /usr/lib/gcc/arm-none-eabi/9.2.1/../../../arm-none-eabi/lib/thumb/v7-m/nofp/libc.a(lib_a-errno.o)
-                0x000000000020f9d0                __errno
- .text          0x000000000020f9dc       0xc8 /usr/lib/gcc/arm-none-eabi/9.2.1/../../../arm-none-eabi/lib/thumb/v7-m/nofp/libc.a(lib_a-strchr.o)
-                0x000000000020f9dc                strchr
- .text          0x000000000020faa4       0x40 /usr/lib/gcc/arm-none-eabi/9.2.1/../../../arm-none-eabi/lib/thumb/v7-m/nofp/libc.a(lib_a-strnlen.o)
-                0x000000000020faa4                strnlen
+                0x000000000020bdac      0x104 pingpong.o
+ .text.udp_rx   0x000000000020beb0       0x98 pingpong.o
+ .text          0x000000000020bf48       0x30 /usr/lib/gcc/arm-none-eabi/9.2.1/thumb/v7-m/nofp/libgcc.a(_aeabi_uldivmod.o)
+                0x000000000020bf48                __aeabi_uldivmod
+ .text          0x000000000020bf78      0x2c4 /usr/lib/gcc/arm-none-eabi/9.2.1/thumb/v7-m/nofp/libgcc.a(_udivmoddi4.o)
+                0x000000000020bf78                __udivmoddi4
+ .text          0x000000000020c23c        0x4 /usr/lib/gcc/arm-none-eabi/9.2.1/thumb/v7-m/nofp/libgcc.a(_dvmd_tls.o)
+                0x000000000020c23c                __aeabi_ldiv0
+                0x000000000020c23c                __aeabi_idiv0
+ .text          0x000000000020c240       0x60 /usr/lib/gcc/arm-none-eabi/9.2.1/../../../arm-none-eabi/lib/thumb/v7-m/nofp/libc.a(lib_a-memcmp.o)
+                0x000000000020c240                memcmp
+ .text          0x000000000020c2a0       0xec /usr/lib/gcc/arm-none-eabi/9.2.1/../../../arm-none-eabi/lib/thumb/v7-m/nofp/libc.a(lib_a-memcpy.o)
+                0x000000000020c2a0                memcpy
+ .text          0x000000000020c38c       0xcc /usr/lib/gcc/arm-none-eabi/9.2.1/../../../arm-none-eabi/lib/thumb/v7-m/nofp/libc.a(lib_a-memmove.o)
+                0x000000000020c38c                memmove
+ .text          0x000000000020c458       0xa0 /usr/lib/gcc/arm-none-eabi/9.2.1/../../../arm-none-eabi/lib/thumb/v7-m/nofp/libc.a(lib_a-memset.o)
+                0x000000000020c458                memset
+ .text          0x000000000020c4f8       0x40 /usr/lib/gcc/arm-none-eabi/9.2.1/../../../arm-none-eabi/lib/thumb/v7-m/nofp/libc.a(lib_a-strcat.o)
+                0x000000000020c4f8                strcat
+ .text          0x000000000020c538       0xbc /usr/lib/gcc/arm-none-eabi/9.2.1/../../../arm-none-eabi/lib/thumb/v7-m/nofp/libc.a(lib_a-strcpy.o)
+                0x000000000020c538                strcpy
+ .text          0x000000000020c5f4       0x5c /usr/lib/gcc/arm-none-eabi/9.2.1/../../../arm-none-eabi/lib/thumb/v7-m/nofp/libc.a(lib_a-strlen-stub.o)
+                0x000000000020c5f4                strlen
+ .text          0x000000000020c650      0x458 /usr/lib/gcc/arm-none-eabi/9.2.1/../../../arm-none-eabi/lib/thumb/v7-m/nofp/libc.a(lib_a-strstr.o)
+                0x000000000020c928                strstr
+ .text          0x000000000020caa8      0x164 /usr/lib/gcc/arm-none-eabi/9.2.1/../../../arm-none-eabi/lib/thumb/v7-m/nofp/libc.a(lib_a-strtol.o)
+                0x000000000020cbe0                _strtol_r
+                0x000000000020cbe4                strtol_l
+                0x000000000020cbf8                strtol
+ .text          0x000000000020cc0c        0xc /usr/lib/gcc/arm-none-eabi/9.2.1/../../../arm-none-eabi/lib/thumb/v7-m/nofp/libc.a(lib_a-errno.o)
+                0x000000000020cc0c                __errno
+ .text          0x000000000020cc18       0xc8 /usr/lib/gcc/arm-none-eabi/9.2.1/../../../arm-none-eabi/lib/thumb/v7-m/nofp/libc.a(lib_a-strchr.o)
+                0x000000000020cc18                strchr
+ .text          0x000000000020cce0       0x40 /usr/lib/gcc/arm-none-eabi/9.2.1/../../../arm-none-eabi/lib/thumb/v7-m/nofp/libc.a(lib_a-strnlen.o)
+                0x000000000020cce0                strnlen
  .text.default_handler
-                0x000000000020fae4        0x2 build/zoul/remote-revb/obj/startup-gcc.o
-                0x000000000020fae4                default_handler
+                0x000000000020cd20        0x2 build/zoul/remote-revb/obj/startup-gcc.o
+                0x000000000020cd20                default_handler
  .text.nmi_handler
-                0x000000000020fae6        0x6 build/zoul/remote-revb/obj/startup-gcc.o
-                0x000000000020fae6                nmi_handler
- .text.fade     0x000000000020faec       0x58 build/zoul/remote-revb/obj/platform.o
+                0x000000000020cd22        0x6 build/zoul/remote-revb/obj/startup-gcc.o
+                0x000000000020cd22                nmi_handler
+ .text.fade     0x000000000020cd28       0x58 build/zoul/remote-revb/obj/platform.o
  .text.platform_init_stage_one
-                0x000000000020fb44       0x14 build/zoul/remote-revb/obj/platform.o
-                0x000000000020fb44                platform_init_stage_one
+                0x000000000020cd80       0x14 build/zoul/remote-revb/obj/platform.o
+                0x000000000020cd80                platform_init_stage_one
  .text.platform_idle
-                0x000000000020fb58        0x4 build/zoul/remote-revb/obj/platform.o
-                0x000000000020fb58                platform_idle
+                0x000000000020cd94        0x4 build/zoul/remote-revb/obj/platform.o
+                0x000000000020cd94                platform_idle
  .text.board_init
-                0x000000000020fb5c        0x4 build/zoul/remote-revb/obj/board.o
-                0x000000000020fb5c                board_init
+                0x000000000020cd98        0x4 build/zoul/remote-revb/obj/board.o
+                0x000000000020cd98                board_init
  .text.soc_init
-                0x000000000020fb60       0x22 build/zoul/remote-revb/obj/soc.o
-                0x000000000020fb60                soc_init
+                0x000000000020cd9c       0x22 build/zoul/remote-revb/obj/soc.o
+                0x000000000020cd9c                soc_init
  .text.clock_isr
-                0x000000000020fb82        0x4 build/zoul/remote-revb/obj/clock.o
-                0x000000000020fb82                clock_isr
+                0x000000000020cdbe        0x4 build/zoul/remote-revb/obj/clock.o
+                0x000000000020cdbe                clock_isr
  .text.rtimer_arch_init
-                0x000000000020fb86        0x2 build/zoul/remote-revb/obj/rtimer-arch.o
-                0x000000000020fb86                rtimer_arch_init
+                0x000000000020cdc2        0x2 build/zoul/remote-revb/obj/rtimer-arch.o
+                0x000000000020cdc2                rtimer_arch_init
  .text.uart0_isr
-                0x000000000020fb88        0x6 build/zoul/remote-revb/obj/uart.o
-                0x000000000020fb88                uart0_isr
+                0x000000000020cdc4        0x6 build/zoul/remote-revb/obj/uart.o
+                0x000000000020cdc4                uart0_isr
  .text.uart1_isr
-                0x000000000020fb8e        0x6 build/zoul/remote-revb/obj/uart.o
-                0x000000000020fb8e                uart1_isr
+                0x000000000020cdca        0x6 build/zoul/remote-revb/obj/uart.o
+                0x000000000020cdca                uart1_isr
  .text.gpio_port_a_isr
-                0x000000000020fb94        0x6 build/zoul/remote-revb/obj/gpio.o
-                0x000000000020fb94                gpio_port_a_isr
+                0x000000000020cdd0        0x6 build/zoul/remote-revb/obj/gpio.o
+                0x000000000020cdd0                gpio_port_a_isr
  .text.gpio_port_b_isr
-                0x000000000020fb9a        0x6 build/zoul/remote-revb/obj/gpio.o
-                0x000000000020fb9a                gpio_port_b_isr
+                0x000000000020cdd6        0x6 build/zoul/remote-revb/obj/gpio.o
+                0x000000000020cdd6                gpio_port_b_isr
  .text.gpio_port_c_isr
-                0x000000000020fba0        0x6 build/zoul/remote-revb/obj/gpio.o
-                0x000000000020fba0                gpio_port_c_isr
+                0x000000000020cddc        0x6 build/zoul/remote-revb/obj/gpio.o
+                0x000000000020cddc                gpio_port_c_isr
  .text.gpio_port_d_isr
-                0x000000000020fba6        0x6 build/zoul/remote-revb/obj/gpio.o
-                0x000000000020fba6                gpio_port_d_isr
- .text.send     0x000000000020fbac       0x12 build/zoul/remote-revb/obj/cc2538-rf.o
+                0x000000000020cde2        0x6 build/zoul/remote-revb/obj/gpio.o
+                0x000000000020cde2                gpio_port_d_isr
+ .text.send     0x000000000020cde8       0x12 build/zoul/remote-revb/obj/cc2538-rf.o
  .text.int_master_read_and_disable
-                0x000000000020fbbe        0x8 build/zoul/remote-revb/obj/int-master.o
-                0x000000000020fbbe                int_master_read_and_disable
+                0x000000000020cdfa        0x8 build/zoul/remote-revb/obj/int-master.o
+                0x000000000020cdfa                int_master_read_and_disable
  .text.int_master_status_set
-                0x000000000020fbc6        0x6 build/zoul/remote-revb/obj/int-master.o
-                0x000000000020fbc6                int_master_status_set
+                0x000000000020ce02        0x6 build/zoul/remote-revb/obj/int-master.o
+                0x000000000020ce02                int_master_status_set
  .text.dbg_send_bytes
-                0x000000000020fbcc       0x22 build/zoul/remote-revb/obj/dbg.o
-                0x000000000020fbcc                dbg_send_bytes
+                0x000000000020ce08       0x22 build/zoul/remote-revb/obj/dbg.o
+                0x000000000020ce08                dbg_send_bytes
  .text.configure
-                0x000000000020fbee        0x4 build/zoul/remote-revb/obj/cc2538-temp-sensor.o
- .text.status   0x000000000020fbf2        0x4 build/zoul/remote-revb/obj/cc2538-temp-sensor.o
- .text.value    0x000000000020fbf6       0x34 build/zoul/remote-revb/obj/cc2538-temp-sensor.o
+                0x000000000020ce2a        0x4 build/zoul/remote-revb/obj/cc2538-temp-sensor.o
+ .text.status   0x000000000020ce2e        0x4 build/zoul/remote-revb/obj/cc2538-temp-sensor.o
+ .text.value    0x000000000020ce32       0x34 build/zoul/remote-revb/obj/cc2538-temp-sensor.o
  .text.configure
-                0x000000000020fc2a        0x4 build/zoul/remote-revb/obj/vdd3-sensor.o
- .text.status   0x000000000020fc2e        0x4 build/zoul/remote-revb/obj/vdd3-sensor.o
- .text.value    0x000000000020fc32       0x2a build/zoul/remote-revb/obj/vdd3-sensor.o
+                0x000000000020ce66        0x4 build/zoul/remote-revb/obj/vdd3-sensor.o
+ .text.status   0x000000000020ce6a        0x4 build/zoul/remote-revb/obj/vdd3-sensor.o
+ .text.value    0x000000000020ce6e       0x2a build/zoul/remote-revb/obj/vdd3-sensor.o
  .text.lora2ipv6
-                0x000000000020fc5c       0x2c build/zoul/remote-revb/obj/interface.o
-                0x000000000020fc5c                lora2ipv6
+                0x000000000020ce98       0x2c build/zoul/remote-revb/obj/interface.o
+                0x000000000020ce98                lora2ipv6
  .text.send_to_phy
-                0x000000000020fc88       0x1c build/zoul/remote-revb/obj/loramac.o
-                0x000000000020fc88                send_to_phy
+                0x000000000020cec4       0x1c build/zoul/remote-revb/obj/loramac.o
+                0x000000000020cec4                send_to_phy
  .text.mac_send_packet
-                0x000000000020fca4       0x30 build/zoul/remote-revb/obj/loramac.o
-                0x000000000020fca4                mac_send_packet
+                0x000000000020cee0       0x30 build/zoul/remote-revb/obj/loramac.o
+                0x000000000020cee0                mac_send_packet
  .text.mutex_cortex_try_lock
-                0x000000000020fcd4       0x20 build/zoul/remote-revb/obj/rn2483radio.o
- .text.parse    0x000000000020fcf4       0xda build/zoul/remote-revb/obj/rn2483radio.o
-                0x000000000020fcf4                parse
- .text.phy_tx   0x000000000020fdce       0x3c build/zoul/remote-revb/obj/rn2483radio.o
-                0x000000000020fdce                phy_tx
+                0x000000000020cf10       0x20 build/zoul/remote-revb/obj/rn2483radio.o
+ .text.parse    0x000000000020cf30       0xda build/zoul/remote-revb/obj/rn2483radio.o
+                0x000000000020cf30                parse
+ .text.phy_tx   0x000000000020d00a       0x3c build/zoul/remote-revb/obj/rn2483radio.o
+                0x000000000020d00a                phy_tx
  .text.stimer_set
-                0x000000000020fe0a        0xe build/zoul/remote-revb/obj/stimer.o
-                0x000000000020fe0a                stimer_set
+                0x000000000020d046        0xe build/zoul/remote-revb/obj/stimer.o
+                0x000000000020d046                stimer_set
  .text.stimer_expired
-                0x000000000020fe18       0x1e build/zoul/remote-revb/obj/stimer.o
-                0x000000000020fe18                stimer_expired
+                0x000000000020d054       0x1e build/zoul/remote-revb/obj/stimer.o
+                0x000000000020d054                stimer_expired
  .text.autostart_start
-                0x000000000020fe36       0x14 build/zoul/remote-revb/obj/autostart.o
-                0x000000000020fe36                autostart_start
+                0x000000000020d072       0x14 build/zoul/remote-revb/obj/autostart.o
+                0x000000000020d072                autostart_start
  .text.energest_init
-                0x000000000020fe4a        0x2 build/zoul/remote-revb/obj/energest.o
-                0x000000000020fe4a                energest_init
+                0x000000000020d086        0x2 build/zoul/remote-revb/obj/energest.o
+                0x000000000020d086                energest_init
  .text.etimer_set
-                0x000000000020fe4c       0x12 build/zoul/remote-revb/obj/etimer.o
-                0x000000000020fe4c                etimer_set
+                0x000000000020d088       0x12 build/zoul/remote-revb/obj/etimer.o
+                0x000000000020d088                etimer_set
  .text.etimer_reset
-                0x000000000020fe5e       0x12 build/zoul/remote-revb/obj/etimer.o
-                0x000000000020fe5e                etimer_reset
+                0x000000000020d09a       0x12 build/zoul/remote-revb/obj/etimer.o
+                0x000000000020d09a                etimer_reset
  .text.etimer_restart
-                0x000000000020fe70       0x12 build/zoul/remote-revb/obj/etimer.o
-                0x000000000020fe70                etimer_restart
+                0x000000000020d0ac       0x12 build/zoul/remote-revb/obj/etimer.o
+                0x000000000020d0ac                etimer_restart
  .text.etimer_expired
-                0x000000000020fe82        0xa build/zoul/remote-revb/obj/etimer.o
-                0x000000000020fe82                etimer_expired
+                0x000000000020d0be        0xa build/zoul/remote-revb/obj/etimer.o
+                0x000000000020d0be                etimer_expired
  .text.call_process
-                0x000000000020fe8c        0xc build/zoul/remote-revb/obj/process.o
+                0x000000000020d0c8        0xc build/zoul/remote-revb/obj/process.o
  .text.rtimer_init
-                0x000000000020fe98        0x4 build/zoul/remote-revb/obj/rtimer.o
-                0x000000000020fe98                rtimer_init
+                0x000000000020d0d4        0x4 build/zoul/remote-revb/obj/rtimer.o
+                0x000000000020d0d4                rtimer_init
  .text.timer_set
-                0x000000000020fe9c        0xe build/zoul/remote-revb/obj/timer.o
-                0x000000000020fe9c                timer_set
+                0x000000000020d0d8        0xe build/zoul/remote-revb/obj/timer.o
+                0x000000000020d0d8                timer_set
  .text.timer_restart
-                0x000000000020feaa        0xc build/zoul/remote-revb/obj/timer.o
-                0x000000000020feaa                timer_restart
+                0x000000000020d0e6        0xc build/zoul/remote-revb/obj/timer.o
+                0x000000000020d0e6                timer_restart
  .text.timer_expired
-                0x000000000020feb6       0x1c build/zoul/remote-revb/obj/timer.o
-                0x000000000020feb6                timer_expired
+                0x000000000020d0f2       0x1c build/zoul/remote-revb/obj/timer.o
+                0x000000000020d0f2                timer_expired
  .text.timer_reset
-                0x000000000020fed2       0x14 build/zoul/remote-revb/obj/timer.o
-                0x000000000020fed2                timer_reset
+                0x000000000020d10e       0x14 build/zoul/remote-revb/obj/timer.o
+                0x000000000020d10e                timer_reset
  .text.ringbuf_init
-                0x000000000020fee6        0xe build/zoul/remote-revb/obj/ringbuf.o
-                0x000000000020fee6                ringbuf_init
+                0x000000000020d122        0xe build/zoul/remote-revb/obj/ringbuf.o
+                0x000000000020d122                ringbuf_init
  .text.ringbuf_put
-                0x000000000020fef4       0x26 build/zoul/remote-revb/obj/ringbuf.o
-                0x000000000020fef4                ringbuf_put
+                0x000000000020d130       0x26 build/zoul/remote-revb/obj/ringbuf.o
+                0x000000000020d130                ringbuf_put
  .text.ringbuf_get
-                0x000000000020ff1a       0x20 build/zoul/remote-revb/obj/ringbuf.o
-                0x000000000020ff1a                ringbuf_get
+                0x000000000020d156       0x20 build/zoul/remote-revb/obj/ringbuf.o
+                0x000000000020d156                ringbuf_get
  .text.list_init
-                0x000000000020ff3a        0x6 build/zoul/remote-revb/obj/list.o
-                0x000000000020ff3a                list_init
+                0x000000000020d176        0x6 build/zoul/remote-revb/obj/list.o
+                0x000000000020d176                list_init
  .text.list_head
-                0x000000000020ff40        0x4 build/zoul/remote-revb/obj/list.o
-                0x000000000020ff40                list_head
+                0x000000000020d17c        0x4 build/zoul/remote-revb/obj/list.o
+                0x000000000020d17c                list_head
  .text.list_tail
-                0x000000000020ff44       0x10 build/zoul/remote-revb/obj/list.o
-                0x000000000020ff44                list_tail
+                0x000000000020d180       0x10 build/zoul/remote-revb/obj/list.o
+                0x000000000020d180                list_tail
  .text.list_remove
-                0x000000000020ff54       0x26 build/zoul/remote-revb/obj/list.o
-                0x000000000020ff54                list_remove
+                0x000000000020d190       0x26 build/zoul/remote-revb/obj/list.o
+                0x000000000020d190                list_remove
  .text.list_add
-                0x000000000020ff7a       0x1a build/zoul/remote-revb/obj/list.o
-                0x000000000020ff7a                list_add
+                0x000000000020d1b6       0x1a build/zoul/remote-revb/obj/list.o
+                0x000000000020d1b6                list_add
  .text.list_push
-                0x000000000020ff94        0xe build/zoul/remote-revb/obj/list.o
-                0x000000000020ff94                list_push
+                0x000000000020d1d0        0xe build/zoul/remote-revb/obj/list.o
+                0x000000000020d1d0                list_push
  .text.list_length
-                0x000000000020ffa2        0xe build/zoul/remote-revb/obj/list.o
-                0x000000000020ffa2                list_length
+                0x000000000020d1de        0xe build/zoul/remote-revb/obj/list.o
+                0x000000000020d1de                list_length
  .text.list_item_next
-                0x000000000020ffb0        0x6 build/zoul/remote-revb/obj/list.o
-                0x000000000020ffb0                list_item_next
+                0x000000000020d1ec        0x6 build/zoul/remote-revb/obj/list.o
+                0x000000000020d1ec                list_item_next
  .text.memb_init
-                0x000000000020ffb6       0x20 build/zoul/remote-revb/obj/memb.o
-                0x000000000020ffb6                memb_init
+                0x000000000020d1f2       0x20 build/zoul/remote-revb/obj/memb.o
+                0x000000000020d1f2                memb_init
  .text.memb_alloc
-                0x000000000020ffd6       0x28 build/zoul/remote-revb/obj/memb.o
-                0x000000000020ffd6                memb_alloc
+                0x000000000020d212       0x28 build/zoul/remote-revb/obj/memb.o
+                0x000000000020d212                memb_alloc
  .text.memb_free
-                0x000000000020fffe       0x2c build/zoul/remote-revb/obj/memb.o
-                0x000000000020fffe                memb_free
+                0x000000000020d23a       0x2c build/zoul/remote-revb/obj/memb.o
+                0x000000000020d23a                memb_free
  .text.memb_inmemb
-                0x000000000021002a       0x1c build/zoul/remote-revb/obj/memb.o
-                0x000000000021002a                memb_inmemb
+                0x000000000020d266       0x1c build/zoul/remote-revb/obj/memb.o
+                0x000000000020d266                memb_inmemb
  .text.memb_numfree
-                0x0000000000210046       0x1c build/zoul/remote-revb/obj/memb.o
-                0x0000000000210046                memb_numfree
+                0x000000000020d282       0x1c build/zoul/remote-revb/obj/memb.o
+                0x000000000020d282                memb_numfree
  .text.button_hal_get_state
-                0x0000000000210062       0x28 build/zoul/remote-revb/obj/button-hal.o
-                0x0000000000210062                button_hal_get_state
+                0x000000000020d29e       0x28 build/zoul/remote-revb/obj/button-hal.o
+                0x000000000020d29e                button_hal_get_state
  .text.queuebuf_update_attr_from_packetbuf
-                0x000000000021008a        0xc build/zoul/remote-revb/obj/queuebuf.o
-                0x000000000021008a                queuebuf_update_attr_from_packetbuf
+                0x000000000020d2c6        0xc build/zoul/remote-revb/obj/queuebuf.o
+                0x000000000020d2c6                queuebuf_update_attr_from_packetbuf
  .text.item_from_index
-                0x0000000000210096       0x14 build/zoul/remote-revb/obj/nbr-table.o
+                0x000000000020d2d2       0x14 build/zoul/remote-revb/obj/nbr-table.o
  .text.index_from_item
-                0x00000000002100aa       0x16 build/zoul/remote-revb/obj/nbr-table.o
+                0x000000000020d2e6       0x16 build/zoul/remote-revb/obj/nbr-table.o
  .text.nbr_set_bit
-                0x00000000002100c0       0x3a build/zoul/remote-revb/obj/nbr-table.o
+                0x000000000020d2fc       0x3a build/zoul/remote-revb/obj/nbr-table.o
  .text.nbr_table_get_from_lladdr
-                0x00000000002100fa       0x26 build/zoul/remote-revb/obj/nbr-table.o
-                0x00000000002100fa                nbr_table_get_from_lladdr
+                0x000000000020d336       0x26 build/zoul/remote-revb/obj/nbr-table.o
+                0x000000000020d336                nbr_table_get_from_lladdr
  .text.linkaddr_copy
-                0x0000000000210120        0x6 build/zoul/remote-revb/obj/linkaddr.o
-                0x0000000000210120                linkaddr_copy
+                0x000000000020d35c        0x6 build/zoul/remote-revb/obj/linkaddr.o
+                0x000000000020d35c                linkaddr_copy
  .text.linkaddr_cmp
-                0x0000000000210126       0x10 build/zoul/remote-revb/obj/linkaddr.o
-                0x0000000000210126                linkaddr_cmp
+                0x000000000020d362       0x10 build/zoul/remote-revb/obj/linkaddr.o
+                0x000000000020d362                linkaddr_cmp
  .text.link_stats_is_fresh
-                0x0000000000210136       0x24 build/zoul/remote-revb/obj/link-stats.o
-                0x0000000000210136                link_stats_is_fresh
+                0x000000000020d372       0x24 build/zoul/remote-revb/obj/link-stats.o
+                0x000000000020d372                link_stats_is_fresh
  .text.guess_etx_from_rssi
-                0x000000000021015a       0x3e build/zoul/remote-revb/obj/link-stats.o
-                0x000000000021015a                guess_etx_from_rssi
+                0x000000000020d396       0x3e build/zoul/remote-revb/obj/link-stats.o
+                0x000000000020d396                guess_etx_from_rssi
  .text.mac_call_sent_callback
-                0x0000000000210198       0x16 build/zoul/remote-revb/obj/mac.o
-                0x0000000000210198                mac_call_sent_callback
- .text.parse    0x00000000002101ae       0x94 build/zoul/remote-revb/obj/framer-802154.o
+                0x000000000020d3d4       0x16 build/zoul/remote-revb/obj/mac.o
+                0x000000000020d3d4                mac_call_sent_callback
+ .text.parse    0x000000000020d3ea       0x94 build/zoul/remote-revb/obj/framer-802154.o
  .text.framer_802154_setup_params.part.0
-                0x0000000000210242       0x7c build/zoul/remote-revb/obj/framer-802154.o
- .text.create   0x00000000002102be        0x6 build/zoul/remote-revb/obj/framer-802154.o
+                0x000000000020d47e       0x7c build/zoul/remote-revb/obj/framer-802154.o
+ .text.create   0x000000000020d4fa        0x6 build/zoul/remote-revb/obj/framer-802154.o
  .text.hdr_length
-                0x00000000002102c4        0x6 build/zoul/remote-revb/obj/framer-802154.o
+                0x000000000020d500        0x6 build/zoul/remote-revb/obj/framer-802154.o
  .text.frame802154_has_panid
-                0x00000000002102ca       0xb6 build/zoul/remote-revb/obj/frame802154.o
-                0x00000000002102ca                frame802154_has_panid
+                0x000000000020d506       0xb6 build/zoul/remote-revb/obj/frame802154.o
+                0x000000000020d506                frame802154_has_panid
  .text.field_len
-                0x0000000000210380       0x84 build/zoul/remote-revb/obj/frame802154.o
+                0x000000000020d5bc       0x84 build/zoul/remote-revb/obj/frame802154.o
  .text.frame802154_is_broadcast_addr
-                0x0000000000210404       0x1e build/zoul/remote-revb/obj/frame802154.o
-                0x0000000000210404                frame802154_is_broadcast_addr
+                0x000000000020d640       0x1e build/zoul/remote-revb/obj/frame802154.o
+                0x000000000020d640                frame802154_is_broadcast_addr
  .text.frame802154_hdrlen
-                0x0000000000210422       0x32 build/zoul/remote-revb/obj/frame802154.o
-                0x0000000000210422                frame802154_hdrlen
+                0x000000000020d65e       0x32 build/zoul/remote-revb/obj/frame802154.o
+                0x000000000020d65e                frame802154_hdrlen
  .text.frame802154_create_fcf
-                0x0000000000210454       0x5e build/zoul/remote-revb/obj/frame802154.o
-                0x0000000000210454                frame802154_create_fcf
+                0x000000000020d690       0x5e build/zoul/remote-revb/obj/frame802154.o
+                0x000000000020d690                frame802154_create_fcf
  .text.frame802154_create
-                0x00000000002104b2       0x8c build/zoul/remote-revb/obj/frame802154.o
-                0x00000000002104b2                frame802154_create
+                0x000000000020d6ee       0x8c build/zoul/remote-revb/obj/frame802154.o
+                0x000000000020d6ee                frame802154_create
  .text.frame802154_parse_fcf
-                0x000000000021053e       0x66 build/zoul/remote-revb/obj/frame802154.o
-                0x000000000021053e                frame802154_parse_fcf
+                0x000000000020d77a       0x66 build/zoul/remote-revb/obj/frame802154.o
+                0x000000000020d77a                frame802154_parse_fcf
  .text.write_str
-                0x00000000002105a4       0x10 build/zoul/remote-revb/obj/printf.o
+                0x000000000020d7e0       0x10 build/zoul/remote-revb/obj/printf.o
  .text.buffer_str
-                0x00000000002105b4       0x16 build/zoul/remote-revb/obj/sprintf.o
+                0x000000000020d7f0       0x16 build/zoul/remote-revb/obj/sprintf.o
  .text.buffer_str
-                0x00000000002105ca       0x28 build/zoul/remote-revb/obj/snprintf.o
+                0x000000000020d806       0x28 build/zoul/remote-revb/obj/snprintf.o
  .text.snprintf
-                0x00000000002105f2       0x1a build/zoul/remote-revb/obj/snprintf.o
-                0x00000000002105f2                snprintf
- .text.putchar  0x000000000021060c        0xc build/zoul/remote-revb/obj/putchar.o
-                0x000000000021060c                putchar
+                0x000000000020d82e       0x1a build/zoul/remote-revb/obj/snprintf.o
+                0x000000000020d82e                snprintf
+ .text.putchar  0x000000000020d848        0xc build/zoul/remote-revb/obj/putchar.o
+                0x000000000020d848                putchar
  .text.send_packet
-                0x0000000000210618        0x4 build/zoul/remote-revb/obj/csma.o
+                0x000000000020d854        0x4 build/zoul/remote-revb/obj/csma.o
  .text.uipbuf_set_len_field
-                0x000000000021061c        0x6 build/zoul/remote-revb/obj/uipbuf.o
-                0x000000000021061c                uipbuf_set_len_field
+                0x000000000020d858        0x6 build/zoul/remote-revb/obj/uipbuf.o
+                0x000000000020d858                uipbuf_set_len_field
  .text.uipbuf_get_len_field
-                0x0000000000210622        0xc build/zoul/remote-revb/obj/uipbuf.o
-                0x0000000000210622                uipbuf_get_len_field
+                0x000000000020d85e        0xc build/zoul/remote-revb/obj/uipbuf.o
+                0x000000000020d85e                uipbuf_get_len_field
  .text.uipbuf_get_next_header
-                0x000000000021062e       0x48 build/zoul/remote-revb/obj/uipbuf.o
-                0x000000000021062e                uipbuf_get_next_header
+                0x000000000020d86a       0x48 build/zoul/remote-revb/obj/uipbuf.o
+                0x000000000020d86a                uipbuf_get_next_header
  .text.uipbuf_get_last_header
-                0x0000000000210676       0x2c build/zoul/remote-revb/obj/uipbuf.o
-                0x0000000000210676                uipbuf_get_last_header
+                0x000000000020d8b2       0x2c build/zoul/remote-revb/obj/uipbuf.o
+                0x000000000020d8b2                uipbuf_get_last_header
  .text.uipbuf_search_header
-                0x00000000002106a2       0x40 build/zoul/remote-revb/obj/uipbuf.o
-                0x00000000002106a2                uipbuf_search_header
+                0x000000000020d8de       0x40 build/zoul/remote-revb/obj/uipbuf.o
+                0x000000000020d8de                uipbuf_search_header
  .text.uip_sr_expire_parent
-                0x00000000002106e2       0x28 build/zoul/remote-revb/obj/uip-sr.o
-                0x00000000002106e2                uip_sr_expire_parent
- .text.uip_sr_node_next
-                0x000000000021070a        0x4 build/zoul/remote-revb/obj/uip-sr.o
-                0x000000000021070a                uip_sr_node_next
+                0x000000000020d91e       0x28 build/zoul/remote-revb/obj/uip-sr.o
+                0x000000000020d91e                uip_sr_expire_parent
  .text.uip_ds6_list_loop
-                0x000000000021070e       0x4e build/zoul/remote-revb/obj/uip-ds6.o
-                0x000000000021070e                uip_ds6_list_loop
+                0x000000000020d946       0x4e build/zoul/remote-revb/obj/uip-ds6.o
+                0x000000000020d946                uip_ds6_list_loop
  .text.uip_ds6_maddr_rm
-                0x000000000021075c        0x8 build/zoul/remote-revb/obj/uip-ds6.o
-                0x000000000021075c                uip_ds6_maddr_rm
+                0x000000000020d994        0x8 build/zoul/remote-revb/obj/uip-ds6.o
+                0x000000000020d994                uip_ds6_maddr_rm
  .text.uip_ds6_set_addr_iid
-                0x0000000000210764       0x16 build/zoul/remote-revb/obj/uip-ds6.o
-                0x0000000000210764                uip_ds6_set_addr_iid
+                0x000000000020d99c       0x16 build/zoul/remote-revb/obj/uip-ds6.o
+                0x000000000020d99c                uip_ds6_set_addr_iid
  .text.uip_ds6_set_lladdr_from_iid
-                0x000000000021077a       0x16 build/zoul/remote-revb/obj/uip-ds6.o
-                0x000000000021077a                uip_ds6_set_lladdr_from_iid
+                0x000000000020d9b2       0x16 build/zoul/remote-revb/obj/uip-ds6.o
+                0x000000000020d9b2                uip_ds6_set_lladdr_from_iid
  .text.get_match_length
-                0x0000000000210790       0x36 build/zoul/remote-revb/obj/uip-ds6.o
-                0x0000000000210790                get_match_length
+                0x000000000020d9c8       0x36 build/zoul/remote-revb/obj/uip-ds6.o
+                0x000000000020d9c8                get_match_length
  .text.uip_udp_packet_sendto
-                0x00000000002107c6       0x54 build/zoul/remote-revb/obj/uip-udp-packet.o
-                0x00000000002107c6                uip_udp_packet_sendto
+                0x000000000020d9fe       0x54 build/zoul/remote-revb/obj/uip-udp-packet.o
+                0x000000000020d9fe                uip_udp_packet_sendto
  .text.uip_ds6_route_nexthop
-                0x000000000021081a        0x4 build/zoul/remote-revb/obj/uip-ds6-route.o
-                0x000000000021081a                uip_ds6_route_nexthop
+                0x000000000020da52        0x4 build/zoul/remote-revb/obj/uip-ds6-route.o
+                0x000000000020da52                uip_ds6_route_nexthop
  .text.uip_ds6_route_lookup
-                0x000000000021081e        0x4 build/zoul/remote-revb/obj/uip-ds6-route.o
-                0x000000000021081e                uip_ds6_route_lookup
+                0x000000000020da56        0x4 build/zoul/remote-revb/obj/uip-ds6-route.o
+                0x000000000020da56                uip_ds6_route_lookup
  .text.uip_ds6_route_rm
-                0x0000000000210822        0x2 build/zoul/remote-revb/obj/uip-ds6-route.o
-                0x0000000000210822                uip_ds6_route_rm
- .text.chksum   0x0000000000210824       0x52 build/zoul/remote-revb/obj/uip6.o
+                0x000000000020da5a        0x2 build/zoul/remote-revb/obj/uip-ds6-route.o
+                0x000000000020da5a                uip_ds6_route_rm
+ .text.chksum   0x000000000020da5c       0x52 build/zoul/remote-revb/obj/uip6.o
  .text.uip_icmp6chksum
-                0x0000000000210876        0x6 build/zoul/remote-revb/obj/uip6.o
-                0x0000000000210876                uip_icmp6chksum
+                0x000000000020daae        0x6 build/zoul/remote-revb/obj/uip6.o
+                0x000000000020daae                uip_icmp6chksum
  .text.uip_udpchksum
-                0x000000000021087c        0x6 build/zoul/remote-revb/obj/uip6.o
-                0x000000000021087c                uip_udpchksum
+                0x000000000020dab4        0x6 build/zoul/remote-revb/obj/uip6.o
+                0x000000000020dab4                uip_udpchksum
  .text.uip_ds6_nbr_lookup
-                0x0000000000210882       0x2c build/zoul/remote-revb/obj/uip-ds6-nbr.o
-                0x0000000000210882                uip_ds6_nbr_lookup
+                0x000000000020daba       0x2c build/zoul/remote-revb/obj/uip-ds6-nbr.o
+                0x000000000020daba                uip_ds6_nbr_lookup
+ .text.uip_ds6_nbr_update_ll
+                0x000000000020dae6       0x5e build/zoul/remote-revb/obj/uip-ds6-nbr.o
+                0x000000000020dae6                uip_ds6_nbr_update_ll
  .text.uip_ds6_nbr_ipaddr_from_lladdr
-                0x00000000002108ae        0x4 build/zoul/remote-revb/obj/uip-ds6-nbr.o
-                0x00000000002108ae                uip_ds6_nbr_ipaddr_from_lladdr
+                0x000000000020db44        0x4 build/zoul/remote-revb/obj/uip-ds6-nbr.o
+                0x000000000020db44                uip_ds6_nbr_ipaddr_from_lladdr
  .text.uip_ds6_nbr_lladdr_from_ipaddr
-                0x00000000002108b2       0x12 build/zoul/remote-revb/obj/uip-ds6-nbr.o
-                0x00000000002108b2                uip_ds6_nbr_lladdr_from_ipaddr
+                0x000000000020db48       0x12 build/zoul/remote-revb/obj/uip-ds6-nbr.o
+                0x000000000020db48                uip_ds6_nbr_lladdr_from_ipaddr
  .text.uip_ds6_link_callback
-                0x00000000002108c4        0x2 build/zoul/remote-revb/obj/uip-ds6-nbr.o
-                0x00000000002108c4                uip_ds6_link_callback
+                0x000000000020db5a        0x2 build/zoul/remote-revb/obj/uip-ds6-nbr.o
+                0x000000000020db5a                uip_ds6_link_callback
  .text.simple_udp_sendto
-                0x00000000002108c6       0x1e build/zoul/remote-revb/obj/simple-udp.o
-                0x00000000002108c6                simple_udp_sendto
+                0x000000000020db5c       0x1e build/zoul/remote-revb/obj/simple-udp.o
+                0x000000000020db5c                simple_udp_sendto
  .text.rpl_nbr_gc_get_worst
-                0x00000000002108e4       0x1e build/zoul/remote-revb/obj/rpl-nbr-policy.o
-                0x00000000002108e4                rpl_nbr_gc_get_worst
+                0x000000000020db7a       0x1e build/zoul/remote-revb/obj/rpl-nbr-policy.o
+                0x000000000020db7a                rpl_nbr_gc_get_worst
  .text.rpl_neighbor_get_ipaddr
-                0x0000000000210902        0xe build/zoul/remote-revb/obj/rpl-neighbor.o
-                0x0000000000210902                rpl_neighbor_get_ipaddr
+                0x000000000020db98        0xe build/zoul/remote-revb/obj/rpl-neighbor.o
+                0x000000000020db98                rpl_neighbor_get_ipaddr
  .text.rpl_neighbor_get_link_stats
-                0x0000000000210910        0xe build/zoul/remote-revb/obj/rpl-neighbor.o
-                0x0000000000210910                rpl_neighbor_get_link_stats
+                0x000000000020dba6        0xe build/zoul/remote-revb/obj/rpl-neighbor.o
+                0x000000000020dba6                rpl_neighbor_get_link_stats
  .text.rpl_neighbor_is_fresh
-                0x000000000021091e        0xe build/zoul/remote-revb/obj/rpl-neighbor.o
-                0x000000000021091e                rpl_neighbor_is_fresh
+                0x000000000020dbb4        0xe build/zoul/remote-revb/obj/rpl-neighbor.o
+                0x000000000020dbb4                rpl_neighbor_is_fresh
  .text.rpl_process_hbh
-                0x000000000021092c       0x1c build/zoul/remote-revb/obj/rpl-dag.o
-                0x000000000021092c                rpl_process_hbh
+                0x000000000020dbc2       0x1c build/zoul/remote-revb/obj/rpl-dag.o
+                0x000000000020dbc2                rpl_process_hbh
  .text.handle_state_update
-                0x0000000000210948        0x4 build/zoul/remote-revb/obj/rpl-timers.o
+                0x000000000020dbde        0x4 build/zoul/remote-revb/obj/rpl-timers.o
  .text.get_probing_delay
-                0x000000000021094c       0x1a build/zoul/remote-revb/obj/rpl-timers.o
-                0x000000000021094c                get_probing_delay
+                0x000000000020dbe2       0x1a build/zoul/remote-revb/obj/rpl-timers.o
+                0x000000000020dbe2                get_probing_delay
+ .text.handle_probing_timer
+                0x000000000020dbfc       0x24 build/zoul/remote-revb/obj/rpl-timers.o
  .text.neighbor_state_changed
-                0x0000000000210966        0x2 build/zoul/remote-revb/obj/rpl.o
+                0x000000000020dc20        0x2 build/zoul/remote-revb/obj/rpl.o
  .text.drop_route
-                0x0000000000210968        0x2 build/zoul/remote-revb/obj/rpl.o
+                0x000000000020dc22        0x2 build/zoul/remote-revb/obj/rpl.o
  .text.rpl_lollipop_greater_than
-                0x000000000021096a       0x34 build/zoul/remote-revb/obj/rpl.o
-                0x000000000021096a                rpl_lollipop_greater_than
+                0x000000000020dc24       0x34 build/zoul/remote-revb/obj/rpl.o
+                0x000000000020dc24                rpl_lollipop_greater_than
+ .text.reset    0x000000000020dc58        0x2 build/zoul/remote-revb/obj/rpl-mrhof.o
  .text.nbr_link_metric
-                0x000000000021099e       0x12 build/zoul/remote-revb/obj/rpl-mrhof.o
+                0x000000000020dc5a       0x12 build/zoul/remote-revb/obj/rpl-mrhof.o
  .text.nbr_path_cost
-                0x00000000002109b0       0x28 build/zoul/remote-revb/obj/rpl-mrhof.o
+                0x000000000020dc6c       0x28 build/zoul/remote-revb/obj/rpl-mrhof.o
  .text.nbr_has_usable_link
-                0x00000000002109d8       0x12 build/zoul/remote-revb/obj/rpl-mrhof.o
+                0x000000000020dc94       0x12 build/zoul/remote-revb/obj/rpl-mrhof.o
  .text.nbr_is_acceptable_parent
-                0x00000000002109ea       0x1e build/zoul/remote-revb/obj/rpl-mrhof.o
- .text.get32    0x0000000000210a08       0x18 build/zoul/remote-revb/obj/rpl-icmp6.o
- .text.set32    0x0000000000210a20       0x12 build/zoul/remote-revb/obj/rpl-icmp6.o
- .text.get16    0x0000000000210a32        0xc build/zoul/remote-revb/obj/rpl-icmp6.o
- .text.set16    0x0000000000210a3e        0xa build/zoul/remote-revb/obj/rpl-icmp6.o
+                0x000000000020dca6       0x1e build/zoul/remote-revb/obj/rpl-mrhof.o
+ .text.get32    0x000000000020dcc4       0x18 build/zoul/remote-revb/obj/rpl-icmp6.o
+ .text.set32    0x000000000020dcdc       0x12 build/zoul/remote-revb/obj/rpl-icmp6.o
+ .text.get16    0x000000000020dcee        0xc build/zoul/remote-revb/obj/rpl-icmp6.o
+ .text.set16    0x000000000020dcfa        0xa build/zoul/remote-revb/obj/rpl-icmp6.o
+ .text.rpl_icmp6_update_nbr_table
+                0x000000000020dd04       0x2e build/zoul/remote-revb/obj/rpl-icmp6.o
+                0x000000000020dd04                rpl_icmp6_update_nbr_table
  *(SORT_BY_ALIGNMENT(.rodata*))
+ *fill*         0x000000000020dd32        0x2 00000000
  .rodata.uart_regs
-                0x0000000000210a48       0x58 build/zoul/remote-revb/obj/uart.o
+                0x000000000020dd34       0x58 build/zoul/remote-revb/obj/uart.o
  .rodata.cc2538_rf_driver
-                0x0000000000210aa0       0x38 build/zoul/remote-revb/obj/cc2538-rf.o
-                0x0000000000210aa0                cc2538_rf_driver
+                0x000000000020dd8c       0x38 build/zoul/remote-revb/obj/cc2538-rf.o
+                0x000000000020dd8c                cc2538_rf_driver
  .rodata.output_power
-                0x0000000000210ad8       0x70 build/zoul/remote-revb/obj/cc2538-rf.o
+                0x000000000020ddc4       0x70 build/zoul/remote-revb/obj/cc2538-rf.o
  .rodata.cc2538_temp_sensor
-                0x0000000000210b48       0x10 build/zoul/remote-revb/obj/cc2538-temp-sensor.o
-                0x0000000000210b48                cc2538_temp_sensor
+                0x000000000020de34       0x10 build/zoul/remote-revb/obj/cc2538-temp-sensor.o
+                0x000000000020de34                cc2538_temp_sensor
  .rodata.vdd3_sensor
-                0x0000000000210b58       0x10 build/zoul/remote-revb/obj/vdd3-sensor.o
-                0x0000000000210b58                vdd3_sensor
+                0x000000000020de44       0x10 build/zoul/remote-revb/obj/vdd3-sensor.o
+                0x000000000020de44                vdd3_sensor
  .rodata.loramac_interface
-                0x0000000000210b68        0x8 build/zoul/remote-revb/obj/interface.o
-                0x0000000000210b68                loramac_interface
+                0x000000000020de54        0x8 build/zoul/remote-revb/obj/interface.o
+                0x000000000020de54                loramac_interface
  .rodata.framer_802154
-                0x0000000000210b70        0xc build/zoul/remote-revb/obj/framer-802154.o
-                0x0000000000210b70                framer_802154
+                0x000000000020de5c        0xc build/zoul/remote-revb/obj/framer-802154.o
+                0x000000000020de5c                framer_802154
  .rodata.csma_driver
-                0x0000000000210b7c       0x1c build/zoul/remote-revb/obj/csma.o
-                0x0000000000210b7c                csma_driver
+                0x000000000020de68       0x1c build/zoul/remote-revb/obj/csma.o
+                0x000000000020de68                csma_driver
  .rodata.sicslowpan_driver
-                0x0000000000210b98       0x10 build/zoul/remote-revb/obj/sicslowpan.o
-                0x0000000000210b98                sicslowpan_driver
- .rodata.CSWTCH.61
-                0x0000000000210ba8       0x10 build/zoul/remote-revb/obj/rpl-dag.o
+                0x000000000020de84       0x10 build/zoul/remote-revb/obj/sicslowpan.o
+                0x000000000020de84                sicslowpan_driver
  .rodata.rpl_lite_driver
-                0x0000000000210bb8       0x54 build/zoul/remote-revb/obj/rpl.o
-                0x0000000000210bb8                rpl_lite_driver
+                0x000000000020de94       0x54 build/zoul/remote-revb/obj/rpl.o
+                0x000000000020de94                rpl_lite_driver
  .rodata.autostart_processes
-                0x0000000000210c0c        0x8 pingpong.o
-                0x0000000000210c0c                autostart_processes
- .rodata        0x0000000000210c14      0x101 /usr/lib/gcc/arm-none-eabi/9.2.1/../../../arm-none-eabi/lib/thumb/v7-m/nofp/libc.a(lib_a-ctype_.o)
-                0x0000000000210c14                _ctype_
- *fill*         0x0000000000210d15        0x1 00000000
+                0x000000000020dee8        0x8 pingpong.o
+                0x000000000020dee8                autostart_processes
+ .rodata        0x000000000020def0      0x101 /usr/lib/gcc/arm-none-eabi/9.2.1/../../../arm-none-eabi/lib/thumb/v7-m/nofp/libc.a(lib_a-ctype_.o)
+                0x000000000020def0                _ctype_
+ *fill*         0x000000000020dff1        0x1 00000000
  .rodata.linkaddr_null
-                0x0000000000210d16        0x8 build/zoul/remote-revb/obj/linkaddr.o
-                0x0000000000210d16                linkaddr_null
+                0x000000000020dff2        0x8 build/zoul/remote-revb/obj/linkaddr.o
+                0x000000000020dff2                linkaddr_null
  .rodata.platform_init_stage_three.str1.1
-                0x0000000000210d1e       0x43 build/zoul/remote-revb/obj/platform.o
+                0x000000000020dffa       0x43 build/zoul/remote-revb/obj/platform.o
                                          0x47 (size before relaxing)
  .rodata.leds_arch_leds
-                0x0000000000210d61        0x6 build/zoul/remote-revb/obj/leds-arch.o
-                0x0000000000210d61                leds_arch_leds
+                0x000000000020e03d        0x6 build/zoul/remote-revb/obj/leds-arch.o
+                0x000000000020e03d                leds_arch_leds
  .rodata.str1.1
-                0x0000000000210d67        0xc build/zoul/remote-revb/obj/board-buttons.o
+                0x000000000020e043        0xc build/zoul/remote-revb/obj/board-buttons.o
  .rodata.str1.1
-                0x0000000000210d73       0x11 build/zoul/remote-revb/obj/cc2538-rf.o
+                0x000000000020e04f       0x11 build/zoul/remote-revb/obj/cc2538-rf.o
  .rodata.str1.1
-                0x0000000000210d84       0x14 build/zoul/remote-revb/obj/cc2538-temp-sensor.o
+                0x000000000020e060       0x14 build/zoul/remote-revb/obj/cc2538-temp-sensor.o
  .rodata.str1.1
-                0x0000000000210d98        0x5 build/zoul/remote-revb/obj/vdd3-sensor.o
+                0x000000000020e074        0x5 build/zoul/remote-revb/obj/vdd3-sensor.o
  .rodata.process_thread_loramac_process.str1.1
-                0x0000000000210d9d       0x43 build/zoul/remote-revb/obj/interface.o
+                0x000000000020e079       0x43 build/zoul/remote-revb/obj/interface.o
                                          0x5c (size before relaxing)
  .rodata.init.str1.1
-                0x0000000000210de0       0x38 build/zoul/remote-revb/obj/interface.o
+                0x000000000020e0bc       0x38 build/zoul/remote-revb/obj/interface.o
  .rodata.loramac_input_callback.str1.1
-                0x0000000000210e18       0x80 build/zoul/remote-revb/obj/interface.o
+                0x000000000020e0f4       0x80 build/zoul/remote-revb/obj/interface.o
                                          0x82 (size before relaxing)
  .rodata.ipv62lora.str1.1
-                0x0000000000210e98       0x12 build/zoul/remote-revb/obj/interface.o
+                0x000000000020e174       0x12 build/zoul/remote-revb/obj/interface.o
  .rodata.output.str1.1
-                0x0000000000210eaa       0x2c build/zoul/remote-revb/obj/interface.o
+                0x000000000020e186       0x2c build/zoul/remote-revb/obj/interface.o
  .rodata.str1.1
-                0x0000000000210ed6       0x12 build/zoul/remote-revb/obj/interface.o
+                0x000000000020e1b2       0x12 build/zoul/remote-revb/obj/interface.o
  .rodata.process_thread_mac_tx.str1.1
-                0x0000000000210ee8       0x12 build/zoul/remote-revb/obj/loramac.o
+                0x000000000020e1c4       0x12 build/zoul/remote-revb/obj/loramac.o
                                          0x2b (size before relaxing)
  .rodata.retransmit_timeout.str1.1
-                0x0000000000210efa       0x55 build/zoul/remote-revb/obj/loramac.o
+                0x000000000020e1d6       0x55 build/zoul/remote-revb/obj/loramac.o
  .rodata.enqueue_packet.str1.1
-                0x0000000000210f4f       0x1e build/zoul/remote-revb/obj/loramac.o
+                0x000000000020e22b       0x1e build/zoul/remote-revb/obj/loramac.o
                                          0x23 (size before relaxing)
  .rodata.query_timeout.str1.1
-                0x0000000000210f6d        0xf build/zoul/remote-revb/obj/loramac.o
+                0x000000000020e249        0xf build/zoul/remote-revb/obj/loramac.o
                                          0x10 (size before relaxing)
  .rodata.on_join_response.str1.1
-                0x0000000000210f7c       0x37 build/zoul/remote-revb/obj/loramac.o
+                0x000000000020e258       0x37 build/zoul/remote-revb/obj/loramac.o
                                          0x39 (size before relaxing)
  .rodata.on_data.str1.1
-                0x0000000000210fb3       0x57 build/zoul/remote-revb/obj/loramac.o
+                0x000000000020e28f       0x57 build/zoul/remote-revb/obj/loramac.o
  .rodata.on_ack.str1.1
-                0x000000000021100a       0x3c build/zoul/remote-revb/obj/loramac.o
+                0x000000000020e2e6       0x3c build/zoul/remote-revb/obj/loramac.o
  .rodata.lora_rx.str1.1
-                0x0000000000211046       0x21 build/zoul/remote-revb/obj/loramac.o
+                0x000000000020e322       0x21 build/zoul/remote-revb/obj/loramac.o
  .rodata.mac_root_start.str1.1
-                0x0000000000211067       0x18 build/zoul/remote-revb/obj/loramac.o
+                0x000000000020e343       0x18 build/zoul/remote-revb/obj/loramac.o
  .rodata.str1.1
-                0x000000000021107f       0x14 build/zoul/remote-revb/obj/loramac.o
+                0x000000000020e35b       0x14 build/zoul/remote-revb/obj/loramac.o
  .rodata.print_lora_addr.str1.1
-                0x0000000000211093        0x6 build/zoul/remote-revb/obj/rn2483radio.o
+                0x000000000020e36f        0x6 build/zoul/remote-revb/obj/rn2483radio.o
  .rodata.print_lora_frame.str1.1
-                0x0000000000211099       0x32 build/zoul/remote-revb/obj/rn2483radio.o
+                0x000000000020e375       0x32 build/zoul/remote-revb/obj/rn2483radio.o
  .rodata.to_frame.str1.1
-                0x00000000002110cb        0xb build/zoul/remote-revb/obj/rn2483radio.o
+                0x000000000020e3a7        0xb build/zoul/remote-revb/obj/rn2483radio.o
                                          0x10 (size before relaxing)
  .rodata.write_uart.str1.1
-                0x00000000002110d6       0x14 build/zoul/remote-revb/obj/rn2483radio.o
+                0x000000000020e3b2       0x14 build/zoul/remote-revb/obj/rn2483radio.o
                                          0x2d (size before relaxing)
  .rodata.process_command.str1.1
-                0x00000000002110ea        0xb build/zoul/remote-revb/obj/rn2483radio.o
+                0x000000000020e3c6        0xb build/zoul/remote-revb/obj/rn2483radio.o
  .rodata.uart_tx.str1.1
-                0x00000000002110f5       0x23 build/zoul/remote-revb/obj/rn2483radio.o
+                0x000000000020e3d1       0x23 build/zoul/remote-revb/obj/rn2483radio.o
  .rodata.phy_init.str1.1
-                0x00000000002110f5       0x1d build/zoul/remote-revb/obj/rn2483radio.o
+                0x000000000020e3d1       0x1d build/zoul/remote-revb/obj/rn2483radio.o
                                          0x1e (size before relaxing)
  .rodata.phy_timeout.str1.1
-                0x0000000000211112       0x21 build/zoul/remote-revb/obj/rn2483radio.o
+                0x000000000020e3ee       0x21 build/zoul/remote-revb/obj/rn2483radio.o
  .rodata.process_thread_ph_tx.str1.1
-                0x0000000000211133        0xa build/zoul/remote-revb/obj/rn2483radio.o
+                0x000000000020e40f        0xa build/zoul/remote-revb/obj/rn2483radio.o
  .rodata.str1.1
-                0x000000000021113d       0xfa build/zoul/remote-revb/obj/rn2483radio.o
+                0x000000000020e419       0xfa build/zoul/remote-revb/obj/rn2483radio.o
                                          0xfd (size before relaxing)
  .rodata.main.str1.1
-                0x0000000000211237       0xe0 build/zoul/remote-revb/obj/contiki-main.o
+                0x000000000020e513       0xe0 build/zoul/remote-revb/obj/contiki-main.o
                                          0xfb (size before relaxing)
  .rodata.str1.1
-                0x0000000000211317        0xc build/zoul/remote-revb/obj/etimer.o
+                0x000000000020e5f3        0xc build/zoul/remote-revb/obj/etimer.o
  .rodata.log_6addr.str1.1
-                0x0000000000211323        0xc build/zoul/remote-revb/obj/log.o
+                0x000000000020e5ff        0xc build/zoul/remote-revb/obj/log.o
                                           0x3 (size before relaxing)
  .rodata.log_lladdr.str1.1
-                0x0000000000211323       0x14 build/zoul/remote-revb/obj/log.o
-                                         0x16 (size before relaxing)
+                0x000000000020e5ff       0x16 build/zoul/remote-revb/obj/log.o
  .rodata.str1.1
-                0x0000000000211337        0xf build/zoul/remote-revb/obj/ctimer.o
+                0x000000000020e615        0xf build/zoul/remote-revb/obj/ctimer.o
  .rodata.process_thread_stack_check_process.str1.1
-                0x0000000000211346       0x4f build/zoul/remote-revb/obj/stack-check.o
+                0x000000000020e624       0x4f build/zoul/remote-revb/obj/stack-check.o
                                          0x63 (size before relaxing)
  .rodata.str1.1
-                0x0000000000211395        0xc build/zoul/remote-revb/obj/stack-check.o
+                0x000000000020e673        0xc build/zoul/remote-revb/obj/stack-check.o
  .rodata.str1.1
-                0x00000000002113a1        0x8 build/zoul/remote-revb/obj/sensors.o
+                0x000000000020e67f        0x8 build/zoul/remote-revb/obj/sensors.o
  .rodata.str1.1
-                0x00000000002113a9       0x13 build/zoul/remote-revb/obj/button-hal.o
+                0x000000000020e687       0x13 build/zoul/remote-revb/obj/button-hal.o
  .rodata.str1.1
-                0x00000000002113bc        0xe build/zoul/remote-revb/obj/serial-line.o
+                0x000000000020e69a        0xe build/zoul/remote-revb/obj/serial-line.o
  .rodata.format_str_v.str1.1
-                0x00000000002113ca       0x35 build/zoul/remote-revb/obj/strformat.o
+                0x000000000020e6a8       0x35 build/zoul/remote-revb/obj/strformat.o
                                          0x37 (size before relaxing)
  .rodata.buffer.5483
-                0x00000000002113ff       0x10 build/zoul/remote-revb/obj/strformat.o
+                0x000000000020e6dd       0x10 build/zoul/remote-revb/obj/strformat.o
  .rodata.buffer.5492
-                0x000000000021140f       0x10 build/zoul/remote-revb/obj/strformat.o
+                0x000000000020e6ed       0x10 build/zoul/remote-revb/obj/strformat.o
  .rodata.str1.1
-                0x000000000021141f        0x5 build/zoul/remote-revb/obj/csma.o
- .rodata.echo_reply_input.str1.1
-                0x0000000000211424       0x21 build/zoul/remote-revb/obj/uip-icmp6.o
-                                         0x41 (size before relaxing)
- .rodata.echo_request_input.str1.1
-                0x0000000000211445       0x33 build/zoul/remote-revb/obj/uip-icmp6.o
-                                         0x3a (size before relaxing)
- .rodata.uip_icmp6_error_output.str1.1
-                0x0000000000211478       0x72 build/zoul/remote-revb/obj/uip-icmp6.o
-                                         0x77 (size before relaxing)
- .rodata.uip_icmp6_send.str1.1
-                0x00000000002114ea       0x56 build/zoul/remote-revb/obj/uip-icmp6.o
-                                         0x5a (size before relaxing)
- .rodata.uip_sr_update_node.str1.1
-                0x0000000000211540       0x7e build/zoul/remote-revb/obj/uip-sr.o
-                                         0xa7 (size before relaxing)
- .rodata.uip_sr_periodic.str1.1
-                0x00000000002115be       0x1b build/zoul/remote-revb/obj/uip-sr.o
- .rodata.uip_sr_link_snprint.str1.1
-                0x00000000002115d9       0x44 build/zoul/remote-revb/obj/uip-sr.o
- .rodata.uip_ds6_prefix_add.str1.1
-                0x000000000021161d       0x76 build/zoul/remote-revb/obj/uip-ds6.o
-                                         0x8f (size before relaxing)
- .rodata.uip_ds6_init.str1.1
-                0x0000000000211693       0x84 build/zoul/remote-revb/obj/uip-ds6.o
- .rodata.uip_ds6_defrt_rm.str1.1
-                0x0000000000211717       0x1d build/zoul/remote-revb/obj/uip-ds6-route.o
-                                         0x36 (size before relaxing)
- .rodata.uip_ds6_defrt_add.str1.1
-                0x0000000000211734       0x78 build/zoul/remote-revb/obj/uip-ds6-route.o
-                                         0x7e (size before relaxing)
- .rodata.uip_ds6_defrt_choose.str1.1
-                0x00000000002117ac       0x68 build/zoul/remote-revb/obj/uip-ds6-route.o
- .rodata.uip_ds6_defrt_periodic.str1.1
-                0x0000000000211814       0x30 build/zoul/remote-revb/obj/uip-ds6-route.o
- .rodata.tcpip_ipv6_output.str1.1
-                0x0000000000211844      0x239 build/zoul/remote-revb/obj/tcpip.o
-                                        0x25d (size before relaxing)
- .rodata.packet_input.part.0.str1.1
-                0x0000000000211a7d       0x1a build/zoul/remote-revb/obj/tcpip.o
+                0x000000000020e6fd        0x5 build/zoul/remote-revb/obj/csma.o
  .rodata.str1.1
-                0x0000000000211a97        0xd build/zoul/remote-revb/obj/tcpip.o
- .rodata.upper_layer_chksum.str1.1
-                0x0000000000211aa4       0x2c build/zoul/remote-revb/obj/uip6.o
-                                         0x44 (size before relaxing)
- .rodata.ext_hdr_options_process.str1.1
-                0x0000000000211ad0       0xbc build/zoul/remote-revb/obj/uip6.o
-                                         0xc0 (size before relaxing)
- .rodata.uip_remove_ext_hdr.str1.1
-                0x0000000000211b8c       0x61 build/zoul/remote-revb/obj/uip6.o
- .rodata.uip_process.str1.1
-                0x0000000000211bed      0x304 build/zoul/remote-revb/obj/uip6.o
-                                        0x315 (size before relaxing)
- .rodata.uip_ds6_nbr_add.str1.1
-                0x0000000000211ef1       0x61 build/zoul/remote-revb/obj/uip-ds6-nbr.o
-                                         0x7a (size before relaxing)
- .rodata.uip_ds6_nbr_update_ll.str1.1
-                0x0000000000211f52       0x9a build/zoul/remote-revb/obj/uip-ds6-nbr.o
-                                         0x9e (size before relaxing)
- .rodata.__func__.6959
-                0x0000000000211fec       0x16 build/zoul/remote-revb/obj/uip-ds6-nbr.o
- .rodata.ns_input.str1.1
-                0x0000000000212002       0x72 build/zoul/remote-revb/obj/uip-nd6.o
-                                         0xa2 (size before relaxing)
+                0x000000000020e702        0xd build/zoul/remote-revb/obj/tcpip.o
  .rodata.str1.1
-                0x0000000000212074       0x13 build/zoul/remote-revb/obj/simple-udp.o
+                0x000000000020e70f       0x13 build/zoul/remote-revb/obj/simple-udp.o
  .rodata.str1.1
-                0x0000000000212087        0xb build/zoul/remote-revb/obj/sicslowpan.o
+                0x000000000020e722        0xb build/zoul/remote-revb/obj/sicslowpan.o
  .rodata.CSWTCH.459
-                0x0000000000212092        0x4 build/zoul/remote-revb/obj/sicslowpan.o
+                0x000000000020e72d        0x4 build/zoul/remote-revb/obj/sicslowpan.o
  .rodata.llprefix
-                0x0000000000212096        0x2 build/zoul/remote-revb/obj/sicslowpan.o
-                0x0000000000212096                llprefix
+                0x000000000020e731        0x2 build/zoul/remote-revb/obj/sicslowpan.o
+                0x000000000020e731                llprefix
  .rodata.ttl_values
-                0x0000000000212098        0x4 build/zoul/remote-revb/obj/sicslowpan.o
+                0x000000000020e733        0x4 build/zoul/remote-revb/obj/sicslowpan.o
  .rodata.unc_ctxconf
-                0x000000000021209c        0x4 build/zoul/remote-revb/obj/sicslowpan.o
-                0x000000000021209c                unc_ctxconf
+                0x000000000020e737        0x4 build/zoul/remote-revb/obj/sicslowpan.o
+                0x000000000020e737                unc_ctxconf
  .rodata.unc_llconf
-                0x00000000002120a0        0x4 build/zoul/remote-revb/obj/sicslowpan.o
-                0x00000000002120a0                unc_llconf
+                0x000000000020e73b        0x4 build/zoul/remote-revb/obj/sicslowpan.o
+                0x000000000020e73b                unc_llconf
  .rodata.unc_mxconf
-                0x00000000002120a4        0x4 build/zoul/remote-revb/obj/sicslowpan.o
-                0x00000000002120a4                unc_mxconf
+                0x000000000020e73f        0x4 build/zoul/remote-revb/obj/sicslowpan.o
+                0x000000000020e73f                unc_mxconf
  .rodata.uiplib_ipaddr_snprint.str1.1
-                0x00000000002120a8       0x28 build/zoul/remote-revb/obj/uiplib.o
+                0x000000000020e743       0x28 build/zoul/remote-revb/obj/uiplib.o
                                          0x2a (size before relaxing)
- .rodata.rpl_neighbor_snprint.str1.1
-                0x00000000002120d0       0x56 build/zoul/remote-revb/obj/rpl-neighbor.o
-                                         0x58 (size before relaxing)
- .rodata.rpl_neighbor_print_list.str1.1
-                0x0000000000212126       0x87 build/zoul/remote-revb/obj/rpl-neighbor.o
-                                         0xa0 (size before relaxing)
- .rodata.rpl_neighbor_set_preferred_parent.str1.1
-                0x00000000002121ad       0x15 build/zoul/remote-revb/obj/rpl-neighbor.o
-                                         0x17 (size before relaxing)
- .rodata.rpl_neighbor_remove_all.str1.1
-                0x00000000002121c2       0x18 build/zoul/remote-revb/obj/rpl-neighbor.o
- .rodata.rpl_neighbor_select_best.str1.1
-                0x00000000002121da       0x36 build/zoul/remote-revb/obj/rpl-neighbor.o
- .rodata.init_dag.str1.1
-                0x0000000000212210       0x3f build/zoul/remote-revb/obj/rpl-dag.o
-                                         0x5b (size before relaxing)
  .rodata.process_dio_init_dag.str1.1
-                0x000000000021224f       0xc5 build/zoul/remote-revb/obj/rpl-dag.o
-                                         0xcf (size before relaxing)
- .rodata.rpl_dag_state_to_str.str1.1
-                0x0000000000212314        0x8 build/zoul/remote-revb/obj/rpl-dag.o
- .rodata.rpl_dag_leave.str1.1
-                0x000000000021231c       0x1c build/zoul/remote-revb/obj/rpl-dag.o
- .rodata.rpl_dag_periodic.str1.1
-                0x0000000000212338       0x59 build/zoul/remote-revb/obj/rpl-dag.o
+                0x000000000020e76b        0x5 build/zoul/remote-revb/obj/rpl-dag.o
  .rodata.rpl_local_repair.str1.1
-                0x0000000000212391       0x20 build/zoul/remote-revb/obj/rpl-dag.o
+                0x000000000020e770        0xd build/zoul/remote-revb/obj/rpl-dag.o
  .rodata.rpl_global_repair.str1.1
-                0x00000000002123b1       0x59 build/zoul/remote-revb/obj/rpl-dag.o
+                0x000000000020e77d        0xe build/zoul/remote-revb/obj/rpl-dag.o
  .rodata.rpl_dag_update_state.str1.1
-                0x000000000021240a       0xeb build/zoul/remote-revb/obj/rpl-dag.o
+                0x000000000020e78b       0x31 build/zoul/remote-revb/obj/rpl-dag.o
  .rodata.rpl_process_dio.str1.1
-                0x00000000002124f5      0x1b3 build/zoul/remote-revb/obj/rpl-dag.o
+                0x000000000020e7bc       0x35 build/zoul/remote-revb/obj/rpl-dag.o
  .rodata.rpl_process_dis.str1.1
-                0x00000000002126a8       0x2c build/zoul/remote-revb/obj/rpl-dag.o
- .rodata.rpl_process_dao.str1.1
-                0x00000000002126d4       0x24 build/zoul/remote-revb/obj/rpl-dag.o
+                0x000000000020e7f1        0xe build/zoul/remote-revb/obj/rpl-dag.o
  .rodata.rpl_process_dao_ack.str1.1
-                0x00000000002126f8       0x48 build/zoul/remote-revb/obj/rpl-dag.o
+                0x000000000020e7ff        0xa build/zoul/remote-revb/obj/rpl-dag.o
  .rodata.rpl_dag_init_root.str1.1
-                0x0000000000212740       0x33 build/zoul/remote-revb/obj/rpl-dag.o
-                                         0x3e (size before relaxing)
- .rodata.str1.1
-                0x0000000000212773       0x27 build/zoul/remote-revb/obj/rpl-dag.o
+                0x000000000020e809        0xa build/zoul/remote-revb/obj/rpl-dag.o
  .rodata.resend_dao.str1.1
-                0x000000000021279a        0xc build/zoul/remote-revb/obj/rpl-timers.o
- .rodata.handle_periodic_timer.str1.1
-                0x00000000002127a6        0x9 build/zoul/remote-revb/obj/rpl-timers.o
- .rodata.rpl_timers_dio_reset.str1.1
-                0x00000000002127af       0x16 build/zoul/remote-revb/obj/rpl-timers.o
-                                         0x33 (size before relaxing)
- .rodata.handle_probing_timer.str1.1
-                0x00000000002127c5       0x45 build/zoul/remote-revb/obj/rpl-timers.o
-                                         0x46 (size before relaxing)
- .rodata.update_hbh_header.str1.1
-                0x000000000021280a       0x77 build/zoul/remote-revb/obj/rpl-ext-header.o
-                                         0x93 (size before relaxing)
- .rodata.rpl_ext_header_srh_update.str1.1
-                0x0000000000212881       0xbb build/zoul/remote-revb/obj/rpl-ext-header.o
-                                         0xc2 (size before relaxing)
- .rodata.rpl_ext_header_hbh_update.str1.1
-                0x000000000021293c       0xcb build/zoul/remote-revb/obj/rpl-ext-header.o
-                                         0xd0 (size before relaxing)
- .rodata.rpl_ext_header_update.str1.1
-                0x0000000000212a07      0x1ad build/zoul/remote-revb/obj/rpl-ext-header.o
-                                        0x1b0 (size before relaxing)
- .rodata.init.str1.1
-                0x0000000000212bb4        0xe build/zoul/remote-revb/obj/rpl.o
-                                         0x2b (size before relaxing)
- .rodata.rpl_link_callback.str1.1
-                0x0000000000212bc2       0x38 build/zoul/remote-revb/obj/rpl.o
- .rodata.rpl_reset_prefix.str1.1
-                0x0000000000212bfa       0x1c build/zoul/remote-revb/obj/rpl.o
-                                         0x1e (size before relaxing)
- .rodata.rpl_set_prefix_from_addr.str1.1
-                0x0000000000212c16       0x49 build/zoul/remote-revb/obj/rpl.o
-                                         0x4e (size before relaxing)
+                0x000000000020e813        0xc build/zoul/remote-revb/obj/rpl-timers.o
  .rodata.str1.1
-                0x0000000000212c5f        0x9 build/zoul/remote-revb/obj/rpl.o
- .rodata.reset.str1.1
-                0x0000000000212c68        0xd build/zoul/remote-revb/obj/rpl-mrhof.o
-                                         0x2a (size before relaxing)
- .rodata.dao_ack_input.str1.1
-                0x0000000000212c75       0x6b build/zoul/remote-revb/obj/rpl-icmp6.o
-                                         0x92 (size before relaxing)
- .rodata.dao_input.str1.1
-                0x0000000000212ce0       0xa7 build/zoul/remote-revb/obj/rpl-icmp6.o
-                                         0xb6 (size before relaxing)
- .rodata.dio_input.str1.1
-                0x0000000000212d87      0x20a build/zoul/remote-revb/obj/rpl-icmp6.o
-                                        0x20f (size before relaxing)
- .rodata.dis_input.str1.1
-                0x0000000000212f91       0x41 build/zoul/remote-revb/obj/rpl-icmp6.o
- .rodata.rpl_icmp6_update_nbr_table.str1.1
-                0x0000000000212fd2       0x21 build/zoul/remote-revb/obj/rpl-icmp6.o
-                                         0x24 (size before relaxing)
- .rodata.rpl_icmp6_dis_output.str1.1
-                0x0000000000212ff3       0x12 build/zoul/remote-revb/obj/rpl-icmp6.o
- .rodata.rpl_icmp6_dio_output.str1.1
-                0x0000000000213005       0x5c build/zoul/remote-revb/obj/rpl-icmp6.o
- .rodata.rpl_icmp6_dao_output.str1.1
-                0x0000000000213061      0x10d build/zoul/remote-revb/obj/rpl-icmp6.o
-                                        0x11c (size before relaxing)
- .rodata.rpl_icmp6_dao_ack_output.str1.1
-                0x000000000021316e       0x2f build/zoul/remote-revb/obj/rpl-icmp6.o
- .rodata.rpl_dag_root_set_prefix.str1.1
-                0x000000000021319d       0x15 build/zoul/remote-revb/obj/rpl-dag-root.o
-                                         0x34 (size before relaxing)
- .rodata.rpl_dag_root_start.str1.1
-                0x00000000002131b2       0x37 build/zoul/remote-revb/obj/rpl-dag-root.o
-                                         0x3b (size before relaxing)
- .rodata.rpl_dag_root_print_links.str1.1
-                0x00000000002131e9       0x58 build/zoul/remote-revb/obj/rpl-dag-root.o
+                0x000000000020e81f        0x9 build/zoul/remote-revb/obj/rpl.o
  .rodata.process_thread_udp_process.str1.1
-                0x0000000000213241       0x2b pingpong.o
+                0x000000000020e828       0x2b pingpong.o
                                          0x44 (size before relaxing)
  .rodata.udp_rx.str1.1
-                0x000000000021326c       0x17 pingpong.o
+                0x000000000020e853       0x17 pingpong.o
                                          0x19 (size before relaxing)
  .rodata.str1.1
-                0x0000000000213283       0x17 pingpong.o
+                0x000000000020e86a       0x17 pingpong.o
                                           0xc (size before relaxing)
-                0x0000000000213283                _etext = .
+                0x000000000020e86a                _etext = .
 
-.glue_7         0x0000000000213284        0x0
- .glue_7        0x0000000000213284        0x0 linker stubs
+.glue_7         0x000000000020e86c        0x0
+ .glue_7        0x000000000020e86c        0x0 linker stubs
 
-.glue_7t        0x0000000000213284        0x0
- .glue_7t       0x0000000000213284        0x0 linker stubs
+.glue_7t        0x000000000020e86c        0x0
+ .glue_7t       0x000000000020e86c        0x0 linker stubs
 
-.vfp11_veneer   0x0000000000213284        0x0
- .vfp11_veneer  0x0000000000213284        0x0 linker stubs
+.vfp11_veneer   0x000000000020e86c        0x0
+ .vfp11_veneer  0x000000000020e86c        0x0 linker stubs
 
-.v4_bx          0x0000000000213284        0x0
- .v4_bx         0x0000000000213284        0x0 linker stubs
+.v4_bx          0x000000000020e86c        0x0
+ .v4_bx         0x000000000020e86c        0x0 linker stubs
 
-.iplt           0x0000000000213284        0x0
- .iplt          0x0000000000213284        0x0 build/zoul/remote-revb/obj/startup-gcc.o
+.iplt           0x000000000020e86c        0x0
+ .iplt          0x000000000020e86c        0x0 build/zoul/remote-revb/obj/startup-gcc.o
 
 .socdata        0x0000000020004000       0x40
  *(SORT_BY_ALIGNMENT(.udma_channel_control_table))
  .udma_channel_control_table
                 0x0000000020004000       0x40 build/zoul/remote-revb/obj/udma.o
 
-.data           0x0000000020004040      0x6e9 load address 0x0000000000213284
+.data           0x0000000020004040      0x6dd load address 0x000000000020e86c
                 0x0000000020004040                _data = .
  *(SORT_BY_ALIGNMENT(.data*))
  .data          0x0000000020004040      0x430 /usr/lib/gcc/arm-none-eabi/9.2.1/../../../arm-none-eabi/lib/thumb/v7-m/nofp/libc.a(lib_a-impure.o)
@@ -4811,431 +4652,422 @@ END GROUP
  .data.etimer_process
                 0x0000000020004570       0x10 build/zoul/remote-revb/obj/etimer.o
                 0x0000000020004570                etimer_process
- .data.curr_log_level_ipv6
-                0x0000000020004580        0x4 build/zoul/remote-revb/obj/log.o
-                0x0000000020004580                curr_log_level_ipv6
  .data.curr_log_level_main
-                0x0000000020004584        0x4 build/zoul/remote-revb/obj/log.o
-                0x0000000020004584                curr_log_level_main
- .data.curr_log_level_rpl
-                0x0000000020004588        0x4 build/zoul/remote-revb/obj/log.o
-                0x0000000020004588                curr_log_level_rpl
- .data.curr_log_level_tcpip
-                0x000000002000458c        0x4 build/zoul/remote-revb/obj/log.o
-                0x000000002000458c                curr_log_level_tcpip
+                0x0000000020004580        0x4 build/zoul/remote-revb/obj/log.o
+                0x0000000020004580                curr_log_level_main
  .data.ctimer_process
-                0x0000000020004590       0x10 build/zoul/remote-revb/obj/ctimer.o
-                0x0000000020004590                ctimer_process
+                0x0000000020004584       0x10 build/zoul/remote-revb/obj/ctimer.o
+                0x0000000020004584                ctimer_process
  .data.stack_check_process
-                0x00000000200045a0       0x10 build/zoul/remote-revb/obj/stack-check.o
-                0x00000000200045a0                stack_check_process
+                0x0000000020004594       0x10 build/zoul/remote-revb/obj/stack-check.o
+                0x0000000020004594                stack_check_process
  .data.sensors_process
-                0x00000000200045b0       0x10 build/zoul/remote-revb/obj/sensors.o
-                0x00000000200045b0                sensors_process
+                0x00000000200045a4       0x10 build/zoul/remote-revb/obj/sensors.o
+                0x00000000200045a4                sensors_process
  .data.button_hal_process
-                0x00000000200045c0       0x10 build/zoul/remote-revb/obj/button-hal.o
-                0x00000000200045c0                button_hal_process
+                0x00000000200045b4       0x10 build/zoul/remote-revb/obj/button-hal.o
+                0x00000000200045b4                button_hal_process
  .data.serial_line_process
-                0x00000000200045d0       0x10 build/zoul/remote-revb/obj/serial-line.o
-                0x00000000200045d0                serial_line_process
- .data.bufmem   0x00000000200045e0        0xc build/zoul/remote-revb/obj/queuebuf.o
+                0x00000000200045c4       0x10 build/zoul/remote-revb/obj/serial-line.o
+                0x00000000200045c4                serial_line_process
+ .data.bufmem   0x00000000200045d4        0xc build/zoul/remote-revb/obj/queuebuf.o
  .data.buframmem
-                0x00000000200045ec        0xc build/zoul/remote-revb/obj/queuebuf.o
+                0x00000000200045e0        0xc build/zoul/remote-revb/obj/queuebuf.o
  .data.neighbor_addr_mem
-                0x00000000200045f8        0xc build/zoul/remote-revb/obj/nbr-table.o
+                0x00000000200045ec        0xc build/zoul/remote-revb/obj/nbr-table.o
  .data.link_stats_struct
-                0x0000000020004604       0x10 build/zoul/remote-revb/obj/link-stats.o
- .data.ctxt     0x0000000020004614        0x8 build/zoul/remote-revb/obj/printf.o
+                0x00000000200045f8       0x10 build/zoul/remote-revb/obj/link-stats.o
+ .data.ctxt     0x0000000020004608        0x8 build/zoul/remote-revb/obj/printf.o
  .data.metadata_memb
-                0x000000002000461c        0xc build/zoul/remote-revb/obj/csma-output.o
+                0x0000000020004610        0xc build/zoul/remote-revb/obj/csma-output.o
  .data.neighbor_memb
-                0x0000000020004628        0xc build/zoul/remote-revb/obj/csma-output.o
+                0x000000002000461c        0xc build/zoul/remote-revb/obj/csma-output.o
  .data.packet_memb
-                0x0000000020004634        0xc build/zoul/remote-revb/obj/csma-output.o
+                0x0000000020004628        0xc build/zoul/remote-revb/obj/csma-output.o
  .data.echo_reply_handler
-                0x0000000020004640        0xc build/zoul/remote-revb/obj/uip-icmp6.o
+                0x0000000020004634        0xc build/zoul/remote-revb/obj/uip-icmp6.o
  .data.echo_request_handler
-                0x000000002000464c        0xc build/zoul/remote-revb/obj/uip-icmp6.o
+                0x0000000020004640        0xc build/zoul/remote-revb/obj/uip-icmp6.o
  .data.nodememb
-                0x0000000020004658        0xc build/zoul/remote-revb/obj/uip-sr.o
+                0x000000002000464c        0xc build/zoul/remote-revb/obj/uip-sr.o
  .data.defaultroutermemb
-                0x0000000020004664        0xc build/zoul/remote-revb/obj/uip-ds6-route.o
+                0x0000000020004658        0xc build/zoul/remote-revb/obj/uip-ds6-route.o
  .data.tcpip_process
-                0x0000000020004670       0x10 build/zoul/remote-revb/obj/tcpip.o
-                0x0000000020004670                tcpip_process
+                0x0000000020004664       0x10 build/zoul/remote-revb/obj/tcpip.o
+                0x0000000020004664                tcpip_process
  .data.ds6_neighbors_struct
-                0x0000000020004680       0x10 build/zoul/remote-revb/obj/uip-ds6-nbr.o
+                0x0000000020004674       0x10 build/zoul/remote-revb/obj/uip-ds6-nbr.o
  .data.ns_input_handler
-                0x0000000020004690        0xc build/zoul/remote-revb/obj/uip-nd6.o
+                0x0000000020004684        0xc build/zoul/remote-revb/obj/uip-nd6.o
  .data.simple_udp_process
-                0x000000002000469c       0x10 build/zoul/remote-revb/obj/simple-udp.o
-                0x000000002000469c                simple_udp_process
+                0x0000000020004690       0x10 build/zoul/remote-revb/obj/simple-udp.o
+                0x0000000020004690                simple_udp_process
  .data.rpl_neighbors
-                0x00000000200046ac        0x4 build/zoul/remote-revb/obj/rpl-neighbor.o
-                0x00000000200046ac                rpl_neighbors
+                0x00000000200046a0        0x4 build/zoul/remote-revb/obj/rpl-neighbor.o
+                0x00000000200046a0                rpl_neighbors
  .data.rpl_neighbors_struct
-                0x00000000200046b0       0x10 build/zoul/remote-revb/obj/rpl-neighbor.o
+                0x00000000200046a4       0x10 build/zoul/remote-revb/obj/rpl-neighbor.o
  .data.rpl_mrhof
-                0x00000000200046c0       0x24 build/zoul/remote-revb/obj/rpl-mrhof.o
-                0x00000000200046c0                rpl_mrhof
+                0x00000000200046b4       0x24 build/zoul/remote-revb/obj/rpl-mrhof.o
+                0x00000000200046b4                rpl_mrhof
  .data.dao_ack_handler
-                0x00000000200046e4        0xc build/zoul/remote-revb/obj/rpl-icmp6.o
+                0x00000000200046d8        0xc build/zoul/remote-revb/obj/rpl-icmp6.o
  .data.dao_handler
-                0x00000000200046f0        0xc build/zoul/remote-revb/obj/rpl-icmp6.o
+                0x00000000200046e4        0xc build/zoul/remote-revb/obj/rpl-icmp6.o
  .data.dio_handler
-                0x00000000200046fc        0xc build/zoul/remote-revb/obj/rpl-icmp6.o
+                0x00000000200046f0        0xc build/zoul/remote-revb/obj/rpl-icmp6.o
  .data.dis_handler
-                0x0000000020004708        0xc build/zoul/remote-revb/obj/rpl-icmp6.o
+                0x00000000200046fc        0xc build/zoul/remote-revb/obj/rpl-icmp6.o
  .data.udp_process
-                0x0000000020004714       0x10 pingpong.o
-                0x0000000020004714                udp_process
+                0x0000000020004708       0x10 pingpong.o
+                0x0000000020004708                udp_process
  .data.mac_pan_id
-                0x0000000020004724        0x2 build/zoul/remote-revb/obj/frame802154.o
+                0x0000000020004718        0x2 build/zoul/remote-revb/obj/frame802154.o
  .data.rf_channel
-                0x0000000020004726        0x1 build/zoul/remote-revb/obj/cc2538-rf.o
+                0x000000002000471a        0x1 build/zoul/remote-revb/obj/cc2538-rf.o
  .data.send_on_cca
-                0x0000000020004727        0x1 build/zoul/remote-revb/obj/cc2538-rf.o
+                0x000000002000471b        0x1 build/zoul/remote-revb/obj/cc2538-rf.o
  .data.can_send
-                0x0000000020004728        0x1 build/zoul/remote-revb/obj/rn2483radio.o
-                0x0000000020004729                _edata = .
-                0x0000000000213284                _ldata = LOADADDR (.data)
+                0x000000002000471c        0x1 build/zoul/remote-revb/obj/rn2483radio.o
+                0x000000002000471d                _edata = .
+                0x000000000020e86c                _ldata = LOADADDR (.data)
 
-.igot.plt       0x000000002000472c        0x0 load address 0x000000000021396d
- .igot.plt      0x000000002000472c        0x0 build/zoul/remote-revb/obj/startup-gcc.o
+.igot.plt       0x0000000020004720        0x0 load address 0x000000000020ef49
+ .igot.plt      0x0000000020004720        0x0 build/zoul/remote-revb/obj/startup-gcc.o
 
-.ARM.exidx      0x0000000000213970        0x8
+.ARM.exidx      0x000000000020ef4c        0x8
  *(SORT_BY_ALIGNMENT(.ARM.exidx*))
- .ARM.exidx     0x0000000000213970        0x8 /usr/lib/gcc/arm-none-eabi/9.2.1/thumb/v7-m/nofp/libgcc.a(_udivmoddi4.o)
+ .ARM.exidx     0x000000000020ef4c        0x8 /usr/lib/gcc/arm-none-eabi/9.2.1/thumb/v7-m/nofp/libgcc.a(_udivmoddi4.o)
 
-.bss            0x0000000020004730     0x26e2
-                0x0000000020004730                _bss = .
+.bss            0x0000000020004720     0x26e2
+                0x0000000020004720                _bss = .
  *(SORT_BY_ALIGNMENT(.bss*))
  .bss.rt_ticks_epoch
-                0x0000000020004730        0x8 build/zoul/remote-revb/obj/clock.o
+                0x0000000020004720        0x8 build/zoul/remote-revb/obj/clock.o
  .bss.rt_ticks_startup
-                0x0000000020004738        0x8 build/zoul/remote-revb/obj/clock.o
+                0x0000000020004728        0x8 build/zoul/remote-revb/obj/clock.o
  .bss.next_trigger
-                0x0000000020004740        0x4 build/zoul/remote-revb/obj/rtimer-arch.o
+                0x0000000020004730        0x4 build/zoul/remote-revb/obj/rtimer-arch.o
  .bss.input_handler
-                0x0000000020004744        0x8 build/zoul/remote-revb/obj/uart.o
- .bss.ioc_over  0x000000002000474c        0x4 build/zoul/remote-revb/obj/ioc.o
- .bss.ioc_sel   0x0000000020004750        0x4 build/zoul/remote-revb/obj/ioc.o
+                0x0000000020004734        0x8 build/zoul/remote-revb/obj/uart.o
+ .bss.ioc_over  0x000000002000473c        0x4 build/zoul/remote-revb/obj/ioc.o
+ .bss.ioc_sel   0x0000000020004740        0x4 build/zoul/remote-revb/obj/ioc.o
  .bss.notification_process
-                0x0000000020004754        0x4 build/zoul/remote-revb/obj/crypto.o
+                0x0000000020004744        0x4 build/zoul/remote-revb/obj/crypto.o
  .bss.prev_FRMCTRL0
-                0x0000000020004758        0x4 build/zoul/remote-revb/obj/cc2538-rf.o
+                0x0000000020004748        0x4 build/zoul/remote-revb/obj/cc2538-rf.o
  .bss.prev_MDMTEST1
-                0x000000002000475c        0x4 build/zoul/remote-revb/obj/cc2538-rf.o
+                0x000000002000474c        0x4 build/zoul/remote-revb/obj/cc2538-rf.o
  .bss.periph_permit_pm1_funcs
-                0x0000000020004760       0x14 build/zoul/remote-revb/obj/lpm.o
+                0x0000000020004750       0x14 build/zoul/remote-revb/obj/lpm.o
  .bss.notification_process
-                0x0000000020004774        0x4 build/zoul/remote-revb/obj/pka.o
- .bss.buffer    0x0000000020004778       0xa0 build/zoul/remote-revb/obj/loramac.o
+                0x0000000020004764        0x4 build/zoul/remote-revb/obj/pka.o
+ .bss.buffer    0x0000000020004768       0xa0 build/zoul/remote-revb/obj/loramac.o
  .bss.last_send_frame
-                0x0000000020004818       0x10 build/zoul/remote-revb/obj/loramac.o
+                0x0000000020004808       0x10 build/zoul/remote-revb/obj/loramac.o
  .bss.query_timer
-                0x0000000020004828       0x20 build/zoul/remote-revb/obj/loramac.o
+                0x0000000020004818       0x20 build/zoul/remote-revb/obj/loramac.o
  .bss.retransmit_timer
-                0x0000000020004848       0x20 build/zoul/remote-revb/obj/loramac.o
+                0x0000000020004838       0x20 build/zoul/remote-revb/obj/loramac.o
  .bss.upper_layer
-                0x0000000020004868        0x4 build/zoul/remote-revb/obj/loramac.o
- .bss.handler   0x000000002000486c        0x4 build/zoul/remote-revb/obj/rn2483radio.o
+                0x0000000020004858        0x4 build/zoul/remote-revb/obj/loramac.o
+ .bss.handler   0x000000002000485c        0x4 build/zoul/remote-revb/obj/rn2483radio.o
  .bss.tx_buffer
-                0x0000000020004870      0x1e0 build/zoul/remote-revb/obj/rn2483radio.o
+                0x0000000020004860      0x1e0 build/zoul/remote-revb/obj/rn2483radio.o
  .bss.next_expiration
-                0x0000000020004a50        0x4 build/zoul/remote-revb/obj/etimer.o
+                0x0000000020004a40        0x4 build/zoul/remote-revb/obj/etimer.o
  .bss.timerlist
-                0x0000000020004a54        0x4 build/zoul/remote-revb/obj/etimer.o
+                0x0000000020004a44        0x4 build/zoul/remote-revb/obj/etimer.o
  .bss.ctimer_list_list
-                0x0000000020004a58        0x4 build/zoul/remote-revb/obj/ctimer.o
- .bss.events    0x0000000020004a5c      0x180 build/zoul/remote-revb/obj/process.o
+                0x0000000020004a48        0x4 build/zoul/remote-revb/obj/ctimer.o
+ .bss.events    0x0000000020004a4c      0x180 build/zoul/remote-revb/obj/process.o
  .bss.process_current
-                0x0000000020004bdc        0x4 build/zoul/remote-revb/obj/process.o
-                0x0000000020004bdc                process_current
+                0x0000000020004bcc        0x4 build/zoul/remote-revb/obj/process.o
+                0x0000000020004bcc                process_current
  .bss.process_list
-                0x0000000020004be0        0x4 build/zoul/remote-revb/obj/process.o
-                0x0000000020004be0                process_list
+                0x0000000020004bd0        0x4 build/zoul/remote-revb/obj/process.o
+                0x0000000020004bd0                process_list
  .bss.next_rtimer
-                0x0000000020004be4        0x4 build/zoul/remote-revb/obj/rtimer.o
- .bss.et.5813   0x0000000020004be8       0x10 build/zoul/remote-revb/obj/stack-check.o
+                0x0000000020004bd4        0x4 build/zoul/remote-revb/obj/rtimer.o
+ .bss.et.5813   0x0000000020004bd8       0x10 build/zoul/remote-revb/obj/stack-check.o
  .bss.events.5467
-                0x0000000020004bf8        0x4 build/zoul/remote-revb/obj/sensors.o
- .bss.i.5466    0x0000000020004bfc        0x4 build/zoul/remote-revb/obj/sensors.o
+                0x0000000020004be8        0x4 build/zoul/remote-revb/obj/sensors.o
+ .bss.i.5466    0x0000000020004bec        0x4 build/zoul/remote-revb/obj/sensors.o
  .bss.button_event_handlers
-                0x0000000020004c00        0xc build/zoul/remote-revb/obj/button-hal.o
- .bss.pmask     0x0000000020004c0c        0x4 build/zoul/remote-revb/obj/button-hal.o
- .bss.ptr.5451  0x0000000020004c10        0x4 build/zoul/remote-revb/obj/serial-line.o
- .bss.rxbuf     0x0000000020004c14        0x8 build/zoul/remote-revb/obj/serial-line.o
+                0x0000000020004bf0        0xc build/zoul/remote-revb/obj/button-hal.o
+ .bss.pmask     0x0000000020004bfc        0x4 build/zoul/remote-revb/obj/button-hal.o
+ .bss.ptr.5451  0x0000000020004c00        0x4 build/zoul/remote-revb/obj/serial-line.o
+ .bss.rxbuf     0x0000000020004c04        0x8 build/zoul/remote-revb/obj/serial-line.o
  .bss.handlers_list
-                0x0000000020004c1c        0x4 build/zoul/remote-revb/obj/gpio-hal.o
+                0x0000000020004c0c        0x4 build/zoul/remote-revb/obj/gpio-hal.o
  .bss.bufmem_memb_mem
-                0x0000000020004c20       0x20 build/zoul/remote-revb/obj/queuebuf.o
+                0x0000000020004c10       0x20 build/zoul/remote-revb/obj/queuebuf.o
  .bss.all_tables
-                0x0000000020004c40       0x20 build/zoul/remote-revb/obj/nbr-table.o
+                0x0000000020004c30       0x20 build/zoul/remote-revb/obj/nbr-table.o
  .bss.nbr_table_keys_list
-                0x0000000020004c60        0x4 build/zoul/remote-revb/obj/nbr-table.o
+                0x0000000020004c50        0x4 build/zoul/remote-revb/obj/nbr-table.o
  .bss.neighbor_addr_mem_memb_mem
-                0x0000000020004c64       0xc0 build/zoul/remote-revb/obj/nbr-table.o
+                0x0000000020004c54       0xc0 build/zoul/remote-revb/obj/nbr-table.o
  .bss.num_tables
-                0x0000000020004d24        0x4 build/zoul/remote-revb/obj/nbr-table.o
+                0x0000000020004d14        0x4 build/zoul/remote-revb/obj/nbr-table.o
  .bss.packetbuf_aligned
-                0x0000000020004d28       0x80 build/zoul/remote-revb/obj/packetbuf.o
+                0x0000000020004d18       0x80 build/zoul/remote-revb/obj/packetbuf.o
  .bss.ip_processor_list_list
-                0x0000000020004da8        0x4 build/zoul/remote-revb/obj/netstack.o
+                0x0000000020004d98        0x4 build/zoul/remote-revb/obj/netstack.o
  .bss._link_stats_mem
-                0x0000000020004dac       0xc0 build/zoul/remote-revb/obj/link-stats.o
+                0x0000000020004d9c       0xc0 build/zoul/remote-revb/obj/link-stats.o
  .bss.received_seqnos
-                0x0000000020004e6c      0x100 build/zoul/remote-revb/obj/mac-sequence.o
+                0x0000000020004e5c      0x100 build/zoul/remote-revb/obj/mac-sequence.o
  .bss.metadata_memb_memb_mem
-                0x0000000020004f6c       0x60 build/zoul/remote-revb/obj/csma-output.o
+                0x0000000020004f5c       0x60 build/zoul/remote-revb/obj/csma-output.o
  .bss.neighbor_list_list
-                0x0000000020004fcc        0x4 build/zoul/remote-revb/obj/csma-output.o
+                0x0000000020004fbc        0x4 build/zoul/remote-revb/obj/csma-output.o
  .bss.neighbor_memb_memb_mem
-                0x0000000020004fd0       0x70 build/zoul/remote-revb/obj/csma-output.o
+                0x0000000020004fc0       0x70 build/zoul/remote-revb/obj/csma-output.o
  .bss.packet_memb_memb_mem
-                0x0000000020005040       0x60 build/zoul/remote-revb/obj/csma-output.o
+                0x0000000020005030       0x60 build/zoul/remote-revb/obj/csma-output.o
  .bss.echo_reply_callback_list_list
-                0x00000000200050a0        0x4 build/zoul/remote-revb/obj/uip-icmp6.o
+                0x0000000020005090        0x4 build/zoul/remote-revb/obj/uip-icmp6.o
  .bss.input_handler_list_list
-                0x00000000200050a4        0x4 build/zoul/remote-revb/obj/uip-icmp6.o
+                0x0000000020005094        0x4 build/zoul/remote-revb/obj/uip-icmp6.o
  .bss.nodelist_list
-                0x00000000200050a8        0x4 build/zoul/remote-revb/obj/uip-sr.o
+                0x0000000020005098        0x4 build/zoul/remote-revb/obj/uip-sr.o
  .bss.nodememb_memb_mem
-                0x00000000200050ac      0x180 build/zoul/remote-revb/obj/uip-sr.o
+                0x000000002000509c      0x180 build/zoul/remote-revb/obj/uip-sr.o
  .bss.num_nodes
-                0x000000002000522c        0x4 build/zoul/remote-revb/obj/uip-sr.o
- .bss.locaddr   0x0000000020005230        0x4 build/zoul/remote-revb/obj/uip-ds6.o
- .bss.locmaddr  0x0000000020005234        0x4 build/zoul/remote-revb/obj/uip-ds6.o
+                0x000000002000521c        0x4 build/zoul/remote-revb/obj/uip-sr.o
+ .bss.locaddr   0x0000000020005220        0x4 build/zoul/remote-revb/obj/uip-ds6.o
+ .bss.locmaddr  0x0000000020005224        0x4 build/zoul/remote-revb/obj/uip-ds6.o
  .bss.locprefix
-                0x0000000020005238        0x4 build/zoul/remote-revb/obj/uip-ds6.o
+                0x0000000020005228        0x4 build/zoul/remote-revb/obj/uip-ds6.o
  .bss.defaultrouterlist_list
-                0x000000002000523c        0x4 build/zoul/remote-revb/obj/uip-ds6-route.o
+                0x000000002000522c        0x4 build/zoul/remote-revb/obj/uip-ds6-route.o
  .bss.defaultroutermemb_memb_mem
-                0x0000000020005240       0x40 build/zoul/remote-revb/obj/uip-ds6-route.o
- .bss.periodic  0x0000000020005280       0x10 build/zoul/remote-revb/obj/tcpip.o
- .bss.addr      0x0000000020005290        0x4 build/zoul/remote-revb/obj/uip-nd6.o
- .bss.nbr       0x0000000020005294        0x4 build/zoul/remote-revb/obj/uip-nd6.o
+                0x0000000020005230       0x40 build/zoul/remote-revb/obj/uip-ds6-route.o
+ .bss.periodic  0x0000000020005270       0x10 build/zoul/remote-revb/obj/tcpip.o
+ .bss.addr      0x0000000020005280        0x4 build/zoul/remote-revb/obj/uip-nd6.o
+ .bss.nbr       0x0000000020005284        0x4 build/zoul/remote-revb/obj/uip-nd6.o
  .bss.nd6_opt_llao
-                0x0000000020005298        0x4 build/zoul/remote-revb/obj/uip-nd6.o
- .bss.callback  0x000000002000529c        0x4 build/zoul/remote-revb/obj/sicslowpan.o
- .bss.context   0x00000000200052a0        0x4 build/zoul/remote-revb/obj/sicslowpan.o
+                0x0000000020005288        0x4 build/zoul/remote-revb/obj/uip-nd6.o
+ .bss.callback  0x000000002000528c        0x4 build/zoul/remote-revb/obj/sicslowpan.o
+ .bss.context   0x0000000020005290        0x4 build/zoul/remote-revb/obj/sicslowpan.o
  .bss.frag_info
-                0x00000000200052a4      0x170 build/zoul/remote-revb/obj/sicslowpan.o
- .bss.hc06_ptr  0x0000000020005414        0x4 build/zoul/remote-revb/obj/sicslowpan.o
+                0x0000000020005294      0x170 build/zoul/remote-revb/obj/sicslowpan.o
+ .bss.hc06_ptr  0x0000000020005404        0x4 build/zoul/remote-revb/obj/sicslowpan.o
  .bss.last_rssi
-                0x0000000020005418        0x4 build/zoul/remote-revb/obj/sicslowpan.o
+                0x0000000020005408        0x4 build/zoul/remote-revb/obj/sicslowpan.o
  .bss.last_tx_status
-                0x000000002000541c        0x4 build/zoul/remote-revb/obj/sicslowpan.o
+                0x000000002000540c        0x4 build/zoul/remote-revb/obj/sicslowpan.o
  .bss.mac_max_payload
-                0x0000000020005420        0x4 build/zoul/remote-revb/obj/sicslowpan.o
+                0x0000000020005410        0x4 build/zoul/remote-revb/obj/sicslowpan.o
  .bss.packetbuf_payload_len
-                0x0000000020005424        0x4 build/zoul/remote-revb/obj/sicslowpan.o
+                0x0000000020005414        0x4 build/zoul/remote-revb/obj/sicslowpan.o
  .bss.packetbuf_ptr
-                0x0000000020005428        0x4 build/zoul/remote-revb/obj/sicslowpan.o
+                0x0000000020005418        0x4 build/zoul/remote-revb/obj/sicslowpan.o
  .bss._rpl_neighbors_mem
-                0x000000002000542c       0x80 build/zoul/remote-revb/obj/rpl-neighbor.o
+                0x000000002000541c       0x80 build/zoul/remote-revb/obj/rpl-neighbor.o
  .bss.dis_timer
-                0x00000000200054ac       0x20 build/zoul/remote-revb/obj/rpl-timers.o
+                0x000000002000549c       0x20 build/zoul/remote-revb/obj/rpl-timers.o
  .bss.periodic_timer
-                0x00000000200054cc       0x20 build/zoul/remote-revb/obj/rpl-timers.o
+                0x00000000200054bc       0x20 build/zoul/remote-revb/obj/rpl-timers.o
  .bss.timer.6391
-                0x00000000200054ec       0x10 pingpong.o
- .bss.udp_conn  0x00000000200054fc       0x24 pingpong.o
+                0x00000000200054dc       0x10 pingpong.o
+ .bss.udp_conn  0x00000000200054ec       0x24 pingpong.o
  .bss.index.6239
-                0x0000000020005520        0x2 build/zoul/remote-revb/obj/rn2483radio.o
- .bss.node_id   0x0000000020005522        0x2 build/zoul/remote-revb/obj/node-id.o
-                0x0000000020005522                node_id
+                0x0000000020005510        0x2 build/zoul/remote-revb/obj/rn2483radio.o
+ .bss.node_id   0x0000000020005512        0x2 build/zoul/remote-revb/obj/node-id.o
+                0x0000000020005512                node_id
  .bss.buframmem_memb_mem
-                0x0000000020005524      0x560 build/zoul/remote-revb/obj/queuebuf.o
- .bss.buflen    0x0000000020005a84        0x2 build/zoul/remote-revb/obj/packetbuf.o
- .bss.bufptr    0x0000000020005a86        0x2 build/zoul/remote-revb/obj/packetbuf.o
+                0x0000000020005514      0x560 build/zoul/remote-revb/obj/queuebuf.o
+ .bss.buflen    0x0000000020005a74        0x2 build/zoul/remote-revb/obj/packetbuf.o
+ .bss.bufptr    0x0000000020005a76        0x2 build/zoul/remote-revb/obj/packetbuf.o
  .bss.uipbuf_attrs
-                0x0000000020005a88       0x10 build/zoul/remote-revb/obj/uipbuf.o
+                0x0000000020005a78       0x10 build/zoul/remote-revb/obj/uipbuf.o
  .bss.uipbuf_default_attrs
-                0x0000000020005a98       0x10 build/zoul/remote-revb/obj/uipbuf.o
+                0x0000000020005a88       0x10 build/zoul/remote-revb/obj/uipbuf.o
  .bss.tmp_ipaddr
-                0x0000000020005aa8       0x10 build/zoul/remote-revb/obj/uip-icmp6.o
+                0x0000000020005a98       0x10 build/zoul/remote-revb/obj/uip-icmp6.o
  .bss.default_prefix
-                0x0000000020005ab8       0x10 build/zoul/remote-revb/obj/uip-ds6.o
+                0x0000000020005aa8       0x10 build/zoul/remote-revb/obj/uip-ds6.o
  .bss.loc_fipaddr
-                0x0000000020005ac8       0x10 build/zoul/remote-revb/obj/uip-ds6.o
- .bss.lastport  0x0000000020005ad8        0x2 build/zoul/remote-revb/obj/uip6.o
+                0x0000000020005ab8       0x10 build/zoul/remote-revb/obj/uip-ds6.o
+ .bss.lastport  0x0000000020005ac8        0x2 build/zoul/remote-revb/obj/uip6.o
  .bss.uip_ext_len
-                0x0000000020005ada        0x2 build/zoul/remote-revb/obj/uip6.o
-                0x0000000020005ada                uip_ext_len
+                0x0000000020005aca        0x2 build/zoul/remote-revb/obj/uip6.o
+                0x0000000020005aca                uip_ext_len
  .bss._ds6_neighbors_mem
-                0x0000000020005adc      0x120 build/zoul/remote-revb/obj/uip-ds6-nbr.o
+                0x0000000020005acc      0x120 build/zoul/remote-revb/obj/uip-ds6-nbr.o
  .bss.nd6_opt_offset
-                0x0000000020005bfc        0x2 build/zoul/remote-revb/obj/uip-nd6.o
- .bss.my_tag    0x0000000020005bfe        0x2 build/zoul/remote-revb/obj/sicslowpan.o
+                0x0000000020005bec        0x2 build/zoul/remote-revb/obj/uip-nd6.o
+ .bss.my_tag    0x0000000020005bee        0x2 build/zoul/remote-revb/obj/sicslowpan.o
  .bss.root_ipaddr.7084
-                0x0000000020005c00       0x10 build/zoul/remote-revb/obj/rpl-dag-root.o
- .bss.count     0x0000000020005c10        0x2 pingpong.o
+                0x0000000020005bf0       0x10 build/zoul/remote-revb/obj/rpl-dag-root.o
+ .bss.count     0x0000000020005c00        0x2 pingpong.o
  .bss.dest_ipaddr.6390
-                0x0000000020005c12       0x10 pingpong.o
+                0x0000000020005c02       0x10 pingpong.o
  .bss.initialized
-                0x0000000020005c22        0x1 build/zoul/remote-revb/obj/antenna-sw.o
- .bss.crc_corr  0x0000000020005c23        0x1 build/zoul/remote-revb/obj/cc2538-rf.o
+                0x0000000020005c12        0x1 build/zoul/remote-revb/obj/antenna-sw.o
+ .bss.crc_corr  0x0000000020005c13        0x1 build/zoul/remote-revb/obj/cc2538-rf.o
  .bss.poll_mode
-                0x0000000020005c24        0x1 build/zoul/remote-revb/obj/cc2538-rf.o
- .bss.rf_flags  0x0000000020005c25        0x1 build/zoul/remote-revb/obj/cc2538-rf.o
- .bss.rssi      0x0000000020005c26        0x1 build/zoul/remote-revb/obj/cc2538-rf.o
- .bss.was_on    0x0000000020005c27        0x1 build/zoul/remote-revb/obj/cc2538-rf.o
- .bss.max_pm    0x0000000020005c28        0x1 build/zoul/remote-revb/obj/lpm.o
+                0x0000000020005c14        0x1 build/zoul/remote-revb/obj/cc2538-rf.o
+ .bss.rf_flags  0x0000000020005c15        0x1 build/zoul/remote-revb/obj/cc2538-rf.o
+ .bss.rssi      0x0000000020005c16        0x1 build/zoul/remote-revb/obj/cc2538-rf.o
+ .bss.was_on    0x0000000020005c17        0x1 build/zoul/remote-revb/obj/cc2538-rf.o
+ .bss.max_pm    0x0000000020005c18        0x1 build/zoul/remote-revb/obj/lpm.o
  .bss.debug_frame.5430
-                0x0000000020005c29        0x1 build/zoul/remote-revb/obj/dbg.o
+                0x0000000020005c19        0x1 build/zoul/remote-revb/obj/dbg.o
  .bss.data.6734
-                0x0000000020005c2a      0x1ee build/zoul/remote-revb/obj/interface.o
- .bss.buf_len   0x0000000020005e18        0x1 build/zoul/remote-revb/obj/loramac.o
+                0x0000000020005c1a      0x1ee build/zoul/remote-revb/obj/interface.o
+ .bss.buf_len   0x0000000020005e08        0x1 build/zoul/remote-revb/obj/loramac.o
  .bss.expected_seq
-                0x0000000020005e19        0x1 build/zoul/remote-revb/obj/loramac.o
+                0x0000000020005e09        0x1 build/zoul/remote-revb/obj/loramac.o
  .bss.new_tx_frame_event
-                0x0000000020005e1a        0x1 build/zoul/remote-revb/obj/loramac.o
- .bss.next_seq  0x0000000020005e1b        0x1 build/zoul/remote-revb/obj/loramac.o
- .bss.r_i       0x0000000020005e1c        0x1 build/zoul/remote-revb/obj/loramac.o
+                0x0000000020005e0a        0x1 build/zoul/remote-revb/obj/loramac.o
+ .bss.next_seq  0x0000000020005e0b        0x1 build/zoul/remote-revb/obj/loramac.o
+ .bss.r_i       0x0000000020005e0c        0x1 build/zoul/remote-revb/obj/loramac.o
  .bss.retransmit_attempt
-                0x0000000020005e1d        0x1 build/zoul/remote-revb/obj/loramac.o
- .bss.state     0x0000000020005e1e        0x1 build/zoul/remote-revb/obj/loramac.o
+                0x0000000020005e0d        0x1 build/zoul/remote-revb/obj/loramac.o
+ .bss.state     0x0000000020005e0e        0x1 build/zoul/remote-revb/obj/loramac.o
  .bss.state_change_event
-                0x0000000020005e1f        0x1 build/zoul/remote-revb/obj/loramac.o
- .bss.w_i       0x0000000020005e20        0x1 build/zoul/remote-revb/obj/loramac.o
- .bss.buf.6238  0x0000000020005e21      0x23e build/zoul/remote-revb/obj/rn2483radio.o
+                0x0000000020005e0f        0x1 build/zoul/remote-revb/obj/loramac.o
+ .bss.w_i       0x0000000020005e10        0x1 build/zoul/remote-revb/obj/loramac.o
+ .bss.buf.6238  0x0000000020005e11      0x23e build/zoul/remote-revb/obj/rn2483radio.o
  .bss.can_send_event
-                0x000000002000605f        0x1 build/zoul/remote-revb/obj/rn2483radio.o
- .bss.cr.6240   0x0000000020006060        0x1 build/zoul/remote-revb/obj/rn2483radio.o
+                0x000000002000604f        0x1 build/zoul/remote-revb/obj/rn2483radio.o
+ .bss.cr.6240   0x0000000020006050        0x1 build/zoul/remote-revb/obj/rn2483radio.o
  .bss.expected_response
-                0x0000000020006061        0x2 build/zoul/remote-revb/obj/rn2483radio.o
+                0x0000000020006051        0x2 build/zoul/remote-revb/obj/rn2483radio.o
  .bss.new_tx_frame_event
-                0x0000000020006063        0x1 build/zoul/remote-revb/obj/rn2483radio.o
- .bss.r_i       0x0000000020006064        0x1 build/zoul/remote-revb/obj/rn2483radio.o
+                0x0000000020006053        0x1 build/zoul/remote-revb/obj/rn2483radio.o
+ .bss.r_i       0x0000000020006054        0x1 build/zoul/remote-revb/obj/rn2483radio.o
  .bss.tx_buf_size
-                0x0000000020006065        0x1 build/zoul/remote-revb/obj/rn2483radio.o
- .bss.w_i       0x0000000020006066        0x1 build/zoul/remote-revb/obj/rn2483radio.o
+                0x0000000020006055        0x1 build/zoul/remote-revb/obj/rn2483radio.o
+ .bss.w_i       0x0000000020006056        0x1 build/zoul/remote-revb/obj/rn2483radio.o
  .bss.initialized
-                0x0000000020006067        0x1 build/zoul/remote-revb/obj/ctimer.o
- .bss.fevent    0x0000000020006068        0x1 build/zoul/remote-revb/obj/process.o
+                0x0000000020006057        0x1 build/zoul/remote-revb/obj/ctimer.o
+ .bss.fevent    0x0000000020006058        0x1 build/zoul/remote-revb/obj/process.o
  .bss.lastevent
-                0x0000000020006069        0x1 build/zoul/remote-revb/obj/process.o
- .bss.nevents   0x000000002000606a        0x1 build/zoul/remote-revb/obj/process.o
+                0x0000000020006059        0x1 build/zoul/remote-revb/obj/process.o
+ .bss.nevents   0x000000002000605a        0x1 build/zoul/remote-revb/obj/process.o
  .bss.poll_requested
-                0x000000002000606b        0x1 build/zoul/remote-revb/obj/process.o
+                0x000000002000605b        0x1 build/zoul/remote-revb/obj/process.o
  .bss.num_sensors
-                0x000000002000606c        0x1 build/zoul/remote-revb/obj/sensors.o
- .bss.buf.5450  0x000000002000606d       0x80 build/zoul/remote-revb/obj/serial-line.o
+                0x000000002000605c        0x1 build/zoul/remote-revb/obj/sensors.o
+ .bss.buf.5450  0x000000002000605d       0x80 build/zoul/remote-revb/obj/serial-line.o
  .bss.overflow.5444
-                0x00000000200060ed        0x1 build/zoul/remote-revb/obj/serial-line.o
+                0x00000000200060dd        0x1 build/zoul/remote-revb/obj/serial-line.o
  .bss.rxbuf_data
-                0x00000000200060ee       0x80 build/zoul/remote-revb/obj/serial-line.o
+                0x00000000200060de       0x80 build/zoul/remote-revb/obj/serial-line.o
  .bss.bufmem_memb_used
-                0x000000002000616e        0x8 build/zoul/remote-revb/obj/queuebuf.o
+                0x000000002000615e        0x8 build/zoul/remote-revb/obj/queuebuf.o
  .bss.buframmem_memb_used
-                0x0000000020006176        0x8 build/zoul/remote-revb/obj/queuebuf.o
+                0x0000000020006166        0x8 build/zoul/remote-revb/obj/queuebuf.o
  .bss.locked_map
-                0x000000002000617e       0x10 build/zoul/remote-revb/obj/nbr-table.o
+                0x000000002000616e       0x10 build/zoul/remote-revb/obj/nbr-table.o
  .bss.neighbor_addr_mem_memb_used
-                0x000000002000618e       0x10 build/zoul/remote-revb/obj/nbr-table.o
- .bss.used_map  0x000000002000619e       0x10 build/zoul/remote-revb/obj/nbr-table.o
- .bss.hdrlen    0x00000000200061ae        0x1 build/zoul/remote-revb/obj/packetbuf.o
+                0x000000002000617e       0x10 build/zoul/remote-revb/obj/nbr-table.o
+ .bss.used_map  0x000000002000618e       0x10 build/zoul/remote-revb/obj/nbr-table.o
+ .bss.hdrlen    0x000000002000619e        0x1 build/zoul/remote-revb/obj/packetbuf.o
  .bss.initialized
-                0x00000000200061af        0x1 build/zoul/remote-revb/obj/framer-802154.o
- .bss.mac_dsn   0x00000000200061b0        0x1 build/zoul/remote-revb/obj/framer-802154.o
+                0x000000002000619f        0x1 build/zoul/remote-revb/obj/framer-802154.o
+ .bss.mac_dsn   0x00000000200061a0        0x1 build/zoul/remote-revb/obj/framer-802154.o
  .bss.initialized.6318
-                0x00000000200061b1        0x1 build/zoul/remote-revb/obj/csma-output.o
+                0x00000000200061a1        0x1 build/zoul/remote-revb/obj/csma-output.o
  .bss.metadata_memb_memb_used
-                0x00000000200061b2        0x8 build/zoul/remote-revb/obj/csma-output.o
+                0x00000000200061a2        0x8 build/zoul/remote-revb/obj/csma-output.o
  .bss.neighbor_memb_memb_used
-                0x00000000200061ba        0x2 build/zoul/remote-revb/obj/csma-output.o
+                0x00000000200061aa        0x2 build/zoul/remote-revb/obj/csma-output.o
  .bss.packet_memb_memb_used
-                0x00000000200061bc        0x8 build/zoul/remote-revb/obj/csma-output.o
+                0x00000000200061ac        0x8 build/zoul/remote-revb/obj/csma-output.o
  .bss.seqno.6319
-                0x00000000200061c4        0x1 build/zoul/remote-revb/obj/csma-output.o
+                0x00000000200061b4        0x1 build/zoul/remote-revb/obj/csma-output.o
  .bss.nodememb_memb_used
-                0x00000000200061c5       0x10 build/zoul/remote-revb/obj/uip-sr.o
+                0x00000000200061b5       0x10 build/zoul/remote-revb/obj/uip-sr.o
  .bss.defaultroutermemb_memb_used
-                0x00000000200061d5        0x2 build/zoul/remote-revb/obj/uip-ds6-route.o
+                0x00000000200061c5        0x2 build/zoul/remote-revb/obj/uip-ds6-route.o
  .bss.uip_ext_bitmap
-                0x00000000200061d7        0x1 build/zoul/remote-revb/obj/uip6.o
-                0x00000000200061d7                uip_ext_bitmap
+                0x00000000200061c7        0x1 build/zoul/remote-revb/obj/uip6.o
+                0x00000000200061c7                uip_ext_bitmap
  .bss.uip_last_proto
-                0x00000000200061d8        0x1 build/zoul/remote-revb/obj/uip6.o
-                0x00000000200061d8                uip_last_proto
+                0x00000000200061c8        0x1 build/zoul/remote-revb/obj/uip6.o
+                0x00000000200061c8                uip_last_proto
  .bss.databuffer
-                0x00000000200061d9      0x117 build/zoul/remote-revb/obj/simple-udp.o
- .bss.started   0x00000000200062f0        0x1 build/zoul/remote-revb/obj/simple-udp.o
+                0x00000000200061c9      0x117 build/zoul/remote-revb/obj/simple-udp.o
+ .bss.started   0x00000000200062e0        0x1 build/zoul/remote-revb/obj/simple-udp.o
  .bss.addr_contexts
-                0x00000000200062f1        0xa build/zoul/remote-revb/obj/sicslowpan.o
+                0x00000000200062e1        0xa build/zoul/remote-revb/obj/sicslowpan.o
  .bss.curr_page
-                0x00000000200062fb        0x1 build/zoul/remote-revb/obj/sicslowpan.o
- .bss.frag_buf  0x00000000200062fc      0x54c build/zoul/remote-revb/obj/sicslowpan.o
+                0x00000000200062eb        0x1 build/zoul/remote-revb/obj/sicslowpan.o
+ .bss.frag_buf  0x00000000200062ec      0x54c build/zoul/remote-revb/obj/sicslowpan.o
  .bss.packetbuf_hdr_len
-                0x0000000020006848        0x1 build/zoul/remote-revb/obj/sicslowpan.o
+                0x0000000020006838        0x1 build/zoul/remote-revb/obj/sicslowpan.o
  .bss.uncomp_hdr_len
-                0x0000000020006849        0x1 build/zoul/remote-revb/obj/sicslowpan.o
+                0x0000000020006839        0x1 build/zoul/remote-revb/obj/sicslowpan.o
  .bss.rpl_leaf_only
-                0x000000002000684a        0x1 build/zoul/remote-revb/obj/rpl.o
+                0x000000002000683a        0x1 build/zoul/remote-revb/obj/rpl.o
  .bss.initialized.7095
-                0x000000002000684b        0x1 build/zoul/remote-revb/obj/rpl-dag-root.o
+                0x000000002000683b        0x1 build/zoul/remote-revb/obj/rpl-dag-root.o
  .bss.payload.6383
-                0x000000002000684c       0x10 pingpong.o
+                0x000000002000683c       0x10 pingpong.o
  .bss.payload.6389
-                0x000000002000685c       0x10 pingpong.o
+                0x000000002000684c       0x10 pingpong.o
  *(SORT_BY_ALIGNMENT(COMMON))
- COMMON         0x000000002000686c       0x20 build/zoul/remote-revb/obj/link-stats.o
-                0x000000002000686c                periodic_timer
- COMMON         0x000000002000688c      0x198 build/zoul/remote-revb/obj/uip-ds6.o
-                0x000000002000688c                uip_ds6_timer_ra
-                0x0000000020006894                uip_ds6_if
-                0x00000000200069b0                uip_ds6_netif_addr_list_offset
-                0x00000000200069b1                uip_ds6_addr_size
-                0x00000000200069b4                uip_ds6_prefix_list
-                0x0000000020006a14                uip_ds6_timer_periodic
- COMMON         0x0000000020006a24      0x23c build/zoul/remote-revb/obj/uip6.o
-                0x0000000020006a24                uip_len
-                0x0000000020006a28                uip_sappdata
-                0x0000000020006a2c                uip_lladdr
-                0x0000000020006a34                uip_aligned_buf
-                0x0000000020006b4c                uip_flags
-                0x0000000020006b50                uip_udp_conn
-                0x0000000020006b54                uip_appdata
-                0x0000000020006b58                uip_conn
-                0x0000000020006b5c                uip_slen
-                0x0000000020006b60                uip_udp_conns
- COMMON         0x0000000020006c60      0x160 build/zoul/remote-revb/obj/rpl-dag.o
-                0x0000000020006c60                curr_instance
- COMMON         0x0000000020006dc0        0x6 build/zoul/remote-revb/obj/loramac.o
-                0x0000000020006dc0                loramac_addr
-                0x0000000020006dc4                loramac_network_joined
-                0x0000000020006dc5                tx_buf_mutex
- COMMON         0x0000000020006dc6       0x2a build/zoul/remote-revb/obj/packetbuf.o
-                0x0000000020006dc6                packetbuf_addrs
-                0x0000000020006dd6                packetbuf_attrs
- COMMON         0x0000000020006df0        0x8 build/zoul/remote-revb/obj/linkaddr.o
-                0x0000000020006df0                linkaddr_node_addr
- COMMON         0x0000000020006df8       0x10 build/zoul/remote-revb/obj/rpl.o
-                0x0000000020006df8                rpl_multicast_addr
- COMMON         0x0000000020006e08        0x3 build/zoul/remote-revb/obj/zoul-sensors.o
-                0x0000000020006e08                sensors_flags
- COMMON         0x0000000020006e0b        0x1 build/zoul/remote-revb/obj/rn2483radio.o
-                0x0000000020006e0b                response_mutex
- COMMON         0x0000000020006e0c        0x1 build/zoul/remote-revb/obj/sensors.o
-                0x0000000020006e0c                sensors_event
- COMMON         0x0000000020006e0d        0x3 build/zoul/remote-revb/obj/button-hal.o
-                0x0000000020006e0d                button_hal_release_event
-                0x0000000020006e0e                button_hal_periodic_event
-                0x0000000020006e0f                button_hal_press_event
- COMMON         0x0000000020006e10        0x1 build/zoul/remote-revb/obj/serial-line.o
-                0x0000000020006e10                serial_line_event_message
- COMMON         0x0000000020006e11        0x1 build/zoul/remote-revb/obj/tcpip.o
-                0x0000000020006e11                tcpip_event
-                0x0000000020006e12                _ebss = .
-                0x0000000020006e12                _end = .
-                0x0000000020006e12                _stack = .
+ COMMON         0x000000002000685c       0x20 build/zoul/remote-revb/obj/link-stats.o
+                0x000000002000685c                periodic_timer
+ COMMON         0x000000002000687c      0x198 build/zoul/remote-revb/obj/uip-ds6.o
+                0x000000002000687c                uip_ds6_timer_ra
+                0x0000000020006884                uip_ds6_if
+                0x00000000200069a0                uip_ds6_netif_addr_list_offset
+                0x00000000200069a1                uip_ds6_addr_size
+                0x00000000200069a4                uip_ds6_prefix_list
+                0x0000000020006a04                uip_ds6_timer_periodic
+ COMMON         0x0000000020006a14      0x23c build/zoul/remote-revb/obj/uip6.o
+                0x0000000020006a14                uip_len
+                0x0000000020006a18                uip_sappdata
+                0x0000000020006a1c                uip_lladdr
+                0x0000000020006a24                uip_aligned_buf
+                0x0000000020006b3c                uip_flags
+                0x0000000020006b40                uip_udp_conn
+                0x0000000020006b44                uip_appdata
+                0x0000000020006b48                uip_conn
+                0x0000000020006b4c                uip_slen
+                0x0000000020006b50                uip_udp_conns
+ COMMON         0x0000000020006c50      0x160 build/zoul/remote-revb/obj/rpl-dag.o
+                0x0000000020006c50                curr_instance
+ COMMON         0x0000000020006db0        0x6 build/zoul/remote-revb/obj/loramac.o
+                0x0000000020006db0                loramac_addr
+                0x0000000020006db4                loramac_network_joined
+                0x0000000020006db5                tx_buf_mutex
+ COMMON         0x0000000020006db6       0x2a build/zoul/remote-revb/obj/packetbuf.o
+                0x0000000020006db6                packetbuf_addrs
+                0x0000000020006dc6                packetbuf_attrs
+ COMMON         0x0000000020006de0        0x8 build/zoul/remote-revb/obj/linkaddr.o
+                0x0000000020006de0                linkaddr_node_addr
+ COMMON         0x0000000020006de8       0x10 build/zoul/remote-revb/obj/rpl.o
+                0x0000000020006de8                rpl_multicast_addr
+ COMMON         0x0000000020006df8        0x3 build/zoul/remote-revb/obj/zoul-sensors.o
+                0x0000000020006df8                sensors_flags
+ COMMON         0x0000000020006dfb        0x1 build/zoul/remote-revb/obj/rn2483radio.o
+                0x0000000020006dfb                response_mutex
+ COMMON         0x0000000020006dfc        0x1 build/zoul/remote-revb/obj/sensors.o
+                0x0000000020006dfc                sensors_event
+ COMMON         0x0000000020006dfd        0x3 build/zoul/remote-revb/obj/button-hal.o
+                0x0000000020006dfd                button_hal_release_event
+                0x0000000020006dfe                button_hal_periodic_event
+                0x0000000020006dff                button_hal_press_event
+ COMMON         0x0000000020006e00        0x1 build/zoul/remote-revb/obj/serial-line.o
+                0x0000000020006e00                serial_line_event_message
+ COMMON         0x0000000020006e01        0x1 build/zoul/remote-revb/obj/tcpip.o
+                0x0000000020006e01                tcpip_event
+                0x0000000020006e02                _ebss = .
+                0x0000000020006e02                _end = .
+                0x0000000020006e02                _stack = .
 
-.stack          0x0000000020006e18      0x800
+.stack          0x0000000020006e08      0x800
  *(SORT_BY_ALIGNMENT(.stack))
- .stack         0x0000000020006e18      0x800 build/zoul/remote-revb/obj/startup-gcc.o
-                0x0000000020007618                _stack_origin = .
-                0x0000000020007618                _heap = .
+ .stack         0x0000000020006e08      0x800 build/zoul/remote-revb/obj/startup-gcc.o
+                0x0000000020007608                _stack_origin = .
+                0x0000000020007608                _heap = .
                 0x0000000020008000                _eheap = (ORIGIN (FRSRAM) + LENGTH (FRSRAM))
 
 .nrdata         0x0000000020000000        0x0
@@ -6041,23 +5873,6 @@ clock_isr                                         build/zoul/remote-revb/obj/clo
                                                   build/zoul/remote-revb/obj/startup-gcc.o
 clock_seconds                                     build/zoul/remote-revb/obj/clock.o
                                                   pingpong.o
-                                                  build/zoul/remote-revb/obj/rpl-dag-root.o
-                                                  build/zoul/remote-revb/obj/rpl-icmp6.o
-                                                  build/zoul/remote-revb/obj/rpl-mrhof.o
-                                                  build/zoul/remote-revb/obj/rpl.o
-                                                  build/zoul/remote-revb/obj/rpl-ext-header.o
-                                                  build/zoul/remote-revb/obj/rpl-timers.o
-                                                  build/zoul/remote-revb/obj/rpl-dag.o
-                                                  build/zoul/remote-revb/obj/rpl-neighbor.o
-                                                  build/zoul/remote-revb/obj/rpl-of0.o
-                                                  build/zoul/remote-revb/obj/uip-nd6.o
-                                                  build/zoul/remote-revb/obj/uip-ds6-nbr.o
-                                                  build/zoul/remote-revb/obj/uip6.o
-                                                  build/zoul/remote-revb/obj/tcpip.o
-                                                  build/zoul/remote-revb/obj/uip-ds6-route.o
-                                                  build/zoul/remote-revb/obj/uip-ds6.o
-                                                  build/zoul/remote-revb/obj/uip-sr.o
-                                                  build/zoul/remote-revb/obj/uip-icmp6.o
                                                   build/zoul/remote-revb/obj/cc1200.o
                                                   build/zoul/remote-revb/obj/stack-check.o
                                                   build/zoul/remote-revb/obj/stimer.o
@@ -6158,13 +5973,6 @@ curr_log_level_6top                               build/zoul/remote-revb/obj/log
 curr_log_level_coap                               build/zoul/remote-revb/obj/log.o
 curr_log_level_framer                             build/zoul/remote-revb/obj/log.o
 curr_log_level_ipv6                               build/zoul/remote-revb/obj/log.o
-                                                  build/zoul/remote-revb/obj/uip-nd6.o
-                                                  build/zoul/remote-revb/obj/uip-ds6-nbr.o
-                                                  build/zoul/remote-revb/obj/uip6.o
-                                                  build/zoul/remote-revb/obj/uip-ds6-route.o
-                                                  build/zoul/remote-revb/obj/uip-ds6.o
-                                                  build/zoul/remote-revb/obj/uip-sr.o
-                                                  build/zoul/remote-revb/obj/uip-icmp6.o
 curr_log_level_lwm2m                              build/zoul/remote-revb/obj/log.o
 curr_log_level_mac                                build/zoul/remote-revb/obj/log.o
 curr_log_level_main                               build/zoul/remote-revb/obj/log.o
@@ -6173,18 +5981,8 @@ curr_log_level_main                               build/zoul/remote-revb/obj/log
                                                   build/zoul/remote-revb/obj/platform.o
 curr_log_level_nullnet                            build/zoul/remote-revb/obj/log.o
 curr_log_level_rpl                                build/zoul/remote-revb/obj/log.o
-                                                  build/zoul/remote-revb/obj/rpl-dag-root.o
-                                                  build/zoul/remote-revb/obj/rpl-icmp6.o
-                                                  build/zoul/remote-revb/obj/rpl-mrhof.o
-                                                  build/zoul/remote-revb/obj/rpl.o
-                                                  build/zoul/remote-revb/obj/rpl-ext-header.o
-                                                  build/zoul/remote-revb/obj/rpl-timers.o
-                                                  build/zoul/remote-revb/obj/rpl-dag.o
-                                                  build/zoul/remote-revb/obj/rpl-neighbor.o
-                                                  build/zoul/remote-revb/obj/rpl-of0.o
 curr_log_level_snmp                               build/zoul/remote-revb/obj/log.o
 curr_log_level_tcpip                              build/zoul/remote-revb/obj/log.o
-                                                  build/zoul/remote-revb/obj/tcpip.o
 dbg_putchar                                       build/zoul/remote-revb/obj/dbg.o
                                                   build/zoul/remote-revb/obj/putchar.o
                                                   build/zoul/remote-revb/obj/puts.o
@@ -6592,21 +6390,6 @@ list_tail                                         build/zoul/remote-revb/obj/lis
 llprefix                                          build/zoul/remote-revb/obj/sicslowpan.o
 log_6addr                                         build/zoul/remote-revb/obj/log.o
                                                   pingpong.o
-                                                  build/zoul/remote-revb/obj/rpl-dag-root.o
-                                                  build/zoul/remote-revb/obj/rpl-icmp6.o
-                                                  build/zoul/remote-revb/obj/rpl.o
-                                                  build/zoul/remote-revb/obj/rpl-ext-header.o
-                                                  build/zoul/remote-revb/obj/rpl-timers.o
-                                                  build/zoul/remote-revb/obj/rpl-dag.o
-                                                  build/zoul/remote-revb/obj/rpl-neighbor.o
-                                                  build/zoul/remote-revb/obj/uip-nd6.o
-                                                  build/zoul/remote-revb/obj/uip-ds6-nbr.o
-                                                  build/zoul/remote-revb/obj/uip6.o
-                                                  build/zoul/remote-revb/obj/tcpip.o
-                                                  build/zoul/remote-revb/obj/uip-ds6-route.o
-                                                  build/zoul/remote-revb/obj/uip-ds6.o
-                                                  build/zoul/remote-revb/obj/uip-sr.o
-                                                  build/zoul/remote-revb/obj/uip-icmp6.o
                                                   build/zoul/remote-revb/obj/contiki-main.o
                                                   build/zoul/remote-revb/obj/interface.o
 log_6addr_compact                                 build/zoul/remote-revb/obj/log.o
@@ -6615,10 +6398,6 @@ log_bytes                                         build/zoul/remote-revb/obj/log
 log_get_level                                     build/zoul/remote-revb/obj/log.o
 log_level_to_str                                  build/zoul/remote-revb/obj/log.o
 log_lladdr                                        build/zoul/remote-revb/obj/log.o
-                                                  build/zoul/remote-revb/obj/rpl-icmp6.o
-                                                  build/zoul/remote-revb/obj/rpl.o
-                                                  build/zoul/remote-revb/obj/uip-ds6-nbr.o
-                                                  build/zoul/remote-revb/obj/tcpip.o
                                                   build/zoul/remote-revb/obj/contiki-main.o
 log_lladdr_compact                                build/zoul/remote-revb/obj/log.o
 log_set_level                                     build/zoul/remote-revb/obj/log.o
@@ -6960,24 +6739,7 @@ print_lora_frame                                  build/zoul/remote-revb/obj/rn2
 print_uart_frame                                  build/zoul/remote-revb/obj/rn2483radio.o
 printf                                            build/zoul/remote-revb/obj/printf.o
                                                   pingpong.o
-                                                  build/zoul/remote-revb/obj/rpl-dag-root.o
-                                                  build/zoul/remote-revb/obj/rpl-icmp6.o
-                                                  build/zoul/remote-revb/obj/rpl-mrhof.o
-                                                  build/zoul/remote-revb/obj/rpl.o
-                                                  build/zoul/remote-revb/obj/rpl-ext-header.o
-                                                  build/zoul/remote-revb/obj/rpl-timers.o
-                                                  build/zoul/remote-revb/obj/rpl-dag.o
-                                                  build/zoul/remote-revb/obj/rpl-neighbor.o
-                                                  build/zoul/remote-revb/obj/rpl-of0.o
                                                   build/zoul/remote-revb/obj/uiplib.o
-                                                  build/zoul/remote-revb/obj/uip-nd6.o
-                                                  build/zoul/remote-revb/obj/uip-ds6-nbr.o
-                                                  build/zoul/remote-revb/obj/uip6.o
-                                                  build/zoul/remote-revb/obj/tcpip.o
-                                                  build/zoul/remote-revb/obj/uip-ds6-route.o
-                                                  build/zoul/remote-revb/obj/uip-ds6.o
-                                                  build/zoul/remote-revb/obj/uip-sr.o
-                                                  build/zoul/remote-revb/obj/uip-icmp6.o
                                                   build/zoul/remote-revb/obj/net-debug.o
                                                   build/zoul/remote-revb/obj/assert.o
                                                   build/zoul/remote-revb/obj/hexconv.o
@@ -7156,13 +6918,11 @@ rpl_dag_root_is_root                              build/zoul/remote-revb/obj/rpl
                                                   build/zoul/remote-revb/obj/rpl-dag.o
                                                   build/zoul/remote-revb/obj/rpl-neighbor.o
 rpl_dag_root_print_links                          build/zoul/remote-revb/obj/rpl-dag-root.o
-                                                  build/zoul/remote-revb/obj/rpl-timers.o
 rpl_dag_root_set_prefix                           build/zoul/remote-revb/obj/rpl-dag-root.o
                                                   build/zoul/remote-revb/obj/rpl.o
 rpl_dag_root_start                                build/zoul/remote-revb/obj/rpl-dag-root.o
                                                   build/zoul/remote-revb/obj/rpl.o
 rpl_dag_state_to_str                              build/zoul/remote-revb/obj/rpl-dag.o
-                                                  build/zoul/remote-revb/obj/rpl-neighbor.o
 rpl_dag_update_state                              build/zoul/remote-revb/obj/rpl-dag.o
                                                   build/zoul/remote-revb/obj/rpl-dag-root.o
                                                   build/zoul/remote-revb/obj/rpl-icmp6.o
@@ -7183,7 +6943,6 @@ rpl_get_default_instance                          build/zoul/remote-revb/obj/rpl
 rpl_get_global_address                            build/zoul/remote-revb/obj/rpl.o
                                                   build/zoul/remote-revb/obj/rpl-dag-root.o
                                                   build/zoul/remote-revb/obj/rpl-icmp6.o
-                                                  build/zoul/remote-revb/obj/rpl-neighbor.o
 rpl_get_leaf_only                                 build/zoul/remote-revb/obj/rpl.o
                                                   build/zoul/remote-revb/obj/rpl-icmp6.o
                                                   build/zoul/remote-revb/obj/rpl-timers.o
@@ -7242,7 +7001,6 @@ rpl_neighbor_get_ipaddr                           build/zoul/remote-revb/obj/rpl
                                                   build/zoul/remote-revb/obj/rpl-timers.o
                                                   build/zoul/remote-revb/obj/rpl-dag.o
 rpl_neighbor_get_link_metric                      build/zoul/remote-revb/obj/rpl-neighbor.o
-                                                  build/zoul/remote-revb/obj/rpl.o
 rpl_neighbor_get_link_stats                       build/zoul/remote-revb/obj/rpl-neighbor.o
                                                   build/zoul/remote-revb/obj/rpl-mrhof.o
                                                   build/zoul/remote-revb/obj/rpl-timers.o
@@ -7255,8 +7013,6 @@ rpl_neighbor_is_fresh                             build/zoul/remote-revb/obj/rpl
                                                   build/zoul/remote-revb/obj/rpl-timers.o
 rpl_neighbor_is_parent                            build/zoul/remote-revb/obj/rpl-neighbor.o
 rpl_neighbor_print_list                           build/zoul/remote-revb/obj/rpl-neighbor.o
-                                                  build/zoul/remote-revb/obj/rpl-timers.o
-                                                  build/zoul/remote-revb/obj/rpl-dag.o
 rpl_neighbor_rank_via_nbr                         build/zoul/remote-revb/obj/rpl-neighbor.o
                                                   build/zoul/remote-revb/obj/rpl-timers.o
                                                   build/zoul/remote-revb/obj/rpl-dag.o
@@ -7766,7 +7522,6 @@ uip_ext_len                                       build/zoul/remote-revb/obj/uip
                                                   build/zoul/remote-revb/obj/simple-udp.o
                                                   build/zoul/remote-revb/obj/udp-socket.o
                                                   build/zoul/remote-revb/obj/uip-nd6.o
-                                                  build/zoul/remote-revb/obj/tcpip.o
                                                   build/zoul/remote-revb/obj/uip-icmp6.o
                                                   build/zoul/remote-revb/obj/uipbuf.o
 uip_flags                                         build/zoul/remote-revb/obj/uip6.o

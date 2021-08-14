@@ -1,0 +1,18 @@
+lora_ip-INFO-  2021-08-14 18:16:25,316-Init IP layer
+lora_mac-INFO-  2021-08-14 18:16:25,316-Init MAC
+lora_phy-INFO-  2021-08-14 18:16:25,316-Init PHY
+lora_phy-INFO-  2021-08-14 18:16:25,317-Radio configuration: {'txBufSize': 10, 'rxBufSize': 10, 'port': '/dev/ttyUSB0', 'baudrate': '57600', 'frequence': '868100000', 'bandwidth': '125', 'cr': '4/5', 'pwr': '1', 'sf': 'sf12'}
+lora_phy-INFO-  2021-08-14 18:16:25,318-PHY TX:mac pause
+lora_phy-INFO-  2021-08-14 18:16:25,318-MAC set watchdog timer to 0 ms
+lora_phy-INFO-  2021-08-14 18:16:25,318-MAC switch to reception mode
+lora_phy-INFO-  2021-08-14 18:16:25,332-PHY TX:radio set mod lora
+lora_phy-INFO-  2021-08-14 18:16:25,338-PHY TX:radio set freq 868100000
+lora_phy-INFO-  2021-08-14 18:16:25,353-PHY TX:radio set bw 125
+lora_phy-INFO-  2021-08-14 18:16:25,359-PHY TX:radio set cr 4/5
+lora_phy-INFO-  2021-08-14 18:16:25,365-PHY TX:radio set pwr 1
+lora_phy-INFO-  2021-08-14 18:16:25,371-PHY TX:radio set sf sf12
+lora_phy-INFO-  2021-08-14 18:16:25,377-PHY TX:radio set wdt 0
+lora_phy-INFO-  2021-08-14 18:16:25,384-PHY TX:radio rx 0
+lora_phy-INFO-  2021-08-14 18:17:14,436-PHY RX:1B611B0100000000
+lora_phy-INFO-  2021-08-14 18:17:14,437-STAT: PHY RX: 31562277982730
+lora_mac-INFO-  2021-08-14 18:17:14,437-MAC RX: LoraFrame(src_addr=LoraAddr(prefix=27, node_id=24859), dest_addr=LoraAddr(prefix=1, node_id=0), command=<MacCommand.JOIN: 0>, payload='', seq=0, k=False, has_next=False)

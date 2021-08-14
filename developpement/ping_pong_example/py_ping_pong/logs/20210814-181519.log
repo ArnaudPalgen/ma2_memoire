@@ -1,0 +1,4 @@
+lora_ip-INFO-  2021-08-14 18:15:19,315-Init IP layer
+lora_mac-INFO-  2021-08-14 18:15:19,315-Init MAC
+lora_phy-INFO-  2021-08-14 18:15:19,315-Init PHY
+lora_phy-INFO-  2021-08-14 18:15:19,317-Radio configuration: {'txBufSize': 10, 'rxBufSize': 10, 'port': '/dev/ttyUSB0', 'baudrate': '57600', 'frequence': '868100000', 'bandwidth': '125', 'cr': '4/5', 'pwr': '1', 'sf': 'sf12'}

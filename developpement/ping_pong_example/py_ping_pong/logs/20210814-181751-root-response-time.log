@@ -1,0 +1,461 @@
+lora_ip-INFO-  2021-08-14 18:17:51,721-Init IP layer
+lora_mac-INFO-  2021-08-14 18:17:51,722-Init MAC
+lora_phy-INFO-  2021-08-14 18:17:51,722-Init PHY
+lora_phy-INFO-  2021-08-14 18:17:51,723-Radio configuration: {'txBufSize': 10, 'rxBufSize': 10, 'port': '/dev/ttyUSB0', 'baudrate': '57600', 'frequence': '868100000', 'bandwidth': '125', 'cr': '4/5', 'pwr': '1', 'sf': 'sf12'}
+lora_phy-INFO-  2021-08-14 18:17:51,724-PHY TX:mac pause
+lora_phy-INFO-  2021-08-14 18:17:51,724-MAC set watchdog timer to 0 ms
+lora_phy-INFO-  2021-08-14 18:17:51,724-MAC switch to reception mode
+lora_phy-INFO-  2021-08-14 18:17:51,737-PHY TX:radio set mod lora
+lora_phy-INFO-  2021-08-14 18:17:51,743-PHY TX:radio set freq 868100000
+lora_phy-INFO-  2021-08-14 18:17:51,757-PHY TX:radio set bw 125
+lora_phy-INFO-  2021-08-14 18:17:51,763-PHY TX:radio set cr 4/5
+lora_phy-INFO-  2021-08-14 18:17:51,769-PHY TX:radio set pwr 1
+lora_phy-INFO-  2021-08-14 18:17:51,775-PHY TX:radio set sf sf12
+lora_phy-INFO-  2021-08-14 18:17:51,781-PHY TX:radio set wdt 0
+lora_phy-INFO-  2021-08-14 18:17:51,787-PHY TX:radio rx 0
+lora_phy-INFO-  2021-08-14 18:18:14,077-PHY RX:1B611B0100000000
+lora_phy-INFO-  2021-08-14 18:18:14,077-STAT: PHY RX: 31621918613696
+lora_mac-INFO-  2021-08-14 18:18:14,078-MAC RX: LoraFrame(src_addr=LoraAddr(prefix=27, node_id=24859), dest_addr=LoraAddr(prefix=1, node_id=0), command=<MacCommand.JOIN: 0>, payload='', seq=0, k=False, has_next=False)
+lora_phy-INFO-  2021-08-14 18:18:14,079-MAC send:LoraFrame(src_addr=LoraAddr(prefix=1, node_id=0), dest_addr=LoraAddr(prefix=27, node_id=24859), command=<MacCommand.JOIN_RESPONSE: 1>, payload='02', seq=0, k=False, has_next=False)
+lora_phy-INFO-  2021-08-14 18:18:14,079-MAC switch to reception mode
+lora_phy-INFO-  2021-08-14 18:18:14,080-PHY TX:radio tx 0100001B611B010002
+lora_phy-INFO-  2021-08-14 18:18:14,080-STAT: PHY TX: 31621921600165
+lora_phy-INFO-  2021-08-14 18:18:15,085-PHY TX:radio rx 0
+lora_phy-INFO-  2021-08-14 18:18:19,449-PHY RX:02611B010000820160000000000E1140223D162E000E4F9C50494E472030
+lora_phy-INFO-  2021-08-14 18:18:19,449-STAT: PHY RX: 31627290534477
+lora_mac-INFO-  2021-08-14 18:18:19,450-MAC RX: LoraFrame(src_addr=LoraAddr(prefix=2, node_id=24859), dest_addr=LoraAddr(prefix=1, node_id=0), command=<MacCommand.DATA: 2>, payload='60000000000E1140223D162E000E4F9C50494E472030', seq=1, k=True, has_next=False)
+lora_mac-WARNING-  2021-08-14 18:18:19,451-Loss of 1 frames
+lora_phy-INFO-  2021-08-14 18:18:19,451-MAC send:LoraFrame(src_addr=LoraAddr(prefix=1, node_id=0), dest_addr=LoraAddr(prefix=2, node_id=24859), command=<MacCommand.ACK: 3>, payload='', seq=1, k=False, has_next=False)
+lora_ip-INFO-  2021-08-14 18:18:19,451-IP RX: 60000000000E1140223D162E000E4F9C50494E472030 from: 2:24859
+lora_phy-INFO-  2021-08-14 18:18:19,451-PHY TX:radio tx 01000002611B0301
+lora_phy-INFO-  2021-08-14 18:18:19,455-STAT: PHY TX: 31627296432201
+lora_phy-INFO-  2021-08-14 18:18:19,455-MAC switch to reception mode
+lora_mac-INFO-  2021-08-14 18:18:19,458-IP send 60000000000E1140162E223D000E0742504F4E472030 to: 2:24859
+lora_phy-INFO-  2021-08-14 18:18:20,459-PHY TX:radio rx 0
+lora_phy-INFO-  2021-08-14 18:19:16,177-PHY RX:02611B0100000402
+lora_phy-INFO-  2021-08-14 18:19:16,177-STAT: PHY RX: 31684018473196
+lora_mac-INFO-  2021-08-14 18:19:16,178-MAC RX: LoraFrame(src_addr=LoraAddr(prefix=2, node_id=24859), dest_addr=LoraAddr(prefix=1, node_id=0), command=<MacCommand.QUERY: 4>, payload='', seq=2, k=False, has_next=False)
+lora_phy-INFO-  2021-08-14 18:19:16,179-MAC send:LoraFrame(src_addr=LoraAddr(prefix=1, node_id=0), dest_addr=LoraAddr(prefix=2, node_id=24859), command=<MacCommand.DATA: 2>, payload='60000000000E1140162E223D000E0742504F4E472030', seq=1, k=False, has_next=False)
+lora_phy-INFO-  2021-08-14 18:19:16,180-MAC switch to reception mode
+lora_phy-INFO-  2021-08-14 18:19:16,180-PHY TX:radio tx 01000002611B020160000000000E1140162E223D000E0742504F4E472030
+lora_phy-INFO-  2021-08-14 18:19:16,180-STAT: PHY TX: 31684021315174
+lora_phy-INFO-  2021-08-14 18:19:17,851-PHY TX:radio rx 0
+lora_phy-INFO-  2021-08-14 18:19:19,537-PHY RX:02611B01000082036000000000091140223D162E0009761250
+lora_phy-INFO-  2021-08-14 18:19:19,538-STAT: PHY RX: 31687378775155
+lora_mac-INFO-  2021-08-14 18:19:19,538-MAC RX: LoraFrame(src_addr=LoraAddr(prefix=2, node_id=24859), dest_addr=LoraAddr(prefix=1, node_id=0), command=<MacCommand.DATA: 2>, payload='6000000000091140223D162E0009761250', seq=3, k=True, has_next=False)
+lora_phy-INFO-  2021-08-14 18:19:19,538-MAC send:LoraFrame(src_addr=LoraAddr(prefix=1, node_id=0), dest_addr=LoraAddr(prefix=2, node_id=24859), command=<MacCommand.ACK: 3>, payload='', seq=3, k=False, has_next=False)
+lora_ip-INFO-  2021-08-14 18:19:19,539-IP RX: 6000000000091140223D162E0009761250 from: 2:24859
+lora_phy-INFO-  2021-08-14 18:19:19,539-PHY TX:radio tx 01000002611B0303
+lora_phy-INFO-  2021-08-14 18:19:19,542-STAT: PHY TX: 31687383568859
+lora_phy-INFO-  2021-08-14 18:19:19,543-MAC switch to reception mode
+lora_mac-INFO-  2021-08-14 18:19:19,547-IP send 60000000000E1140162E223D000E0741504F4E472031 to: 2:24859
+lora_phy-INFO-  2021-08-14 18:19:20,546-PHY TX:radio rx 0
+lora_phy-INFO-  2021-08-14 18:20:18,958-PHY RX:02611B0100000404
+lora_phy-INFO-  2021-08-14 18:20:18,958-STAT: PHY RX: 31746799239444
+lora_mac-INFO-  2021-08-14 18:20:18,958-MAC RX: LoraFrame(src_addr=LoraAddr(prefix=2, node_id=24859), dest_addr=LoraAddr(prefix=1, node_id=0), command=<MacCommand.QUERY: 4>, payload='', seq=4, k=False, has_next=False)
+lora_phy-INFO-  2021-08-14 18:20:18,959-MAC send:LoraFrame(src_addr=LoraAddr(prefix=1, node_id=0), dest_addr=LoraAddr(prefix=2, node_id=24859), command=<MacCommand.DATA: 2>, payload='60000000000E1140162E223D000E0741504F4E472031', seq=2, k=False, has_next=False)
+lora_phy-INFO-  2021-08-14 18:20:18,959-MAC switch to reception mode
+lora_phy-INFO-  2021-08-14 18:20:18,959-PHY TX:radio tx 01000002611B020260000000000E1140162E223D000E0741504F4E472031
+lora_phy-INFO-  2021-08-14 18:20:18,959-STAT: PHY TX: 31746800633536
+lora_phy-INFO-  2021-08-14 18:20:20,630-PHY TX:radio rx 0
+lora_phy-INFO-  2021-08-14 18:20:22,318-PHY RX:02611B01000082056000000000091140223D162E0009761250
+lora_phy-INFO-  2021-08-14 18:20:22,318-STAT: PHY RX: 31750159449429
+lora_mac-INFO-  2021-08-14 18:20:22,319-MAC RX: LoraFrame(src_addr=LoraAddr(prefix=2, node_id=24859), dest_addr=LoraAddr(prefix=1, node_id=0), command=<MacCommand.DATA: 2>, payload='6000000000091140223D162E0009761250', seq=5, k=True, has_next=False)
+lora_phy-INFO-  2021-08-14 18:20:22,319-MAC send:LoraFrame(src_addr=LoraAddr(prefix=1, node_id=0), dest_addr=LoraAddr(prefix=2, node_id=24859), command=<MacCommand.ACK: 3>, payload='', seq=5, k=False, has_next=False)
+lora_ip-INFO-  2021-08-14 18:20:22,319-IP RX: 6000000000091140223D162E0009761250 from: 2:24859
+lora_phy-INFO-  2021-08-14 18:20:22,320-PHY TX:radio tx 01000002611B0305
+lora_phy-INFO-  2021-08-14 18:20:22,323-STAT: PHY TX: 31750164668905
+lora_phy-INFO-  2021-08-14 18:20:22,324-MAC switch to reception mode
+lora_mac-INFO-  2021-08-14 18:20:22,327-IP send 60000000000E1140162E223D000E0740504F4E472032 to: 2:24859
+lora_phy-INFO-  2021-08-14 18:20:23,328-PHY TX:radio rx 0
+lora_phy-INFO-  2021-08-14 18:21:21,732-PHY RX:02611B0100000406
+lora_phy-INFO-  2021-08-14 18:21:21,732-STAT: PHY RX: 31809572938553
+lora_mac-INFO-  2021-08-14 18:21:21,732-MAC RX: LoraFrame(src_addr=LoraAddr(prefix=2, node_id=24859), dest_addr=LoraAddr(prefix=1, node_id=0), command=<MacCommand.QUERY: 4>, payload='', seq=6, k=False, has_next=False)
+lora_phy-INFO-  2021-08-14 18:21:21,733-MAC send:LoraFrame(src_addr=LoraAddr(prefix=1, node_id=0), dest_addr=LoraAddr(prefix=2, node_id=24859), command=<MacCommand.DATA: 2>, payload='60000000000E1140162E223D000E0740504F4E472032', seq=3, k=False, has_next=False)
+lora_phy-INFO-  2021-08-14 18:21:21,733-MAC switch to reception mode
+lora_phy-INFO-  2021-08-14 18:21:21,733-PHY TX:radio tx 01000002611B020360000000000E1140162E223D000E0740504F4E472032
+lora_phy-INFO-  2021-08-14 18:21:21,734-STAT: PHY TX: 31809574942387
+lora_phy-INFO-  2021-08-14 18:21:23,404-PHY TX:radio rx 0
+lora_phy-INFO-  2021-08-14 18:21:25,092-PHY RX:02611B01000082076000000000091140223D162E0009761250
+lora_phy-INFO-  2021-08-14 18:21:25,092-STAT: PHY RX: 31812933315042
+lora_mac-INFO-  2021-08-14 18:21:25,092-MAC RX: LoraFrame(src_addr=LoraAddr(prefix=2, node_id=24859), dest_addr=LoraAddr(prefix=1, node_id=0), command=<MacCommand.DATA: 2>, payload='6000000000091140223D162E0009761250', seq=7, k=True, has_next=False)
+lora_phy-INFO-  2021-08-14 18:21:25,093-MAC send:LoraFrame(src_addr=LoraAddr(prefix=1, node_id=0), dest_addr=LoraAddr(prefix=2, node_id=24859), command=<MacCommand.ACK: 3>, payload='', seq=7, k=False, has_next=False)
+lora_ip-INFO-  2021-08-14 18:21:25,093-IP RX: 6000000000091140223D162E0009761250 from: 2:24859
+lora_phy-INFO-  2021-08-14 18:21:25,093-PHY TX:radio tx 01000002611B0307
+lora_phy-INFO-  2021-08-14 18:21:25,094-STAT: PHY TX: 31812935511107
+lora_phy-INFO-  2021-08-14 18:21:25,095-MAC switch to reception mode
+lora_mac-INFO-  2021-08-14 18:21:25,099-IP send 60000000000E1140162E223D000E073F504F4E472033 to: 2:24859
+lora_phy-INFO-  2021-08-14 18:21:26,099-PHY TX:radio rx 0
+lora_phy-INFO-  2021-08-14 18:22:24,505-PHY RX:02611B0100000408
+lora_phy-INFO-  2021-08-14 18:22:24,505-STAT: PHY RX: 31872346263907
+lora_mac-INFO-  2021-08-14 18:22:24,505-MAC RX: LoraFrame(src_addr=LoraAddr(prefix=2, node_id=24859), dest_addr=LoraAddr(prefix=1, node_id=0), command=<MacCommand.QUERY: 4>, payload='', seq=8, k=False, has_next=False)
+lora_phy-INFO-  2021-08-14 18:22:24,506-MAC send:LoraFrame(src_addr=LoraAddr(prefix=1, node_id=0), dest_addr=LoraAddr(prefix=2, node_id=24859), command=<MacCommand.DATA: 2>, payload='60000000000E1140162E223D000E073F504F4E472033', seq=4, k=False, has_next=False)
+lora_phy-INFO-  2021-08-14 18:22:24,506-MAC switch to reception mode
+lora_phy-INFO-  2021-08-14 18:22:24,506-PHY TX:radio tx 01000002611B020460000000000E1140162E223D000E073F504F4E472033
+lora_phy-INFO-  2021-08-14 18:22:24,506-STAT: PHY TX: 31872347579568
+lora_phy-INFO-  2021-08-14 18:22:26,177-PHY TX:radio rx 0
+lora_phy-INFO-  2021-08-14 18:22:27,865-PHY RX:02611B01000082096000000000091140223D162E0009761250
+lora_phy-INFO-  2021-08-14 18:22:27,865-STAT: PHY RX: 31875706576556
+lora_mac-INFO-  2021-08-14 18:22:27,866-MAC RX: LoraFrame(src_addr=LoraAddr(prefix=2, node_id=24859), dest_addr=LoraAddr(prefix=1, node_id=0), command=<MacCommand.DATA: 2>, payload='6000000000091140223D162E0009761250', seq=9, k=True, has_next=False)
+lora_phy-INFO-  2021-08-14 18:22:27,866-MAC send:LoraFrame(src_addr=LoraAddr(prefix=1, node_id=0), dest_addr=LoraAddr(prefix=2, node_id=24859), command=<MacCommand.ACK: 3>, payload='', seq=9, k=False, has_next=False)
+lora_ip-INFO-  2021-08-14 18:22:27,867-IP RX: 6000000000091140223D162E0009761250 from: 2:24859
+lora_phy-INFO-  2021-08-14 18:22:27,869-PHY TX:radio tx 01000002611B0309
+lora_phy-INFO-  2021-08-14 18:22:27,870-STAT: PHY TX: 31875711410856
+lora_phy-INFO-  2021-08-14 18:22:27,871-MAC switch to reception mode
+lora_mac-INFO-  2021-08-14 18:22:27,874-IP send 60000000000E1140162E223D000E073E504F4E472034 to: 2:24859
+lora_phy-INFO-  2021-08-14 18:22:28,874-PHY TX:radio rx 0
+lora_phy-INFO-  2021-08-14 18:23:27,279-PHY RX:02611B010000040A
+lora_phy-INFO-  2021-08-14 18:23:27,280-STAT: PHY RX: 31935120868890
+lora_mac-INFO-  2021-08-14 18:23:27,280-MAC RX: LoraFrame(src_addr=LoraAddr(prefix=2, node_id=24859), dest_addr=LoraAddr(prefix=1, node_id=0), command=<MacCommand.QUERY: 4>, payload='', seq=10, k=False, has_next=False)
+lora_phy-INFO-  2021-08-14 18:23:27,281-MAC send:LoraFrame(src_addr=LoraAddr(prefix=1, node_id=0), dest_addr=LoraAddr(prefix=2, node_id=24859), command=<MacCommand.DATA: 2>, payload='60000000000E1140162E223D000E073E504F4E472034', seq=5, k=False, has_next=False)
+lora_phy-INFO-  2021-08-14 18:23:27,282-MAC switch to reception mode
+lora_phy-INFO-  2021-08-14 18:23:27,282-PHY TX:radio tx 01000002611B020560000000000E1140162E223D000E073E504F4E472034
+lora_phy-INFO-  2021-08-14 18:23:27,282-STAT: PHY TX: 31935123484564
+lora_phy-INFO-  2021-08-14 18:23:28,953-PHY TX:radio rx 0
+lora_phy-INFO-  2021-08-14 18:23:30,641-PHY RX:02611B010000820B6000000000091140223D162E0009761250
+lora_phy-INFO-  2021-08-14 18:23:30,641-STAT: PHY RX: 31938482196577
+lora_mac-INFO-  2021-08-14 18:23:30,641-MAC RX: LoraFrame(src_addr=LoraAddr(prefix=2, node_id=24859), dest_addr=LoraAddr(prefix=1, node_id=0), command=<MacCommand.DATA: 2>, payload='6000000000091140223D162E0009761250', seq=11, k=True, has_next=False)
+lora_phy-INFO-  2021-08-14 18:23:30,642-MAC send:LoraFrame(src_addr=LoraAddr(prefix=1, node_id=0), dest_addr=LoraAddr(prefix=2, node_id=24859), command=<MacCommand.ACK: 3>, payload='', seq=11, k=False, has_next=False)
+lora_ip-INFO-  2021-08-14 18:23:30,642-IP RX: 6000000000091140223D162E0009761250 from: 2:24859
+lora_phy-INFO-  2021-08-14 18:23:30,642-PHY TX:radio tx 01000002611B030B
+lora_phy-INFO-  2021-08-14 18:23:30,646-STAT: PHY TX: 31938486851362
+lora_phy-INFO-  2021-08-14 18:23:30,646-MAC switch to reception mode
+lora_mac-INFO-  2021-08-14 18:23:30,649-IP send 60000000000E1140162E223D000E073D504F4E472035 to: 2:24859
+lora_phy-INFO-  2021-08-14 18:23:31,650-PHY TX:radio rx 0
+lora_phy-INFO-  2021-08-14 18:24:30,060-PHY RX:02611B010000040C
+lora_phy-INFO-  2021-08-14 18:24:30,061-STAT: PHY RX: 31997901704339
+lora_mac-INFO-  2021-08-14 18:24:30,061-MAC RX: LoraFrame(src_addr=LoraAddr(prefix=2, node_id=24859), dest_addr=LoraAddr(prefix=1, node_id=0), command=<MacCommand.QUERY: 4>, payload='', seq=12, k=False, has_next=False)
+lora_phy-INFO-  2021-08-14 18:24:30,062-MAC send:LoraFrame(src_addr=LoraAddr(prefix=1, node_id=0), dest_addr=LoraAddr(prefix=2, node_id=24859), command=<MacCommand.DATA: 2>, payload='60000000000E1140162E223D000E073D504F4E472035', seq=6, k=False, has_next=False)
+lora_phy-INFO-  2021-08-14 18:24:30,062-MAC switch to reception mode
+lora_phy-INFO-  2021-08-14 18:24:30,063-PHY TX:radio tx 01000002611B020660000000000E1140162E223D000E073D504F4E472035
+lora_phy-INFO-  2021-08-14 18:24:30,063-STAT: PHY TX: 31997904430974
+lora_phy-INFO-  2021-08-14 18:24:31,734-PHY TX:radio rx 0
+lora_phy-INFO-  2021-08-14 18:24:33,422-PHY RX:02611B010000820D6000000000091140223D162E0009761250
+lora_phy-INFO-  2021-08-14 18:24:33,422-STAT: PHY RX: 32001263426934
+lora_mac-INFO-  2021-08-14 18:24:33,423-MAC RX: LoraFrame(src_addr=LoraAddr(prefix=2, node_id=24859), dest_addr=LoraAddr(prefix=1, node_id=0), command=<MacCommand.DATA: 2>, payload='6000000000091140223D162E0009761250', seq=13, k=True, has_next=False)
+lora_phy-INFO-  2021-08-14 18:24:33,423-MAC send:LoraFrame(src_addr=LoraAddr(prefix=1, node_id=0), dest_addr=LoraAddr(prefix=2, node_id=24859), command=<MacCommand.ACK: 3>, payload='', seq=13, k=False, has_next=False)
+lora_ip-INFO-  2021-08-14 18:24:33,423-IP RX: 6000000000091140223D162E0009761250 from: 2:24859
+lora_phy-INFO-  2021-08-14 18:24:33,423-PHY TX:radio tx 01000002611B030D
+lora_phy-INFO-  2021-08-14 18:24:33,426-STAT: PHY TX: 32001267132907
+lora_phy-INFO-  2021-08-14 18:24:33,426-MAC switch to reception mode
+lora_mac-INFO-  2021-08-14 18:24:33,430-IP send 60000000000E1140162E223D000E073C504F4E472036 to: 2:24859
+lora_phy-INFO-  2021-08-14 18:24:34,430-PHY TX:radio rx 0
+lora_phy-INFO-  2021-08-14 18:25:32,833-PHY RX:02611B010000040E
+lora_phy-INFO-  2021-08-14 18:25:32,833-STAT: PHY RX: 32060674649600
+lora_mac-INFO-  2021-08-14 18:25:32,834-MAC RX: LoraFrame(src_addr=LoraAddr(prefix=2, node_id=24859), dest_addr=LoraAddr(prefix=1, node_id=0), command=<MacCommand.QUERY: 4>, payload='', seq=14, k=False, has_next=False)
+lora_phy-INFO-  2021-08-14 18:25:32,834-MAC send:LoraFrame(src_addr=LoraAddr(prefix=1, node_id=0), dest_addr=LoraAddr(prefix=2, node_id=24859), command=<MacCommand.DATA: 2>, payload='60000000000E1140162E223D000E073C504F4E472036', seq=7, k=False, has_next=False)
+lora_phy-INFO-  2021-08-14 18:25:32,835-MAC switch to reception mode
+lora_phy-INFO-  2021-08-14 18:25:32,835-PHY TX:radio tx 01000002611B020760000000000E1140162E223D000E073C504F4E472036
+lora_phy-INFO-  2021-08-14 18:25:32,835-STAT: PHY TX: 32060676040098
+lora_phy-INFO-  2021-08-14 18:25:34,505-PHY TX:radio rx 0
+lora_phy-INFO-  2021-08-14 18:25:36,193-PHY RX:02611B010000820F6000000000091140223D162E0009761250
+lora_phy-INFO-  2021-08-14 18:25:36,193-STAT: PHY RX: 32064034477198
+lora_mac-INFO-  2021-08-14 18:25:36,194-MAC RX: LoraFrame(src_addr=LoraAddr(prefix=2, node_id=24859), dest_addr=LoraAddr(prefix=1, node_id=0), command=<MacCommand.DATA: 2>, payload='6000000000091140223D162E0009761250', seq=15, k=True, has_next=False)
+lora_phy-INFO-  2021-08-14 18:25:36,194-MAC send:LoraFrame(src_addr=LoraAddr(prefix=1, node_id=0), dest_addr=LoraAddr(prefix=2, node_id=24859), command=<MacCommand.ACK: 3>, payload='', seq=15, k=False, has_next=False)
+lora_ip-INFO-  2021-08-14 18:25:36,194-IP RX: 6000000000091140223D162E0009761250 from: 2:24859
+lora_phy-INFO-  2021-08-14 18:25:36,194-PHY TX:radio tx 01000002611B030F
+lora_phy-INFO-  2021-08-14 18:25:36,196-STAT: PHY TX: 32064037283647
+lora_phy-INFO-  2021-08-14 18:25:36,196-MAC switch to reception mode
+lora_mac-INFO-  2021-08-14 18:25:36,199-IP send 60000000000E1140162E223D000E073B504F4E472037 to: 2:24859
+lora_phy-INFO-  2021-08-14 18:25:37,200-PHY TX:radio rx 0
+lora_phy-INFO-  2021-08-14 18:26:35,608-PHY RX:02611B0100000410
+lora_phy-INFO-  2021-08-14 18:26:35,608-STAT: PHY RX: 32123449218532
+lora_mac-INFO-  2021-08-14 18:26:35,609-MAC RX: LoraFrame(src_addr=LoraAddr(prefix=2, node_id=24859), dest_addr=LoraAddr(prefix=1, node_id=0), command=<MacCommand.QUERY: 4>, payload='', seq=16, k=False, has_next=False)
+lora_phy-INFO-  2021-08-14 18:26:35,609-MAC send:LoraFrame(src_addr=LoraAddr(prefix=1, node_id=0), dest_addr=LoraAddr(prefix=2, node_id=24859), command=<MacCommand.DATA: 2>, payload='60000000000E1140162E223D000E073B504F4E472037', seq=8, k=False, has_next=False)
+lora_phy-INFO-  2021-08-14 18:26:35,610-MAC switch to reception mode
+lora_phy-INFO-  2021-08-14 18:26:35,610-PHY TX:radio tx 01000002611B020860000000000E1140162E223D000E073B504F4E472037
+lora_phy-INFO-  2021-08-14 18:26:35,610-STAT: PHY TX: 32123451575966
+lora_phy-INFO-  2021-08-14 18:26:37,281-PHY TX:radio rx 0
+lora_phy-INFO-  2021-08-14 18:26:38,969-PHY RX:02611B01000082116000000000091140223D162E0009761250
+lora_phy-INFO-  2021-08-14 18:26:38,969-STAT: PHY RX: 32126810686371
+lora_mac-INFO-  2021-08-14 18:26:38,970-MAC RX: LoraFrame(src_addr=LoraAddr(prefix=2, node_id=24859), dest_addr=LoraAddr(prefix=1, node_id=0), command=<MacCommand.DATA: 2>, payload='6000000000091140223D162E0009761250', seq=17, k=True, has_next=False)
+lora_phy-INFO-  2021-08-14 18:26:38,970-MAC send:LoraFrame(src_addr=LoraAddr(prefix=1, node_id=0), dest_addr=LoraAddr(prefix=2, node_id=24859), command=<MacCommand.ACK: 3>, payload='', seq=17, k=False, has_next=False)
+lora_ip-INFO-  2021-08-14 18:26:38,970-IP RX: 6000000000091140223D162E0009761250 from: 2:24859
+lora_phy-INFO-  2021-08-14 18:26:38,970-PHY TX:radio tx 01000002611B0311
+lora_phy-INFO-  2021-08-14 18:26:38,973-STAT: PHY TX: 32126813937728
+lora_phy-INFO-  2021-08-14 18:26:38,973-MAC switch to reception mode
+lora_mac-INFO-  2021-08-14 18:26:38,977-IP send 60000000000E1140162E223D000E073A504F4E472038 to: 2:24859
+lora_phy-INFO-  2021-08-14 18:26:39,977-PHY TX:radio rx 0
+lora_phy-INFO-  2021-08-14 18:27:38,389-PHY RX:02611B0100000412
+lora_phy-INFO-  2021-08-14 18:27:38,389-STAT: PHY RX: 32186230485952
+lora_mac-INFO-  2021-08-14 18:27:38,390-MAC RX: LoraFrame(src_addr=LoraAddr(prefix=2, node_id=24859), dest_addr=LoraAddr(prefix=1, node_id=0), command=<MacCommand.QUERY: 4>, payload='', seq=18, k=False, has_next=False)
+lora_phy-INFO-  2021-08-14 18:27:38,391-MAC send:LoraFrame(src_addr=LoraAddr(prefix=1, node_id=0), dest_addr=LoraAddr(prefix=2, node_id=24859), command=<MacCommand.DATA: 2>, payload='60000000000E1140162E223D000E073A504F4E472038', seq=9, k=False, has_next=False)
+lora_phy-INFO-  2021-08-14 18:27:38,391-MAC switch to reception mode
+lora_phy-INFO-  2021-08-14 18:27:38,392-PHY TX:radio tx 01000002611B020960000000000E1140162E223D000E073A504F4E472038
+lora_phy-INFO-  2021-08-14 18:27:38,392-STAT: PHY TX: 32186232910625
+lora_phy-INFO-  2021-08-14 18:27:40,062-PHY TX:radio rx 0
+lora_phy-INFO-  2021-08-14 18:27:41,750-PHY RX:02611B01000082136000000000091140223D162E0009761250
+lora_phy-INFO-  2021-08-14 18:27:41,751-STAT: PHY RX: 32189591812192
+lora_mac-INFO-  2021-08-14 18:27:41,751-MAC RX: LoraFrame(src_addr=LoraAddr(prefix=2, node_id=24859), dest_addr=LoraAddr(prefix=1, node_id=0), command=<MacCommand.DATA: 2>, payload='6000000000091140223D162E0009761250', seq=19, k=True, has_next=False)
+lora_phy-INFO-  2021-08-14 18:27:41,752-MAC send:LoraFrame(src_addr=LoraAddr(prefix=1, node_id=0), dest_addr=LoraAddr(prefix=2, node_id=24859), command=<MacCommand.ACK: 3>, payload='', seq=19, k=False, has_next=False)
+lora_ip-INFO-  2021-08-14 18:27:41,752-IP RX: 6000000000091140223D162E0009761250 from: 2:24859
+lora_phy-INFO-  2021-08-14 18:27:41,752-PHY TX:radio tx 01000002611B0313
+lora_phy-INFO-  2021-08-14 18:27:41,755-STAT: PHY TX: 32189595747593
+lora_phy-INFO-  2021-08-14 18:27:41,756-MAC switch to reception mode
+lora_mac-INFO-  2021-08-14 18:27:41,759-IP send 60000000000E1140162E223D000E0739504F4E472039 to: 2:24859
+lora_phy-INFO-  2021-08-14 18:27:42,759-PHY TX:radio rx 0
+lora_phy-INFO-  2021-08-14 18:28:41,170-PHY RX:02611B0100000414
+lora_phy-INFO-  2021-08-14 18:28:41,170-STAT: PHY RX: 32249010888938
+lora_mac-INFO-  2021-08-14 18:28:41,170-MAC RX: LoraFrame(src_addr=LoraAddr(prefix=2, node_id=24859), dest_addr=LoraAddr(prefix=1, node_id=0), command=<MacCommand.QUERY: 4>, payload='', seq=20, k=False, has_next=False)
+lora_phy-INFO-  2021-08-14 18:28:41,171-MAC send:LoraFrame(src_addr=LoraAddr(prefix=1, node_id=0), dest_addr=LoraAddr(prefix=2, node_id=24859), command=<MacCommand.DATA: 2>, payload='60000000000E1140162E223D000E0739504F4E472039', seq=10, k=False, has_next=False)
+lora_phy-INFO-  2021-08-14 18:28:41,171-MAC switch to reception mode
+lora_phy-INFO-  2021-08-14 18:28:41,171-PHY TX:radio tx 01000002611B020A60000000000E1140162E223D000E0739504F4E472039
+lora_phy-INFO-  2021-08-14 18:28:41,171-STAT: PHY TX: 32249012563351
+lora_phy-INFO-  2021-08-14 18:28:42,842-PHY TX:radio rx 0
+lora_phy-INFO-  2021-08-14 18:28:44,531-PHY RX:02611B01000082156000000000091140223D162E0009761250
+lora_phy-INFO-  2021-08-14 18:28:44,531-STAT: PHY RX: 32252371990811
+lora_mac-INFO-  2021-08-14 18:28:44,532-MAC RX: LoraFrame(src_addr=LoraAddr(prefix=2, node_id=24859), dest_addr=LoraAddr(prefix=1, node_id=0), command=<MacCommand.DATA: 2>, payload='6000000000091140223D162E0009761250', seq=21, k=True, has_next=False)
+lora_phy-INFO-  2021-08-14 18:28:44,532-MAC send:LoraFrame(src_addr=LoraAddr(prefix=1, node_id=0), dest_addr=LoraAddr(prefix=2, node_id=24859), command=<MacCommand.ACK: 3>, payload='', seq=21, k=False, has_next=False)
+lora_ip-INFO-  2021-08-14 18:28:44,532-IP RX: 6000000000091140223D162E0009761250 from: 2:24859
+lora_phy-INFO-  2021-08-14 18:28:44,532-PHY TX:radio tx 01000002611B0315
+lora_phy-INFO-  2021-08-14 18:28:44,535-STAT: PHY TX: 32252376645252
+lora_phy-INFO-  2021-08-14 18:28:44,536-MAC switch to reception mode
+lora_phy-INFO-  2021-08-14 18:28:45,540-PHY TX:radio rx 0
+lora_phy-INFO-  2021-08-14 18:29:43,944-PHY RX:02611B0100000416
+lora_phy-INFO-  2021-08-14 18:29:43,944-STAT: PHY RX: 32311785433430
+lora_mac-INFO-  2021-08-14 18:29:43,945-MAC RX: LoraFrame(src_addr=LoraAddr(prefix=2, node_id=24859), dest_addr=LoraAddr(prefix=1, node_id=0), command=<MacCommand.QUERY: 4>, payload='', seq=22, k=False, has_next=False)
+lora_phy-INFO-  2021-08-14 18:29:43,945-MAC send:LoraFrame(src_addr=LoraAddr(prefix=1, node_id=0), dest_addr=LoraAddr(prefix=2, node_id=24859), command=<MacCommand.ACK: 3>, payload='', seq=22, k=False, has_next=False)
+lora_phy-INFO-  2021-08-14 18:29:43,946-MAC switch to reception mode
+lora_phy-INFO-  2021-08-14 18:29:43,946-PHY TX:radio tx 01000002611B0316
+lora_phy-INFO-  2021-08-14 18:29:43,947-STAT: PHY TX: 32311787830171
+lora_phy-INFO-  2021-08-14 18:29:44,951-PHY TX:radio rx 0
+lora_phy-INFO-  2021-08-14 18:30:46,037-PHY RX:02611B0100000417
+lora_phy-INFO-  2021-08-14 18:30:46,037-STAT: PHY RX: 32373878196372
+lora_mac-INFO-  2021-08-14 18:30:46,037-MAC RX: LoraFrame(src_addr=LoraAddr(prefix=2, node_id=24859), dest_addr=LoraAddr(prefix=1, node_id=0), command=<MacCommand.QUERY: 4>, payload='', seq=23, k=False, has_next=False)
+lora_phy-INFO-  2021-08-14 18:30:46,037-MAC send:LoraFrame(src_addr=LoraAddr(prefix=1, node_id=0), dest_addr=LoraAddr(prefix=2, node_id=24859), command=<MacCommand.ACK: 3>, payload='', seq=23, k=False, has_next=False)
+lora_phy-INFO-  2021-08-14 18:30:46,038-MAC switch to reception mode
+lora_phy-INFO-  2021-08-14 18:30:46,038-PHY TX:radio tx 01000002611B0317
+lora_phy-INFO-  2021-08-14 18:30:46,038-STAT: PHY TX: 32373879189237
+lora_phy-INFO-  2021-08-14 18:30:47,042-PHY TX:radio rx 0
+lora_phy-INFO-  2021-08-14 18:31:48,131-PHY RX:02611B0100000418
+lora_phy-INFO-  2021-08-14 18:31:48,131-STAT: PHY RX: 32435972425871
+lora_mac-INFO-  2021-08-14 18:31:48,134-MAC RX: LoraFrame(src_addr=LoraAddr(prefix=2, node_id=24859), dest_addr=LoraAddr(prefix=1, node_id=0), command=<MacCommand.QUERY: 4>, payload='', seq=24, k=False, has_next=False)
+lora_phy-INFO-  2021-08-14 18:31:48,135-MAC send:LoraFrame(src_addr=LoraAddr(prefix=1, node_id=0), dest_addr=LoraAddr(prefix=2, node_id=24859), command=<MacCommand.ACK: 3>, payload='', seq=24, k=False, has_next=False)
+lora_phy-INFO-  2021-08-14 18:31:48,135-MAC switch to reception mode
+lora_phy-INFO-  2021-08-14 18:31:48,135-PHY TX:radio tx 01000002611B0318
+lora_phy-INFO-  2021-08-14 18:31:48,136-STAT: PHY TX: 32435976837748
+lora_phy-INFO-  2021-08-14 18:31:49,140-PHY TX:radio rx 0
+lora_phy-INFO-  2021-08-14 18:32:50,225-PHY RX:02611B0100000419
+lora_phy-INFO-  2021-08-14 18:32:50,225-STAT: PHY RX: 32498066226263
+lora_mac-INFO-  2021-08-14 18:32:50,226-MAC RX: LoraFrame(src_addr=LoraAddr(prefix=2, node_id=24859), dest_addr=LoraAddr(prefix=1, node_id=0), command=<MacCommand.QUERY: 4>, payload='', seq=25, k=False, has_next=False)
+lora_phy-INFO-  2021-08-14 18:32:50,226-MAC send:LoraFrame(src_addr=LoraAddr(prefix=1, node_id=0), dest_addr=LoraAddr(prefix=2, node_id=24859), command=<MacCommand.ACK: 3>, payload='', seq=25, k=False, has_next=False)
+lora_phy-INFO-  2021-08-14 18:32:50,227-MAC switch to reception mode
+lora_phy-INFO-  2021-08-14 18:32:50,227-PHY TX:radio tx 01000002611B0319
+lora_phy-INFO-  2021-08-14 18:32:50,227-STAT: PHY TX: 32498068591041
+lora_phy-INFO-  2021-08-14 18:32:51,231-PHY TX:radio rx 0
+lora_phy-INFO-  2021-08-14 18:33:52,318-PHY RX:02611B010000041A
+lora_phy-INFO-  2021-08-14 18:33:52,319-STAT: PHY RX: 32560159807691
+lora_mac-INFO-  2021-08-14 18:33:52,320-MAC RX: LoraFrame(src_addr=LoraAddr(prefix=2, node_id=24859), dest_addr=LoraAddr(prefix=1, node_id=0), command=<MacCommand.QUERY: 4>, payload='', seq=26, k=False, has_next=False)
+lora_phy-INFO-  2021-08-14 18:33:52,320-MAC send:LoraFrame(src_addr=LoraAddr(prefix=1, node_id=0), dest_addr=LoraAddr(prefix=2, node_id=24859), command=<MacCommand.ACK: 3>, payload='', seq=26, k=False, has_next=False)
+lora_phy-INFO-  2021-08-14 18:33:52,321-MAC switch to reception mode
+lora_phy-INFO-  2021-08-14 18:33:52,321-PHY TX:radio tx 01000002611B031A
+lora_phy-INFO-  2021-08-14 18:33:52,321-STAT: PHY TX: 32560162634898
+lora_phy-INFO-  2021-08-14 18:33:53,326-PHY TX:radio rx 0
+lora_phy-INFO-  2021-08-14 18:34:54,413-PHY RX:02611B010000041B
+lora_phy-INFO-  2021-08-14 18:34:54,413-STAT: PHY RX: 32622254407006
+lora_mac-INFO-  2021-08-14 18:34:54,414-MAC RX: LoraFrame(src_addr=LoraAddr(prefix=2, node_id=24859), dest_addr=LoraAddr(prefix=1, node_id=0), command=<MacCommand.QUERY: 4>, payload='', seq=27, k=False, has_next=False)
+lora_phy-INFO-  2021-08-14 18:34:54,415-MAC send:LoraFrame(src_addr=LoraAddr(prefix=1, node_id=0), dest_addr=LoraAddr(prefix=2, node_id=24859), command=<MacCommand.ACK: 3>, payload='', seq=27, k=False, has_next=False)
+lora_phy-INFO-  2021-08-14 18:34:54,415-MAC switch to reception mode
+lora_phy-INFO-  2021-08-14 18:34:54,416-PHY TX:radio tx 01000002611B031B
+lora_phy-INFO-  2021-08-14 18:34:54,417-STAT: PHY TX: 32622257867809
+lora_phy-INFO-  2021-08-14 18:34:55,421-PHY TX:radio rx 0
+lora_phy-INFO-  2021-08-14 18:35:56,506-PHY RX:02611B010000041C
+lora_phy-INFO-  2021-08-14 18:35:56,506-STAT: PHY RX: 32684347390461
+lora_mac-INFO-  2021-08-14 18:35:56,507-MAC RX: LoraFrame(src_addr=LoraAddr(prefix=2, node_id=24859), dest_addr=LoraAddr(prefix=1, node_id=0), command=<MacCommand.QUERY: 4>, payload='', seq=28, k=False, has_next=False)
+lora_phy-INFO-  2021-08-14 18:35:56,507-MAC send:LoraFrame(src_addr=LoraAddr(prefix=1, node_id=0), dest_addr=LoraAddr(prefix=2, node_id=24859), command=<MacCommand.ACK: 3>, payload='', seq=28, k=False, has_next=False)
+lora_phy-INFO-  2021-08-14 18:35:56,507-MAC switch to reception mode
+lora_phy-INFO-  2021-08-14 18:35:56,508-PHY TX:radio tx 01000002611B031C
+lora_phy-INFO-  2021-08-14 18:35:56,508-STAT: PHY TX: 32684349378837
+lora_phy-INFO-  2021-08-14 18:35:57,512-PHY TX:radio rx 0
+lora_phy-INFO-  2021-08-14 18:36:58,600-PHY RX:02611B010000041D
+lora_phy-INFO-  2021-08-14 18:36:58,602-STAT: PHY RX: 32746442016199
+lora_mac-INFO-  2021-08-14 18:36:58,602-MAC RX: LoraFrame(src_addr=LoraAddr(prefix=2, node_id=24859), dest_addr=LoraAddr(prefix=1, node_id=0), command=<MacCommand.QUERY: 4>, payload='', seq=29, k=False, has_next=False)
+lora_phy-INFO-  2021-08-14 18:36:58,604-MAC send:LoraFrame(src_addr=LoraAddr(prefix=1, node_id=0), dest_addr=LoraAddr(prefix=2, node_id=24859), command=<MacCommand.ACK: 3>, payload='', seq=29, k=False, has_next=False)
+lora_phy-INFO-  2021-08-14 18:36:58,604-MAC switch to reception mode
+lora_phy-INFO-  2021-08-14 18:36:58,604-PHY TX:radio tx 01000002611B031D
+lora_phy-INFO-  2021-08-14 18:36:58,604-STAT: PHY TX: 32746445488458
+lora_phy-INFO-  2021-08-14 18:36:59,608-PHY TX:radio rx 0
+lora_phy-INFO-  2021-08-14 18:38:00,694-PHY RX:02611B010000041E
+lora_phy-INFO-  2021-08-14 18:38:00,695-STAT: PHY RX: 32808535773959
+lora_mac-INFO-  2021-08-14 18:38:00,695-MAC RX: LoraFrame(src_addr=LoraAddr(prefix=2, node_id=24859), dest_addr=LoraAddr(prefix=1, node_id=0), command=<MacCommand.QUERY: 4>, payload='', seq=30, k=False, has_next=False)
+lora_phy-INFO-  2021-08-14 18:38:00,696-MAC send:LoraFrame(src_addr=LoraAddr(prefix=1, node_id=0), dest_addr=LoraAddr(prefix=2, node_id=24859), command=<MacCommand.ACK: 3>, payload='', seq=30, k=False, has_next=False)
+lora_phy-INFO-  2021-08-14 18:38:00,696-MAC switch to reception mode
+lora_phy-INFO-  2021-08-14 18:38:00,696-PHY TX:radio tx 01000002611B031E
+lora_phy-INFO-  2021-08-14 18:38:00,697-STAT: PHY TX: 32808537741380
+lora_phy-INFO-  2021-08-14 18:38:01,700-PHY TX:radio rx 0
+lora_phy-INFO-  2021-08-14 18:39:02,787-PHY RX:02611B010000041F
+lora_phy-INFO-  2021-08-14 18:39:02,787-STAT: PHY RX: 32870628495681
+lora_mac-INFO-  2021-08-14 18:39:02,788-MAC RX: LoraFrame(src_addr=LoraAddr(prefix=2, node_id=24859), dest_addr=LoraAddr(prefix=1, node_id=0), command=<MacCommand.QUERY: 4>, payload='', seq=31, k=False, has_next=False)
+lora_phy-INFO-  2021-08-14 18:39:02,788-MAC send:LoraFrame(src_addr=LoraAddr(prefix=1, node_id=0), dest_addr=LoraAddr(prefix=2, node_id=24859), command=<MacCommand.ACK: 3>, payload='', seq=31, k=False, has_next=False)
+lora_phy-INFO-  2021-08-14 18:39:02,788-MAC switch to reception mode
+lora_phy-INFO-  2021-08-14 18:39:02,788-PHY TX:radio tx 01000002611B031F
+lora_phy-INFO-  2021-08-14 18:39:02,789-STAT: PHY TX: 32870629758689
+lora_phy-INFO-  2021-08-14 18:39:03,793-PHY TX:radio rx 0
+lora_phy-INFO-  2021-08-14 18:40:04,881-PHY RX:02611B0100000420
+lora_phy-INFO-  2021-08-14 18:40:04,881-STAT: PHY RX: 32932722157369
+lora_mac-INFO-  2021-08-14 18:40:04,881-MAC RX: LoraFrame(src_addr=LoraAddr(prefix=2, node_id=24859), dest_addr=LoraAddr(prefix=1, node_id=0), command=<MacCommand.QUERY: 4>, payload='', seq=32, k=False, has_next=False)
+lora_phy-INFO-  2021-08-14 18:40:04,881-MAC send:LoraFrame(src_addr=LoraAddr(prefix=1, node_id=0), dest_addr=LoraAddr(prefix=2, node_id=24859), command=<MacCommand.ACK: 3>, payload='', seq=32, k=False, has_next=False)
+lora_phy-INFO-  2021-08-14 18:40:04,882-MAC switch to reception mode
+lora_phy-INFO-  2021-08-14 18:40:04,882-PHY TX:radio tx 01000002611B0320
+lora_phy-INFO-  2021-08-14 18:40:04,882-STAT: PHY TX: 32932723195015
+lora_phy-INFO-  2021-08-14 18:40:05,886-PHY TX:radio rx 0
+lora_phy-INFO-  2021-08-14 18:41:06,974-PHY RX:02611B0100000421
+lora_phy-INFO-  2021-08-14 18:41:06,975-STAT: PHY RX: 32994815758245
+lora_mac-INFO-  2021-08-14 18:41:06,975-MAC RX: LoraFrame(src_addr=LoraAddr(prefix=2, node_id=24859), dest_addr=LoraAddr(prefix=1, node_id=0), command=<MacCommand.QUERY: 4>, payload='', seq=33, k=False, has_next=False)
+lora_phy-INFO-  2021-08-14 18:41:06,975-MAC send:LoraFrame(src_addr=LoraAddr(prefix=1, node_id=0), dest_addr=LoraAddr(prefix=2, node_id=24859), command=<MacCommand.ACK: 3>, payload='', seq=33, k=False, has_next=False)
+lora_phy-INFO-  2021-08-14 18:41:06,975-MAC switch to reception mode
+lora_phy-INFO-  2021-08-14 18:41:06,976-PHY TX:radio tx 01000002611B0321
+lora_phy-INFO-  2021-08-14 18:41:06,976-STAT: PHY TX: 32994817010640
+lora_phy-INFO-  2021-08-14 18:41:07,980-PHY TX:radio rx 0
+lora_phy-INFO-  2021-08-14 18:42:09,068-PHY RX:02611B0100000422
+lora_phy-INFO-  2021-08-14 18:42:09,068-STAT: PHY RX: 33056908994218
+lora_mac-INFO-  2021-08-14 18:42:09,068-MAC RX: LoraFrame(src_addr=LoraAddr(prefix=2, node_id=24859), dest_addr=LoraAddr(prefix=1, node_id=0), command=<MacCommand.QUERY: 4>, payload='', seq=34, k=False, has_next=False)
+lora_phy-INFO-  2021-08-14 18:42:09,068-MAC send:LoraFrame(src_addr=LoraAddr(prefix=1, node_id=0), dest_addr=LoraAddr(prefix=2, node_id=24859), command=<MacCommand.ACK: 3>, payload='', seq=34, k=False, has_next=False)
+lora_phy-INFO-  2021-08-14 18:42:09,068-MAC switch to reception mode
+lora_phy-INFO-  2021-08-14 18:42:09,069-PHY TX:radio tx 01000002611B0322
+lora_phy-INFO-  2021-08-14 18:42:09,069-STAT: PHY TX: 33056909824262
+lora_phy-INFO-  2021-08-14 18:42:10,073-PHY TX:radio rx 0
+lora_phy-INFO-  2021-08-14 18:43:11,164-PHY RX:02611B0100000423
+lora_phy-INFO-  2021-08-14 18:43:11,164-STAT: PHY RX: 33119005076129
+lora_mac-INFO-  2021-08-14 18:43:11,167-MAC RX: LoraFrame(src_addr=LoraAddr(prefix=2, node_id=24859), dest_addr=LoraAddr(prefix=1, node_id=0), command=<MacCommand.QUERY: 4>, payload='', seq=35, k=False, has_next=False)
+lora_phy-INFO-  2021-08-14 18:43:11,167-MAC send:LoraFrame(src_addr=LoraAddr(prefix=1, node_id=0), dest_addr=LoraAddr(prefix=2, node_id=24859), command=<MacCommand.ACK: 3>, payload='', seq=35, k=False, has_next=False)
+lora_phy-INFO-  2021-08-14 18:43:11,167-MAC switch to reception mode
+lora_phy-INFO-  2021-08-14 18:43:11,167-PHY TX:radio tx 01000002611B0323
+lora_phy-INFO-  2021-08-14 18:43:11,167-STAT: PHY TX: 33119008548548
+lora_phy-INFO-  2021-08-14 18:43:12,171-PHY TX:radio rx 0
+lora_phy-INFO-  2021-08-14 18:44:13,263-PHY RX:02611B0100000424
+lora_phy-INFO-  2021-08-14 18:44:13,263-STAT: PHY RX: 33181103981597
+lora_mac-INFO-  2021-08-14 18:44:13,263-MAC RX: LoraFrame(src_addr=LoraAddr(prefix=2, node_id=24859), dest_addr=LoraAddr(prefix=1, node_id=0), command=<MacCommand.QUERY: 4>, payload='', seq=36, k=False, has_next=False)
+lora_phy-INFO-  2021-08-14 18:44:13,264-MAC send:LoraFrame(src_addr=LoraAddr(prefix=1, node_id=0), dest_addr=LoraAddr(prefix=2, node_id=24859), command=<MacCommand.ACK: 3>, payload='', seq=36, k=False, has_next=False)
+lora_phy-INFO-  2021-08-14 18:44:13,264-MAC switch to reception mode
+lora_phy-INFO-  2021-08-14 18:44:13,264-PHY TX:radio tx 01000002611B0324
+lora_phy-INFO-  2021-08-14 18:44:13,264-STAT: PHY TX: 33181105629572
+lora_phy-INFO-  2021-08-14 18:44:14,268-PHY TX:radio rx 0
+lora_phy-INFO-  2021-08-14 18:45:15,356-PHY RX:02611B0100000425
+lora_phy-INFO-  2021-08-14 18:45:15,356-STAT: PHY RX: 33243197622527
+lora_mac-INFO-  2021-08-14 18:45:15,357-MAC RX: LoraFrame(src_addr=LoraAddr(prefix=2, node_id=24859), dest_addr=LoraAddr(prefix=1, node_id=0), command=<MacCommand.QUERY: 4>, payload='', seq=37, k=False, has_next=False)
+lora_phy-INFO-  2021-08-14 18:45:15,357-MAC send:LoraFrame(src_addr=LoraAddr(prefix=1, node_id=0), dest_addr=LoraAddr(prefix=2, node_id=24859), command=<MacCommand.ACK: 3>, payload='', seq=37, k=False, has_next=False)
+lora_phy-INFO-  2021-08-14 18:45:15,357-MAC switch to reception mode
+lora_phy-INFO-  2021-08-14 18:45:15,358-PHY TX:radio tx 01000002611B0325
+lora_phy-INFO-  2021-08-14 18:45:15,358-STAT: PHY TX: 33243199018863
+lora_phy-INFO-  2021-08-14 18:45:16,362-PHY TX:radio rx 0
+lora_phy-INFO-  2021-08-14 18:46:17,450-PHY RX:02611B0100000426
+lora_phy-INFO-  2021-08-14 18:46:17,450-STAT: PHY RX: 33305291171323
+lora_mac-INFO-  2021-08-14 18:46:17,450-MAC RX: LoraFrame(src_addr=LoraAddr(prefix=2, node_id=24859), dest_addr=LoraAddr(prefix=1, node_id=0), command=<MacCommand.QUERY: 4>, payload='', seq=38, k=False, has_next=False)
+lora_phy-INFO-  2021-08-14 18:46:17,451-MAC send:LoraFrame(src_addr=LoraAddr(prefix=1, node_id=0), dest_addr=LoraAddr(prefix=2, node_id=24859), command=<MacCommand.ACK: 3>, payload='', seq=38, k=False, has_next=False)
+lora_phy-INFO-  2021-08-14 18:46:17,451-MAC switch to reception mode
+lora_phy-INFO-  2021-08-14 18:46:17,451-PHY TX:radio tx 01000002611B0326
+lora_phy-INFO-  2021-08-14 18:46:17,451-STAT: PHY TX: 33305292227980
+lora_phy-INFO-  2021-08-14 18:46:18,455-PHY TX:radio rx 0
+lora_phy-INFO-  2021-08-14 18:47:19,544-PHY RX:02611B0100000427
+lora_phy-INFO-  2021-08-14 18:47:19,544-STAT: PHY RX: 33367385197857
+lora_mac-INFO-  2021-08-14 18:47:19,547-MAC RX: LoraFrame(src_addr=LoraAddr(prefix=2, node_id=24859), dest_addr=LoraAddr(prefix=1, node_id=0), command=<MacCommand.QUERY: 4>, payload='', seq=39, k=False, has_next=False)
+lora_phy-INFO-  2021-08-14 18:47:19,547-MAC send:LoraFrame(src_addr=LoraAddr(prefix=1, node_id=0), dest_addr=LoraAddr(prefix=2, node_id=24859), command=<MacCommand.ACK: 3>, payload='', seq=39, k=False, has_next=False)
+lora_phy-INFO-  2021-08-14 18:47:19,547-MAC switch to reception mode
+lora_phy-INFO-  2021-08-14 18:47:19,547-PHY TX:radio tx 01000002611B0327
+lora_phy-INFO-  2021-08-14 18:47:19,548-STAT: PHY TX: 33367389035265
+lora_phy-INFO-  2021-08-14 18:47:20,552-PHY TX:radio rx 0
+lora_phy-INFO-  2021-08-14 18:48:21,638-PHY RX:02611B0100000428
+lora_phy-INFO-  2021-08-14 18:48:21,638-STAT: PHY RX: 33429479122344
+lora_mac-INFO-  2021-08-14 18:48:21,639-MAC RX: LoraFrame(src_addr=LoraAddr(prefix=2, node_id=24859), dest_addr=LoraAddr(prefix=1, node_id=0), command=<MacCommand.QUERY: 4>, payload='', seq=40, k=False, has_next=False)
+lora_phy-INFO-  2021-08-14 18:48:21,639-MAC send:LoraFrame(src_addr=LoraAddr(prefix=1, node_id=0), dest_addr=LoraAddr(prefix=2, node_id=24859), command=<MacCommand.ACK: 3>, payload='', seq=40, k=False, has_next=False)
+lora_phy-INFO-  2021-08-14 18:48:21,640-MAC switch to reception mode
+lora_phy-INFO-  2021-08-14 18:48:21,640-PHY TX:radio tx 01000002611B0328
+lora_phy-INFO-  2021-08-14 18:48:21,640-STAT: PHY TX: 33429481548441
+lora_phy-INFO-  2021-08-14 18:48:22,645-PHY TX:radio rx 0
+lora_phy-INFO-  2021-08-14 18:49:23,731-PHY RX:02611B0100000429
+lora_phy-INFO-  2021-08-14 18:49:23,731-STAT: PHY RX: 33491572486103
+lora_mac-INFO-  2021-08-14 18:49:23,732-MAC RX: LoraFrame(src_addr=LoraAddr(prefix=2, node_id=24859), dest_addr=LoraAddr(prefix=1, node_id=0), command=<MacCommand.QUERY: 4>, payload='', seq=41, k=False, has_next=False)
+lora_phy-INFO-  2021-08-14 18:49:23,732-MAC send:LoraFrame(src_addr=LoraAddr(prefix=1, node_id=0), dest_addr=LoraAddr(prefix=2, node_id=24859), command=<MacCommand.ACK: 3>, payload='', seq=41, k=False, has_next=False)
+lora_phy-INFO-  2021-08-14 18:49:23,733-MAC switch to reception mode
+lora_phy-INFO-  2021-08-14 18:49:23,733-PHY TX:radio tx 01000002611B0329
+lora_phy-INFO-  2021-08-14 18:49:23,733-STAT: PHY TX: 33491574299333
+lora_phy-INFO-  2021-08-14 18:49:24,737-PHY TX:radio rx 0
+lora_phy-INFO-  2021-08-14 18:50:25,824-PHY RX:02611B010000042A
+lora_phy-INFO-  2021-08-14 18:50:25,824-STAT: PHY RX: 33553665530912
+lora_mac-INFO-  2021-08-14 18:50:25,825-MAC RX: LoraFrame(src_addr=LoraAddr(prefix=2, node_id=24859), dest_addr=LoraAddr(prefix=1, node_id=0), command=<MacCommand.QUERY: 4>, payload='', seq=42, k=False, has_next=False)
+lora_phy-INFO-  2021-08-14 18:50:25,825-MAC send:LoraFrame(src_addr=LoraAddr(prefix=1, node_id=0), dest_addr=LoraAddr(prefix=2, node_id=24859), command=<MacCommand.ACK: 3>, payload='', seq=42, k=False, has_next=False)
+lora_phy-INFO-  2021-08-14 18:50:25,825-MAC switch to reception mode
+lora_phy-INFO-  2021-08-14 18:50:25,826-PHY TX:radio tx 01000002611B032A
+lora_phy-INFO-  2021-08-14 18:50:25,826-STAT: PHY TX: 33553667418167
+lora_phy-INFO-  2021-08-14 18:50:26,830-PHY TX:radio rx 0
+lora_phy-INFO-  2021-08-14 18:51:27,918-PHY RX:02611B010000042B
+lora_phy-INFO-  2021-08-14 18:51:27,918-STAT: PHY RX: 33615759635196
+lora_mac-INFO-  2021-08-14 18:51:27,919-MAC RX: LoraFrame(src_addr=LoraAddr(prefix=2, node_id=24859), dest_addr=LoraAddr(prefix=1, node_id=0), command=<MacCommand.QUERY: 4>, payload='', seq=43, k=False, has_next=False)
+lora_phy-INFO-  2021-08-14 18:51:27,919-MAC send:LoraFrame(src_addr=LoraAddr(prefix=1, node_id=0), dest_addr=LoraAddr(prefix=2, node_id=24859), command=<MacCommand.ACK: 3>, payload='', seq=43, k=False, has_next=False)
+lora_phy-INFO-  2021-08-14 18:51:27,920-MAC switch to reception mode
+lora_phy-INFO-  2021-08-14 18:51:27,920-PHY TX:radio tx 01000002611B032B
+lora_phy-INFO-  2021-08-14 18:51:27,920-STAT: PHY TX: 33615761521613
+lora_phy-INFO-  2021-08-14 18:51:28,924-PHY TX:radio rx 0
+lora_phy-INFO-  2021-08-14 18:52:30,012-PHY RX:02611B010000042C
+lora_phy-INFO-  2021-08-14 18:52:30,012-STAT: PHY RX: 33677853315327
+lora_mac-INFO-  2021-08-14 18:52:30,013-MAC RX: LoraFrame(src_addr=LoraAddr(prefix=2, node_id=24859), dest_addr=LoraAddr(prefix=1, node_id=0), command=<MacCommand.QUERY: 4>, payload='', seq=44, k=False, has_next=False)
+lora_phy-INFO-  2021-08-14 18:52:30,013-MAC send:LoraFrame(src_addr=LoraAddr(prefix=1, node_id=0), dest_addr=LoraAddr(prefix=2, node_id=24859), command=<MacCommand.ACK: 3>, payload='', seq=44, k=False, has_next=False)
+lora_phy-INFO-  2021-08-14 18:52:30,014-MAC switch to reception mode
+lora_phy-INFO-  2021-08-14 18:52:30,014-PHY TX:radio tx 01000002611B032C
+lora_phy-INFO-  2021-08-14 18:52:30,014-STAT: PHY TX: 33677855165301
+lora_phy-INFO-  2021-08-14 18:52:31,018-PHY TX:radio rx 0
+lora_phy-INFO-  2021-08-14 18:53:32,105-PHY RX:02611B010000042D
+lora_phy-INFO-  2021-08-14 18:53:32,105-STAT: PHY RX: 33739946427624
+lora_mac-INFO-  2021-08-14 18:53:32,106-MAC RX: LoraFrame(src_addr=LoraAddr(prefix=2, node_id=24859), dest_addr=LoraAddr(prefix=1, node_id=0), command=<MacCommand.QUERY: 4>, payload='', seq=45, k=False, has_next=False)
+lora_phy-INFO-  2021-08-14 18:53:32,106-MAC send:LoraFrame(src_addr=LoraAddr(prefix=1, node_id=0), dest_addr=LoraAddr(prefix=2, node_id=24859), command=<MacCommand.ACK: 3>, payload='', seq=45, k=False, has_next=False)
+lora_phy-INFO-  2021-08-14 18:53:32,106-MAC switch to reception mode
+lora_phy-INFO-  2021-08-14 18:53:32,106-PHY TX:radio tx 01000002611B032D
+lora_phy-INFO-  2021-08-14 18:53:32,107-STAT: PHY TX: 33739947774628
+lora_phy-INFO-  2021-08-14 18:53:33,111-PHY TX:radio rx 0
+lora_phy-INFO-  2021-08-14 18:54:34,199-PHY RX:02611B010000042E
+lora_phy-INFO-  2021-08-14 18:54:34,199-STAT: PHY RX: 33802039904958
+lora_mac-INFO-  2021-08-14 18:54:34,199-MAC RX: LoraFrame(src_addr=LoraAddr(prefix=2, node_id=24859), dest_addr=LoraAddr(prefix=1, node_id=0), command=<MacCommand.QUERY: 4>, payload='', seq=46, k=False, has_next=False)
+lora_phy-INFO-  2021-08-14 18:54:34,199-MAC send:LoraFrame(src_addr=LoraAddr(prefix=1, node_id=0), dest_addr=LoraAddr(prefix=2, node_id=24859), command=<MacCommand.ACK: 3>, payload='', seq=46, k=False, has_next=False)
+lora_phy-INFO-  2021-08-14 18:54:34,199-MAC switch to reception mode
+lora_phy-INFO-  2021-08-14 18:54:34,200-PHY TX:radio tx 01000002611B032E
+lora_phy-INFO-  2021-08-14 18:54:34,200-STAT: PHY TX: 33802041220642
+lora_phy-INFO-  2021-08-14 18:54:35,204-PHY TX:radio rx 0
+lora_phy-INFO-  2021-08-14 18:55:36,293-PHY RX:02611B010000042F
+lora_phy-INFO-  2021-08-14 18:55:36,293-STAT: PHY RX: 33864134173488
+lora_mac-INFO-  2021-08-14 18:55:36,294-MAC RX: LoraFrame(src_addr=LoraAddr(prefix=2, node_id=24859), dest_addr=LoraAddr(prefix=1, node_id=0), command=<MacCommand.QUERY: 4>, payload='', seq=47, k=False, has_next=False)
+lora_phy-INFO-  2021-08-14 18:55:36,294-MAC send:LoraFrame(src_addr=LoraAddr(prefix=1, node_id=0), dest_addr=LoraAddr(prefix=2, node_id=24859), command=<MacCommand.ACK: 3>, payload='', seq=47, k=False, has_next=False)
+lora_phy-INFO-  2021-08-14 18:55:36,295-MAC switch to reception mode
+lora_phy-INFO-  2021-08-14 18:55:36,295-PHY TX:radio tx 01000002611B032F
+lora_phy-INFO-  2021-08-14 18:55:36,296-STAT: PHY TX: 33864136939375
+lora_phy-INFO-  2021-08-14 18:55:37,300-PHY TX:radio rx 0
+lora_phy-INFO-  2021-08-14 18:56:38,386-PHY RX:02611B0100000430
+lora_phy-INFO-  2021-08-14 18:56:38,386-STAT: PHY RX: 33926227333131
+lora_mac-INFO-  2021-08-14 18:56:38,387-MAC RX: LoraFrame(src_addr=LoraAddr(prefix=2, node_id=24859), dest_addr=LoraAddr(prefix=1, node_id=0), command=<MacCommand.QUERY: 4>, payload='', seq=48, k=False, has_next=False)
+lora_phy-INFO-  2021-08-14 18:56:38,387-MAC send:LoraFrame(src_addr=LoraAddr(prefix=1, node_id=0), dest_addr=LoraAddr(prefix=2, node_id=24859), command=<MacCommand.ACK: 3>, payload='', seq=48, k=False, has_next=False)
+lora_phy-INFO-  2021-08-14 18:56:38,387-MAC switch to reception mode
+lora_phy-INFO-  2021-08-14 18:56:38,387-PHY TX:radio tx 01000002611B0330
+lora_phy-INFO-  2021-08-14 18:56:38,387-STAT: PHY TX: 33926228700625
+lora_phy-INFO-  2021-08-14 18:56:39,391-PHY TX:radio rx 0
+lora_phy-INFO-  2021-08-14 18:57:40,480-PHY RX:02611B0100000431
+lora_phy-INFO-  2021-08-14 18:57:40,480-STAT: PHY RX: 33988321356157
+lora_mac-INFO-  2021-08-14 18:57:40,481-MAC RX: LoraFrame(src_addr=LoraAddr(prefix=2, node_id=24859), dest_addr=LoraAddr(prefix=1, node_id=0), command=<MacCommand.QUERY: 4>, payload='', seq=49, k=False, has_next=False)
+lora_phy-INFO-  2021-08-14 18:57:40,481-MAC send:LoraFrame(src_addr=LoraAddr(prefix=1, node_id=0), dest_addr=LoraAddr(prefix=2, node_id=24859), command=<MacCommand.ACK: 3>, payload='', seq=49, k=False, has_next=False)
+lora_phy-INFO-  2021-08-14 18:57:40,481-MAC switch to reception mode
+lora_phy-INFO-  2021-08-14 18:57:40,482-PHY TX:radio tx 01000002611B0331
+lora_phy-INFO-  2021-08-14 18:57:40,482-STAT: PHY TX: 33988323096293
+lora_phy-INFO-  2021-08-14 18:57:41,486-PHY TX:radio rx 0
+lora_phy-INFO-  2021-08-14 18:58:42,573-PHY RX:02611B0100000432
+lora_phy-INFO-  2021-08-14 18:58:42,574-STAT: PHY RX: 34050414818573
+lora_mac-INFO-  2021-08-14 18:58:42,574-MAC RX: LoraFrame(src_addr=LoraAddr(prefix=2, node_id=24859), dest_addr=LoraAddr(prefix=1, node_id=0), command=<MacCommand.QUERY: 4>, payload='', seq=50, k=False, has_next=False)
+lora_phy-INFO-  2021-08-14 18:58:42,574-MAC send:LoraFrame(src_addr=LoraAddr(prefix=1, node_id=0), dest_addr=LoraAddr(prefix=2, node_id=24859), command=<MacCommand.ACK: 3>, payload='', seq=50, k=False, has_next=False)
+lora_phy-INFO-  2021-08-14 18:58:42,575-MAC switch to reception mode
+lora_phy-INFO-  2021-08-14 18:58:42,575-PHY TX:radio tx 01000002611B0332
+lora_phy-INFO-  2021-08-14 18:58:42,575-STAT: PHY TX: 34050416316431
+lora_phy-INFO-  2021-08-14 18:58:43,579-PHY TX:radio rx 0
+lora_phy-INFO-  2021-08-14 18:59:44,667-PHY RX:02611B0100000433
+lora_phy-INFO-  2021-08-14 18:59:44,667-STAT: PHY RX: 34112508454062
+lora_mac-INFO-  2021-08-14 18:59:44,668-MAC RX: LoraFrame(src_addr=LoraAddr(prefix=2, node_id=24859), dest_addr=LoraAddr(prefix=1, node_id=0), command=<MacCommand.QUERY: 4>, payload='', seq=51, k=False, has_next=False)
+lora_phy-INFO-  2021-08-14 18:59:44,668-MAC send:LoraFrame(src_addr=LoraAddr(prefix=1, node_id=0), dest_addr=LoraAddr(prefix=2, node_id=24859), command=<MacCommand.ACK: 3>, payload='', seq=51, k=False, has_next=False)
+lora_phy-INFO-  2021-08-14 18:59:44,668-MAC switch to reception mode
+lora_phy-INFO-  2021-08-14 18:59:44,669-PHY TX:radio tx 01000002611B0333
+lora_phy-INFO-  2021-08-14 18:59:44,669-STAT: PHY TX: 34112510044847
+lora_phy-INFO-  2021-08-14 18:59:45,673-PHY TX:radio rx 0
+lora_phy-INFO-  2021-08-14 19:00:46,761-PHY RX:02611B0100000434
+lora_phy-INFO-  2021-08-14 19:00:46,761-STAT: PHY RX: 34174602160843
+lora_mac-INFO-  2021-08-14 19:00:46,761-MAC RX: LoraFrame(src_addr=LoraAddr(prefix=2, node_id=24859), dest_addr=LoraAddr(prefix=1, node_id=0), command=<MacCommand.QUERY: 4>, payload='', seq=52, k=False, has_next=False)
+lora_phy-INFO-  2021-08-14 19:00:46,762-MAC send:LoraFrame(src_addr=LoraAddr(prefix=1, node_id=0), dest_addr=LoraAddr(prefix=2, node_id=24859), command=<MacCommand.ACK: 3>, payload='', seq=52, k=False, has_next=False)
+lora_phy-INFO-  2021-08-14 19:00:46,762-MAC switch to reception mode
+lora_phy-INFO-  2021-08-14 19:00:46,762-PHY TX:radio tx 01000002611B0334
+lora_phy-INFO-  2021-08-14 19:00:46,762-STAT: PHY TX: 34174603451455
+lora_phy-INFO-  2021-08-14 19:00:47,766-PHY TX:radio rx 0
