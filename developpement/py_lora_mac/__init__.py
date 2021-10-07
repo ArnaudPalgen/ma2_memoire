@@ -12,8 +12,6 @@ class NetworkStack:
         self.send = self.ip.send
         self.register_listener = self.ip.register_listener
         self.init = self.ip.init
-        if ENABLE_STAT:
-            self.phy_meter = PhyMeter.getMeter()
 
 
 NETWORK_STACK = NetworkStack()

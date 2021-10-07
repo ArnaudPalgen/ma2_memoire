@@ -144,6 +144,9 @@ class LoraMac:
             log.warn("Loss of %d frames", (frame.seq - child.expected_sn))
         
         child.expected_sn = frame.seq + 1
+        if frame.payload is not None and frame.payload != "":
+            # The frame can contain data
+            self.upper_layer(frame.src_addr, frame.payload) #deliver data to upper layer
 
 
         if child.tx_buf.empty():  # no data for this child -> send an ack
@@ -172,7 +175,9 @@ class LoraMac:
         The child must pas in the **kwargs parameters with the key "child"
         """
 
-        child: LoraChild = kwargs["child"]  # get the child
+        child: LoraChild = kwargs.get("child", None)  # get the child
+        if child is None:
+            return
         while not child.tx_buf.empty():
             try:
                 next_frame = child.tx_buf.get_nowait()  # get the next frame to send

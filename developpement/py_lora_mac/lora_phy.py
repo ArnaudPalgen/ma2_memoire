@@ -16,10 +16,6 @@ K_FLAG_SHIFT = 7
 NEXT_FLAG_SHIFT = 6
 
 
-ENABLE_STAT = True
-TEST_LOSS = False
-LOSS_PROBABILITY = 0 #in [0, 1]
-
 @unique
 class MacCommand(Enum):
     """The MAC commands available for LoRaMAC."""
@@ -252,44 +248,6 @@ class UartFrame:
     stat_id: int = -1
 
 
-class PhyMeter:
-
-    instance = None
-
-    def __init__(self, dest_file):
-        self.data_list=[]#[[data, put_time, send_time, diff]]
-        self.counter = -1
-        self.dest_file = dest_file
-
-    def put(self,data):
-        data.stat_id = self._get_id()
-        self.data_list.append([data, time.perf_counter_ns(), -1, -1])
-
-    def send(self,data):
-        r = self.data_list[data.stat_id]
-        r[2]=time.perf_counter_ns()
-        r[3]=r[2]-r[1]
-
-    @staticmethod
-    def getMeter(dest_file='stat.txt'):
-        if PhyMeter.instance == None:
-            PhyMeter.instance = PhyMeter(dest_file)
-        return PhyMeter.instance
-
-    def _get_id(self):
-        self.counter+=1
-        return self.counter
-
-    def export_data(self):
-        #with open(self.dest_file, "w", newline='') as f:
-        writer = csv.writer(open(self.dest_file, "w", newline=''), 'unix')
-        writer.writerow(['put time', 'send time', 'delta', 'data'])
-        writer.writerow([self.data_list[0][0], self.data_list[-1][1], len(self.data_list), 'general info'])
-        for data in self.data_list:
-            writer.writerow([data[1], data[2], data[3], str(data[0])])
-
-
-
 class LoraPhy:
     """The LoRaMAC PHY layer.
 
@@ -299,8 +257,6 @@ class LoraPhy:
 
     def __init__(self, **params):
         self._con = None  # The serial conenction
-        #self._port = port  # The serial port
-        #self._baudrate = baudrate  # The serial baudrate
         self._params = params
         self._buffer = queue.Queue(self._params.get('txBufSize', 10))  # The TX buffer
         self._rx_buffer = queue.Queue(self._params.get('rxBufSize', 10))  # the RX buffer
@@ -355,10 +311,6 @@ class LoraPhy:
 
         log.info("MAC send:%s", str(loraFrame))
         self._tx_lock.acquire()
-        if TEST_LOSS:
-            if not random.random() < LOSS_PROBABILITY:
-                log.warning("LOSS TEST: don't send %s", str(loraFrame))
-                return
         if loraFrame is None:
             return
         f = UartFrame(
@@ -429,8 +381,6 @@ class LoraPhy:
         try:
             log.debug("append %s to tx_buf", str(data))
             self._buffer.put(data, block=False)
-            if ENABLE_STAT:
-                PhyMeter.getMeter().put(data)
         except queue.Full:
             log.warning("TX buffer full")
             return False
@@ -446,7 +396,6 @@ class LoraPhy:
         Returns:
             bool: True if the answer is the one expected, False otherwise.
         """
-        #decode_data = data
         log.debug("process uart response: " + decode_data)
         for resp in self._last_sended.expected_response:
             if resp is None:
@@ -454,8 +403,6 @@ class LoraPhy:
             if resp.value in decode_data:  # the response is the one expected
                 if resp == UartResponse.RADIO_RX:  # the response is DATA
                     log.info("PHY RX:" + decode_data[10:].strip())
-                    #if ENABLE_STAT:
-                    #    log.info("STAT: PHY RX: %d", time.monotonic_ns())
                     try:
                         self._rx_buffer.put(
                             LoraFrame.build(decode_data[10:].strip()), block=False
@@ -492,10 +439,6 @@ class LoraPhy:
                     self._can_send_cond.wait()
             self._last_sended = self._buffer.get(block=True)
             log.info("PHY TX:" + self._last_sended.cmd.value + self._last_sended.data)
-            if ENABLE_STAT:
-                PhyMeter.getMeter().send(self._last_sended)
-                #if self._last_sended.cmd == UartCommand.TX:
-                #    log.info("STAT: PHY TX: %d", time.monotonic_ns())
             self._con.write(
                 (self._last_sended.cmd.value + self._last_sended.data + "\r\n").encode()
             )
