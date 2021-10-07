@@ -1,6 +1,0 @@
-lora_mac-INFO-  2021-08-03 17:52:53,046-Init MAC
-lora_phy-INFO-  2021-08-03 17:52:53,046-Init PHY
-lora_phy-INFO-  2021-08-03 17:52:53,050-PHY TX:mac pause
-lora_phy-INFO-  2021-08-03 17:52:53,063-PHY TX:radio set freq 868100000
-lora_phy-INFO-  2021-08-03 17:52:53,079-PHY TX:radio set wdt 0
-lora_phy-INFO-  2021-08-03 17:52:53,086-PHY TX:radio rx 0

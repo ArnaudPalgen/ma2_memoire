@@ -1,5 +1,0 @@
-main-ERROR-  2021-08-02 16:23:51,665-
- Type:<class 'AttributeError'>
- Value:'LoraMac' object has no attribute 'init'
- Traceback:<traceback object at 0x7f7a09b17580>
-NoneType: None

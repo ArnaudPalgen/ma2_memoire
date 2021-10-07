@@ -1,3 +1,0 @@
-- pour LoRa et IEEE 802.15.4, se concentrer sur des tutoriels avant les standards (trop détaillés)
-- regarder à l'état de l'art en matière de réseaux hybrides et de bridging LoRa / IEEE 802.14.4
-- discuter des différentes plateformes et RTOS pertinents. Par exemple Contiki-OS, RIOT-OS, OpenWSN
