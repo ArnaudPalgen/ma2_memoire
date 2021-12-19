@@ -37,3 +37,5 @@
 
 -   `lora-root-node` contient le script de l'application pour la racine LoRa. Ce script prend deux paramètres: le port du RN2483 et l'entier représentant le mode de fonctionnement (exemple: `python lora-root.py /dev/ttyUSB0 2`)
 -   `rpl-node` contient l'application Contiki pour un noeud RPL ou racine RPL. Dans le Makefile, veillez à bien adapter le chemin de Contiki vers le répertoire où il installé.  La ligne `MODULES += os/services/loramacv2` doit être commentée si l'application est utilisée pour un noeud RPL.
+
+Fork Contiki avec intégration de LoRaMAC: https://github.com/ArnaudPalgen/contiki-ng/tree/dev/loramac
