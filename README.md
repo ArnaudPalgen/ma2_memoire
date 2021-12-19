@@ -1,18 +1,20 @@
 # Mémoire
 
-Etat de l'art
-- Harware: Zolertia, RN2483, Raspberry
-- Potocole ration: Lora, 802.15.4
-- IP: IPv6, 6LoWPAN
-- RPL
-- 6Tisch, Orchestra
-- Contiki
+***Auteur***: Arnaud *Palgen*<br />
+
+***Directeur***: Bruno *Quoitin*<br />
+
+***Résumé***: <br/>
+
+Le domaine de l'internet des objets connectés (Internet Of Things, IoT) est en constante augmentation. Il existe une multitude de technologies permettant de mettre en réseau les objets connectés. Chaque technologie a donc des usages spécifiques qui dépendent de sa consommation d'énergie, des débits pouvant être atteints, de la portée et également des topologies réalisables.
+
+Cependant, certains cas d'utilisation de réseaux de capteurs sans fils (Wireless Sensors Network, WSN) nécessitent l'usage d'un réseau hybride, utilisant plusieurs technologies radio, comme pour ce mémoire qui consiste au développement d'un réseau de capteurs se trouvant aux pieds de cultures dont la pousse de feuilles pourrait devenir un obstacle aux communications ou atténuer les signaux radio, et où les cultures se trouvent dans un terrain accidenté. Pour cela les deux technologies radio LoRa et IEEE 802.15.4 sont choisies.
+
+Ce mémoire fournit une base de connaissance sur le fonctionnement de la modulation LoRa, de IEEE 802.15.4 avec TSCH et RPL, ainsi qu'un aperçu des RTOS (Real Time Operating System) existants. C'est avec cette base de connaissances que le réseau hybride est développé. Le travail principal de ce mémoire consiste en l'élaboration et l'implémentation d'un protocole MAC pour LoRa qui permet de réaliser des communications point à point. Enfin, le prototype développé est validé et évalué.<br/>
+
+***Mots-clés***: LoRa, IEEE 802.15.4, Contiki-NG, IoT, Télécommunications
 
 
-Mise en oeuvre
-- topologie du réseau
-- Protocole MAC pour LoRa
-- 
 
+![umons-log](README.assets/UMONS-rouge-quadri-avec-texteth-300x103-16399228856073.png "") ![umons-fs-logo](README.assets/Sciencesvert-rouge-300x133-16399229018385.png "")
 
-Contiki-ng fork: https://github.com/ArnaudPalgen/contiki-ng

@@ -1,0 +1,15 @@
+#ifndef __PROJECT_CONF_H__
+#define __PROJECT_CONF_H__
+
+#undef LPM_CONF_ENABLE
+#define LPM_CONF_ENABLE 0
+
+#undef LORA_MAC_CONFIRMED
+#define LORA_MAC_CONFIRMED 0
+
+#define TSCH_CONF_AUTOSTART 0
+
+//#undef WATCHDOG_CONF_ENABLE
+//#define WATCHDOG_CONF_ENABLE 0
+
+#endif /* __PROJECT_CONF_H__ */

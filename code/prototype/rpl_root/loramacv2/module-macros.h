@@ -1,0 +1,1 @@
+#define UIP_FALLBACK_INTERFACE         loramac_interface
