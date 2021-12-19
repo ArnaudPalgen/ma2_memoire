@@ -16,5 +16,5 @@ Ce mémoire fournit une base de connaissance sur le fonctionnement de la modulat
 
 
 
-![umons-log](README.assets/UMONS-rouge-quadri-avec-texteth-300x103-16399228856073.png "") ![umons-fs-logo](README.assets/Sciencesvert-rouge-300x133-16399229018385.png "")
+![umons-logo](https://web.umons.ac.be/app/uploads/2018/02/UMONS-rouge-quadri-avec-texteth-300x103.png "") ![umons-fs-logo](https://web.umons.ac.be/app/uploads/2018/02/Sciencesvert-rouge-300x133.png "")
 
